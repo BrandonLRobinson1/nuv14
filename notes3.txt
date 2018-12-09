@@ -1,0 +1,50 @@
+
+"scripts": {
+  "start": "node node_modules/react-native/local-cli/cli.js start",
+  "rc-start": "npm start -- --reset-cache",
+  "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean",
+  "clean-start": "npm run clean && npm run rc-start",
+  "fresh-install": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build/ModuleCache/* && rm -rf node_modules/ && npm cache clean && npm install",
+  "fresh-start" : "npm run fresh-install && npm run rc-start",
+  "tron": "node_modules/.bin/reactotron"
+}
+
+
+babel-core
+react-native init --version 0.47.0 <projectname>
+--version @0.44.0 version works better
+
+**pod install creates workspace!!
+
+*pod init stop cfbundleerror
+
+react-native init --version 0.57.4 nuv10
+
+react-native run-ios --simulator="iPhone 8"
+
+npm i react-native-google-places react-native-google-places-autocomplete react-native-maps react-native-vector-icons -S
+
+npm i axios firebase lodash moment react-native-router-flux react-redux redux redux-actions redux-thunk  -S
+
+npm i babel-core babel-eslint eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react redux-mock-store redux-devtools-extension remote-redux-devtools --save-dev
+
+git commit -am 'fresh one'
+
+third party folder errors
+https://github.com/facebook/react-native/issues/20774
+
+** followed steps 1 then copied contents of script folder to react native folder (where Xcode was looking for it)
+#1 -> rm -rf node_modules/ && yarn cache clean && yarn install and rm -rf ~/.rncache
+
+** when adding pods use -> pod update
+
+fixed can't find asap raw with doing #1 above
+
+
+If you are using use_frameworks! in your Podfile you instead need to dynamically load the
+icon font by doing Icon.loadFont() when boostrapping your application
+
+
+Googlemaps not found in appdelagate.m ->
+[!] The 'Pods-nuv14' target has transitive dependencies that include static binaries: (/Users/brob/Desktop/brobLastStand/nuv14/ios/Pods/GoogleMaps/Base/Frameworks/GoogleMapsBase.framework, /Users/brob/Desktop/brobLastStand/nuv14/ios/Pods/GoogleMaps/Maps/Frameworks/GoogleMaps.framework, and /Users/brob/Desktop/brobLastStand/nuv14/ios/Pods/GoogleMaps/Maps/Frameworks/GoogleMapsCore.framework)
+-> fixedd by commenting out use_frameworks out in podfile then running pod update

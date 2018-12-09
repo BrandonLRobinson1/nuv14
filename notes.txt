@@ -1,0 +1,182 @@
+***DO NOT HAVE THIS PROJECT NESTED IN ANY FOLDER THAT HAS A SPACE IN THE NAME!!
+
+**https://itnext.io/install-react-native-maps-with-gradle-3-on-android-44f91a70a395
+
+react-native run-ios --simulator="iPhone 5s"
+
+// open BROBSCOXNU.xcworkspace --> !from ios folder! in terminal
+open NU.xcworkspace --> !from ios folder! in terminal
+
+DONT NEED TO LINK ANYMORE
+
+pod init and pod install in the ios folder <-- *did this already
+
+command m - debug andriod
+
+**IMPORTANT - to get ANDROID BUNDLE WORKING - put http://localhost:8081/debugger-ui/ in browser and hit enter then on andriod emulator click command M and then debug-js-remotley IN THAT ORDER and  (seems to be a linking things)
+
+import {Platform, StyleSheet} from 'react-native';
+
+const styles = StyleSheet.create({
+  height: Platform.OS === 'ios' ? 200 : 100,
+});
+
+npm install --save react-navigation
+
+https://medium.com/@shamin616/how-to-setup-google-maps-with-react-native-maps-in-react-native-in-ios-c5dd95f00a2c
+
+This might be related to https://github.com/facebook/react-native/issues/4968
+ 1. Clear watchman watches: `watchman watch-del-all`.
+  2. Delete the `node_modules` folder: `rm -rf node_modules && npm install`.
+  3. Reset Metro Bundler cache: `rm -rf /tmp/metro-bundler-cache-*` or `npm start -- --reset-cache`.
+  4. Remove haste cache: `rm -rf /tmp/haste-map-react-native-packager-*`.
+    at ModuleResolver.resolveDependency (/Users/brob/Desktop/Working on/BROBSCOXNU/node_modules/metro/src/node-haste/DependencyGraph/ModuleResolution.js:161:1460)
+    at ResolutionRequest.resolveDependency (/Users/brob/Desktop/Working on/BROBSCOXNU/node_modules/metro/src/node-haste/DependencyGraph/ResolutionRequest.js:91:16)
+    at DependencyGraph.resolveDependency (/Users/brob/Desktop/Working on/BROBSCOXNU/node_modules/metro/src/node-haste/DependencyGraph.js:272:4579)
+    at dependencies.map.relativePath (/Users/brob/Desktop/Working on/BROBSCOXNU/node_modules/metro/src/DeltaBundler/traverseDependencies.js:376:19)
+    at Array.map (native)
+    at resolveDependencies (/Users/brob/Desktop/Working on/BROBSCOXNU/node_modules/metro/src/DeltaBundler/traverseDependencies.js:374:16)
+    at /Users/brob/Desktop/Working on/BROBSCOXNU/node_modules/metro/src/DeltaBundler/traverseDependencies.js:212:33
+    at Generator.next (<anonymous>)
+    at step (/Users/brob/Desktop/Working on/BROBSCOXNU/node_modules/metro/src/DeltaBundler/traverseDependencies.js:297:313)
+    at /Users/brob/Desktop/Working on/BROBSCOXNU/node_modules/metro/src/DeltaBundler/traverseDependencies.js:297:473
+
+
+To be honest when things go terribly wrong (especially if you are using more than one libraries with native code) - I would delete the ios & android directories, also delete node_modules, reinstall node modules (make sure you install RN 0.40 & rn-maps 0.13.0), then run react-native upgrade (to recreate the ios and android projects) and finally react-native link.
+
+Hope it helps!
+
+Ps. Basically if you run react-native link without doing the above and if you already have the previous version of rn-maps, it might not override the rn-maps native code in your project so it will not work - hence I am suggesting the above solution.
+
+
+    ==============================================
+
+
+Fixing SDK Path Errors on Linux Distributions
+Your project is not finding the SDK set in the Project Settings via the path provided, so the project needs to be pointing in the right direction, and you have a couple options to accomplish this, but let's start by finding the correct SDK folder first.
+
+Finding your SDK
+From Package Manager
+
+If you are using a package-based JRE install like Java 8 JRE via a the custom PPA in a Debian-based distribution, or used OpenJDK, the directory will most likely be /usr/lib/jvm/java-8-oracle (or whatever version you have chosen). You can find this path set in the JAVA_HOME environment variable:
+
+$ echo $JAVA_HOME
+ /usr/lib/jvm/java-8-oracle
+Manual Download
+
+If you have installed via the Java JRE/SDK download, it will be wherever you placed the folder, e.g. /home/username/jdk-8u121_1.8.0 (or something similar).
+
+Scripted installs may even add the SDK to /opt/java-8-oracle, but as of this writing, the Java Install instructions leave the folder placement in your hands.
+
+Android Studio 2.2
+
+Lastly if you are using Android Studio, the SDK is placed where you have set it to place the SDK files downloaded through the Studio's SDK Manager. By going to File > Settings > Appearance & Behavior > System Settings > Android SDK, you can find the SDK location setting at the top with the option to change, and the default folder being ~/Android/Sdk.
+
+Android Studio SDK Path
+
+Setting the SDK Path
+Now that we know where the SDK is, it is time to let react-native know.
+
+Option 1: Set with local.properties
+
+This method is very simple, and all that is needed is creating the file local.properties in the following folder, where Project_Folder is the base of your React-Native application:
+
+Project_Folder/Android/App
+
+In your local.properties, you want to set the variable sdk.dir to the path of your SDK folder:
+
+sdk.dir=/home/username/Android/Sdk
+While this is the easiest way to remedy the issue, it is not the best, especially if you work with multiple projects. For every project, you will have to create this file for every project, and if the folder changes plan on changing this file for each project's local.properties.
+
+
+==============================================
+
+
+Valid keys: [
+  "display",
+  "width",
+  "height",
+  "start",
+  "end",
+  "top",
+  "left",
+  "right",
+  "bottom",
+  "minWidth",
+  "maxWidth",
+  "minHeight",
+  "maxHeight",
+  "margin",
+  "marginVertical",
+  "marginHorizontal",
+  "marginTop",
+  "marginBottom",
+  "marginLeft",
+  "marginRight",
+  "marginStart",
+  "marginEnd",
+  "padding",
+  "paddingVertical",
+  "paddingHorizontal",
+  "paddingTop",
+  "paddingBottom",
+  "paddingLeft",
+  "paddingRight",
+  "paddingStart",
+  "paddingEnd",
+  "borderWidth",
+  "borderTopWidth",
+  "borderStartWidth",
+  "borderEndWidth",
+  "borderRightWidth",
+  "borderBottomWidth",
+  "borderLeftWidth",
+  "position",
+  "flexDirection",
+  "flexWrap",
+  "justifyContent",
+  "alignItems",
+  "alignSelf",
+  "alignContent",
+  "overflow",
+  "flex",
+  "flexGrow",
+  "flexShrink",
+  "flexBasis",
+  "aspectRatio",
+  "zIndex",
+  "direction",
+  "shadowColor",
+  "shadowOffset",
+  "shadowOpacity",
+  "shadowRadius",
+  "transform",
+  "transformMatrix",
+  "decomposedMatrix",
+  "scaleX",
+  "scaleY",
+  "rotation",
+  "translateX",
+  "translateY",
+  "backfaceVisibility",
+  "backgroundColor",
+  "borderColor",
+  "borderTopColor",
+  "borderRightColor",
+  "borderBottomColor",
+  "borderLeftColor",
+  "borderStartColor",
+  "borderEndColor",
+  "borderRadius",
+  "borderTopLeftRadius",
+  "borderTopRightRadius",
+  "borderTopStartRadius",
+  "borderTopEndRadius",
+  "borderBottomLeftRadius",
+  "borderBottomRightRadius",
+  "borderBottomStartRadius",
+  "borderBottomEndRadius",
+  "borderStyle",
+  "opacity",
+  "elevation"
+]

@@ -1,0 +1,97 @@
+react-native link react-native-vector-icons --> try in new branch for driod fix
+
+** server functions for - firebase sessions, billing, twillio verifcation
+
+// eslint-disable-line
+
+// eslint-disable-next-line
+
+/* eslint-disable */
+/* eslint-enable */
+
+    "rules": { "react/jsx-filename-extension": [0] }
+
+            // original porings
+            // region: {
+              // latitude: 45.52220671242907,
+              // longitude: -122.6653281029795,
+              // latitudeDelta: 0.04864195044303443,
+              // longitudeDelta: 0.040142817690068,
+            // },
+
+            // google maps location + own func for lat long deltas
+            // region: {
+            //   latitude: 37.785834,
+            //   longitude: -122.406417,
+            //   latitudeDelta:  0.0622,
+            //   longitudeDelta: 0.05183658170914543,
+            // },
+
+            // me trying to nail the us
+            // region: {
+            //   latitude: 37.090240,
+            //   longitude: -95.712891,
+            //   latitudeDelta:  60,
+            //   longitudeDelta: 60,
+            // },
+
+
+
+---------->> ************ Google maps works better on ios if the remote debugger is on**
+
+
+  {
+      id: "xxxxxx",
+      coordinate: {
+        latitude: 45.524548,
+        longitude: -122.6749817,
+      },
+      title: "Best Place",
+      description: "This is the best place in Portland",
+      image: Images[0],
+      name: "Shizzle Jacklyn"
+      address: {
+        street: "8649 A C Skinner Parkway"
+        details: "App 922",
+        city: "Jacksonville",
+        state: "FL"
+        zip: "33256"
+      },
+      phone: 708-897-2343,
+      servicesOffered: ["stuff", "stuffy"],
+      ratings: [
+        {
+          id: "xxxxxx"
+          name: "angry Joe",
+          comment: "blah",
+          time: "timestamp",
+          rating: "2",
+        }
+      ],
+      qr: {
+        qrStuff: {}
+      },
+      customers: [
+        {
+          id: "",
+          order: "",
+          price: "",
+          time:"",
+          distance: "how far were you willing to go"
+        }
+      ],
+      availabily: "",
+      avaialbleNow: false,
+      appointments: "idk what to do for this yet"
+    },
+
+*seperate tabs with folders!!!
+
+*browse - /
+*maps
+**appointment tab - top right tab is instructions -> maybe https://bunkat.github.io/schedule/work-item-example.html
+*profile - favorites, history
+*settings
+
+
+display users current or search location with standard pin

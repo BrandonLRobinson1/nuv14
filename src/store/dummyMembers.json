@@ -1,0 +1,796 @@
+[
+  {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Pierre Nails",
+      "description": "This is the best place in Portland, we specialize in this and that and this. Loctated in upper east, it is a luxury to treat you.",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+
+
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 2",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 3",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 4",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 5",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 6",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 1",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 2",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 3",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 4",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 5",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 6",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 1",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 2",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 3",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 4",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 5",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    },
+    {
+      "id": "xxxxxx",
+      "coordinate": {
+        "latitude": 45.524548,
+        "longitude": -122.6749817
+      },
+      "title": "Best 6",
+      "description": "This is the best place in Portland",
+      "image": null,
+      "name": "Shizzle Jacklyn",
+      "address": {
+        "street": "8649 A C Skinner Parkway",
+        "details": "App 922",
+        "city": "Jacksonville",
+        "state": "FL",
+        "zip": "33256"
+      },
+      "phone": "708-897-2343",
+      "servicesOffered": ["stuff", "stuffy"],
+      "ratings": [
+        {
+          "id": "xxxxxx",
+          "name": "angry Joe",
+          "comment": "blah",
+          "time": "timestamp",
+          "rating": "2"
+        }
+      ],
+      "qr": {
+        "qrStuff": {}
+      },
+      "customers": [
+        {
+          "id": "",
+          "order": "",
+          "price": "",
+          "time":"",
+          "distance": "how far were you willing to go"
+        }
+      ],
+      "availabily": "",
+      "avaialbleNow": false,
+      "appointments": "idk what to do for this yet"
+    }
+]
