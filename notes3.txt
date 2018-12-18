@@ -22,6 +22,8 @@ react-native init --version 0.57.4 nuv10
 
 react-native run-ios --simulator="iPhone 8"
 
+****on start of FRESH INSTALL (maybe before or after pod init/install), app will likely break -> do ** rm -rf node_modules/ && yarn cache clean && yarn install and rm -rf ~/.rncache
+
 npm i react-native-google-places react-native-google-places-autocomplete react-native-maps react-native-vector-icons -S
 
 npm i axios firebase lodash moment react-native-router-flux react-redux redux redux-actions redux-thunk  -S
@@ -48,3 +50,20 @@ icon font by doing Icon.loadFont() when boostrapping your application
 Googlemaps not found in appdelagate.m ->
 [!] The 'Pods-nuv14' target has transitive dependencies that include static binaries: (/Users/brob/Desktop/brobLastStand/nuv14/ios/Pods/GoogleMaps/Base/Frameworks/GoogleMapsBase.framework, /Users/brob/Desktop/brobLastStand/nuv14/ios/Pods/GoogleMaps/Maps/Frameworks/GoogleMaps.framework, and /Users/brob/Desktop/brobLastStand/nuv14/ios/Pods/GoogleMaps/Maps/Frameworks/GoogleMapsCore.framework)
 -> fixedd by commenting out use_frameworks out in podfile then running pod update
+
+
+** AFTER ANY PACKAGE INSTALL -> NEED A CACHE CLEAN, SIMULATOR CLEAN, BUILD CLEAN and REINSTALL ALL PACKAGAES then react-native run-ios then build in xcode
+
+notes on what i think the newest build error is about
+-this happened after i installed the remote-redux-devtools, saw a few error that make me think
+that i need to uninstall, downgrade npm, and redownload
+but first, clean cache, clean packagages, redo and rebuild bc i think xcode may need a fresh build after any package,
+then may just try an uninstall and disconnect the remote redux dev tools
+
+
+===
+
+clean git
+
+git rm -r --cached .
+git add .

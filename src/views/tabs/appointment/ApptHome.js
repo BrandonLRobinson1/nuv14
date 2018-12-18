@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Image, View, Text, StyleSheet } from 'react-native';
-import Permissions from 'react-native-permissions';
+// import Permissions from 'react-native-permissions';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Spinner, Card } from '../../../common';
 import { colors, commonStyles } from '../../../Colors';
@@ -16,35 +16,16 @@ class ApptHome extends Component {
   }
 
   // Check the status of a single permission
-  componentDidMount() {
-    // console.log('Permissions.check', Permissions.check('camerazzz'));
-    console.log('Permissions.check', Permissions.check('camera'));
-    return
+  // componentDidMount() {
+    // Permissions.check('camera')
+    //   .then(response => {
+    //     // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+    //     // this.setState({ photoPermission: response })
+    //     console.log('response', JSON.stringify(response))
+    //   })
+    //   .catch(err => console.error(err));
 
-    // var permissionTypes = ['location', 'camera', 'microphone', 'photo', 'contacts', 'event', 'reminder', 'bluetooth', 'notification', 'backgroundRefresh', 'speechRecognition', 'mediaLibrary', 'motion'];
-
-    console.log('Permissions', Permissions, Permissions.request('camera')); // no requestPermission, no getPermissionStatus
-    // console.log('Permissions', Permissions, Permissions.request('camera')); // no requestPermission, no getPermissionStatus
-    return
-
-    // Permissions.request('camera').then(response => {
-
-    Permissions.check('camera').then(response => {
-      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
-      // this.setState({ photoPermission: response })
-      console.log('response', JSON.stringify(response))
-    });
-
-  };
-
-  // requestCameraPermission(permission) {
-  //   // console.log('Permissions', Permissions);
-  //   // return
-  //     Permissions.request(permission).then(response => {
-  //       // this.setState({ cameraPermission: response })
-  //       console.log('response', response);
-  //     });
-  // }
+  // };
 
   render() {
     const {

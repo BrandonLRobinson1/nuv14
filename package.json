@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "cache-clean": "yarn cache clean",
+    "remove-cache": "rm -rf ~/.rncache",
+    "fresh-install": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build/ModuleCache/* && rm -rf node_modules/ && npm cache clean && npm install",
+    "fresh-start" : "npm run fresh-install && npm run rc-start"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -27,7 +31,8 @@
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.50.0",
-    "react-test-renderer": "16.6.0-alpha.8af6728"
+    "react-test-renderer": "16.6.0-alpha.8af6728",
+    "remote-redux-devtools": "^0.5.14"
   },
   "jest": {
     "preset": "react-native"
