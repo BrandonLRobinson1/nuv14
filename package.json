@@ -7,6 +7,7 @@
     "test": "jest",
     "cache-clean": "yarn cache clean",
     "remove-cache": "rm -rf ~/.rncache",
+    "best-cache-clean": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro* && rm -rf $TMPDIR/haste-*",
     "fresh-install": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build/ModuleCache/* && rm -rf node_modules/ && npm cache clean && npm install",
     "fresh-start" : "npm run fresh-install && npm run rc-start"
   },

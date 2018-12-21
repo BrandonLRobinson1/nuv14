@@ -60,6 +60,8 @@ import com.facebook.soloader.SoLoader;
 
 import com.airbnb.android.react.maps.MapsPackage;
 
+import com.oblador.vectoricons.VectorIconsPackage;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -86,7 +88,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new MapsPackage(),
-          new RNGooglePlacesPackage()
+          new RNGooglePlacesPackage(),
+          new VectorIconsPackage()
       );
     }
 

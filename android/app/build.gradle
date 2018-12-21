@@ -233,11 +233,13 @@ project.ext.react = [
 
 apply from: "../../node_modules/react-native/react.gradle"
 
-// project.ext.vectoricons = [
-//     iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf', 'MaterialCommunityIcons.ttf', 'FontAwesome.ttf', 'Entypo.ttf' ] // Name of the font files you want to copy
-// ]
+project.ext.vectoricons = [
+    iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf', 'MaterialCommunityIcons.ttf', 'FontAwesome.ttf', 'Entypo.ttf' ] // Name of the font files you want to copy
+]
+
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -310,6 +312,8 @@ dependencies {
   }
   implementation 'com.google.android.gms:play-services-base:10.0.1'
   implementation 'com.google.android.gms:play-services-maps:10.0.1'
+
+  compile project(':react-native-vector-icons')
 }
 
 // Run this once to be able to run the application with BUCK
