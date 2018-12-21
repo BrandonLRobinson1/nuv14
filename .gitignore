@@ -60,3 +60,9 @@ private.js
 src/helpers/
 ios/nuv14/AppDelegate.m
 */ios/nuv14/AppDelegate.m
+
+android/local.properties
+./android/local.properties
+
+android/app/src/main/AndroidManifest.xml
+
