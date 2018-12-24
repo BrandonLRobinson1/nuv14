@@ -52,6 +52,8 @@ Googlemaps not found in appdelagate.m ->
 -> fixedd by commenting out use_frameworks out in podfile then running pod update
 
 
+** -----> IF YOU TOUCH THE PODS (COCOAPODS) AT ALL YOU NEED TO COMMENT OUT use_frameworks THEN pod update then UNcomment it back then build*
+
 ** AFTER ANY PACKAGE INSTALL -> NEED A CACHE CLEAN, SIMULATOR CLEAN, BUILD CLEAN and REINSTALL ALL PACKAGAES then react-native run-ios then build in xcode
 
 notes on what i think the newest build error is about

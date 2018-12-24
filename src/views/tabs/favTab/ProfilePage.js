@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Image, View, Text, StyleSheet, Dimensions, ScrollView, ListView, TouchableOpacity } from 'react-native';
+import { Image, View, Text, StyleSheet, Dimensions, ScrollView, ListView, TouchableOpacity, Animated } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import CustomMarker from '../map/CustomMarker';
 import { CardSection, Spinner, Card } from '../../../common';
 import { colors, commonStyles } from '../../../Colors';
 
 // maybe favorites and available
+
+// 🤯 will be grabbing the region obj from the nail tech info when its created
+//   import { regionObj } from '../../../store/location/nailTECKSTORE';
+const regionObj = {latitude: 37.767, longitude: -122.421, latitudeDelta: 0.03148000000000195, longitudeDelta: 0.034317000000001485}
 
 // eslint-disable-next-line
 class ProfilePage extends Component {
@@ -21,6 +27,7 @@ class ProfilePage extends Component {
       imageStyle,
       imageContainer,
       container,
+      mapContainer,
       scrollableBody,
       stickyBottom,
       customAppointmentButton,
@@ -28,6 +35,7 @@ class ProfilePage extends Component {
       imageCardSectionContainer
     } = styles; // eslint-disable-line
 
+    const { NU_White } = colors;
     const { title, description, address: { street } } = this.props.personData; // eslint-disable-line
 
     return (
@@ -63,22 +71,44 @@ class ProfilePage extends Component {
 
               <CardSection>
                 <View style={horizontalFlex}>
+
                   <View>
                     <Text style={NU_Small_Header_Text}>
                       address
                     </Text>
                   </View>
+
                   <View>
                     <Text style={NU_Paragraph_Text}>
                       {street}
                     </Text>
                   </View>
-                  <View>
-                    <Text>
-                      map segment
-                    </Text>
+
+                  <View onPress={() => console.log('react-native-open-maps')}>
+                    {/* TODO write function to conditionally render mapview based on if regionOBJ is available -> also see if there is a better way to determine mapContainer hieght */}
+                    <MapView
+                      provider={PROVIDER_GOOGLE}
+                      ref={map => this.map = map} // eslint-disable-line
+                      initialRegion={regionObj}
+                      style={mapContainer}
+                      loadingEnabled
+                      zoomEnabled={false}
+                      zoomControlEnabled={false}
+                      rotateEnabled={false}
+                      scrollEnabled={false}
+                      pitchEnabled={false}
+                      moveOnMarkerPress={false}
+                    >
+
+                    <MapView.Marker coordinate={regionObj}>
+                      <CustomMarker />
+                    </MapView.Marker>
+
+                    </MapView>
                   </View>
+
                 </View>
+
               </CardSection>
 
               <CardSection>
@@ -156,12 +186,16 @@ export default connect(
   }
 )(ProfilePage);
 
-const { NU_Red , NU_Blue, NU_White, NU_Grey, NU_Border_Grey } = colors; // eslint-disable-line
+const { NU_Red , NU_Blue, NU_White, NU_Grey, NU_Border_Grey, NU_Transparent } = colors; // eslint-disable-line
 
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
     height: '100%'
+  },
+  mapContainer: {
+    width: '100%',
+    height: 100
   },
   scrollableBody: {
     flex: 9

@@ -9,7 +9,7 @@
     "remove-cache": "rm -rf ~/.rncache",
     "best-cache-clean": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro* && rm -rf $TMPDIR/haste-*",
     "fresh-install": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build/ModuleCache/* && rm -rf node_modules/ && npm cache clean && npm install",
-    "fresh-start" : "npm run fresh-install && npm run rc-start"
+    "fresh-start": "npm run fresh-install && npm run rc-start"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -21,6 +21,7 @@
     "react-native-google-places": "^2.5.2",
     "react-native-google-places-autocomplete": "^1.3.9",
     "react-native-maps": "^0.22.1",
+    "react-native-permissions": "^1.1.1",
     "react-native-router-flux": "^4.0.6",
     "react-native-vector-icons": "^6.1.0",
     "react-redux": "^6.0.0",

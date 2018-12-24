@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import CustomMarker from './CustomMarker';
 import { FullCard, Spinner } from '../../../common';
 import { setCurrentLocation, getActiveNailTechs, getinitialDelta } from '../../../store/location/locationServices';
 import { colors } from '../../../Colors';
@@ -44,7 +45,6 @@ class Maptab extends Component {
     this.renderMarkers = this.renderMarkers.bind(this);
     this.renderCards = this.renderCards.bind(this);
     this.onCardClick = this.onCardClick.bind(this);
-    this.customMarker = this.customMarker.bind(this);
     this.getLocationInformation = this.getLocationInformation.bind(this);
     this.timer = this.timer.bind(this);
   }
@@ -70,34 +70,12 @@ class Maptab extends Component {
     return;
   }
 
-  // eslint-disable-next-line
-  customMarker() {
-    const {
-      customMarkerShell,
-      customMarker,
-      customMarkerText,
-      customMarkerTailShell,
-      customMarkerTail
-    } = styles;
-
-    return (
-      <View style={customMarkerShell}>
-        <View style={customMarker}>
-          <Text style={customMarkerText}>
-            NU
-          </Text>
-        </View>
-        <View style={customMarkerTailShell}>
-          <View style={customMarkerTail} />
-        </View>
-      </View>
-    );
-  }
-
   componentWillUnmount() {
     this.index = 0;
     this.animation = new Animated.Value(0);
     navigator.geolocation.clearWatch(this.watchID); // eslint-disable-line
+    this.regionTimeout = 0;
+    this.timer = 0;
     console.log('UNMOUNT');
   }
 
@@ -129,7 +107,7 @@ class Maptab extends Component {
         longitudeDelta: init.longitudeDelta || longDelta
       };
 
-      console.log('initialRegion', initialRegion)
+      console.log('🌎initialRegion1', initialRegion);
 
       this.setState({
         initialPosition: initialRegion,
@@ -151,6 +129,8 @@ class Maptab extends Component {
           longitudeDelta: init.longitudeDelta || longDelta,
           timeStamp: utcDate // may want to assiociate timestamp with sessions
         };
+
+        console.log('🌎initialRegion2', initialRegion);
 
         this.setState({
           initialPosition: initialRegion, // if you want ur stRTING POINT TO BE A central location beteen markers and not yourself
@@ -249,7 +229,7 @@ class Maptab extends Component {
     return (
       <MapView.Marker key={index} coordinate={marker.coordinate}>
         <Animated.View style={[markerWrap, opacityStyle, scaleStyle, markerSize]}>
-          {this.customMarker()}
+          <CustomMarker />
         </Animated.View>
       </MapView.Marker>
     );
@@ -443,52 +423,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: NU_Text_Desc
   },
-  markerWrap: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  customMarkerShell: {
-    width: 40,
-    height: 30,
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  customMarker: {
-    flex: 2,
-    backgroundColor: NU_Red,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 3
-  },
-  customMarkerTailShell: {
-    flex: 1,
-    backgroundColor: NU_Transparent,
-    alignItems: 'center'
-  },
-  customMarkerTail: {
-    width: 0,
-    height: 0,
-    backgroundColor: NU_Transparent,
-    borderStyle: 'solid',
-    borderLeftWidth: 4,
-    borderRightWidth: 4,
-    borderBottomWidth: 11,
-    borderLeftColor: NU_Transparent,
-    borderRightColor: NU_Transparent,
-    borderBottomColor: NU_Red,
-    transform: [
-      {
-        rotate: '180deg'
-      }
-    ]
-  },
-  customMarkerText: {
-    color: NU_White,
-    fontSize: 11
-  },
   markerSize: {
     width: 100,
     height: 40
+  },
+  markerWrap: {
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 

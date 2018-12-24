@@ -46,6 +46,10 @@ target 'nuv14' do
   pod 'react-native-maps', path: rn_maps_path
   pod 'react-native-google-maps', path: rn_maps_path  # Remove this line if you don't want to support GoogleMaps on iOS
 
+  # shit wont install
+  # pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
+  # ReactNativePermissions.podspec.json floating around in local.podspecs
+
   pod 'GoogleMaps'  # Remove this line if you don't want to support GoogleMaps on iOS
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'

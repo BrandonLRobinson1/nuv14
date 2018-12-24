@@ -44,7 +44,6 @@ class SearchAddress extends Component {
           await setCurrentLocation(locationToSearch);
           // TODO: rerun and await new get markers function for fresh refresh
           await setSavedTechs([]);
-
           return Actions.mapTab();
         }}
         query={{
