@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { Image, View, Text, StyleSheet, Dimensions, ScrollView, ListView, TouchableOpacity, Animated } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomMarker from '../map/CustomMarker';
+import { createRating } from '../../../helpers/helpersFunctions';
 import { CardSection, Spinner, Card } from '../../../common';
 import { colors, commonStyles } from '../../../Colors';
 
@@ -32,11 +34,38 @@ class ProfilePage extends Component {
       stickyBottom,
       customAppointmentButton,
       customAppointmentButtonText,
-      imageCardSectionContainer
+      imageCardSectionContainer,
+      starRow,
+      starIndiv
     } = styles; // eslint-disable-line
 
-    const { NU_White } = colors;
+    const { NU_White, NU_Red} = colors;
     const { title, description, address: { street } } = this.props.personData; // eslint-disable-line
+
+    const starGenerator = (score) => {
+      if(!score || score === 0 || score > 5) return (<Text>No Reviews yet, be the first!</Text>) // with styling
+      const ratingArray = createRating(score);
+
+      return (
+        <View style={starIndiv}>
+          <View style={{padding: 3, margin: 3}}>
+            <Icon name={ratingArray[0] || null} size={20} color={NU_Red} />
+          </View>
+          <View style={{padding: 3, margin: 3}}>
+            <Icon name={ratingArray[1] || null} size={20} color={NU_Red} />
+          </View>
+          <View style={{padding: 3, margin: 3}}>
+            <Icon name={ratingArray[2] || null} size={20} color={NU_Red} />
+          </View>
+          <View style={{padding: 3, margin: 3}}>
+            <Icon name={ratingArray[3] || null} size={20} color={NU_Red} />
+          </View>
+          <View style={{padding: 3, margin: 3}}>
+            <Icon name={ratingArray[4] || null} size={20} color={NU_Red} />
+          </View>
+        </View>
+      );
+    }
 
     return (
       <View style={container}>
@@ -118,10 +147,8 @@ class ProfilePage extends Component {
                       Ratings
                     </Text>
                   </View>
-                  <View>
-                    <Text>
-                      *******
-                    </Text>
+                  <View style={starRow}>
+                    {starGenerator(3.4)}
                   </View>
                   <View>
                     <Text>
@@ -253,5 +280,66 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: NU_White,
     resizeMode: 'cover'
+  },
+  starRow: {
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    display: 'flex'
+  },
+  starIndiv: {
+    flexDirection: 'row',
+    // margin: 5,
+    // padding: 5
   }
 });
+
+// export const createRating = (score) => {
+//   const result = [];
+//   if(score > 0) {
+//     if(score < 0.4) {
+//       result.push(null);
+//     } else if (score >= 0.4 && score <= 0.75){
+//       result.push('star-half');
+//     } else {
+//       result.push('star');
+//     }
+//   }
+//   if(score >= 1) {
+//     if(score < 1.4) {
+//       result.push(null);
+//     } else if (score >= 1.4 && score <= 1.75){
+//       result.push('star-half');
+//     } else {
+//       result.push('star');
+//     }
+//   }
+//   if(score >= 2) {
+//     if(score < 2.4) {
+//       result.push(null);
+//     } else if (score >= 2.4 && score <= 2.75){
+//       result.push('star-half');
+//     } else {
+//       result.push('star');
+//     }
+//   }
+//   if(score >= 3) {
+//     if(score < 3.4) {
+//       result.push(null);
+//     } else if (score >= 3.4 && score <= 3.75){
+//       result.push('star-half');
+//     } else {
+//       result.push('star');
+//     }
+//   }
+//   if(score >= 4) {
+//     if(score < 4.4) {
+//       result.push(null);
+//     } else if (score >= 4.4 && score <= 4.75){
+//       result.push('star-half');
+//     } else {
+//       result.push('star');
+//     }
+//   }
+//   return result;
+// }
