@@ -270,18 +270,18 @@ class Maptab extends Component {
   }
 
   timer() {
-  //   const myInterval = setInterval(() => {
+    const myInterval = setInterval(() => {
       console.log('started')
-  //     if (this.props.savedTechs && this.props.regionObj && this.props.deltas) {
-  //       console.log('timer stopped 🛑');
-  //       clearInterval(myInterval);
-  //       return this.getLocationInformation();
-  //     }
-  //     console.log('rerunning timer function ⛳');
-  //     if (!Array.isArray(this.props.savedTechs)) this.props.getActiveNailTechs();
-  //     this.props.getinitialDelta();
-  //   // }, 1500);
-  //   }, 500);
+      if (this.props.savedTechs && this.props.regionObj && this.props.deltas) {
+        console.log('timer stopped 🛑');
+        clearInterval(myInterval);
+        return this.getLocationInformation();
+      }
+      console.log('rerunning timer function ⛳');
+      if (!Array.isArray(this.props.savedTechs)) this.props.getActiveNailTechs();
+      this.props.getinitialDelta();
+    // }, 1500);
+    }, 500);
   }
 
   render() {

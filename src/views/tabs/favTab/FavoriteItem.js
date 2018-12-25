@@ -16,7 +16,14 @@ class FavoriteItem extends Component {
 
   render() {
     // eslint-disable-next-line
-    const { imageStyle, horizontalFlex, imageContainer, horizontalText, headerStyle } = styles;
+    const {
+      imageStyle,
+      horizontalFlex,
+      imageContainer,
+      horizontalText,
+      headerStyle,
+      imageCardSectionContainer
+    } = styles;
     // const { name, description, title, address: { city, state } } = this.props.personData; // eslint-disable-line
 
     // currently only has {coordinate: {…}, description: "This is the best place in Portland", image: {…}, title: "Best Place"}
@@ -62,7 +69,7 @@ class FavoriteItem extends Component {
 
     return (
       <Card>
-        <CardSection>
+        <CardSection style={imageCardSectionContainer}>
           <View style={imageContainer}>
             <Image
               source={{ uri: "https://i.imgur.com/K3KJ3w4h.jpg" }}
@@ -110,7 +117,7 @@ export default connect(
   }
 )(FavoriteItem);
 
-const { NU_White, NU_Grey, NU_Pink } = colors; // eslint-disable-line
+const { NU_White, NU_Grey, NU_Pink, NU_Border_Grey } = colors; // eslint-disable-line
 
 const styles = StyleSheet.create({
   circleContainer: {
@@ -122,18 +129,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: NU_Grey
   },
-  imageContainer: { // this is how you would full screen an image **ORDER MATTERS****************************
-    flex: 1,
-    backgroundColor: NU_White,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  imageStyle: { // this is how you would full screen an image **ORDER MATTERS****************************
-    height: 90,
-    width: 90,
-    borderRadius: 45,
-    margin: 2
-  },
+
   horizontalFlex: {
     display: 'flex',
     flexDirection: 'column',
@@ -152,5 +148,57 @@ const styles = StyleSheet.create({
     padding: 5,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+
+  imageCardSectionContainer: {
+    padding: 0,
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    overflow: 'hidden',
+    shadowColor: NU_Border_Grey,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5
+  },
+  imageContainer: {
+    minHeight: 145,
+    flex: 2,
+    width: '100%',
+    height: '100%',
+    alignSelf: 'center',
+    backgroundColor: NU_White,
+
+  },
+  imageStyle: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    alignSelf: 'center',
+    backgroundColor: NU_White,
+    resizeMode: 'cover'
   }
 });
+
+
+
+// in case i decide to switch back t0 the old view
+
+// old header picture view
+// <View style={imageContainer}>
+//   <Image
+//     source={{ uri: "https://i.imgur.com/K3KJ3w4h.jpg" }}
+//     style={imageStyle}
+//   />
+// </View>
+
+// imageContainer: { // this is how you would full screen an image **ORDER MATTERS****************************
+//   flex: 1,
+//   backgroundColor: NU_White,
+//   alignItems: 'center',
+//   justifyContent: 'center'
+// },
+// imageStyle: { // this is how you would full screen an image **ORDER MATTERS****************************
+//   height: 90,
+//   width: 90,
+//   borderRadius: 45,
+//   margin: 2
+// },

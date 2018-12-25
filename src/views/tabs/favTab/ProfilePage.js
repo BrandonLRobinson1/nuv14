@@ -36,7 +36,9 @@ class ProfilePage extends Component {
       customAppointmentButtonText,
       imageCardSectionContainer,
       starRow,
-      starIndiv
+      starIndiv,
+      starSpace,
+      reviewText
     } = styles; // eslint-disable-line
 
     const { NU_White, NU_Red} = colors;
@@ -48,19 +50,19 @@ class ProfilePage extends Component {
 
       return (
         <View style={starIndiv}>
-          <View style={{padding: 3, margin: 3}}>
+          <View style={starSpace}>
             <Icon name={ratingArray[0] || null} size={20} color={NU_Red} />
           </View>
-          <View style={{padding: 3, margin: 3}}>
+          <View style={starSpace}>
             <Icon name={ratingArray[1] || null} size={20} color={NU_Red} />
           </View>
-          <View style={{padding: 3, margin: 3}}>
+          <View style={starSpace}>
             <Icon name={ratingArray[2] || null} size={20} color={NU_Red} />
           </View>
-          <View style={{padding: 3, margin: 3}}>
+          <View style={starSpace}>
             <Icon name={ratingArray[3] || null} size={20} color={NU_Red} />
           </View>
-          <View style={{padding: 3, margin: 3}}>
+          <View style={starSpace}>
             <Icon name={ratingArray[4] || null} size={20} color={NU_Red} />
           </View>
         </View>
@@ -150,8 +152,8 @@ class ProfilePage extends Component {
                   <View style={starRow}>
                     {starGenerator(3.4)}
                   </View>
-                  <View>
-                    <Text>
+                  <View onPress={() => {console.log('go to review page')}}>
+                    <Text style={reviewText}>
                       see reviews
                     </Text>
                   </View>
@@ -252,16 +254,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     padding: 12
   },
-  imageContainer: {
-    minHeight: 250,
-    flex: 2,
-    width: '100%',
-    height: '100%',
-    alignSelf: 'center',
-    backgroundColor: NU_White,
-    // shadowColor: NU_Border_Grey,
-    // shadowOffset: { width: 0, height: 2 },
-  },
   imageCardSectionContainer: {
     padding: 0,
     borderTopLeftRadius: 3,
@@ -272,6 +264,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     // borderWidth: 1,
     // borderColor: NU_Border_Grey
+  },
+  imageContainer: {
+    minHeight: 235,
+    flex: 2,
+    width: '100%',
+    height: '100%',
+    alignSelf: 'center',
+    backgroundColor: NU_White,
+    // shadowColor: NU_Border_Grey,
+    // shadowOffset: { width: 0, height: 2 },
   },
   imageStyle: {
     flex: 1,
@@ -288,58 +290,14 @@ const styles = StyleSheet.create({
     display: 'flex'
   },
   starIndiv: {
-    flexDirection: 'row',
-    // margin: 5,
-    // padding: 5
+    flexDirection: 'row'
+  },
+  starSpace: {
+    margin: 2,
+    padding: 2
+  },
+  reviewText: {
+    color: NU_Blue,
+    textDecorationLine: 'underline'
   }
 });
-
-// export const createRating = (score) => {
-//   const result = [];
-//   if(score > 0) {
-//     if(score < 0.4) {
-//       result.push(null);
-//     } else if (score >= 0.4 && score <= 0.75){
-//       result.push('star-half');
-//     } else {
-//       result.push('star');
-//     }
-//   }
-//   if(score >= 1) {
-//     if(score < 1.4) {
-//       result.push(null);
-//     } else if (score >= 1.4 && score <= 1.75){
-//       result.push('star-half');
-//     } else {
-//       result.push('star');
-//     }
-//   }
-//   if(score >= 2) {
-//     if(score < 2.4) {
-//       result.push(null);
-//     } else if (score >= 2.4 && score <= 2.75){
-//       result.push('star-half');
-//     } else {
-//       result.push('star');
-//     }
-//   }
-//   if(score >= 3) {
-//     if(score < 3.4) {
-//       result.push(null);
-//     } else if (score >= 3.4 && score <= 3.75){
-//       result.push('star-half');
-//     } else {
-//       result.push('star');
-//     }
-//   }
-//   if(score >= 4) {
-//     if(score < 4.4) {
-//       result.push(null);
-//     } else if (score >= 4.4 && score <= 4.75){
-//       result.push('star-half');
-//     } else {
-//       result.push('star');
-//     }
-//   }
-//   return result;
-// }
