@@ -162,7 +162,6 @@ class Maptab extends Component {
       });
     }
 
-
     // // We should detect when scrolling has stopped then animate
     // // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
@@ -237,6 +236,7 @@ class Maptab extends Component {
 
 
   renderCards(marker, index) {
+    // tried to make seperate component out of this, will not work please leave alone
     const {
       card,
       cardImage,
@@ -273,11 +273,11 @@ class Maptab extends Component {
     const myInterval = setInterval(() => {
       console.log('started')
       if (this.props.savedTechs && this.props.regionObj && this.props.deltas) {
-        console.log('stopped');
+        console.log('timer stopped 🛑');
         clearInterval(myInterval);
         return this.getLocationInformation();
       }
-      console.log('function has run agaiiin');
+      console.log('rerunning timer function ⛳');
       if (!Array.isArray(this.props.savedTechs)) this.props.getActiveNailTechs();
       this.props.getinitialDelta();
     // }, 1500);
@@ -432,6 +432,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
-
-
-

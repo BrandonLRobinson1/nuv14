@@ -10,7 +10,7 @@ import { colors, commonStyles } from '../../../Colors';
 // maybe favorites and available
 
 // 🤯 will be grabbing the region obj from the nail tech info when its created
-//   import { regionObj } from '../../../store/location/nailTECKSTORE';
+//   -> actually might be passed in as a prop not sure yet, or import { regionObj } from '../../../store/location/nailTECKSTORE';
 const regionObj = {latitude: 37.767, longitude: -122.421, latitudeDelta: 0.03148000000000195, longitudeDelta: 0.034317000000001485}
 
 // eslint-disable-next-line
@@ -105,7 +105,7 @@ class ProfilePage extends Component {
                     </MapView.Marker>
 
                     </MapView>
-                  </View>
+                </View>
 
                 </View>
 
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     width: '100%',
-    height: 100
+    height: 110
   },
   scrollableBody: {
     flex: 9
