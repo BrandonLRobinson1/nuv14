@@ -15,7 +15,7 @@ import ApptHome from './src/views/tabs/appointment/ApptHome';
 // import { getinitialDelta, getActiveNailTechs } from './src/store/location/locationServices';
 import { userInfoFetch } from './src/store/userInfo/user';
 
-import Favorites from './src/views/tabs/favTab/Favorites';
+import Featured from './src/views/tabs/favTab/Featured';
 import ProfilePage from './src/views/tabs/favTab/ProfilePage';
 
 import MapTab from './src/views/tabs/map/MapTab';
@@ -107,11 +107,11 @@ class RouterComponent extends Component {
             default="mapTab"
           >
 
-            <Scene key="favorites" title="BrowseOrInfo" icon={tabIcon}>
+            <Scene key="featured" title="Featured" icon={tabIcon}>
               <Scene
-                key="FavoritesTab"
-                component={Favorites}
-                title="FavoritesTab"
+                key="FeaturedTab"
+                component={Featured}
+                title="Featured"
                 initial
               />
               <Scene
@@ -122,7 +122,7 @@ class RouterComponent extends Component {
                 hideTabBar
                 // onRight={() => {
                 //   Actions.pop();
-                //   Actions.FavoritesTab();
+                //   Actions.FeaturedTab();
                 // }}
               />
             </Scene>

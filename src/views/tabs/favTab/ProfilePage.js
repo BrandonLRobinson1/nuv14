@@ -189,6 +189,15 @@ class ProfilePage extends Component {
                   </View>
                 </View>
               </CardSection>
+
+              <CardSection>
+                <View>
+                  <Text>
+                    add to favorites
+                  </Text>
+                </View>
+              </CardSection>
+
             </Card>
           </ScrollView>
         </View>
