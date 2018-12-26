@@ -40,7 +40,6 @@ class Favorites extends Component {
     return (
       <ListView
         dataSource={this.dataSource}
-        style={{backgroundColor: 'orange'}}
         renderRow={personData => <FeaturedItem key={personData.title} personData={personData} />} // TODO: replace Math.random with personData.id
       />
     );
