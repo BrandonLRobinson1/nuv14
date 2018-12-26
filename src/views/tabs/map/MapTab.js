@@ -270,6 +270,7 @@ class Maptab extends Component {
   }
 
   timer() {
+// ******************************************************* if you turn on userFetch ioff in router then infinite loop - FIXXXXXXXXXXXXXXXXXX TODO
     const myInterval = setInterval(() => {
       console.log('started')
       if (this.props.savedTechs && this.props.regionObj && this.props.deltas) {

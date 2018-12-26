@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Image, View, Text, StyleSheet } from 'react-native';
-// import Permissions from 'react-native-permissions';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Spinner, Card } from '../../../common';
 import { colors, commonStyles } from '../../../Colors';
@@ -12,20 +11,7 @@ class ApptHome extends Component {
   constructor() {
     super();
 
-    // this.requestCameraPermission = this.requestCameraPermission.bind(this);
   }
-
-  // Check the status of a single permission
-  // componentDidMount() {
-    // Permissions.check('camera')
-    //   .then(response => {
-    //     // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
-    //     // this.setState({ photoPermission: response })
-    //     console.log('response', JSON.stringify(response))
-    //   })
-    //   .catch(err => console.error(err));
-
-  // };
 
   render() {
     const {

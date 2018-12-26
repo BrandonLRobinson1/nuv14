@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Scene, Router, Actions } from 'react-native-router-flux';
+import { Scene, Router, Actions, Text } from 'react-native-router-flux';
 // import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
@@ -38,6 +38,12 @@ const tabIcon = ({ focused, title }) => {
   return (<Icon name="rocket" size={20} color={NU_Red} />);
 };
 
+const StarIcon = ({ focused, title }) => {
+  // console.log('😺', focused, title);
+  return (<Icon name="star" size={20} color={focused ? 'white' :'green'} />);
+};
+
+
 class RouterComponent extends Component {
 
   componentWillMount() {
@@ -51,7 +57,7 @@ class RouterComponent extends Component {
   }
 
   render() {
-    console.log('how many renders without listening to state');
+    console.log('🚀 how many renders without listening to state');
     return (
       <Router>
         <Scene key="root">
@@ -100,14 +106,16 @@ class RouterComponent extends Component {
           <Scene
             key="tabbar"
             tabs
-            tabBarStyle={{backgroundColor: "blue"}}
+            inactiveTintColor="red"
+            activeTintColor="white"
+            tabBarStyle={{backgroundColor: "black"}}
             type="reset"
             hideNavBar
             pressOpacity={1}
             default="mapTab"
           >
 
-            <Scene key="featured" title="Featured" icon={tabIcon}>
+            <Scene key="featured" title="Featured" icon={StarIcon}>
               <Scene
                 key="FeaturedTab"
                 component={Featured}
@@ -127,7 +135,7 @@ class RouterComponent extends Component {
               />
             </Scene>
 
-            <Scene key="map" title="MAP" icon={tabIcon}>
+            <Scene key="map" title="Find a salon" icon={tabIcon}>
               <Scene
                 key="mapTab"
                 component={MapTab}
@@ -161,6 +169,10 @@ class RouterComponent extends Component {
                 onRight={() => {
                   // Actions.pop();
                   Actions.Settings();
+                }}
+                leftTitle="Refer"
+                onLeft={() => {
+                  console.log('modal')
                 }}
               />
 

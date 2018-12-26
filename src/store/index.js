@@ -11,7 +11,6 @@ const rootReducer = combineReducers({
   userInfo
 });
 
-console.log('winder', window);
 
 const composeEnhancers = composeWithDevTools({ realtime: true, port: 8000 });
 export const store = createStore(rootReducer, /* preloadedState, */ // eslint-disable-line

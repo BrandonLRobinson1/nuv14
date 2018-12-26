@@ -97,8 +97,6 @@ class FavoriteItem extends Component {
           <Button
             buttonText="View"
             onPress={() => {
-              // console.log('Actions', Actions)
-              // Actions.pop();
               Actions.ProfilePage({ personData: this.props.personData }); // eslint-disable-line
             }}
           />
