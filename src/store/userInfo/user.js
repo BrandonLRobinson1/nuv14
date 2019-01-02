@@ -153,8 +153,7 @@ export const userInfoFetch = () => {
   const { currentUser } = firebase.auth();
 
   return dispatch => {
-    // **** this is assuming that getting info with the current used uid gives you full access to the information bc doing it with it doesnt!
-    // firebase.database().ref('/users/testAccounts/dCpWn7CLu9bx3ZVEoBOx8bNdINT2/-LKJWP3gP_Tu3h0_IlSD') // dCpWn7CLu9bx3ZVEoBOx8bNdINT2
+    // **** this is assuming that getting info with the current user uid gives you full access to the information bc doing it with it doesnt!
     firebase.database().ref('/users/testAccounts/vdSfqJpFXidXXy9RAgyWqDxEx6I3/-LKy4WpC_8mhAKMaMkvo')
     // firebase.database().ref(`/users/testAccounts/${currentUser.uid}`) // dCpWn7CLu9bx3ZVEoBOx8bNdINT2
       .on('value', snapshot => {

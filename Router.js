@@ -32,14 +32,12 @@ import { colors } from './src/Colors';
 // eslint-disable-next-line
 const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Border_Grey, NU_Card_Border } = colors;
 
-// conditionally render this page in sceens with a redux store that has defaults
 const tabIcon = ({ focused, title }) => {
   // return (<Text style={{color: focused ? 'red' :'black'}}>{title}</Text>)
   return (<Icon name="rocket" size={20} color={NU_Red} />);
 };
 
 const StarIcon = ({ focused, title }) => {
-  // console.log('😺', focused, title);
   return (<Icon name="star" size={20} color={focused ? 'white' :'green'} />);
 };
 
@@ -128,10 +126,6 @@ class RouterComponent extends Component {
                 title=""
                 backTitle=" "
                 hideTabBar
-                // onRight={() => {
-                //   Actions.pop();
-                //   Actions.FeaturedTab();
-                // }}
               />
             </Scene>
 
@@ -164,10 +158,9 @@ class RouterComponent extends Component {
                 title="profile"
                 backTitle=" "
                 initial
-                //  setting has to include a edit profile
                 rightTitle="Settings"
                 onRight={() => {
-                  // Actions.pop();
+                  Actions.pop();
                   Actions.Settings();
                 }}
                 leftTitle="Refer"
@@ -181,12 +174,7 @@ class RouterComponent extends Component {
                 component={EditAccount}
                 title="Edit Account"
                 backTitle=" "
-                //  setting has to include a edit profile
                 rightTitle="Edit"
-                onRight={() => {
-                  // Actions.pop();
-                  // Actions.Settings();
-                }}
               />
 
               <Scene
@@ -194,12 +182,7 @@ class RouterComponent extends Component {
                 component={ChangeEmail}
                 title="Edit Email"
                 backTitle=" "
-                //  setting has to include a edit profile
                 rightTitle=""
-                onRight={() => {
-                  // Actions.pop();
-                  // Actions.Settings();
-                }}
               />
 
               <Scene

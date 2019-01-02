@@ -1,0 +1,31 @@
+{
+  "salon": "salon x",
+  "email": "salonx@xsolon.net",
+  "services": ["manicure", "pedicure", "shit"],
+  "phone": 7044445555,
+  "area": "atlanta",
+  "coordinate": {
+    "latitude": 45.524548,
+    "longitude": -122.6749817
+  },
+  "availNow": true,
+  "image": {
+    "uri": "https://i.imgur.com/N7rlQYt.jpg"
+  },
+  "reviews": [
+    {
+      "user": "longkey",
+      "userName": "longkey kenny",
+      "rating": 4,
+      "comment": "she was aiiiight"
+    },
+    {
+      "user": "longkey",
+      "userName": "longkey kiera",
+      "rating": 3,
+      "comment": "she was shitty"
+    }
+  ],
+  "payments": {},
+  "status": null
+}
