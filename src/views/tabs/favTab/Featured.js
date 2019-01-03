@@ -17,7 +17,6 @@ class Favorites extends Component {
   }
 
   getRows() {
-  // will AUTOMATICALLY pull info from redux, sfetched as app loads
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2 // eslint-disable-line
     });
@@ -32,7 +31,7 @@ class Favorites extends Component {
       this.setState({ noDoubleRender: true });
       this.getRows();
     }
-    if (!this.dataSource /* !this.props.markerData */) return ( // eslint-disable-line
+    if (!this.dataSource) return ( // eslint-disable-line
       <FullCard>
         <Spinner />
       </FullCard>
@@ -40,7 +39,7 @@ class Favorites extends Component {
     return (
       <ListView
         dataSource={this.dataSource}
-        renderRow={personData => <FeaturedItem key={personData.title} personData={personData} />} // TODO: replace Math.random with personData.id
+        renderRow={personData => <FeaturedItem key={personData.title} personData={personData} />} // TODO: replace key value with personData.id
       />
     );
   }

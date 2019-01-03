@@ -36,7 +36,7 @@ class Validate extends Component {
     return (
       <Card>
 
-      <CardSection>
+        <CardSection>
           <Text>
             We've sent a verfication code to your email or phone, enter to code to complete sign up :)
           </Text>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Scene, Router, Actions, Text } from 'react-native-router-flux';
-// import { Text } from 'react-native';
+import { Scene, Router, Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
+
 import SignUp from './src/views/getCredentials/SignUp';
 import PhoneNumber from './src/views/getCredentials/PhoneNumber';
 import SignUpEmail from './src/views/getCredentials/SignUpEmail';
@@ -33,7 +33,6 @@ import { colors } from './src/Colors';
 const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Border_Grey, NU_Card_Border } = colors;
 
 const tabIcon = ({ focused, title }) => {
-  // return (<Text style={{color: focused ? 'red' :'black'}}>{title}</Text>)
   return (<Icon name="rocket" size={20} color={NU_Red} />);
 };
 
@@ -51,8 +50,7 @@ class RouterComponent extends Component {
     getAppData();
    // TURN BACK ON TURNED OFF FOR TESTING
 
-
-    // need to iniate here then run checks to see if data is there if not render accirdingly
+   // need to iniate here then run checks to see if data is there if not render accirdingly
   }
 
   render() {
@@ -213,14 +211,14 @@ class RouterComponent extends Component {
   }
 };
 
-
 // export default connect(
 //   state => ({
 //   }),
 //   {
 //     getinitialDelta,
 //     getActiveNailTechs,
-//     userInfoFetch
+//     userInfoFetch,
+//     getAppData
 //   }
 // )(RouterComponent);
 

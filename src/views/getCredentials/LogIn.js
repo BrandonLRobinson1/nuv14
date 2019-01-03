@@ -47,8 +47,7 @@ class LogIn extends Component {
           loading: false
         });
         console.log('not logged in');
-      });
-    // return 1
+    });
   }
 
   renderButton() {

@@ -1,0 +1,4 @@
+streamline how and where the deltas are comming from
+
+andriod -
+  map marker tail

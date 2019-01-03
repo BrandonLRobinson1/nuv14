@@ -65,7 +65,6 @@ class PhoneNumber extends Component {
     );
   }
 
-
   render() {
     const {
       circle,

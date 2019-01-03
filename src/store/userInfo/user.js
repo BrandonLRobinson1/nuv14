@@ -157,7 +157,7 @@ export const userInfoFetch = () => {
     firebase.database().ref('/users/testAccounts/vdSfqJpFXidXXy9RAgyWqDxEx6I3/-LKy4WpC_8mhAKMaMkvo')
     // firebase.database().ref(`/users/testAccounts/${currentUser.uid}`) // dCpWn7CLu9bx3ZVEoBOx8bNdINT2
       .on('value', snapshot => {
-        console.log('cha ching ... payload', snapshot.val());
+        console.log('🤑 cha ching user info fetch payload', snapshot.val());
         const {
           email,
           firstName,
@@ -177,13 +177,9 @@ export const userInfoFetch = () => {
 
         // ** for tests only - a location not far from what this would actually pull
         dispatch( setCurrentLocation( { latitude: 37.767, longitude: -122.421 } ) );
-        // dispatch(setCurrentLocation( { ...userData[0].coordinate } ) );
         // dispatch(setCurrentLocation( "PRIVATE_LOCATION" ) );
 
-
-        // maybes
         // so that the map really knows when its empty and call not comming - THIS IS SETTING HERE BECAUSE ITS WITHIN A SUCCESFUL CALL,
-
         // dispatch(setFavorites(favorites)); // favorites and history will live in this fetch
 
         dispatch(setOther(email));
@@ -201,7 +197,7 @@ export const getAppData = () => {
     /// ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
     firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
       .on('value', snapshot => {
-        console.log('🎆')
+        console.log('🎆 get app data snapshot return')
         dispatch(setFavorites(snapshot.val()));
       },
       error => {
