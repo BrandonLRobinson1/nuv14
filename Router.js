@@ -13,7 +13,7 @@ import Validate from './src/views/getCredentials/Validate';
 import ApptHome from './src/views/tabs/appointment/ApptHome';
 
 // import { getinitialDelta, getActiveNailTechs } from './src/store/location/locationServices';
-import { userInfoFetch } from './src/store/userInfo/user';
+import { userInfoFetch, getAppData } from './src/store/userInfo/user';
 
 import Featured from './src/views/tabs/favTab/Featured';
 import ProfilePage from './src/views/tabs/favTab/ProfilePage';
@@ -45,9 +45,10 @@ const StarIcon = ({ focused, title }) => {
 class RouterComponent extends Component {
 
   componentWillMount() {
-    const { getinitialDelta, getActiveNailTechs, userInfoFetch } = this.props;
+    const { getinitialDelta, getActiveNailTechs, userInfoFetch, getAppData } = this.props;
     // TURN BACK ON TURNED OFF FOR TESTING
     userInfoFetch(); // -> on app load preferabl
+    getAppData();
    // TURN BACK ON TURNED OFF FOR TESTING
 
 
@@ -243,6 +244,7 @@ export default connect(
   {
     // getinitialDelta,
     // getActiveNailTechs,
-    userInfoFetch
+    userInfoFetch,
+    getAppData
   }
 )(RouterComponent);

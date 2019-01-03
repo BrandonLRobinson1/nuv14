@@ -183,11 +183,26 @@ export const userInfoFetch = () => {
 
         // maybes
         // so that the map really knows when its empty and call not comming - THIS IS SETTING HERE BECAUSE ITS WITHIN A SUCCESFUL CALL,
-        // OTHERWISE YOU CAN RUN INTO AN INFITE RENDER LOOP IN THE MAPTAB
-        const favorites = userData.length ? userData : [];
-        dispatch(setFavorites(favorites));
+
+        // dispatch(setFavorites(favorites)); // favorites and history will live in this fetch
+
         dispatch(setOther(email));
-        // I have validated that the this works as is
+      },
+      error => {
+        console.log('err', error);
+      });
+  };
+};
+
+
+export const getAppData = () => {
+  const { currentUser } = firebase.auth();
+  return dispatch => {
+    /// ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
+    firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
+      .on('value', snapshot => {
+        console.log('🎆')
+        dispatch(setFavorites(snapshot.val()));
       },
       error => {
         console.log('err', error);

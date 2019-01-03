@@ -24,6 +24,7 @@ class FavoriteItem extends Component {
       headerStyle,
       imageCardSectionContainer
     } = styles;
+
     // const { name, description, title, address: { city, state } } = this.props.personData; // eslint-disable-line
 
     // currently only has {coordinate: {…}, description: "This is the best place in Portland", image: {…}, title: "Best Place"}
@@ -72,7 +73,7 @@ class FavoriteItem extends Component {
         <CardSection style={imageCardSectionContainer}>
           <View style={imageContainer}>
             <Image
-              source={{ uri: "https://i.imgur.com/K3KJ3w4h.jpg" }}
+              source={this.props.personData.image}
               style={imageStyle}
             />
           </View>

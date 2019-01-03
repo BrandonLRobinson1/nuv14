@@ -48,12 +48,10 @@ export const getinitialDelta = () => (dispatch, getState) => {
     }
   } = getState();
 
-  console.log('getinitialDelta favorites state', favorites, getState());
+  if (!Array.isArray(favorites) || !favorites.length) return dispatch(setDeltas(null));
 
-  if (!Array.isArray(favorites)) return dispatch(setDeltas(null));
-
-  // 0 and 1 are usless for calculation
-  if (favorites.length < 2) {
+  // shouldnt be getting from favorites however it should be getting from active in atlanta
+  if (favorites.length < 2) { // 0 and 1 are usless for calculation
     const sendDeltas = {
       latitudeDelta: latDelta,
       longitudeDelta: longDelta
@@ -69,30 +67,9 @@ export const getinitialDelta = () => (dispatch, getState) => {
   };
 
   return dispatch(setDeltas(sendDeltas));
-  /*
-  const sfMarker = [
-    {
-      coordinate: {
-        latitude: 37.771096,
-        longitude: -122.397195,
-      },
-      title: 'Second Best Place',
-      description: 'This is the second best place in Portland',
-      image: Images[1],
-    }
-  ];
-  */
 };
 
 export const getActiveNailTechs = () => (dispatch, getState) => {
-// *** put a timeoout on the calls bc theyre called every 4 seconds
-  const Images = [
-    { uri: 'https://i.imgur.com/sNam9iJ.jpg' },
-    { uri: 'https://i.imgur.com/N7rlQYt.jpg' },
-    { uri: 'https://i.imgur.com/UDrH0wm.jpg' },
-    { uri: 'https://i.imgur.com/Ka8kNST.jpg' }
-  ];
-
   const {
     userInfo: {
       user: {
@@ -102,34 +79,8 @@ export const getActiveNailTechs = () => (dispatch, getState) => {
     }
   } = getState();
 
-  if (Array.isArray(favorites)) {
-    if (!favorites.length) setSavedTechs('no active users');
-    const massagedData = [];
-    favorites.map((person, i) => {
-      person.image = Images[i];
-      person.title = `best place ${i}x`;
-      person.description = 'This is the best place in Portland';
-      massagedData.push(person);
-    });
-    return dispatch(setSavedTechs(massagedData));
-  }
-  return dispatch(setSavedTechs(null));
+  if (!Array.isArray(favorites) || !favorites.length) return dispatch(setSavedTechs(null));
 
-  /*
-  const sfMarker = [
-    {
-      coordinate: {
-        latitude: 37.771096,
-        longitude: -122.397195,
-      },
-      title: 'Second Best Place',
-      description: 'This is the second best place in Portland',
-      image: Images[1],
-    }
-  ];
-
-  // careful with variable name here!!!!!!!!!!!!!!!! ALSO find a way to avoid this when creating users
-  const markers = sfMarkers;
-  return markers;
-  */
+  // shouldnt be getting from favorites however it should be getting from active in atlanta
+  return dispatch(setSavedTechs(favorites));
 };
