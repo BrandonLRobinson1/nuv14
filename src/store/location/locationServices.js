@@ -1,6 +1,6 @@
 import { handleActions, createAction } from 'redux-actions';
 import { getRegionForCoordinates } from '../../helpers/helpersFunctions'; // helper function is a way to get latitiud delta and longitude delta based on a number of points/markers
-import { latDelta, longDelta } from '../../helpers/helpersFunctions';
+import { latDelta, longDelta } from '../../Styles';
 
 // need to design this to grab info from every SESSION
 const defaultState = {

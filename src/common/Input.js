@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput, View, Text, StyleSheet } from 'react-native';
-import { colors } from '../Colors';
+import { colors } from '../Styles';
 
 const Input = ({ label, onChangeText, value, placeholder, secureTextEntry, editable = true, keyboardType = 'default', maxLength = null, clearTextOnFocus = false }) => ( // what to pass in
   <View style={styles.containerStyle}>

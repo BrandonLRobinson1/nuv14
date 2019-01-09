@@ -1,4 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+// phone dimensions *****
+export const { width, height } = Dimensions.get('window');
+export const phoneHeight = height;
+export const phoneWidth = width;
+
+export const aspectRatio = width / height;
+export const latDelta = 0.0622; // .0922
+export const longDelta = aspectRatio * latDelta;
+
+export const CARD_HEIGHT = height / 4;
+export const CARD_WIDTH = CARD_HEIGHT - 50;
+// phone dimensions *****
 
 
 export const colors = {

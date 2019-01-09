@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Image, View, Text, StyleSheet, ScrollView } from 'react-native';
 import Featured from '../favTab/Featured';
 import { CardSection, Card } from '../../../common';
-import { colors, commonStyles } from '../../../Colors';
+import { colors, commonStyles } from '../../../Styles';
 
 // maybe favorites and available
 

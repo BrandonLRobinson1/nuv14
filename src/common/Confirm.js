@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, Modal } from 'react-native';
 import { CardSection } from './CardSection';
 import { Button } from './Button';
-import { colors } from '../Colors';
+import { colors } from '../Styles';
 // import { relative } from 'path';
 
 const Confirm = ({hildren, visible, onAccept, onDecline}) => {

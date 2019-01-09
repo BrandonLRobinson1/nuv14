@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { AlbumCard, CardSection, Card, SectionSmall, SectionMedium, Button } from '../../../common';
 // import { updateFirstName, updateLastName, updateZipCode } from '../../store/userInfo.user';
-import { colors } from '../../../Colors';
+import { colors } from '../../../Styles';
 
 class FavoriteItem extends Component {
   constructor() {

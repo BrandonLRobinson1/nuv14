@@ -12,9 +12,8 @@ import { connect } from 'react-redux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import CustomMarker from './CustomMarker';
 import { FullCard, Spinner } from '../../../common';
-import { latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneHeight, phoneWidth } from '../../../helpers/helpersFunctions';
 import { setCurrentLocation, getActiveNailTechs, getinitialDelta } from '../../../store/location/locationServices';
-import { colors } from '../../../Colors';
+import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth } from '../../../Styles';
 
 // TODO need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
