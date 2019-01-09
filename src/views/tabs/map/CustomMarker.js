@@ -4,7 +4,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { colors, commonStyles } from '../../../Colors';
+import { colors, commonStyles } from '../../../Styles';
 
 export default CustomMarker = () => {
   const {

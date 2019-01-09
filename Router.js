@@ -26,7 +26,7 @@ import Settings from './src/views/tabs/profile/Settings';
 import EditAccount from './src/views/tabs/profile/settingsItems/account/EditAccount';
 import ChangeEmail from './src/views/tabs/profile/settingsItems/account/ChangeEmail';
 
-import { colors } from './src/Colors';
+import { colors } from './src/Styles';
 // import CredentialsRouter from './src/views/getCredentials/index';
 
 // eslint-disable-next-line

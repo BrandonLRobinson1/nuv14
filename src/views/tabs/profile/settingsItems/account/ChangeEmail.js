@@ -10,7 +10,7 @@ import {
 } from '../../../../../common';
 import { updateEmail } from '../../../../../store/userInfo/user';
 import { emailRegEx } from '../../../../../helpers/helpersFunctions';
-import { colors } from '../../../../../Colors';
+import { colors } from '../../../../../Styles';
 
 class EditAccouunt extends Component {
   constructor() {

@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { Button, CardSection, Card, Input } from '../../common';
 import { updateFirstName, updateLastName, updateZipCode } from '../../store/userInfo/user';
 import { allLettersRegEx, allNumbersRegEx, specialCharacterValidation} from '../../helpers/helpersFunctions';
-import { colors } from '../../Colors';
+import { colors } from '../../Styles';
 
 class SignUp extends Component {
   constructor() {

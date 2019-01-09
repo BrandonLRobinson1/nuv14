@@ -7,7 +7,7 @@ import {
   FullCard,
   SectionSmall
 } from '../../common';
-import { colors } from '../../Colors';
+import { colors } from '../../Styles';
 
 const GetCredentials = () => {
   // eslint-disable-next-line

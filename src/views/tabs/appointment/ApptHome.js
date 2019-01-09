@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Image, View, Text, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Spinner, Card } from '../../../common';
-import { colors, commonStyles } from '../../../Colors';
+import { colors, commonStyles } from '../../../Styles';
 
 
 // eslint-disable-next-line

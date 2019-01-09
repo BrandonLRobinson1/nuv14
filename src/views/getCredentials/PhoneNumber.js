@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { Button, CardSection, Card, Input, EnterPhone } from '../../common';
 import { allNumbersRegEx } from '../../helpers/helpersFunctions';
 import { updatePhoneNumber, clearAll, addFormInfo } from '../../store/userInfo/user';
-import { colors } from '../../Colors';
+import { colors } from '../../Styles';
 
 class PhoneNumber extends Component {
   constructor() {

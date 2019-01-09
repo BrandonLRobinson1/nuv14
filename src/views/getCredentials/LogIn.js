@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { Button, CardSection, Card, Input, Spinner } from '../../common';
 import { updateLogInEmail, updateLogInPassword, logUserIn } from '../../store/logIn/logIn';
 import { emailRegEx, specialCharacterValidation } from '../../helpers/helpersFunctions';
-import { colors } from '../../Colors';
+import { colors } from '../../Styles';
 
 class LogIn extends Component {
   constructor() {

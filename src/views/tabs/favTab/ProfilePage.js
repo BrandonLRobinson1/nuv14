@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomMarker from '../map/CustomMarker';
 import { createRating } from '../../../helpers/helpersFunctions';
 import { CardSection, Spinner, Card } from '../../../common';
-import { colors, commonStyles } from '../../../Colors';
+import { colors, commonStyles } from '../../../Styles';
 
 // maybe favorites and available
 

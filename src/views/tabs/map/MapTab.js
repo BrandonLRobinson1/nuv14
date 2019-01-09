@@ -194,6 +194,13 @@ class Maptab extends Component {
         outputRange: [0.35, 1, 0.35],
         extrapolate: 'clamp'
       });
+
+      // const cardBorder = this.animation.interpolate({
+      //     inputRange,
+      //     outputRange: [0, 1, 0],
+      //     extrapolate: 'clamp',
+      // });
+      // return { scale, opacity, cardBorder };
       return { scale, opacity };
     });
 

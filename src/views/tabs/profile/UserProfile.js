@@ -134,7 +134,7 @@ class UserProfile extends Component {
           </CardSection>
 
           <View style={scrollSection}>
-            <Featured dataToRender={false}/>
+            <Featured dataToRender={false} />
           </View>
 
         </View>

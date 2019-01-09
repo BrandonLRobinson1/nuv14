@@ -6,7 +6,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { setCurrentLocation, setSavedTechs } from '../../../store/location/locationServices';
 
 import { placesKey } from '../../../../private';
-import { colors } from '../../../Colors';
+import { colors } from '../../../Styles';
 
 // eslint-disable-next-line
 class SearchAddress extends Component {

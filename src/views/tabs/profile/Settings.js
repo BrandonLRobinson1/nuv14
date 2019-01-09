@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import SettingsTitle from './settingsItems/SettingsTitle';
 import SettingsList from './settingsItems/SettingsList';
-import { colors } from '../../../Colors';
+import { colors } from '../../../Styles';
 // maybe favorites and available
 
 // eslint-disable-next-line

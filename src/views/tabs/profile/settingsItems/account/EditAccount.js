@@ -14,7 +14,7 @@ import {
   updateZipCode,
   setBio
 } from '../../../../../store/userInfo/user';
-import { colors } from '../../../../../Colors';
+import { colors } from '../../../../../Styles';
 
 class EditAccouunt extends Component {
   constructor() {
