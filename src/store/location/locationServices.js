@@ -1,11 +1,6 @@
 import { handleActions, createAction } from 'redux-actions';
-import { Dimensions } from 'react-native';
 import { getRegionForCoordinates } from '../../helpers/helpersFunctions'; // helper function is a way to get latitiud delta and longitude delta based on a number of points/markers
-
-const { width, height } = Dimensions.get('window');
-const aspectRatio = width / height;
-const latDelta = 0.0622; // 0.0922
-const longDelta = aspectRatio * latDelta;
+import { latDelta, longDelta } from '../../helpers/helpersFunctions';
 
 // need to design this to grab info from every SESSION
 const defaultState = {

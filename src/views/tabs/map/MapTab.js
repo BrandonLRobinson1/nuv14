@@ -12,25 +12,9 @@ import { connect } from 'react-redux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import CustomMarker from './CustomMarker';
 import { FullCard, Spinner } from '../../../common';
+import { latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneHeight, phoneWidth } from '../../../helpers/helpersFunctions';
 import { setCurrentLocation, getActiveNailTechs, getinitialDelta } from '../../../store/location/locationServices';
 import { colors } from '../../../Colors';
-
-const Images = [
-  { uri: 'https://i.imgur.com/sNam9iJ.jpg' },
-  { uri: 'https://i.imgur.com/N7rlQYt.jpg' },
-  { uri: 'https://i.imgur.com/UDrH0wm.jpg' },
-  { uri: 'https://i.imgur.com/Ka8kNST.jpg' }
-];
-
-// phone dimensions *****
-const { width, height } = Dimensions.get('window');
-const aspectRatio = width / height;
-const latDelta = 0.0622; // .0922
-const longDelta = aspectRatio * latDelta;
-
-const CARD_HEIGHT = height / 4;
-const CARD_WIDTH = CARD_HEIGHT - 50;
-// *****
 
 // TODO need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
@@ -390,7 +374,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   endPadding: {
-    paddingRight: width - CARD_WIDTH,
+    paddingRight: phoneWidth - CARD_WIDTH,
   },
   card: {
     padding: 10,

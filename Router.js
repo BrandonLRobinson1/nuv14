@@ -46,6 +46,7 @@ class RouterComponent extends Component {
   componentWillMount() {
     const { getinitialDelta, getActiveNailTechs, userInfoFetch, getAppData } = this.props;
     // TURN BACK ON TURNED OFF FOR TESTING
+    // ******************************************************* use lodash when searching through firebase database instead of writing your own functions
     userInfoFetch(); // -> on app load preferabl
     getAppData();
    // TURN BACK ON TURNED OFF FOR TESTING
