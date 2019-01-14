@@ -71,7 +71,7 @@ export const getActiveNailTechs = () => (dispatch, getState) => {
       }
     }
   } = getState();
-
+  
   if (!Array.isArray(favorites) || !favorites.length) return dispatch(setSavedTechs(null));
 
   // shouldnt be getting from favorites however it should be getting from active in atlanta
