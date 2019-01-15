@@ -48,7 +48,9 @@ class RouterComponent extends Component {
     // TURN BACK ON TURNED OFF FOR TESTING
     // ******************************************************* use lodash when searching through firebase database instead of writing your own functions
     userInfoFetch(); // -> on app load preferabl
-    getAppData();
+
+    getAppData(); // ---> get markers for map TODO rename
+
    // TURN BACK ON TURNED OFF FOR TESTING
 
    // need to iniate here then run checks to see if data is there if not render accirdingly

@@ -15,6 +15,9 @@ import { FullCard, Spinner } from '../../../common';
 import { setCurrentLocation, getActiveNailTechs, getinitialDelta } from '../../../store/location/locationServices';
 import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth } from '../../../Styles';
 
+// for line 330!!! took it out so it wont ping my account with fe
+// provider={PROVIDER_GOOGLE}
+
 // TODO need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
   constructor() {
@@ -83,9 +86,12 @@ class Maptab extends Component {
     if (regionObj !== 'PRIVATE_LOCATION') { // need to check for private region info not FALSY
       console.log('fired 4 - location isnt private', regionObj, init, markers);
 
+      const firstMarker = markers[0].coordinate;
+      console.log('👳‍♀️👳‍♀️👳‍♀️👳‍♀️👳‍♀️👳‍♀️👳‍♀️👳‍♀️', firstMarker);
+
       const initialRegion = {
-        latitude: regionObj.latitude,
-        longitude: regionObj.longitude,
+        latitude: firstMarker.latitude || regionObj.latitude,
+        longitude: firstMarker.longitude || regionObj.longitude,
         latitudeDelta: init.latitudeDelta || latDelta,
         longitudeDelta: init.longitudeDelta || longDelta
       };
@@ -325,7 +331,7 @@ class Maptab extends Component {
       <View style={container}>
 
         <MapView
-          provider={PROVIDER_GOOGLE}
+
           ref={map => this.map = map} // eslint-disable-line
           initialRegion={initialPosition}
           style={container}
@@ -342,7 +348,7 @@ class Maptab extends Component {
               const opacityStyle = {
                 opacity: interpolations[index].opacity
               }
-              console.log('opacityStyle', opacityStyle)
+
               return(
                 <MapView.Marker key={index} coordinate={marker.coordinate}>
                   <Animated.View style={[markerWrap, opacityStyle, scaleStyle, markerSize]}>
@@ -354,7 +360,10 @@ class Maptab extends Component {
 
           {/* below is an optional your location marker */}
 
-          <MapView.Marker coordinate={initialPosition} pinColor={NU_White} />
+          <MapView.Marker
+            coordinate={{latitude: 37.773, longitude: -122.396}}
+            pinColor={NU_White}
+          />
 
         </MapView>
 

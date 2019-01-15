@@ -1,7 +1,8 @@
 import { handleActions, createAction } from 'redux-actions';
 import firebase from 'firebase';
 import { setCurrentLocation } from '../location/locationServices';
-import { getRegionForCoordinates } from '../../helpers/helpersFunctions'
+import { getRegionForCoordinates } from '../../helpers/helpersFunctions';
+import { latDelta, longDelta } from '../../Styles';
 
 const defaultState = {
   firstName: '',
@@ -178,7 +179,8 @@ export const userInfoFetch = () => {
 
         // ** for tests only - a location not far from what this would actually pull
 
-        // dispatch( setCurrentLocation( { latitude: 37.767, longitude: -122.421 } ) );
+        // ***!!! THE REASON THAT YOU SET A CURRENT LOCATION HERE ON THE USER INFO IS BECAUSE ITLL EITHER BE PRIVATE AND HAVE A DEFAULT LIKE BELOW OR ITLL USE THE BUILT IN PHONE GET LOCATION
+        dispatch( setCurrentLocation( { latitude: 37.767, longitude: -122.421 } ) );
         // dispatch(setCurrentLocation( "PRIVATE_LOCATION" ) );
 
         // so that the map really knows when its empty and call not comming - THIS IS SETTING HERE BECAUSE ITS WITHIN A SUCCESFUL CALL,
@@ -199,18 +201,7 @@ export const getAppData = () => {
     /// ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
     firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
       .on('value', snapshot => {
-
         dispatch(setFavorites(snapshot.val()));
-
-        let dataForDeltas = snapshot.val().reduce((collection, item, index) => {
-          collection.push(item.coordinate);
-          return collection
-        }, []);
-
-        dataForDeltas = getRegionForCoordinates(dataForDeltas);
-
-        dispatch(setCurrentLocation(dataForDeltas));
-
       },
       error => {
         console.log('err', error);

@@ -41,7 +41,7 @@ export const getinitialDelta = () => (dispatch, getState) => {
     }
   } = getState();
 
-  if (!Array.isArray(favorites) || !favorites.length) return dispatch(setDeltas(null));
+  if (!Array.isArray(favorites) || !favorites.length) return dispatch(setDeltas(null)); // <--- setting this to null probable isnt a good idea because the map will be in a loading state forever
 
   // shouldnt be getting from favorites however it should be getting from active in atlanta
   if (favorites.length < 2) { // 0 and 1 are usless for calculation
@@ -52,14 +52,14 @@ export const getinitialDelta = () => (dispatch, getState) => {
     return dispatch(setDeltas(sendDeltas));
   }
 
-  const allFavorites = favorites.map(marker => marker.coordinate);
-  const getDeltas = getRegionForCoordinates(allFavorites);
-  const sendDeltas = {
-    latitudeDelta: getDeltas.latitudeDelta,
-    longitudeDelta: getDeltas.longitudeDelta
-  };
+  let dataForDeltas = favorites.reduce((collection, item, index) => {
+    collection.push(item.coordinate);
+    return collection
+  }, []);
 
-  return dispatch(setDeltas(sendDeltas));
+  dataForDeltas = getRegionForCoordinates(dataForDeltas);
+
+  dispatch(setDeltas(dataForDeltas));
 };
 
 export const getActiveNailTechs = () => (dispatch, getState) => {
@@ -71,7 +71,7 @@ export const getActiveNailTechs = () => (dispatch, getState) => {
       }
     }
   } = getState();
-  
+
   if (!Array.isArray(favorites) || !favorites.length) return dispatch(setSavedTechs(null));
 
   // shouldnt be getting from favorites however it should be getting from active in atlanta
