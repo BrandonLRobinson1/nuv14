@@ -36,23 +36,20 @@ class Maptab extends Component {
   }
 
   componentWillMount() {
+    console.log('keep in mind this fires when you try to change address')
     this.index = 0;
     this.animation = new Animated.Value(0);
     navigator.geolocation.clearWatch(this.watchID); // eslint-disable-line
     this.timer();
   }
 
-  // maybe get it down to this .. will have to check and render info if it is available
   componentDidMount() {
     console.log('component will mount in maptab run')
     const { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj } = this.props; // eslint-disable-line
 
-    // currently get active nailtechs run depends on a successful call to getuserinfo in router, so on final timer reset may need to call
-    // HUGE** get active nail techs is its OWN THING bc in the future itll have its own call to google to get active people,
     // this for now will have to be recalled to be updated until we can run a watch on it
     if (!Array.isArray(this.props.savedTechs)) this.props.getActiveNailTechs();
 
-    // ****** if you have required info cancel timer and call function that renders map
     return;
   }
 
@@ -78,25 +75,22 @@ class Maptab extends Component {
     const markers = savedTechs;
     const init = deltas;
 
-    // *** above should be called before this component loads
-
     const dt = new Date();
     const utcDate = dt.toUTCString(); // unique timestamp with date
 
+    // private will pull generic location, otherwise either use built in get location from phone or cached location
     if (regionObj !== 'PRIVATE_LOCATION') { // need to check for private region info not FALSY
       console.log('fired 4 - location isnt private', regionObj, init, markers);
 
       const firstMarker = markers[0].coordinate;
-      console.log('👳‍♀️👳‍♀️👳‍♀️👳‍♀️👳‍♀️👳‍♀️👳‍♀️👳‍♀️', firstMarker);
 
       const initialRegion = {
         latitude: firstMarker.latitude || regionObj.latitude,
         longitude: firstMarker.longitude || regionObj.longitude,
         latitudeDelta: init.latitudeDelta || latDelta,
-        longitudeDelta: init.longitudeDelta || longDelta
+        longitudeDelta: init.longitudeDelta || longDelta,
+        timeStamp: utcDate
       };
-
-      console.log('🌎initialRegion1', initialRegion);
 
       this.setState({
         initialPosition: initialRegion,
@@ -119,10 +113,8 @@ class Maptab extends Component {
           timeStamp: utcDate // may want to assiociate timestamp with sessions
         };
 
-        console.log('🌎initialRegion2', initialRegion);
-
         this.setState({
-          initialPosition: initialRegion, // if you want ur stRTING POINT TO BE A central location beteen markers and not yourself
+          initialPosition: initialRegion,
           markers
         });
 
@@ -180,90 +172,6 @@ class Maptab extends Component {
     });
   }
 
-
-  renderMarkers(marker, index) {
-    const { markerWrap, markerSize } = styles;
-    // this is the snippet of code that is reponsible for what paticlular marker is zoomed in on
-    const interpolations = this.state.markers.map((marker, index) => {
-      const inputRange = [
-        (index - 1) * CARD_WIDTH,
-        index * CARD_WIDTH,
-        ((index + 1) * CARD_WIDTH)
-      ];
-      const scale = this.animation.interpolate({
-        inputRange,
-        outputRange: [1, 1.35, 1],
-        extrapolate: 'clamp'
-      });
-      const opacity = this.animation.interpolate({
-        inputRange,
-        outputRange: [0.35, 1, 0.35],
-        extrapolate: 'clamp'
-      });
-
-      const cardBorder = this.animation.interpolate({
-          inputRange,
-          outputRange: [0, 1, 0],
-          extrapolate: 'clamp'
-      });
-      return { scale, opacity, cardBorder };
-    });
-
-    const scaleStyle = {
-      transform: [
-        {
-          scale: interpolations[index].scale
-        },
-      ],
-    };
-    const opacityStyle = {
-      opacity: interpolations[index].opacity
-    };
-
-    return (
-      <MapView.Marker key={index} coordinate={marker.coordinate}>
-        <Animated.View style={[markerWrap, opacityStyle, scaleStyle, markerSize]}>
-          <CustomMarker />
-        </Animated.View>
-      </MapView.Marker>
-    );
-  }
-
-
-  renderCards(marker, index) {
-    // tried to make seperate component out of this, will not work please leave alone
-    const {
-      // card,
-      // cardImage,
-      // textContent,
-      // cardtitle,
-      // cardDescription
-    } = styles;
-
-    // return (
-    //   <View style={card} key={index}>
-    //     <Image
-    //       source={marker.image}
-    //       style={cardImage}
-    //       resizeMode="cover"
-    //     />
-    //     <View style={textContent}>
-    //       <Text numberOfLines={1} style={cardtitle}>
-    //         {marker.title}
-    //       </Text>
-    //       <Text numberOfLines={1} style={cardDescription}>
-    //         {marker.description}
-    //       </Text>
-    //     </View>
-    //     <TouchableOpacity onPress={() => this.onCardClick(marker)}>
-    //       <Text>
-    //         button
-    //       </Text>
-    //     </TouchableOpacity>
-    //   </View>
-    // );
-  }
-
   timer() {
 // ******************************************************* if you turn on userFetch ioff in router then infinite loop - FIXXXXXXXXXXXXXXXXXX TODO
     const myInterval = setInterval(() => {
@@ -288,18 +196,14 @@ class Maptab extends Component {
     console.log('maptab rerender - render amount direct affected by timer');
 
     let interpolations;
-    if ( this.state.markers && this.state.markers.length ) {
-      interpolations = this.state.markers.map((marker, index) => {
+    if ( markers && markers.length ) {
+      interpolations = markers.map((marker, index) => {
         const inputRange = [
           (index - 1) * CARD_WIDTH,
           index * CARD_WIDTH,
           (index + 1) * CARD_WIDTH
         ];
-        // const inputRange = [
-        //   (index - 1) * CARD_WIDTH,
-        //   index * CARD_WIDTH,
-        //   (index + 1) * CARD_WIDTH
-        // ];
+
         const scale = this.animation.interpolate({
           inputRange,
           outputRange: [1, 1.35, 1],
@@ -316,7 +220,6 @@ class Maptab extends Component {
             outputRange: [0, 1, 0],
             extrapolate: 'clamp'
         });
-        // console.log('scale, opacity, cardBorder, marker, index', scale, opacity, cardBorder, marker, index);
         return { scale, opacity, cardBorder };
       });
     }
@@ -359,7 +262,6 @@ class Maptab extends Component {
           }) }
 
           {/* below is an optional your location marker */}
-
           <MapView.Marker
             coordinate={{latitude: 37.773, longitude: -122.396}}
             pinColor={NU_White}
@@ -389,17 +291,8 @@ class Maptab extends Component {
         >
 
           { markers.map((marker, index) => {
-            // const scaleStyle = {
-            //   transform: [
-            //     {
-            //       scale: interpolations[index].scale
-            //     },
-            //   ],
-            // };
-            const opacityStyleBorder = {
-              opacity: interpolations[index].cardBorder
-            }
-            // { backgroundColor: 'blue'}
+
+            const opacityStyleBorder = { opacity: interpolations[index].cardBorder }
             return (
               <View key={index}>
               {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
@@ -423,8 +316,8 @@ class Maptab extends Component {
                       button
                     </Text>
                   </TouchableOpacity>
-                  </View>
-                  </View>
+                </View>
+              </View>
 
             );
           }) }
@@ -452,7 +345,7 @@ class Maptab extends Component {
 
 export default connect(
   state => {
-    console.log('state', state)
+    // console.log('state', state)
     return {
     regionObj: state.location.locationServices.regionObj,
     savedTechs: state.location.locationServices.savedTechs,

@@ -177,14 +177,9 @@ export const userInfoFetch = () => {
         dispatch(updateZipCode(zipCode));
         dispatch(updateEmail(email));
 
-        // ** for tests only - a location not far from what this would actually pull
-
         // ***!!! THE REASON THAT YOU SET A CURRENT LOCATION HERE ON THE USER INFO IS BECAUSE ITLL EITHER BE PRIVATE AND HAVE A DEFAULT LIKE BELOW OR ITLL USE THE BUILT IN PHONE GET LOCATION
-        dispatch( setCurrentLocation( { latitude: 37.767, longitude: -122.421 } ) );
+        dispatch( setCurrentLocation( { latitude: 37.767, longitude: -122.421 } ) ); // would be saved, using random data here
         // dispatch(setCurrentLocation( "PRIVATE_LOCATION" ) );
-
-        // so that the map really knows when its empty and call not comming - THIS IS SETTING HERE BECAUSE ITS WITHIN A SUCCESFUL CALL,
-        // dispatch(setFavorites(favorites)); // favorites and history will live in this fetch
 
         dispatch(setOther(email));
       },

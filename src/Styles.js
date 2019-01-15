@@ -12,8 +12,6 @@ export const CARD_HEIGHT = height / 4;
 export const CARD_WIDTH = CARD_HEIGHT - 50;
 // phone dimensions *****
 
-// $FONT_FAMILY: Platform.OS === 'ios' ? 'Avenir Next' : 'Roboto',
-
 export const colors = {
   NU_Red: 'red',
   NU_Blue: 'blue',
@@ -31,6 +29,9 @@ export const colors = {
 };
 
 export const commonStyles = StyleSheet.create({
+  // NU_Font: {
+  //   fontFamily: Platform.OS === 'ios' ? 'Avenir Next' : 'Roboto'
+  // },
   NU_Header_Text: {
     fontSize: 26,
     color: colors.NU_Black,

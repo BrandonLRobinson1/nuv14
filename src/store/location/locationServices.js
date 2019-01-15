@@ -13,7 +13,6 @@ const prefix = 'NU_STORE/LOCATION/';
 export const setCurrentLocation = createAction(`${prefix}SET_CURRENT_LOCATION`);
 export const setSavedTechs = createAction(`${prefix}SET_SAVED_TECHS`);
 export const setDeltas = createAction(`${prefix}SET_DELTAS`);
-// export const setGeoLocation = createAction(`${prefix}SET_GEO_LOCATION`);
 
 export default handleActions({
   [setCurrentLocation]: (state, { payload }) => ({
@@ -31,8 +30,8 @@ export default handleActions({
 }, defaultState);
 
 // should have one thunk package all the data i need for a users session and send it up, generator
+
 export const getinitialDelta = () => (dispatch, getState) => {
-  // *** put a timeoout on the calls
   const {
     userInfo: {
       user: {
@@ -66,7 +65,6 @@ export const getActiveNailTechs = () => (dispatch, getState) => {
   const {
     userInfo: {
       user: {
-        // ***** when changing refer to this dispatch for directions
         favorites // set favorites bc its a place holder for this
       }
     }
