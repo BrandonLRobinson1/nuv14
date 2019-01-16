@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Image, View, Text, StyleSheet, ScrollView } from 'react-native';
 import Featured from '../favTab/Featured';
-import { CardSection, Card } from '../../../common';
+import { CardSection, Card, ModalView } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
 // maybe favorites and available
@@ -12,7 +12,8 @@ class UserProfile extends Component {
   constructor() {
     super();
     this.state = {
-      tabSelected: 'favorites'
+      tabSelected: 'favorites',
+      modalTesterWillDelete: false
     };
     // this.renderFavsAndHistory = this.renderFavsAndHistory.bind(this);
   }
@@ -24,6 +25,12 @@ class UserProfile extends Component {
   //     <Featured />
   //   );
   // }
+
+  componentWillMount(deletethisuneededshit) {
+    setInterval(() => {
+      this.setState( (state) => ({ modalTesterWillDelete: !this.state.modalTesterWillDelete }) );
+    }, 5000);
+  }
 
   tabSelect(selected) {
     const { tabSelected } = this.state;
@@ -138,6 +145,10 @@ class UserProfile extends Component {
           </View>
 
         </View>
+
+        <ModalView visible={this.state.modalTesterWillDelete}>
+          refer Modal
+        </ModalView>
 
       </Card>
     ); // TODO change if statements to if (!this.props.keyname)
