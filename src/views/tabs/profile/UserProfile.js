@@ -27,6 +27,7 @@ class UserProfile extends Component {
   // }
 
   componentWillMount(deletethisuneededshit) {
+    // should actually pull a value from redux and not local state
     setInterval(() => {
       this.setState( (state) => ({ modalTesterWillDelete: !this.state.modalTesterWillDelete }) );
     }, 5000);
