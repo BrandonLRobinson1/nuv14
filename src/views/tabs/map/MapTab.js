@@ -92,6 +92,11 @@ class Maptab extends Component {
         timeStamp: utcDate
       };
 
+      // this is STRICly to make the home postion the first map focus, to do this properly it needs to be done in redux and not here
+      initialRegion.latitude = 37.773;
+      initialRegion.longitude = -122.396;
+      // this is STRICly to make the home postion the first map focus, to do this properly it needs to be done in redux and not here
+
       this.setState({
         initialPosition: initialRegion,
         markers

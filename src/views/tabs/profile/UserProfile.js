@@ -28,9 +28,9 @@ class UserProfile extends Component {
 
   componentWillMount(deletethisuneededshit) {
     // should actually pull a value from redux and not local state
-    setInterval(() => {
-      this.setState( (state) => ({ modalTesterWillDelete: !this.state.modalTesterWillDelete }) );
-    }, 5000);
+    // setInterval(() => {
+    //   this.setState( (state) => ({ modalTesterWillDelete: !this.state.modalTesterWillDelete }) );
+    // }, 5000);
   }
 
   tabSelect(selected) {
@@ -84,10 +84,10 @@ class UserProfile extends Component {
           <CardSection>
             <View style={horizontalFlex}>
               <View style={flexCenter}>
-                <Text>
+                <Text style={NU_Paragraph_Text}>
                   Brandon Robinson
                 </Text>
-                <Text>
+                <Text style={NU_Paragraph_Text}>
                   Charlotte, NC
                 </Text>
               </View>

@@ -1,20 +1,25 @@
 import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { colors } from '../../../../Styles';
-
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { colors, commonStyles } from '../../../../Styles';
 
 const SettingsList = ({name, sceneLocation}) => {
 
-  const { row, itemName, icon, font } = styles;
+  const { row, itemName, icon } = styles;
+  const { NU_Blue } = colors;
+  const { NU_Paragraph_Text } = commonStyles;
   return (
     <View style={row}>
       <View style={itemName}>
-        <Text style={font}>{name}</Text>
+        <Text style={NU_Paragraph_Text}>
+          {name}
+        </Text>
       </View>
       <View style={icon}>
-        <Text onPress={() => { Actions[sceneLocation]() }}> > icon </Text>
+        <Text onPress={() => { Actions[sceneLocation]() }}>
+          <Icon name="chevron-right" size={20} color={NU_Blue} />
+        </Text>
       </View>
     </View>
   );
@@ -32,19 +37,14 @@ const styles = StyleSheet.create({
   },
   itemName: {
     flex: 5,
-    backgroundColor: NU_Blue,
     justifyContent: 'center',
     paddingLeft: 10
   },
   icon: {
     flex: 1,
     backgroundColor: NU_Red,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    paddingRight: 10
-  },
-  font: {
-    fontSize: 14,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 

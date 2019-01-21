@@ -50,10 +50,10 @@ class ApptHome extends Component {
         <CardSection>
           <View style={horizontalFlex}>
             <View style={flexCenter}>
-              <Text>
+              <Text style={NU_Paragraph_Text}>
                 Brandon Robinson
               </Text>
-              <Text>
+              <Text style={NU_Paragraph_Text}>
                 Charlotte, NC
               </Text>
             </View>

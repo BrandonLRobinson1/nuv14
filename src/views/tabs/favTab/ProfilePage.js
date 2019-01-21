@@ -84,6 +84,8 @@ class ProfilePage extends Component {
                 </View>
               </CardSection>
 
+              <Text>above scrolls for more pics</Text>
+
               <CardSection>
                 <View style={horizontalFlex}>
                   <View>
@@ -179,12 +181,12 @@ class ProfilePage extends Component {
                 <View style={horizontalFlex}>
                   <View>
                     <Text style={NU_Small_Header_Text}>
-                      filler
+                      hours
                     </Text>
                   </View>
                   <View>
                     <Text style={NU_Paragraph_Text}>
-                      filler
+                      hours
                     </Text>
                   </View>
                 </View>

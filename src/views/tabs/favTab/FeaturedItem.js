@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { AlbumCard, CardSection, Card, SectionSmall, SectionMedium, Button } from '../../../common';
 // import { updateFirstName, updateLastName, updateZipCode } from '../../store/userInfo.user';
-import { colors } from '../../../Styles';
+import { colors, commonStyles } from '../../../Styles';
 
 class FavoriteItem extends Component {
   constructor() {
@@ -20,12 +20,11 @@ class FavoriteItem extends Component {
       imageStyle,
       horizontalFlex,
       imageContainer,
-      horizontalText,
-      headerStyle,
       imageCardSectionContainer
     } = styles;
 
-    const { title, description } = this.props.personData;
+    const { personData } = this.props;
+    const { NU_Header_Text, NU_Paragraph_Text } = commonStyles;
 
     return (
       <Card>
@@ -40,14 +39,14 @@ class FavoriteItem extends Component {
 
         <CardSection>
           <View style={horizontalFlex}>
-            <View style={headerStyle}>
-              <Text>
-                {title}
+            <View>
+              <Text style={NU_Header_Text}>
+                {personData.title}
               </Text>
             </View>
-            <View style={horizontalText}>
-              <Text>
-                {description}
+            <View>
+              <Text style={NU_Paragraph_Text}>
+                {personData.description}
               </Text>
             </View>
           </View>
@@ -57,7 +56,7 @@ class FavoriteItem extends Component {
           <Button
             buttonText="View"
             onPress={() => {
-              Actions.ProfilePage({ personData: this.props.personData }); // eslint-disable-line
+              Actions.ProfilePage({ personData }); // eslint-disable-line
             }}
           />
         </CardSection>
@@ -92,20 +91,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     width: '100%'
-  },
-  headerStyle: {
-    backgroundColor: NU_Pink,
-    flex: 1,
-    padding: 5,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  horizontalText: {
-    backgroundColor: NU_White,
-    flex: 1,
-    padding: 5,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
 
   imageCardSectionContainer: {
