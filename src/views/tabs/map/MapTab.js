@@ -380,7 +380,7 @@ const styles = StyleSheet.create({
     borderColor: 'black'
   },
   endPadding: {
-    // paddingRight: phoneWidth - CARD_WIDTH,
+    paddingRight: phoneWidth - CARD_WIDTH,
     borderColor: 'black'
   },
   card: {

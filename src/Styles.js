@@ -3,7 +3,6 @@ import { StyleSheet, Dimensions } from 'react-native';
 export const { width, height } = Dimensions.get('window');
 export const phoneHeight = height;
 export const phoneWidth = width;
-
 export const aspectRatio = width / height;
 export const latDelta = 0.0622; // .0922
 export const longDelta = aspectRatio * latDelta;
