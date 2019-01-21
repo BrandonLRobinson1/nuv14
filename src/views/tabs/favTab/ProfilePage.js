@@ -12,8 +12,8 @@ import { colors, commonStyles } from '../../../Styles';
 // maybe favorites and available
 
 // 🤯 will be grabbing the region obj from the nail tech info when its created
-//   -> actually might be passed in as a prop not sure yet, or import { regionObj } from '../../../store/location/nailTECKSTORE';
-const regionObj = {latitude: 37.767, longitude: -122.421, latitudeDelta: 0.03148000000000195, longitudeDelta: 0.034317000000001485}
+// -> actually might be passed in as a prop not sure yet, or import { regionObj } from '../../../store/location/nailTECKSTORE';
+const regionObj = {latitude: 37.767, longitude: -122.421, latitudeDelta: 0.03148000000000195, longitudeDelta: 0.034317000000001485};
 
 // eslint-disable-next-line
 class ProfilePage extends Component {
@@ -272,9 +272,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     shadowColor: NU_Border_Grey,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    // borderWidth: 1,
-    // borderColor: NU_Border_Grey
+    shadowOpacity: 0.5
   },
   imageContainer: {
     minHeight: 235,
@@ -282,9 +280,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignSelf: 'center',
-    backgroundColor: NU_White,
-    // shadowColor: NU_Border_Grey,
-    // shadowOffset: { width: 0, height: 2 },
+    backgroundColor: NU_White
   },
   imageStyle: {
     flex: 1,

@@ -5,17 +5,14 @@ import { Actions } from 'react-native-router-flux';
 import { CardSection, Spinner, Card } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
-
 // eslint-disable-next-line
 class ApptHome extends Component {
   constructor() {
     super();
-
   }
 
   render() {
     const {
-      // NU_Header_Text,
       horizontalFlex,
       NU_Paragraph_Text,
       NU_Small_Header_Text
@@ -24,19 +21,9 @@ class ApptHome extends Component {
       imageStyle,
       imageContainer,
       flexCenter
-      // container,
-      // scrollableBody,
-      // sectionalButtonStyle,
-      // dividerStyle,
-      // tabOff,
-      // tabOn,
-      // stickyBottom,
-      // customAppointmentButton,
-      // customAppointmentButtonText
     } = styles; // eslint-disable-line
 
     return (
-
       <Card>
         <CardSection>
           <View style={imageContainer}>
@@ -93,9 +80,7 @@ class ApptHome extends Component {
         <CardSection>
           <Text onPress={() => this.requestCameraPermission('camera')}>Path to QR code</Text>
         </CardSection>
-
       </Card>
-
     ); // TODO change if statements to if (!this.props.keyname)
   }
 }
@@ -112,14 +97,6 @@ export default connect(
 const { NU_Red , NU_Blue, NU_White, NU_Grey, NU_Border_Grey } = colors; // eslint-disable-line
 
 const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    height: '100%'
-  },
-  scrollableBody: {
-    flex: 9
-    // marginBottom: 5
-  },
   imageContainer: { // this is how you would full screen an image **ORDER MATTERS****************************
     flex: 1,
     backgroundColor: NU_White,
@@ -135,20 +112,5 @@ const styles = StyleSheet.create({
   flexCenter: {
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  dividerStyle: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row'
-  },
-  sectionalButtonStyle: {
-    flex: 1,
-    textAlign: 'center'
-  },
-  tabOff: {
-    color: NU_Grey
-  },
-  tabOn: {
-    color: NU_Blue
   }
 });
