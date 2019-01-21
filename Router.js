@@ -119,7 +119,7 @@ class RouterComponent extends Component {
               <Scene
                 key="FeaturedTab"
                 component={Featured}
-                title="Featured"
+                title="Featured Tab"
                 initial
               />
               <Scene
@@ -128,6 +128,9 @@ class RouterComponent extends Component {
                 title=""
                 backTitle=" "
                 hideTabBar
+                onLeft={() => {
+                  Actions.pop();
+                }}
               />
             </Scene>
 
@@ -149,6 +152,16 @@ class RouterComponent extends Component {
                 component={SearchAddress}
                 title="Address Search"
                 backTitle=" "
+              />
+              <Scene
+                key="ProfilePageMap"
+                component={ProfilePage}
+                title=""
+                backTitle=""
+                hideTabBar
+                onLeft={() => {
+                  Actions.pop();
+                }}
               />
             </Scene>
 
@@ -192,6 +205,17 @@ class RouterComponent extends Component {
                 component={Settings}
                 title="Settings"
                 backTitle=" "
+              />
+
+              <Scene
+                key="ProfilePage"
+                component={ProfilePage}
+                title=""
+                backTitle=""
+                hideTabBar
+                onLeft={() => {
+                  Actions.pop();
+                }}
               />
 
             </Scene>

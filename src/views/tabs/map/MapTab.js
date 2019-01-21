@@ -9,6 +9,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import CustomMarker from './CustomMarker';
 import { FullCard, Spinner } from '../../../common';
@@ -33,6 +34,7 @@ class Maptab extends Component {
     this.onCardClick = this.onCardClick.bind(this);
     this.getLocationInformation = this.getLocationInformation.bind(this);
     this.timer = this.timer.bind(this);
+    this.onMarkerClick = this.onMarkerClick.bind(this);
   }
 
   componentWillMount() {
@@ -66,6 +68,29 @@ class Maptab extends Component {
   onCardClick (person) {
   // capture info for confirmed visit and details in the redux on they book apt, build big info obj
     console.log('marker', person);
+  }
+
+  onMarkerClick (cords) {
+    // markers: null,
+    // initialPosition: null
+
+    this.setState({
+      ...this.state
+    })
+
+    Animated.event(
+      [
+        {
+          nativeEvent: {
+            contentOffset: {
+              x: this.animation
+            }
+          }
+        }
+      ],
+      { useNativeDriver: true }
+    )
+
   }
 
   // need to run the same logic a componentwillmount to fetch information
@@ -258,7 +283,12 @@ class Maptab extends Component {
               }
 
               return(
-                <MapView.Marker key={index} coordinate={marker.coordinate}>
+                <MapView.Marker key={index}
+                coordinate={marker.coordinate}
+                onPress={() =>  {
+                  Actions.pop();
+                  Actions.ProfilePageMap({ personData: marker });
+                }}>
                   <Animated.View style={[markerWrap, opacityStyle, scaleStyle, markerSize]}>
                     <CustomMarker />
                   </Animated.View>
