@@ -211,16 +211,15 @@ const styles = StyleSheet.create({
   },
   scrollSection: {
     flex: 1,
+    borderBottomLeftRadius: 2,
+    borderBottomRightRadius: 2,
+    marginBottom: 6,
+    paddingBottom: 5,
+    backgroundColor: NU_White
     // borderWidth: 1,
     // borderRadius: 2,
     // borderColor: NU_Border_Grey,
     // shadowOffset: {width: 0, height: 2},
     // shadowColor: NU_Card_Border,
-    // borderBottomLeftRadius: 2,
-    // borderBottomRightRadius: 2,
-
-    marginBottom: 6,
-    paddingBottom: 5,
-    backgroundColor: NU_White,
   }
 });

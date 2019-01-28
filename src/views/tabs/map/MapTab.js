@@ -203,6 +203,7 @@ class Maptab extends Component {
   }
 
   timer() {
+    // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 async await calls
 // ******************************************************* if you turn on userFetch ioff in router then infinite loop - FIXXXXXXXXXXXXXXXXXX TODO
     const myInterval = setInterval(() => {
       console.log('started')
@@ -286,7 +287,7 @@ class Maptab extends Component {
                 <MapView.Marker key={index}
                 coordinate={marker.coordinate}
                 onPress={() =>  {
-                  Actions.pop();
+                  // Actions.pop();
                   Actions.ProfilePageMap({ personData: marker });
                 }}>
                   <Animated.View style={[markerWrap, opacityStyle, scaleStyle, markerSize]}>
@@ -346,7 +347,12 @@ class Maptab extends Component {
                       {marker.description}
                     </Text>
                   </View>
-                  <TouchableOpacity onPress={() => this.onCardClick(marker)}>
+                  <TouchableOpacity
+                    onPress={() =>  {
+                      // Actions.pop();
+                      Actions.ProfilePageMap({ personData: marker });
+                    }}
+                  >
                     <Text>
                       button
                     </Text>

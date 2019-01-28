@@ -112,7 +112,6 @@ class RouterComponent extends Component {
             type="reset"
             hideNavBar
             pressOpacity={1}
-            default="mapTab"
           >
 
             <Scene key="featured" title="Featured" icon={StarIcon}>
@@ -134,7 +133,8 @@ class RouterComponent extends Component {
               />
             </Scene>
 
-            <Scene key="map" title="Find a salon" icon={tabIcon}>
+            <Scene key="map" title="Find a salon" icon={tabIcon} >
+
               <Scene
                 key="mapTab"
                 component={MapTab}
@@ -163,6 +163,7 @@ class RouterComponent extends Component {
                   Actions.pop();
                 }}
               />
+
             </Scene>
 
 
