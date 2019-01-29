@@ -56,7 +56,7 @@ class Reviews extends Component {
 
           <ListView
             dataSource={this.dataSource}
-            renderRow={ReviewData => <ReviewRow key={Math.random()} ReviewData={'ReviewData'} />}
+            renderRow={reviewData => <ReviewRow key={Math.random()} reviewData={reviewData} />}
           />
 
         </ScrollView>
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
 const reviewsSample = [
   {
     name: "Sam",
+    title: 'what a great place',
     reviewScore: 3.7,
     review: "this is a fantaaaaastic shop, i come here every single saturday and I always take my daughter. This is about to be the longest most exiting 3.7 star review of all times for you haters> Yeah you A-A-RON!!!",
     firebaseProfileKey: "DATABAS-LOOK-UP-KEY-DFFAH87323HFSK2",// one option for keeping track of reviews
@@ -102,6 +103,16 @@ const reviewsSample = [
   },
   {
     name: "Sam",
+    title: 'what a great place',
+    reviewScore: 3.7,
+    review: "this is a fantaaaaastic shop, i come here every single saturday and I always take my daughter. This is about to be the longest most exiting 3.7 star review of all times for you haters> Yeah you A-A-RON!!!",
+    firebaseProfileKey: "DATABAS-LOOK-UP-KEY-DFFAH87323HFSK2",// one option for keeping track of reviews
+    timeDate: 'September 19th, 2019',
+    displayTime: "4 days ago"
+  },
+  {
+    name: "Sam",
+    title: '',
     reviewScore: 3.7,
     review: "this is a fantaaaaastic shop, i come here every single saturday and I always take my daughter. This is about to be the longest most exiting 3.7 star review of all times for you haters> Yeah you A-A-RON!!!",
     firebaseProfileKey: "DATABAS-LOOK-UP-KEY-DFFAH87323HFSK2",// one option for keeping track of reviews
@@ -110,14 +121,7 @@ const reviewsSample = [
   },
   {
     name: "Sam",
-    reviewScore: 3.7,
-    review: "this is a fantaaaaastic shop, i come here every single saturday and I always take my daughter. This is about to be the longest most exiting 3.7 star review of all times for you haters> Yeah you A-A-RON!!!",
-    firebaseProfileKey: "DATABAS-LOOK-UP-KEY-DFFAH87323HFSK2",// one option for keeping track of reviews
-    timeDate: 'utc time and date stamp maybe from styles or redux',
-    displayTime: "4 days ago"
-  },
-  {
-    name: "Sam",
+    title: 'what a great place',
     reviewScore: 3.7,
     review: "this is a fantaaaaastic shop, i come here every single saturday and I always take my daughter. This is about to be the longest most exiting 3.7 star review of all times for you haters> Yeah you A-A-RON!!!",
     firebaseProfileKey: "DATABAS-LOOK-UP-KEY-DFFAH87323HFSK2",// one option for keeping track of reviews
