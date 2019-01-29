@@ -17,6 +17,7 @@ import { userInfoFetch, getAppData } from './src/store/userInfo/user';
 
 import Featured from './src/views/tabs/favTab/Featured';
 import ProfilePage from './src/views/tabs/favTab/ProfilePage';
+import Reviews from './src/views/tabs/favTab/Reviews';
 
 import MapTab from './src/views/tabs/map/MapTab';
 import SearchAddress from './src/views/tabs/map/SearchAddress';
@@ -162,6 +163,12 @@ class RouterComponent extends Component {
                 onLeft={() => {
                   Actions.pop();
                 }}
+              />
+              <Scene
+                key="Reviews"
+                component={Reviews}
+                title="Reviews"
+                backTitle=" "
               />
 
             </Scene>

@@ -4,7 +4,7 @@ import { ListView } from 'react-native';
 import FeaturedItem from './FeaturedItem';
 import { FullCard, Spinner } from '../../../common';
 
-class Favorites extends Component {
+class Favorites extends Component { // <------- name needs to be updated TODO
   constructor() {
     super();
 
@@ -18,7 +18,6 @@ class Favorites extends Component {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2 // eslint-disable-line
     });
-
     // basically if a value is passed to this prop under dataToRender ... render that (favorites or history) otherwise render the standard featured list (which is currently sharing favorites) TODO wire up correctly
     const renderData = Array.isArray(this.props.dataToRender) ? this.props.dataToRender : this.props.favorites;
     this.dataSource = ds.cloneWithRows(renderData);

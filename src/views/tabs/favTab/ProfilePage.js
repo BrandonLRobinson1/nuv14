@@ -42,7 +42,7 @@ class ProfilePage extends Component {
     } = styles; // eslint-disable-line
 
     const { NU_White, NU_Red} = colors;
-    const { title, description, address: { street } } = this.props.personData; // eslint-disable-line
+    const { title, description, address: { street }, ratings } = this.props.personData; // eslint-disable-line
 
     const starGenerator = (score) => {
       if(!score || score === 0 || score > 5) return (<Text>No Reviews yet, be the first!</Text>) // with styling
@@ -154,8 +154,11 @@ class ProfilePage extends Component {
                   <View style={starRow}>
                     {starGenerator(3.4)}
                   </View>
-                  <View onPress={() => {console.log('go to review page')}}>
-                    <Text style={reviewText}>
+                  <View>
+                    <Text
+                      onPress={() => Actions.Reviews({ reviews: ratings })}
+                      style={reviewText}
+                    >
                       see reviews
                     </Text>
                   </View>
