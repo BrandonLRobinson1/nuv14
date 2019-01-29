@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomMarker from '../map/CustomMarker';
+import StarReview from './StarReview';
 import { createRating } from '../../../helpers/helpersFunctions';
 import { CardSection, Spinner, Card } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
@@ -36,40 +37,12 @@ class ProfilePage extends Component {
       customAppointmentButtonText,
       imageCardSectionContainer,
       starRow,
-      starIndiv,
-      starSpace,
       reviewText
     } = styles; // eslint-disable-line
 
-    const { NU_White, NU_Red} = colors;
+    const { NU_White, NU_Red } = colors;
     const { title, description, address: { street }, ratings } = this.props.personData; // eslint-disable-line
     const starRating = 3.4; // TODO SHOULD COME FROM THIS.PROPS.PERSONDATA;
-
-    // TODO make star generator its own component
-    const starGenerator = (score, size, color) => {
-      if(!score || score === 0 || score > 5) return (<Text>No Reviews yet, be the first!</Text>) // with styling
-      const ratingArray = createRating(score);
-
-      return (
-        <View style={starIndiv}>
-          <View style={starSpace}>
-            <Icon name={ratingArray[0] || null} size={size} color={color} />
-          </View>
-          <View style={starSpace}>
-            <Icon name={ratingArray[1] || null} size={size} color={color} />
-          </View>
-          <View style={starSpace}>
-            <Icon name={ratingArray[2] || null} size={size} color={color} />
-          </View>
-          <View style={starSpace}>
-            <Icon name={ratingArray[3] || null} size={size} color={color} />
-          </View>
-          <View style={starSpace}>
-            <Icon name={ratingArray[4] || null} size={size} color={color} />
-          </View>
-        </View>
-      );
-    }
 
     return (
       <View style={container}>
@@ -154,7 +127,7 @@ class ProfilePage extends Component {
                     </Text>
                   </View>
                   <View style={starRow}>
-                    {starGenerator(starRating, 20, NU_Red)}
+                    <StarReview color={NU_Red} size={20} score={starRating} />
                   </View>
                   <View>
                     <Text
@@ -162,7 +135,6 @@ class ProfilePage extends Component {
                         () => Actions.Reviews({
                           reviews: ratings,
                           ratingAvg: starRating,
-                          starGenerator,
                           title
                         })
                       }
@@ -302,19 +274,12 @@ const styles = StyleSheet.create({
     backgroundColor: NU_White,
     resizeMode: 'cover'
   },
-  starRow: {
-    backgroundColor: 'green',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    display: 'flex'
-  },
-  starIndiv: {
-    flexDirection: 'row'
-  },
-  starSpace: {
-    margin: 2,
-    padding: 2
-  },
+  // starRow: {
+  //   backgroundColor: 'green',
+  //   justifyContent: 'center',
+  //   alignItems: 'flex-start',
+  //   display: 'flex'
+  // },
   reviewText: {
     color: NU_Blue,
     textDecorationLine: 'underline'

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, Text, ListView, Spinner } from 'react-native';
 import ReviewRow from './ReviewRow';
+import StarReview from './StarReview';
 import { Card , CardSection, FullCard } from '../../../common';
 import { commonStyles, colors } from '../../../Styles';
 
@@ -45,7 +46,7 @@ class Reviews extends Component {
               </Text>
             </View>
             <View>
-                {starGenerator(ratingAvg, 30, NU_Grey)}
+              <StarReview color={NU_Grey} size={30} score={ratingAvg} />
             </View>
             <View style={sectionPadding}>
               <Text style={NU_Small_Header_Text}>
