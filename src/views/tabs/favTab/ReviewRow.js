@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, Text, ListView } from 'react-native';
+import StarReview from './StarReview';
 import { commonStyles, colors } from '../../../Styles';
 
 const ReviewRow = (props) => {
@@ -13,12 +14,10 @@ const ReviewRow = (props) => {
   return (
     <View style={container}>
       <View>
-        <Text>
-          ****
-        </Text>
+        <StarReview color={NU_Red} size={15} score={reviewScore} />
       </View>
-      <View style={NU_Small_Header_Text}>
-        <Text>
+      <View>
+        <Text style={NU_Small_Header_Text}>
           {title}
         </Text>
       </View>
@@ -28,7 +27,7 @@ const ReviewRow = (props) => {
         </Text>
       </View>
       <View>
-        <Text style={[NU_Paragraph_Text, { color: NU_Red }]}>>
+        <Text style={[NU_Paragraph_Text, { color: NU_Red }]}>
           {displayTime}
         </Text>
       </View>
