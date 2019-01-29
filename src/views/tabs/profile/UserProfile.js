@@ -45,7 +45,8 @@ class UserProfile extends Component {
     const {
       horizontalFlex,
       NU_Paragraph_Text,
-      NU_Small_Header_Text
+      NU_Small_Header_Text,
+      flexCenter
     } = commonStyles;
 
     const {
@@ -53,7 +54,6 @@ class UserProfile extends Component {
       imageContainer,
       container,
       scrollableBody,
-      flexCenter,
       sectionalButtonStyle,
       dividerStyle,
       tabOff,
@@ -185,10 +185,6 @@ const styles = StyleSheet.create({
     width: 90,
     borderRadius: 45,
     margin: 2
-  },
-  flexCenter: {
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   dividerStyle: {
     justifyContent: 'center',

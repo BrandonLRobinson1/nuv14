@@ -51,5 +51,9 @@ export const commonStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     width: '100%'
+  },
+  flexCenter: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

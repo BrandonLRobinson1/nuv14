@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { colors } from '../Styles';
 
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     borderColor: NU_Border_Grey,
     flexDirection: 'row',
     position: 'relative'
-    }
+  }
 });
 
 export { CardSection };

@@ -43,27 +43,29 @@ class ProfilePage extends Component {
 
     const { NU_White, NU_Red} = colors;
     const { title, description, address: { street }, ratings } = this.props.personData; // eslint-disable-line
+    const starRating = 3.4; // TODO SHOULD COME FROM THIS.PROPS.PERSONDATA;
 
-    const starGenerator = (score) => {
+    // TODO make star generator its own component
+    const starGenerator = (score, size, color) => {
       if(!score || score === 0 || score > 5) return (<Text>No Reviews yet, be the first!</Text>) // with styling
       const ratingArray = createRating(score);
 
       return (
         <View style={starIndiv}>
           <View style={starSpace}>
-            <Icon name={ratingArray[0] || null} size={20} color={NU_Red} />
+            <Icon name={ratingArray[0] || null} size={size} color={color} />
           </View>
           <View style={starSpace}>
-            <Icon name={ratingArray[1] || null} size={20} color={NU_Red} />
+            <Icon name={ratingArray[1] || null} size={size} color={color} />
           </View>
           <View style={starSpace}>
-            <Icon name={ratingArray[2] || null} size={20} color={NU_Red} />
+            <Icon name={ratingArray[2] || null} size={size} color={color} />
           </View>
           <View style={starSpace}>
-            <Icon name={ratingArray[3] || null} size={20} color={NU_Red} />
+            <Icon name={ratingArray[3] || null} size={size} color={color} />
           </View>
           <View style={starSpace}>
-            <Icon name={ratingArray[4] || null} size={20} color={NU_Red} />
+            <Icon name={ratingArray[4] || null} size={size} color={color} />
           </View>
         </View>
       );
@@ -152,11 +154,18 @@ class ProfilePage extends Component {
                     </Text>
                   </View>
                   <View style={starRow}>
-                    {starGenerator(3.4)}
+                    {starGenerator(starRating, 20, NU_Red)}
                   </View>
                   <View>
                     <Text
-                      onPress={() => Actions.Reviews({ reviews: ratings })}
+                      onPress={
+                        () => Actions.Reviews({
+                          reviews: ratings,
+                          ratingAvg: starRating,
+                          starGenerator,
+                          title
+                        })
+                      }
                       style={reviewText}
                     >
                       see reviews
