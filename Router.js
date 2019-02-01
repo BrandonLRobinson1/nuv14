@@ -115,12 +115,11 @@ class RouterComponent extends Component {
             pressOpacity={1}
           >
 
-            <Scene key="featured" title="Featured" icon={StarIcon}>
+            <Scene key="featured" title="Featured" icon={StarIcon} initial>
               <Scene
                 key="FeaturedTab"
                 component={Featured}
                 title="Featured Tab"
-                initial
               />
               <Scene
                 key="ProfilePage"
@@ -128,6 +127,16 @@ class RouterComponent extends Component {
                 title=""
                 backTitle=" "
                 hideTabBar
+                onLeft={() => {
+                  console.log('Actions', Actions)
+                  Actions.pop();
+                }}
+              />
+              <Scene
+                key="Reviews"
+                component={Reviews}
+                title="Reviews"
+                backTitle=" "
                 onLeft={() => {
                   Actions.pop();
                 }}
@@ -141,10 +150,9 @@ class RouterComponent extends Component {
                 component={MapTab}
                 title="MapTab"
                 backTitle=" "
-                initial
                 rightTitle="Change Location"
                 onRight={() => {
-                  Actions.pop();
+                  // Actions.pop();
                   Actions.SearchAddress();
                 }}
               />
@@ -169,6 +177,9 @@ class RouterComponent extends Component {
                 component={Reviews}
                 title="Reviews"
                 backTitle=" "
+                onLeft={() => {
+                  Actions.pop();
+                }}
               />
 
             </Scene>
@@ -180,10 +191,10 @@ class RouterComponent extends Component {
                 component={UserProfile}
                 title="profile"
                 backTitle=" "
-                initial
+
                 rightTitle="Settings"
                 onRight={() => {
-                  Actions.pop();
+                  // Actions.pop();
                   Actions.Settings();
                 }}
                 leftTitle="Refer"
@@ -226,6 +237,16 @@ class RouterComponent extends Component {
                 }}
               />
 
+              <Scene
+                key="Reviews"
+                component={Reviews}
+                title="Reviews"
+                backTitle=" "
+                onLeft={() => {
+                  Actions.pop();
+                }}
+              />
+
             </Scene>
 
             <Scene key="Appointment" title="Appointment" icon={tabIcon}>
@@ -234,7 +255,6 @@ class RouterComponent extends Component {
                 component={ApptHome}
                 title=" "
                 backTitle=" "
-                initial
               />
             </Scene>
 

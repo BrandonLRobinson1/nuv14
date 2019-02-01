@@ -56,7 +56,7 @@ class FavoriteItem extends Component {
           <Button
             buttonText="View"
             onPress={() => {
-              Actions.ProfilePage({ personData }); // eslint-disable-line
+              Actions.ProfilePage({ personData });
             }}
           />
         </CardSection>

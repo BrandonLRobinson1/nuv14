@@ -131,8 +131,8 @@ class ProfilePage extends Component {
                   </View>
                   <View>
                     <Text
-                      onPress={
-                        () => Actions.Reviews({
+                      onPress={ () => Actions.Reviews(
+                        {
                           reviews: ratings,
                           ratingAvg: starRating,
                           title

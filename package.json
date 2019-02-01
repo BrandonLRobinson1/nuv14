@@ -9,7 +9,8 @@
     "remove-cache": "rm -rf ~/.rncache",
     "best-cache-clean": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro* && rm -rf $TMPDIR/haste-*",
     "fresh-install": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build/ModuleCache/* && rm -rf node_modules/ && npm cache clean && npm install",
-    "fresh-start": "npm run fresh-install && npm run rc-start"
+    "fresh-start": "npm run fresh-install && npm run rc-start",
+    "lint": "eslint src/**/*.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -31,6 +32,11 @@
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-jsx-a11y": "^6.2.0",
+    "eslint-plugin-react": "^7.12.4",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.50.0",
     "react-test-renderer": "16.6.0-alpha.8af6728",
