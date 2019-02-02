@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListView, FlatList, Text } from 'react-native';
-import FeaturedItem from '../sharedTabComp/FeaturedItem';
+import Preview from '../sharedTabComp/Preview';
 import { FullCard, Spinner } from '../../../common';
 
-class Favorites extends Component { // <------- name needs to be updated TODO
+class DiscoverMain extends Component { // <------- name needs to be updated TODO
   constructor() {
     super();
 
@@ -42,7 +42,7 @@ class Favorites extends Component { // <------- name needs to be updated TODO
     return (
       <FlatList
         data={renderData}
-        renderItem={personData => <FeaturedItem key={personData.title} personData={personData} />} // TODO: replace key value with personData.id
+        renderItem={personData => <Preview key={personData.title} personData={personData} />} // TODO: replace key value with personData.id
       />
     );
   }
@@ -54,4 +54,4 @@ export default connect(
   }),
   {
   }
-)(Favorites);
+)(DiscoverMain);

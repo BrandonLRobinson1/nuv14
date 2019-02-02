@@ -15,7 +15,7 @@ import ApptHome from './src/views/tabs/appointment/ApptHome';
 // import { getinitialDelta, getActiveNailTechs } from './src/store/location/locationServices';
 import { userInfoFetch, getAppData } from './src/store/userInfo/user';
 
-import Featured from './src/views/tabs/favTab/Featured';
+import DiscoverMain from './src/views/tabs/discover/DiscoverMain';
 import ProfilePage from './src/views/tabs/sharedTabComp/ProfilePage';
 import Reviews from './src/views/tabs/sharedTabComp/Reviews';
 
@@ -115,11 +115,11 @@ class RouterComponent extends Component {
             pressOpacity={1}
           >
 
-            <Scene key="featured" title="Featured" icon={StarIcon} initial>
+            <Scene key="featured" title="DiscoverMain" icon={StarIcon} initial>
               <Scene
-                key="FeaturedTab"
-                component={Featured}
-                title="Featured Tab"
+                key="DiscoverMainTab"
+                component={DiscoverMain}
+                title="DiscoverMain Tab"
               />
               <Scene
                 key="ProfilePage"

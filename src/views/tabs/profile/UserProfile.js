@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Image, View, Text, StyleSheet, FlatList } from 'react-native';
-import FeaturedItem from '../sharedTabComp/FeaturedItem';
+import FeaturedItem from '../sharedTabComp/Preview';
 import { CardSection, Card, ModalView, FullCard, Spinner } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 

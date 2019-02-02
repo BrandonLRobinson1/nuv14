@@ -6,7 +6,7 @@ import { AlbumCard, CardSection, Card, SectionSmall, SectionMedium, Button } fro
 // import { updateFirstName, updateLastName, updateZipCode } from '../../store/userInfo.user';
 import { colors, commonStyles } from '../../../Styles';
 
-class FavoriteItem extends Component {
+class Preview extends Component {
   constructor() {
     super();
     this.state = {};
@@ -76,7 +76,7 @@ export default connect(
   {
     // updateFirstName,
   }
-)(FavoriteItem);
+)(Preview);
 
 const { NU_White, NU_Grey, NU_Pink, NU_Border_Grey } = colors; // eslint-disable-line
 
