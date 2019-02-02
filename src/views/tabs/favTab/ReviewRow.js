@@ -4,9 +4,9 @@ import StarReview from './StarReview';
 import { commonStyles, colors } from '../../../Styles';
 
 const ReviewRow = (props) => {
-  const { name, review, reviewScore, displayTime, title } = props.reviewData;
+  const { name, review, reviewScore, displayTime, title } = props.reviewData.item;
   // const { reviewsBackground } = styles;
-  console.log('propzzzzzzzzzzzzzzzzzzzzzzzzz', props);
+
   const { container } = styles;
   const { NU_Paragraph_Text, NU_Small_Header_Text } = commonStyles;
   const { NU_Grey, NU_Red } = colors;

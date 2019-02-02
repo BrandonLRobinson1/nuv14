@@ -1,40 +1,23 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, Text, ListView, Spinner } from 'react-native';
+import { View, ScrollView, StyleSheet, Text, FlatList } from 'react-native';
 import ReviewRow from './ReviewRow';
 import StarReview from './StarReview';
-import { Card , CardSection, FullCard } from '../../../common';
+import { Card , CardSection, FullCard, Spinner } from '../../../common';
 import { commonStyles, colors } from '../../../Styles';
 
 class Reviews extends Component {
   constructor() {
     super();
-
-    this.getReviews = this.getReviews.bind(this);
-  }
-
-  getReviews() {
-    // const { reviews } = this.props;
-    // **** info should come from log above TODO not from the sample
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2 // eslint-disable-line
-    });
-    this.dataSource = ds.cloneWithRows(reviewsSample);
+    // this.getReview = this.getReview.bind(this) <--- put in componentwillmount instead
   }
 
   render () {
-    this.getReviews();
     const { starGenerator, ratingAvg, title } = this.props;
     const { reviewsBackground, summaryCard, sectionPadding } = styles;
     const { flexCenter, NU_Small_Header_Text } = commonStyles;
     const { NU_Grey } = colors;
 
-    console.log('☀️☀️☀️☀️☀️☀️ propzzzzzzzzzzzzzzzzzzzzzzzzz', this.props);
-
-    if (!this.dataSource) return ( // eslint-disable-line
-      <FullCard>
-        <Spinner />
-      </FullCard>
-    );
+    // ***** shouldnt need a check should just since this info should be provided with profile
 
     return (
       <View style={reviewsBackground}>
@@ -55,9 +38,9 @@ class Reviews extends Component {
             </View>
           </View>
 
-          <ListView
-            dataSource={this.dataSource}
-            renderRow={reviewData => <ReviewRow key={Math.random()} reviewData={reviewData} />}
+          <FlatList
+            data={reviewsSample}
+            renderItem={(reviewData) => <ReviewRow key={Math.random()} reviewData={reviewData} />}
           />
 
         </ScrollView>
