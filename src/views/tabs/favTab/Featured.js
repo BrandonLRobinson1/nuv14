@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, FlatList } from 'react-native';
+import { ListView, FlatList, Text } from 'react-native';
 import FeaturedItem from './FeaturedItem';
 import { FullCard, Spinner } from '../../../common';
 
@@ -36,6 +36,7 @@ class Favorites extends Component { // <------- name needs to be updated TODO
     if (!renderData) return ( // eslint-disable-line
       <FullCard>
         <Spinner />
+        <Text>boii</Text>
       </FullCard>
     );
     return (

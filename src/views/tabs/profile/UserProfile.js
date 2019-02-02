@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Image, View, Text, StyleSheet, ScrollView } from 'react-native';
-import Featured from '../favTab/Featured';
-import { CardSection, Card, ModalView } from '../../../common';
+import { Image, View, Text, StyleSheet, FlatList } from 'react-native';
+import FeaturedItem from '../favTab/FeaturedItem';
+import { CardSection, Card, ModalView, FullCard, Spinner } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
 // maybe favorites and available
@@ -15,16 +15,32 @@ class UserProfile extends Component {
       tabSelected: 'favorites',
       modalTesterWillDelete: false
     };
-    // this.renderFavsAndHistory = this.renderFavsAndHistory.bind(this);
+    this.renderFavsAndHistory = this.renderFavsAndHistory.bind(this);
   }
 
   // eslint-disable-next-line
-  // renderFavsAndHistory () {
-  //   // can conditionally send props based upon what is selected - send history or favorites and when the info is ready itll load
-  //   return (
-  //     <Featured />
-  //   );
-  // }
+  renderFavsAndHistory (list, tab) {
+    console.log('list', list);
+    const { favorites } = this.props; // <--- should be list TODO
+    const { tabSelected } = this.state;
+
+    // can conditionally send props based upon what is selected - send history or favorites and when the info is ready itll load
+    if (favorites.length > 0 /* should be list.length */) {
+      return (
+        <FlatList
+          data={favorites}
+          renderItem={personData => <FeaturedItem key={personData.title} personData={personData} />} // TODO: replace key value with personData.id
+        />
+      )
+    } else {
+      return (
+        <View>
+          <Text>{`nothing in ${tabSelected}.... yet :)`}</Text>
+        </View>
+      )
+    }
+
+  }
 
   componentWillMount(deletethisuneededshit) {
     // should actually pull a value from redux and not local state
@@ -50,6 +66,10 @@ class UserProfile extends Component {
     } = commonStyles;
 
     const {
+      favorites
+    } = this.props;
+
+    const {
       imageStyle,
       imageContainer,
       container,
@@ -66,6 +86,13 @@ class UserProfile extends Component {
     const { tabSelected } = this.state;
     const favSelectHistory = tabSelected === 'history' ? tabOn : tabOff;
     const favSelectFavorites = tabSelected === 'favorites' ? tabOn : tabOff;
+
+    if (!favorites) return ( //would be checking for favorites and history
+      <FullCard>
+        <Spinner />
+        <Text>boii</Text>
+      </FullCard>
+    );
 
     return (
       <Card>
@@ -141,9 +168,9 @@ class UserProfile extends Component {
             </View>
           </CardSection>
 
-          <View style={scrollSection}>
-            <Featured dataToRender={false} />
-          </View>
+            <View style={scrollSection}>
+              {this.renderFavsAndHistory(tabSelected === 'favorites' ? ['fav list'] : ['history list'])}
+            </View>
 
         </View>
 
