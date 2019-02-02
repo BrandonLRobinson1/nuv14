@@ -23,7 +23,11 @@ class FavoriteItem extends Component {
       imageCardSectionContainer
     } = styles;
 
-    const { personData } = this.props;
+    const { item : personData  } = this.props.personData;
+    // const personData = item;\
+    console.log('🔥 -----', personData)
+
+
     const { NU_Header_Text, NU_Paragraph_Text } = commonStyles;
 
     return (
@@ -31,7 +35,7 @@ class FavoriteItem extends Component {
         <CardSection style={imageCardSectionContainer}>
           <View style={imageContainer}>
             <Image
-              source={this.props.personData.image}
+              source={personData.image}
               style={imageStyle}
             />
           </View>

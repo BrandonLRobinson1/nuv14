@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListView, FlatList, Text } from 'react-native';
-import FeaturedItem from './FeaturedItem';
+import FeaturedItem from '../sharedTabComp/FeaturedItem';
 import { FullCard, Spinner } from '../../../common';
 
 class Favorites extends Component { // <------- name needs to be updated TODO

@@ -16,8 +16,8 @@ import ApptHome from './src/views/tabs/appointment/ApptHome';
 import { userInfoFetch, getAppData } from './src/store/userInfo/user';
 
 import Featured from './src/views/tabs/favTab/Featured';
-import ProfilePage from './src/views/tabs/favTab/ProfilePage';
-import Reviews from './src/views/tabs/favTab/Reviews';
+import ProfilePage from './src/views/tabs/sharedTabComp/ProfilePage';
+import Reviews from './src/views/tabs/sharedTabComp/Reviews';
 
 import MapTab from './src/views/tabs/map/MapTab';
 import SearchAddress from './src/views/tabs/map/SearchAddress';
