@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import propTypes from 'prop-types';
 import { Button, CardSection, Card, Input, Spinner } from '../../common';
 import { updateLogInEmail, updateLogInPassword, logUserIn } from '../../store/logIn/logIn';
 import { emailRegEx, specialCharacterValidation } from '../../helpers/helpersFunctions';
 import { colors } from '../../Styles';
 
+const { NU_Red , NU_Blue, NU_White, NU_Grey } = colors;
+
 class LogIn extends Component {
   constructor() {
     super();
+
     this.state = {
       errorMessage: '',
       clearTextOnFocus: false,
       password: '',
       loading: null
     };
+
     this.onButtonPress = this.onButtonPress.bind(this);
     this.renderButton = this.renderButton.bind(this);
   }
 
+  // eslint-disable-next-line
   async onButtonPress() {
     const { password } = this.state;
     const { email, updateLogInPassword, logUserIn } = this.props; // eslint-disable-line
@@ -47,11 +53,12 @@ class LogIn extends Component {
           loading: false
         });
         console.log('not logged in');
-    });
+      });
   }
 
   renderButton() {
-    if (this.state.loading) { // eslint-disable-line
+    const { loading } = this.state;
+    if (loading) { // eslint-disable-line
       return <Spinner size="large" />;
     }
     return (
@@ -110,9 +117,23 @@ class LogIn extends Component {
         </CardSection>
 
       </Card>
-    )
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  errorText: {
+    color: NU_Red,
+    width: '100%',
+    display: 'flex',
+    textAlign: 'center'
+  }
+});
+
+LogIn.propTypes = {
+  updateLogInEmail: propTypes.func.isRequired,
+  email: propTypes.string
+};
 
 export default connect(
   state => ({
@@ -125,14 +146,3 @@ export default connect(
     logUserIn
   },
 )(LogIn);
-
-const { NU_Red , NU_Blue, NU_White, NU_Grey } = colors
-
-const styles = StyleSheet.create({
-  errorText: {
-    color: NU_Red,
-    width: '100%',
-    display: 'flex',
-    textAlign: 'center'
-  }
-});

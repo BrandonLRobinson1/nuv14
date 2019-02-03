@@ -1,5 +1,4 @@
 import { handleActions, createAction } from 'redux-actions';
-import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 
 const defaultState = {

@@ -1,8 +1,8 @@
 import { handleActions, createAction } from 'redux-actions';
 import firebase from 'firebase';
 import { setCurrentLocation } from '../location/locationServices';
-import { getRegionForCoordinates } from '../../helpers/helpersFunctions';
-import { latDelta, longDelta } from '../../Styles';
+// import { getRegionForCoordinates } from '../../helpers/helpersFunctions';
+// import { latDelta, longDelta } from '../../Styles';
 
 const defaultState = {
   firstName: '',
@@ -177,7 +177,7 @@ export const userInfoFetch = () => {
         dispatch(updateEmail(email));
 
         // ***!!! THE REASON THAT YOU SET A CURRENT LOCATION HERE ON THE USER INFO IS BECAUSE ITLL EITHER BE PRIVATE AND HAVE A confirmED one LIKE BELOW OR ITLL USE THE BUILT IN PHONE GET LOCATION
-        dispatch( setCurrentLocation( { latitude: 37.767, longitude: -122.421 } ) ); // would be saved, using random steve data here
+        dispatch( setCurrentLocation({ latitude: 37.767, longitude: -122.421 })); // would be saved, using random steve data here
         // dispatch(setCurrentLocation( "PRIVATE_LOCATION" ) );
 
         dispatch(setOther(email));

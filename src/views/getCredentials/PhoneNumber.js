@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { TextInput, View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { Button, CardSection, Card, Input, EnterPhone } from '../../common';
+import propTypes from 'prop-types';
+import { Button, CardSection, Card } from '../../common';
 import { allNumbersRegEx } from '../../helpers/helpersFunctions';
 import { updatePhoneNumber, clearAll, addFormInfo } from '../../store/userInfo/user';
 import { colors } from '../../Styles';
+
+const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black } = colors
 
 class PhoneNumber extends Component {
   constructor() {
@@ -16,7 +19,8 @@ class PhoneNumber extends Component {
       phoneNumber1: '',
       phoneNumber2: '',
       phoneNumber3: ''
-    }
+    };
+
     this.onButtonPress = this.onButtonPress.bind(this);
     this.textInputRender = this.textInputRender.bind(this);
   }
@@ -38,14 +42,13 @@ class PhoneNumber extends Component {
     this.setState({ loading: false });
 
     return Actions.Validate();
-
   }
 
 
   textInputRender(maxLength, placeholder, stateNum) {
     const { inputStyle } = styles;
     const setStateVar = `phoneNumber${stateNum}`;
-    const valueVar = this.state[`phoneNumber${stateNum}`];
+    const valueVar = this.state[`phoneNumber${stateNum}`]; // eslint-disable-line
 
     return (
       <TextInput
@@ -123,22 +126,9 @@ class PhoneNumber extends Component {
         </CardSection>
 
       </Card>
-    )
+    );
   }
 }
-
-export default connect(
-  state => ({
-    // phoneNumber: state.userInfo.user.phoneNumber
-  }),
-  {
-    updatePhoneNumber,
-    clearAll,
-    addFormInfo
-  }
-)(PhoneNumber);
-
-const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black } = colors
 
 const styles = StyleSheet.create({
   circle: {
@@ -193,3 +183,19 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+
+PhoneNumber.propTypes = {
+  updatePhoneNumber: propTypes.func.isRequired
+};
+
+export default connect(
+  state => ({
+    // phoneNumber: state.userInfo.user.phoneNumber
+  }),
+  {
+    updatePhoneNumber,
+    clearAll,
+    addFormInfo
+  }
+)(PhoneNumber);

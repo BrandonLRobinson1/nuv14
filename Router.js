@@ -60,7 +60,7 @@ class RouterComponent extends Component {
     return (
       <Router>
         <Scene key="root">
-{/*
+
           <Scene
             key="getCredentials"
             component={GetCredentials}
@@ -101,7 +101,7 @@ class RouterComponent extends Component {
             title="Please Login"
             backTitle=" "
           />
-*/}
+
           <Scene
             key="tabbar"
             tabs

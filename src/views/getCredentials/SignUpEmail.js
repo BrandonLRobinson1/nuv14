@@ -3,10 +3,13 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import propTypes from 'prop-types';
 import { Button, CardSection, Card, Input, Spinner } from '../../common';
 import { updateEmail, updatePassword, signUserUp } from '../../store/userInfo/user';
 import { emailRegEx, specialCharacterValidation } from '../../helpers/helpersFunctions';
 import { colors } from '../../Styles';
+
+const { NU_Red , NU_Blue, NU_White, NU_Grey } = colors; // eslint-disable-line
 
 class SignUpEmail extends Component {
   constructor() {
@@ -57,7 +60,7 @@ class SignUpEmail extends Component {
       })
       .catch(err => {
         console.log('email sign in error', err);
-        this.setState({ 
+        this.setState({
           errorMessage: err.message,
           loading: false
         });
@@ -65,8 +68,9 @@ class SignUpEmail extends Component {
   }
 
   renderButton() {
-    if (this.state.loading) {
-      return <Spinner size='large' />;
+    const { loading } = this.state;
+    if (loading) {
+      return <Spinner />;
     }
     return (
       <Button
@@ -139,7 +143,7 @@ class SignUpEmail extends Component {
         <CardSection>
           {this.renderButton()}
         </CardSection>
-        
+
         <CardSection>
           <Text style={errorText}>
             {errorMessage}
@@ -150,20 +154,6 @@ class SignUpEmail extends Component {
     );
   }
 }
-
-export default connect(
-  state => ({
-    email: state.userInfo.user.email,
-    password: state.userInfo.user.password
-  }),
-  {
-    updateEmail,
-    updatePassword,
-    signUserUp
-  }
-)(SignUpEmail);
-
-const { NU_Red , NU_Blue, NU_White, NU_Grey } = colors; // eslint-disable-line
 
 const styles = StyleSheet.create({
   circle: {
@@ -196,3 +186,22 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
+
+SignUpEmail.propTypes = {
+  updateEmail: propTypes.func.isRequired,
+  updatePassword: propTypes.func.isRequired,
+  signUserUp: propTypes.func.isRequired,
+  email: propTypes.string // eslint-disable-line
+};
+
+export default connect(
+  state => ({
+    email: state.userInfo.user.email,
+    password: state.userInfo.user.password
+  }),
+  {
+    updateEmail,
+    updatePassword,
+    signUserUp
+  }
+)(SignUpEmail);

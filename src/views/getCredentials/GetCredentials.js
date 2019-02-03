@@ -9,6 +9,9 @@ import {
 } from '../../common';
 import { colors } from '../../Styles';
 
+// eslint-disable-next-line
+const { NU_Red , NU_Blue, NU_White } = colors;
+
 const GetCredentials = () => {
   // eslint-disable-next-line
   const { align, buttonSection, buttonPadding, buttonPlacement, textStyle } = styles;
@@ -39,7 +42,7 @@ const GetCredentials = () => {
           <CardSection>
             <Button
               buttonText="Sign Up"
-              onPress={() => Actions["Email and Password"]()}
+              onPress={() => Actions['Email and Password']()}
             />
           </CardSection>
         </View>
@@ -48,11 +51,6 @@ const GetCredentials = () => {
     </FullCard>
   );
 };
-
-export default GetCredentials;
-
-// eslint-disable-next-line
-const { NU_Red , NU_Blue, NU_White } = colors;
 
 const styles = StyleSheet.create({
   textStyle: {
@@ -78,3 +76,5 @@ const styles = StyleSheet.create({
     flex: 3
   }
 });
+
+export default GetCredentials;

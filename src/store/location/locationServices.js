@@ -51,7 +51,7 @@ export const getinitialDelta = () => (dispatch, getState) => {
     return dispatch(setDeltas(sendDeltas));
   }
 
-  let dataForDeltas = favorites.reduce((collection, item, index) => {
+  let dataForDeltas = favorites.reduce((collection, item) => {
     collection.push(item.coordinate);
     return collection;
   }, []);

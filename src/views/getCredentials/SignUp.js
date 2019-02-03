@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Button, CardSection, Card, Input } from '../../common';
 import { updateFirstName, updateLastName, updateZipCode } from '../../store/userInfo/user';
-import { allLettersRegEx, allNumbersRegEx, specialCharacterValidation} from '../../helpers/helpersFunctions';
+import { allLettersRegEx, allNumbersRegEx, specialCharacterValidation } from '../../helpers/helpersFunctions';
 import { colors } from '../../Styles';
+
+const { NU_Red, NU_Blue, NU_White, NU_Grey } = colors;
 
 class SignUp extends Component {
   constructor() {
@@ -17,7 +19,7 @@ class SignUp extends Component {
   }
 
   onButtonPress() {
-    const { firstName, lastName, zipCode } = this.props;
+    const { firstName, lastName, zipCode } = this.props; // eslint-disable-line
     if (!allLettersRegEx(firstName)) return this.setState({ errorMessage: 'Please Enter Valid First Name' });
     if (!allLettersRegEx(lastName)) return this.setState({ errorMessage: 'Please Enter Valid Last Name' });
     if (!allNumbersRegEx(zipCode)) return this.setState({ errorMessage: 'Please Enter Valid Zip Code' });
@@ -94,21 +96,6 @@ class SignUp extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    firstName: state.userInfo.user.firstName,
-    lastName: state.userInfo.user.lastName,
-    zipCode: state.userInfo.user.zipCode
-  }),
-  {
-    updateFirstName,
-    updateLastName,
-    updateZipCode
-  }
-)(SignUp);
-
-const { NU_Red , NU_Blue, NU_White, NU_Grey } = colors
-
 const styles = StyleSheet.create({
   circle: {
     height: 12,
@@ -140,3 +127,16 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
+
+export default connect(
+  state => ({
+    firstName: state.userInfo.user.firstName,
+    lastName: state.userInfo.user.lastName,
+    zipCode: state.userInfo.user.zipCode
+  }),
+  {
+    updateFirstName,
+    updateLastName,
+    updateZipCode
+  }
+)(SignUp);
