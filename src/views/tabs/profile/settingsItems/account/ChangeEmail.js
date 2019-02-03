@@ -12,6 +12,8 @@ import { updateEmail } from '../../../../../store/userInfo/user';
 import { emailRegEx } from '../../../../../helpers/helpersFunctions';
 import { colors } from '../../../../../Styles';
 
+const { NU_Red } = colors; // eslint-disable-line
+
 class EditAccouunt extends Component {
   constructor() {
     super();
@@ -118,20 +120,9 @@ class EditAccouunt extends Component {
           </Text>
         </CardSection>
       </Card>
-    )
+    );
   }
 }
-
-export default connect(
-  state => ({
-    email: state.userInfo.user.email
-  }),
-  {
-    updateEmail
-  },
-)(EditAccouunt);
-
-const { NU_Red } = colors; // eslint-disable-line
 
 const styles = StyleSheet.create({
   errorText: {
@@ -141,3 +132,12 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
+
+export default connect(
+  state => ({
+    email: state.userInfo.user.email
+  }),
+  {
+    updateEmail
+  },
+)(EditAccouunt);

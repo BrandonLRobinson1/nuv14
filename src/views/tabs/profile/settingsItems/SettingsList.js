@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import propTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { colors, commonStyles } from '../../../../Styles';
 
-const SettingsList = ({name, sceneLocation}) => {
-
+const SettingsList = ({ name, sceneLocation }) => {
   const { row, itemName, icon } = styles;
   const { NU_Blue } = colors;
   const { NU_Paragraph_Text } = commonStyles;
@@ -47,5 +47,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+SettingsList.propTypes = {
+  name: propTypes.string.isRequired,
+  sceneLocation: propTypes.string.isRequired
+};
 
 export default SettingsList;

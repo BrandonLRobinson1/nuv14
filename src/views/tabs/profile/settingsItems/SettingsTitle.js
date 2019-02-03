@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import propTypes from 'prop-types';
 import { commonStyles } from '../../../../Styles';
 
-const SettingsTitle = ({name}) => {
+const SettingsTitle = ({ name }) => {
   const { NU_Small_Header_Text } = commonStyles;
   const { row, itemName } = styles;
   return (
@@ -27,6 +28,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   }
 });
+
+SettingsTitle.propTypes = {
+  name: propTypes.string.isRequired
+};
 
 export default SettingsTitle;
 
