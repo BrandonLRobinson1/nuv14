@@ -5,12 +5,12 @@ import {
   View,
   Animated,
   Image,
-  Dimensions,
   TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import propTypes from 'prop-types';
 import CustomMarker from './CustomMarker';
 import { FullCard, Spinner } from '../../../common';
 import { setCurrentLocation, getActiveNailTechs, getinitialDelta } from '../../../store/location/locationServices';
@@ -18,6 +18,8 @@ import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth } from
 
 // for line 330!!! took it out so it wont ping my account with fe
 // provider={PROVIDER_GOOGLE}
+
+const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
 
 // TODO need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
@@ -29,8 +31,6 @@ class Maptab extends Component {
       initialPosition: null
     };
 
-    // this.renderMarkers = this.renderMarkers.bind(this);
-    // this.renderCards = this.renderCards.bind(this);
     this.onCardClick = this.onCardClick.bind(this);
     this.getLocationInformation = this.getLocationInformation.bind(this);
     this.timer = this.timer.bind(this);
@@ -38,7 +38,7 @@ class Maptab extends Component {
   }
 
   componentWillMount() {
-    console.log('keep in mind this fires when you try to change address')
+    console.log('keep in mind this fires when you try to change address');
     this.index = 0;
     this.animation = new Animated.Value(0);
     navigator.geolocation.clearWatch(this.watchID); // eslint-disable-line
@@ -46,13 +46,11 @@ class Maptab extends Component {
   }
 
   componentDidMount() {
-    console.log('component will mount in maptab run')
-    const { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj } = this.props; // eslint-disable-line
+    console.log('component will mount in maptab run');
+    const { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, savedTechs } = this.props; // eslint-disable-line
 
     // this for now will have to be recalled to be updated until we can run a watch on it
-    if (!Array.isArray(this.props.savedTechs)) this.props.getActiveNailTechs();
-
-    return;
+    if (!Array.isArray(savedTechs)) getActiveNailTechs();
   }
 
   componentWillUnmount() {
@@ -70,13 +68,10 @@ class Maptab extends Component {
     console.log('marker', person);
   }
 
-  onMarkerClick (cords) {
-    // markers: null,
-    // initialPosition: null
-
+  onMarkerClick() {
     this.setState({
       ...this.state
-    })
+    });
 
     Animated.event(
       [
@@ -89,7 +84,7 @@ class Maptab extends Component {
         }
       ],
       { useNativeDriver: true }
-    )
+    );
 
   }
 
@@ -222,7 +217,6 @@ class Maptab extends Component {
   render() {
     const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardtitle, cardDescription, cardBack } = styles;
     const { initialPosition, markers } = this.state;
-    const { NU_White } = colors;
 
     console.log('maptab rerender - render amount direct affected by timer');
 
@@ -247,9 +241,9 @@ class Maptab extends Component {
         });
 
         const cardBorder = this.animation.interpolate({
-            inputRange,
-            outputRange: [0, 1, 0],
-            extrapolate: 'clamp'
+          inputRange,
+          outputRange: [0, 1, 0],
+          extrapolate: 'clamp'
         });
         return { scale, opacity, cardBorder };
       });
@@ -272,34 +266,33 @@ class Maptab extends Component {
         >
 
           { markers.map((marker, index) => {
-              const scaleStyle = {
-                transform: [
-                  {
-                    scale: interpolations[index].scale
-                  },
-                ],
-              };
-              const opacityStyle = {
-                opacity: interpolations[index].opacity
-              }
+            const scaleStyle = {
+              transform: [
+                {
+                  scale: interpolations[index].scale
+                }
+              ]
+            };
+            const opacityStyle = {
+              opacity: interpolations[index].opacity
+            };
 
-              return(
-                <MapView.Marker key={index}
+            return (
+              <MapView.Marker
+                key={`item-${marker.coordinate.latitude}`}
                 coordinate={marker.coordinate}
-                onPress={() =>  {
-                  // Actions.pop();
-                  Actions.ProfilePageMap({ personData: marker });
-                }}>
-                  <Animated.View style={[markerWrap, opacityStyle, scaleStyle, markerSize]}>
-                    <CustomMarker />
-                  </Animated.View>
-                </MapView.Marker>
-              )
+                onPress={() => Actions.ProfilePageMap({ personData: marker })}
+              >
+                <Animated.View style={[markerWrap, opacityStyle, scaleStyle, markerSize]}>
+                  <CustomMarker />
+                </Animated.View>
+              </MapView.Marker>
+            );
           }) }
 
           {/* below is an optional your location marker */}
           <MapView.Marker
-            coordinate={{latitude: 37.773, longitude: -122.396}}
+            coordinate={{ latitude: 37.773, longitude: -122.396 }}
             pinColor={NU_White}
           />
 
@@ -332,7 +325,7 @@ class Maptab extends Component {
             return (
               <View key={index}>
               {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
-               <Animated.View style={[cardBack, opacityStyleBorder, {display: 'flex'} ]} />
+                <Animated.View style={[cardBack, opacityStyleBorder, { display: 'flex' }]} />
                 <View style={card}>
                   <Image
                     source={marker.image}
@@ -369,38 +362,6 @@ class Maptab extends Component {
     );
   }
 }
-
-// export default connect(
-//   state => ({
-//     regionObj: state.location.locationServices.regionObj,
-//     savedTechs: state.location.locationServices.savedTechs,
-//     deltas: state.location.locationServices.deltas
-//     // favorites: state.userInfo.user.favorites // be sure to change this where ever the markers are in the code so that it listens for the prop that gets the map info to renender when waiting
-//   }),
-//   {
-//     setCurrentLocation,
-//     getActiveNailTechs,
-//     getinitialDelta
-//   }
-// )(Maptab);
-
-export default connect(
-  state => {
-    // console.log('state', state)
-    return {
-    regionObj: state.location.locationServices.regionObj,
-    savedTechs: state.location.locationServices.savedTechs,
-    deltas: state.location.locationServices.deltas,
-    favorites: state.userInfo.user.favorites // be sure to change this where ever the markers are in the code so that it listens for the prop that gets the map info to renender when waiting
-  }},
-  {
-    setCurrentLocation,
-    getActiveNailTechs,
-    getinitialDelta
-  }
-)(Maptab);
-
-const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
 
 const styles = StyleSheet.create({
   container: {
@@ -480,8 +441,47 @@ const styles = StyleSheet.create({
   }
 });
 
+Maptab.propTypes = {
+  setCurrentLocation: propTypes.func.isRequired,
+  getActiveNailTechs: propTypes.func.isRequired,
+  getinitialDelta: propTypes.func.isRequired
+};
+
+Maptab.defaultProps = {
+  buttonText: 'buttonTextNeeded'
+};
+
+export default connect(
+  state => {
+    // console.log('state', state)
+    return {
+      regionObj: state.location.locationServices.regionObj,
+      savedTechs: state.location.locationServices.savedTechs,
+      deltas: state.location.locationServices.deltas,
+      favorites: state.userInfo.user.favorites // be sure to change this where ever the markers are in the code so that it listens for the prop that gets the map info to renender when waiting
+    };
+  },
+  {
+    setCurrentLocation,
+    getActiveNailTechs,
+    getinitialDelta
+  }
+)(Maptab);
 
 
+// export default connect(
+//   state => ({
+//     regionObj: state.location.locationServices.regionObj,
+//     savedTechs: state.location.locationServices.savedTechs,
+//     deltas: state.location.locationServices.deltas
+//     // favorites: state.userInfo.user.favorites // be sure to change this where ever the markers are in the code so that it listens for the prop that gets the map info to renender when waiting
+//   }),
+//   {
+//     setCurrentLocation,
+//     getActiveNailTechs,
+//     getinitialDelta
+//   }
+// )(Maptab);
 
 
 

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Image, View, Text, StyleSheet, FlatList } from 'react-native';
+import propTypes from 'prop-types';
 import FeaturedItem from '../sharedTabComp/Preview';
 import { CardSection, Card, ModalView, FullCard, Spinner } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
-// maybe favorites and available
+const { NU_Blue, NU_White, NU_Grey, NU_Card_Border, NU_Border_Grey } = colors; // eslint-disable-line
 
 // eslint-disable-next-line
 class UserProfile extends Component {   // should pull a fresh copy of data everytime you land on this page so on willmount might handle
@@ -31,9 +32,7 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
     const { tabSelected } = this.state;
 
     // TODO change favorites to list
-    const addKeysToFavorites = (favorites || []).map((item, index) => {
-      return {...item, key: `list-key-${index}`}
-    });
+    const addKeysToFavorites = (favorites || []).map((item, index) => ({ ...item, key: `list-key-${index}` }));
 
     if (favorites.length > 0 /* should be list.length */) {
       return (
@@ -42,13 +41,13 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
           renderItem={personData => <FeaturedItem key={personData.title} personData={personData} />} // TODO: replace key value with personData.id
         />
       );
-    } else {
-      return (
-        <View>
-          <Text>{`nothing in ${tabSelected}.... yet :)`}</Text>
-        </View>
-      );
     }
+
+    return (
+      <View>
+        <Text>{`nothing in ${tabSelected}.... yet :)`}</Text>
+      </View>
+    );
   }
 
   tabSelect(selected) {
@@ -58,6 +57,8 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
 
   // overide sectional styles for some of these so like there isnt a line between the name and the picture
   render() {
+    const { modalTesterWillDelete } = this.state;
+
     const {
       horizontalFlex,
       NU_Paragraph_Text,
@@ -168,14 +169,15 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
             </View>
           </CardSection>
 
-            <View style={scrollSection}>
-              {this.renderFavsAndHistory(tabSelected === 'favorites' ? ['fav list'] : ['history list'])}
-            </View>
+          <View style={scrollSection}>
+            {this.renderFavsAndHistory(tabSelected === 'favorites' ? ['fav list'] : ['history list'])}
+          </View>
 
         </View>
 
+
         <ModalView
-          visible={this.state.modalTesterWillDelete}
+          visible={modalTesterWillDelete}
           onAccept={() => console.log('accept')}
           onDecline={() => console.log('decline')}
         >
@@ -183,23 +185,9 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
         </ModalView>
 
       </Card>
-    ); // TODO change if statements to if (!this.props.keyname)
+    );
   }
-};
-
-export default connect(
-  state => ({
-    firstName: state.userInfo.user.firstName,
-    lastName: state.userInfo.user.lastName,
-    profilePic: state.userInfo.user.profilePic,
-    dob: state.userInfo.user.dob,
-    favorites: state.userInfo.user.favorites
-  }),
-  {
-  }
-)(UserProfile);
-
-const { NU_Blue, NU_White, NU_Grey, NU_Card_Border, NU_Border_Grey } = colors; // eslint-disable-line
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -209,13 +197,13 @@ const styles = StyleSheet.create({
   scrollableBody: {
     flex: 9
   },
-  imageContainer: { // this is how you would full screen an image **ORDER MATTERS****************************
+  imageContainer: { // this is how to full screen an image **ORDER MATTERS************
     flex: 1,
     backgroundColor: NU_White,
     alignItems: 'center',
     justifyContent: 'center'
   },
-  imageStyle: { // this is how you would full screen an image **ORDER MATTERS****************************
+  imageStyle: { // this is how to full screen an image **ORDER MATTERS************
     height: 90,
     width: 90,
     borderRadius: 45,
@@ -249,3 +237,24 @@ const styles = StyleSheet.create({
     backgroundColor: NU_White
   }
 });
+
+/* eslint-disable */
+UserProfile.propTypes = {
+  firstName: propTypes.string,
+  lastName: propTypes.string,
+  dob: propTypes.string,
+  favorites: propTypes.array
+};
+/* eslint-enable */
+
+export default connect(
+  state => ({
+    firstName: state.userInfo.user.firstName,
+    lastName: state.userInfo.user.lastName,
+    profilePic: state.userInfo.user.profilePic,
+    dob: state.userInfo.user.dob,
+    favorites: state.userInfo.user.favorites
+  }),
+  {
+  }
+)(UserProfile);

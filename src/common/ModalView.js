@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 });
 
 ModalView.propTypes = {
-  visible: propTypes.string.isRequired,
+  visible: propTypes.bool.isRequired,
   onAccept: propTypes.func.isRequired,
   onDecline: propTypes.func.isRequired
 };

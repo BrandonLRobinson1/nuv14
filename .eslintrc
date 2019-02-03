@@ -15,6 +15,7 @@
         "no-use-before-define": [0],
         "react/forbid-prop-types": [1],
         "import/export": [1],
-        "camelcase": [1]
+        "camelcase": [1],
+        "object-curly-newline": [0]
     }
 }

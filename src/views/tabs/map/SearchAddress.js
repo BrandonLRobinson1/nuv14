@@ -4,19 +4,20 @@ import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'; // https://www.npmjs.com/package/react-native-google-places-autocomplete
 import { setCurrentLocation, setSavedTechs } from '../../../store/location/locationServices';
-
+import propTypes from 'prop-types';
 import { placesKey } from '../../../../private';
 import { colors } from '../../../Styles';
+
+const { NU_Red , NU_Blue, NU_White, NU_Grey } = colors; // eslint-disable-line
 
 // eslint-disable-next-line
 class SearchAddress extends Component {
   // THIS COMPONENT WILL ALSO BE USED FOR TECHS TO SAVE THIER CORRECT ADDRESS IN THE SYSTEM
-  //WARNING! To be deprecated in React v17. Use componentDidMount instead.
 
-  //WARNING! To be deprecated in React v17. Use componentDidMount instead.
-  componentWillMount() {
-    // cache currernt map data, markers, poistion etc
-  }
+  // componentDidMount() {
+  //   // cache currernt map data, markers, poistion etc
+  // }
+
   render() {
     // const { textInputContainer, textInput, predefinedPlacesDescription } = styles;
     const { setCurrentLocation , setSavedTechs} = this.props; // eslint-disable-line
@@ -56,17 +57,6 @@ class SearchAddress extends Component {
   }
 }
 
-export default connect(
-  state => ({
-
-  }),
-  {
-    setCurrentLocation,
-    setSavedTechs
-  }
-)(SearchAddress);
-
-const { NU_Red , NU_Blue, NU_White, NU_Grey } = colors; // eslint-disable-line
 const styles = StyleSheet.create({
   textInputContainer: {
     backgroundColor: 'rgba(0,0,0,0)',
@@ -84,3 +74,18 @@ const styles = StyleSheet.create({
     color: '#1faadb'
   }
 });
+
+SearchAddress.propTypes = {
+  setCurrentLocation: propTypes.func.isRequired,
+  setSavedTechs: propTypes.func.isRequired
+};
+
+export default connect(
+  state => ({
+
+  }),
+  {
+    setCurrentLocation,
+    setSavedTechs
+  }
+)(SearchAddress);
