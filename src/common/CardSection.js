@@ -1,17 +1,19 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import propTypes from 'prop-types';
 import { colors } from '../Styles';
 
-const CardSection = (props) => {
-  const { CardSectionStyles } = styles;
-    return (
-      <View style={[styles.CardSectionStyles, props.style]}>
-          {props.children}
-      </View>
-    );
-};
+const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Border_Grey, NU_Background  } = colors;
 
-const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Border_Grey, NU_Background  } = colors
+const CardSection = props => {
+  const { CardSectionStyles } = styles;
+  const { children, style = null } = props; // eslint-disable-line
+  return (
+    <View style={[CardSectionStyles, style]}>
+      {children}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   CardSectionStyles: {
@@ -24,5 +26,9 @@ const styles = StyleSheet.create({
     position: 'relative'
   }
 });
+
+CardSection.propTypes = {
+  style: propTypes.func.object // eslint-disable-line
+};
 
 export { CardSection };

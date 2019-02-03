@@ -1,6 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import propTypes from 'prop-types';
 import { colors } from '../Styles';
+
+const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black } = colors;
 
 const Button = ({ onPress, buttonText }) => {
   const { buttonStyle, buttonTextStyle } = styles;
@@ -13,8 +16,6 @@ const Button = ({ onPress, buttonText }) => {
   );
 };
 
-const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black } = colors;
-
 const styles = StyleSheet.create({
   buttonStyle: {
     flex: 1,
@@ -25,14 +26,23 @@ const styles = StyleSheet.create({
     borderColor: NU_Blue,
     marginLeft: 5,
     marginRight: 5
-    },
+  },
   buttonTextStyle: {
     color: NU_Blue,
     fontSize: 16,
     fontWeight: '600',
     padding: 12,
-    alignSelf: 'center', // centers text inside the button
+    alignSelf: 'center'
   }
 });
+
+Button.propTypes = {
+  onPress: propTypes.func.isRequired,
+  buttonText: propTypes.string
+};
+
+Button.defaultProps = {
+  buttonText: 'buttonTextNeeded'
+};
 
 export { Button };
