@@ -8,7 +8,7 @@ import { colors, commonStyles } from '../../../Styles';
 // maybe favorites and available
 
 // eslint-disable-next-line
-class UserProfile extends Component {
+class UserProfile extends Component {   // should pull a fresh copy of data everytime you land on this page so on willmount might handle
   constructor() {
     super();
     this.state = {
@@ -18,43 +18,38 @@ class UserProfile extends Component {
     this.renderFavsAndHistory = this.renderFavsAndHistory.bind(this);
   }
 
+  componentWillMount(deletethisuneededshit) {
+    // should actually pull a value from redux and not local state
+    setInterval(() => {
+      this.setState( (state) => ({ modalTesterWillDelete: !this.state.modalTesterWillDelete }) );
+    }, 5000);
+  }
+
   // eslint-disable-next-line
-  renderFavsAndHistory (list, tab) {
-    console.log('list', list);
+  renderFavsAndHistory (list) {
     const { favorites } = this.props; // <--- should be list TODO
     const { tabSelected } = this.state;
 
-    // can conditionally send props based upon what is selected - send history or favorites and when the info is ready itll load
     if (favorites.length > 0 /* should be list.length */) {
       return (
         <FlatList
           data={favorites}
           renderItem={personData => <FeaturedItem key={personData.title} personData={personData} />} // TODO: replace key value with personData.id
         />
-      )
+      );
     } else {
       return (
         <View>
           <Text>{`nothing in ${tabSelected}.... yet :)`}</Text>
         </View>
-      )
+      );
     }
-
-  }
-
-  componentWillMount(deletethisuneededshit) {
-    // should actually pull a value from redux and not local state
-    // setInterval(() => {
-    //   this.setState( (state) => ({ modalTesterWillDelete: !this.state.modalTesterWillDelete }) );
-    // }, 5000);
   }
 
   tabSelect(selected) {
     const { tabSelected } = this.state;
     return tabSelected !== selected ? this.setState({ tabSelected: selected }) : null;
   }
-
-  // should pull a fresh copy everytime you land on this page so on willmount might handle
 
   // overide sectional styles for some of these so like there isnt a line between the name and the picture
   render() {
@@ -66,6 +61,9 @@ class UserProfile extends Component {
     } = commonStyles;
 
     const {
+      firstName,
+      lastName,
+      profilePic,
       favorites
     } = this.props;
 
@@ -96,9 +94,7 @@ class UserProfile extends Component {
 
     return (
       <Card>
-
         <View style={cardSectionFlex}>
-
           <CardSection>
             <View style={imageContainer}>
               <Image
@@ -112,10 +108,10 @@ class UserProfile extends Component {
             <View style={horizontalFlex}>
               <View style={flexCenter}>
                 <Text style={NU_Paragraph_Text}>
-                  Brandon Robinson
+                  {`${firstName} ${lastName}`}
                 </Text>
                 <Text style={NU_Paragraph_Text}>
-                  Charlotte, NC
+                  Charlotte, NC (from zip)
                 </Text>
               </View>
             </View>
@@ -130,7 +126,7 @@ class UserProfile extends Component {
               </View>
               <View>
                 <Text style={NU_Paragraph_Text}>
-                  stuff
+                  bio
                 </Text>
               </View>
             </View>
@@ -185,7 +181,11 @@ class UserProfile extends Component {
 
 export default connect(
   state => ({
-    favorites: state.userInfo.user.favorites,
+    firstName: state.userInfo.user.firstName,
+    lastName: state.userInfo.user.lastName,
+    profilePic: state.userInfo.user.profilePic,
+    dob: state.userInfo.user.dob,
+    favorites: state.userInfo.user.favorites
   }),
   {
   }
@@ -239,10 +239,5 @@ const styles = StyleSheet.create({
     marginBottom: 6,
     paddingBottom: 5,
     backgroundColor: NU_White
-    // borderWidth: 1,
-    // borderRadius: 2,
-    // borderColor: NU_Border_Grey,
-    // shadowOffset: {width: 0, height: 2},
-    // shadowColor: NU_Card_Border,
   }
 });

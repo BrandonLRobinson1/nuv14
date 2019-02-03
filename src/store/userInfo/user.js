@@ -177,8 +177,8 @@ export const userInfoFetch = () => {
         dispatch(updateZipCode(zipCode));
         dispatch(updateEmail(email));
 
-        // ***!!! THE REASON THAT YOU SET A CURRENT LOCATION HERE ON THE USER INFO IS BECAUSE ITLL EITHER BE PRIVATE AND HAVE A DEFAULT LIKE BELOW OR ITLL USE THE BUILT IN PHONE GET LOCATION
-        dispatch( setCurrentLocation( { latitude: 37.767, longitude: -122.421 } ) ); // would be saved, using random data here
+        // ***!!! THE REASON THAT YOU SET A CURRENT LOCATION HERE ON THE USER INFO IS BECAUSE ITLL EITHER BE PRIVATE AND HAVE A confirmED one LIKE BELOW OR ITLL USE THE BUILT IN PHONE GET LOCATION
+        dispatch( setCurrentLocation( { latitude: 37.767, longitude: -122.421 } ) ); // would be saved, using random steve data here
         // dispatch(setCurrentLocation( "PRIVATE_LOCATION" ) );
 
         dispatch(setOther(email));

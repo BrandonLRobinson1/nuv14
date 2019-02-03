@@ -28,7 +28,6 @@ import EditAccount from './src/views/tabs/profile/settingsItems/account/EditAcco
 import ChangeEmail from './src/views/tabs/profile/settingsItems/account/ChangeEmail';
 
 import { colors } from './src/Styles';
-// import CredentialsRouter from './src/views/getCredentials/index';
 
 // eslint-disable-next-line
 const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Border_Grey, NU_Card_Border } = colors;
@@ -46,7 +45,6 @@ class RouterComponent extends Component {
 
   componentWillMount() {
     const { getinitialDelta, getActiveNailTechs, userInfoFetch, getAppData } = this.props;
-    // TURN BACK ON TURNED OFF FOR TESTING
     // ******************************************************* use lodash when searching through firebase database instead of writing your own functions
     userInfoFetch(); // -> on app load preferabl
 
@@ -107,49 +105,43 @@ class RouterComponent extends Component {
           <Scene
             key="tabbar"
             tabs
-            inactiveTintColor="red"
-            activeTintColor="white"
+            inactiveTintColor={NU_Red}
+            activeTintColor={NU_White}
             tabBarStyle={{backgroundColor: "black"}}
             type="reset"
             hideNavBar
             pressOpacity={1}
           >
 
-            <Scene key="featured" title="DiscoverMain" icon={StarIcon} initial>
+            <Scene key="featured" title="Discover" icon={StarIcon} initial>
               <Scene
                 key="DiscoverMainTab"
                 component={DiscoverMain}
-                title="DiscoverMain Tab"
+                title="Discover"
               />
               <Scene
                 key="ProfilePage"
                 component={ProfilePage}
                 title=""
-                backTitle=" "
+                backTitle=""
                 hideTabBar
-                onLeft={() => {
-                  console.log('Actions', Actions)
-                  Actions.pop();
-                }}
+                onLeft={() => Actions.pop()}
               />
               <Scene
                 key="Reviews"
                 component={Reviews}
                 title="Reviews"
-                backTitle=" "
-                onLeft={() => {
-                  Actions.pop();
-                }}
+                backTitle=""
+                onLeft={() => Actions.pop()}
               />
             </Scene>
 
-            <Scene key="map" title="Find a salon" icon={tabIcon} >
-
+            <Scene key="map" title="Find a salon" icon={tabIcon}>
               <Scene
                 key="mapTab"
                 component={MapTab}
                 title="MapTab"
-                backTitle=" "
+                backTitle=""
                 rightTitle="Change Location"
                 onRight={() => {
                   // Actions.pop();
@@ -168,20 +160,15 @@ class RouterComponent extends Component {
                 title=""
                 backTitle=""
                 hideTabBar
-                onLeft={() => {
-                  Actions.pop();
-                }}
+                onLeft={() => Actions.pop()}
               />
               <Scene
                 key="Reviews"
                 component={Reviews}
                 title="Reviews"
-                backTitle=" "
-                onLeft={() => {
-                  Actions.pop();
-                }}
+                backTitle=""
+                onLeft={() => Actions.pop()}
               />
-
             </Scene>
 
 
@@ -190,24 +177,21 @@ class RouterComponent extends Component {
                 key="userProfile"
                 component={UserProfile}
                 title="profile"
-                backTitle=" "
-
+                backTitle=""
                 rightTitle="Settings"
                 onRight={() => {
                   // Actions.pop();
                   Actions.Settings();
                 }}
                 leftTitle="Refer"
-                onLeft={() => {
-                  console.log('modal')
-                }}
+                onLeft={() => console.log('modal')}
               />
 
               <Scene
                 key="EditAccount"
                 component={EditAccount}
                 title="Edit Account"
-                backTitle=" "
+                backTitle=""
                 rightTitle="Edit"
               />
 
@@ -215,7 +199,7 @@ class RouterComponent extends Component {
                 key="ChangeEmail"
                 component={ChangeEmail}
                 title="Edit Email"
-                backTitle=" "
+                backTitle=""
                 rightTitle=""
               />
 
@@ -223,7 +207,7 @@ class RouterComponent extends Component {
                 key="Settings"
                 component={Settings}
                 title="Settings"
-                backTitle=" "
+                backTitle=""
               />
 
               <Scene
@@ -232,9 +216,7 @@ class RouterComponent extends Component {
                 title=""
                 backTitle=""
                 hideTabBar
-                onLeft={() => {
-                  Actions.pop();
-                }}
+                onLeft={() => Actions.pop()}
               />
 
               <Scene
@@ -242,19 +224,16 @@ class RouterComponent extends Component {
                 component={Reviews}
                 title="Reviews"
                 backTitle=" "
-                onLeft={() => {
-                  Actions.pop();
-                }}
+                onLeft={() => Actions.pop()}
               />
-
             </Scene>
 
             <Scene key="Appointment" title="Appointment" icon={tabIcon}>
               <Scene
                 key="ApptHome"
                 component={ApptHome}
-                title=" "
-                backTitle=" "
+                title=""
+                backTitle=""
               />
             </Scene>
 

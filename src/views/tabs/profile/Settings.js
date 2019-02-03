@@ -9,7 +9,6 @@ import {
 import SettingsTitle from './settingsItems/SettingsTitle';
 import SettingsList from './settingsItems/SettingsList';
 import { colors } from '../../../Styles';
-// maybe favorites and available
 
 // eslint-disable-next-line
 class Setting extends Component {
