@@ -1,8 +1,16 @@
 import React from 'react';
-import { TextInput, View, Text, StyleSheet } from 'react-native';
+import {
+  TextInput,
+  View,
+  Text,
+  StyleSheet
+} from 'react-native';
+import propTypes from 'prop-types';
 import { colors } from '../Styles';
 
-const Input = ({ label, onChangeText, value, placeholder, secureTextEntry, editable = true, keyboardType = 'default', maxLength = null, clearTextOnFocus = false }) => ( // what to pass in
+const { NU_Black } = colors;
+
+const Input = ({ label, onChangeText, value, placeholder, secureTextEntry, editable = true, keyboardType = 'default', maxLength = null, clearTextOnFocus = false }) => ( // eslint-disable-line
   <View style={styles.containerStyle}>
     <Text style={styles.labelStyle}>{label}</Text>
     <TextInput
@@ -20,10 +28,14 @@ const Input = ({ label, onChangeText, value, placeholder, secureTextEntry, edita
   </View>
 );
 
-const { NU_Black } = colors;
+Input.propTypes = {
+  label: propTypes.string.isRequired,
+  placeholder: propTypes.string.isRequired,
+  onChangeText: propTypes.func.isRequired
+};
 
 const styles = StyleSheet.create({
-  inputStyle : {
+  inputStyle: {
     color: NU_Black,
     paddingRight: 5,
     paddingLeft: 5,
