@@ -93,7 +93,6 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
     if (!favorites) return ( //would be checking for favorites and history
       <FullCard>
         <Spinner />
-        <Text>boii</Text>
       </FullCard>
     );
 

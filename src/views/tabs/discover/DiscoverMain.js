@@ -19,7 +19,6 @@ class DiscoverMain extends Component { // <------- name needs to be updated TODO
     if (!favorites) return ( // eslint-disable-line
       <FullCard>
         <Spinner />
-        <Text>boii</Text>
       </FullCard>
     );
     return (
