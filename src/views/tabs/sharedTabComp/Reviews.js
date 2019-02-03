@@ -18,6 +18,9 @@ class Reviews extends Component {
     const { NU_Grey } = colors;
 
     // ***** shouldnt need a check should just since this info should be provided with profile
+    const addKeysToReviews = (reviewsSample || []).map((item, index) => {
+      return {...item, key: `list-key-${index}`}
+    });
 
     return (
       <View style={reviewsBackground}>
@@ -39,7 +42,7 @@ class Reviews extends Component {
           </View>
 
           <FlatList
-            data={reviewsSample}
+            data={addKeysToReviews}
             renderItem={(reviewData) => <ReviewRow key={Math.random()} reviewData={reviewData} />}
           />
 

@@ -18,22 +18,27 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
     this.renderFavsAndHistory = this.renderFavsAndHistory.bind(this);
   }
 
-  componentWillMount(deletethisuneededshit) {
-    // should actually pull a value from redux and not local state
-    setInterval(() => {
-      this.setState( (state) => ({ modalTesterWillDelete: !this.state.modalTesterWillDelete }) );
-    }, 5000);
-  }
+  // componentWillMount(deletethisuneededshit) {
+  //   // should actually pull a value from redux and not local state
+  //   setInterval(() => {
+  //     this.setState( (state) => ({ modalTesterWillDelete: !this.state.modalTesterWillDelete }) );
+  //   }, 5000);
+  // }
 
   // eslint-disable-next-line
   renderFavsAndHistory (list) {
     const { favorites } = this.props; // <--- should be list TODO
     const { tabSelected } = this.state;
 
+    // TODO change favorites to list
+    const addKeysToFavorites = (favorites || []).map((item, index) => {
+      return {...item, key: `list-key-${index}`}
+    });
+
     if (favorites.length > 0 /* should be list.length */) {
       return (
         <FlatList
-          data={favorites}
+          data={addKeysToFavorites}
           renderItem={personData => <FeaturedItem key={personData.title} personData={personData} />} // TODO: replace key value with personData.id
         />
       );

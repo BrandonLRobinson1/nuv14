@@ -7,33 +7,16 @@ import { FullCard, Spinner } from '../../../common';
 class DiscoverMain extends Component { // <------- name needs to be updated TODO
   constructor() {
     super();
-
-    this.state = {
-      noDoubleRender: false
-    };
-    // this.getRows = this.getRows.bind(this);
   }
 
-  // getRows() {
-  //   const ds = new ListView.DataSource({
-  //     rowHasChanged: (r1, r2) => r1 !== r2 // eslint-disable-line
-  //   });
-  //   // basically if a value is passed to this prop under dataToRender ... render that (favorites or history) otherwise render the standard featured list (which is currently sharing favorites) TODO wire up correctly
-  //   const renderData = Array.isArray(this.props.dataToRender) ? this.props.dataToRender : this.props.favorites;
-  //   this.dataSource = ds.cloneWithRows(renderData);
-  // }
-
   render() {
-    const renderData = Array.isArray(this.props.dataToRender) ? this.props.dataToRender : this.props.favorites;
-    console.log('renderData', renderData);
-    // if (this.props.favorites && !this.state.noDoubleRender) {
-    //   this.setState({ noDoubleRender: true });
-    //   this.getRows();
+    const { favorites } = this.props;
 
-    //   console.log('☀️☀️☀️☀️☀️☀️ propzzzzzzzzzzzzzzzzzzzzzzzzz', this.props, this.dataSource);
+    const addKeysList = (favorites || []).map((item, index) => {
+      return {...item, key: `list-key-${index}`}
+    });
 
-    // }
-    if (!renderData) return ( // eslint-disable-line
+    if (!favorites) return ( // eslint-disable-line
       <FullCard>
         <Spinner />
         <Text>boii</Text>
@@ -41,7 +24,7 @@ class DiscoverMain extends Component { // <------- name needs to be updated TODO
     );
     return (
       <FlatList
-        data={renderData}
+        data={addKeysList}
         renderItem={personData => <Preview key={personData.title} personData={personData} />} // TODO: replace key value with personData.id
       />
     );
