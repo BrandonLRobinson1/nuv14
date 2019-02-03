@@ -17,7 +17,7 @@ const defaultState = {
   gender: '',
   dob: '',
 
-  favorites: '',
+  favorites: [],
   other: null
 };
 

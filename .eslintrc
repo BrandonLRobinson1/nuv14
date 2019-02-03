@@ -14,6 +14,7 @@
         "import/prefer-default-export": [0],
         "no-use-before-define": [0],
         "react/forbid-prop-types": [1],
-        "import/export": [1]
+        "import/export": [1],
+        "camelcase": [1]
     }
 }

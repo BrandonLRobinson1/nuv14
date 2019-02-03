@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
+import propTypes from 'prop-types';
 import Preview from '../sharedTabComp/Preview';
 import { FullCard, Spinner } from '../../../common';
 
-class DiscoverMain extends Component { // <------- name needs to be updated TODO
-  constructor() {
-    super();
-  }
+// eslint-disable-next-line
+class DiscoverMain extends Component {
+  // constructor() {
+  //   super();
+  // }
 
   render() {
-    const { favorites } = this.props;;
+    const { favorites } = this.props;
+    const addKeysList = (favorites || []).map((item, index) => ({ ...item, key: `list-key-${index}`}) );
 
-    const addKeysList = (favorites || []).map((item, index) => {
-      return {...item, key: `list-key-${index}`}
-    });
-
-    if (!favorites) return ( // eslint-disable-line
+    if (!favorites.length) return ( // eslint-disable-line
       <FullCard>
         <Spinner />
       </FullCard>
@@ -24,11 +23,15 @@ class DiscoverMain extends Component { // <------- name needs to be updated TODO
     return (
       <FlatList
         data={addKeysList}
-        renderItem={personData => <Preview key={personData.title} personData={personData} />} // TODO: replace key value with personData.id
+        renderItem={personData => <Preview personData={personData} />}
       />
     );
   }
 }
+
+DiscoverMain.propTypes = {
+  favorites: propTypes.array // eslint-disable-line
+};
 
 export default connect(
   state => ({
