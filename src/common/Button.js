@@ -3,6 +3,7 @@ import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import propTypes from 'prop-types';
 import { colors } from '../Styles';
 
+// eslint-disable-next-line
 const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black } = colors;
 
 const Button = ({ onPress, buttonText }) => {

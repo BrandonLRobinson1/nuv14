@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import propTypes from 'prop-types';
 import { colors } from '../Styles';
 
+// eslint-disable-next-line
 const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Header_Background, NU_Shadow } = colors
 
 const Header = ({ headerText }) => {

@@ -5,9 +5,12 @@ import { CardSection } from './CardSection';
 import { Button } from './Button';
 import { colors } from '../Styles';
 
+// eslint-disable-next-line
 const { NU_Red, NU_Black } = colors;
 
+// eslint-disable-next-line
 const ModalView = ({ children, visible, onAccept, onDecline }) => {
+// eslint-disable-next-line
   const { containerStyle, textStyle, cardSectionStyle, modalBottom } = styles;
   return (
     <Modal

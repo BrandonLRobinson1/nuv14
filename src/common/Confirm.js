@@ -5,12 +5,12 @@ import { CardSection } from './CardSection';
 import { Button } from './Button';
 import { colors } from '../Styles';
 
+// eslint-disable-next-line
 const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Modal_Black } = colors;
 
+// eslint-disable-next-line
 const Confirm = ({ children, visible, onAccept, onDecline }) => {
   const { cardSectiontyle, textStyle, containerStyle } = styles;
-
-  console.log('chilly', children)
 
   return (
     <Modal
@@ -40,7 +40,7 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
 };
 
 const styles = {
-  cardSectiontyle:{
+  cardSectiontyle: {
     jusifyContent: 'center'
   },
   textStyle:{
@@ -49,7 +49,7 @@ const styles = {
     textAlign: 'center',
     lineHeight: 40
   },
-  containerStyle:{
+  containerStyle: {
     backgroundColor: NU_Modal_Black,
     position: 'relative',
     flex: 1,

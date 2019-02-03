@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 });
 
 FullCard.propTypes = {
-  contentStyle: propTypes.object
+  contentStyle: propTypes.object // eslint-disable-line
 };
 
 export { FullCard };
