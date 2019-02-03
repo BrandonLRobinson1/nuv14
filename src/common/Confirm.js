@@ -4,10 +4,13 @@ import propTypes from 'prop-types';
 import { CardSection } from './CardSection';
 import { Button } from './Button';
 import { colors } from '../Styles';
-// import { relative } from 'path';
+
+const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Modal_Black } = colors;
 
 const Confirm = ({ children, visible, onAccept, onDecline }) => {
   const { cardSectiontyle, textStyle, containerStyle } = styles;
+
+  console.log('chilly', children)
 
   return (
     <Modal
@@ -36,7 +39,12 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
   )
 }
 
-const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Modal_Black } = colors
+Confirm.propTypes = {
+  onAccept: propTypes.func.isRequired,
+  onDecline: propTypes.func.isRequired,
+  visible: propTypes.string.isRequired,
+  children: propTypes.string.isRequired
+};
 
 const styles = {
   cardSectiontyle:{

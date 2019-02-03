@@ -174,7 +174,11 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
 
         </View>
 
-        <ModalView visible={this.state.modalTesterWillDelete}>
+        <ModalView
+          visible={this.state.modalTesterWillDelete}
+          onAccept={() => console.log('accept')}
+          onDecline={() => console.log('decline')}
+        >
           refer Modal
         </ModalView>
 

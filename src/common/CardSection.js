@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 });
 
 CardSection.propTypes = {
-  style: propTypes.func.object // eslint-disable-line
+  style: propTypes.any // eslint-disable-line
 };
 
 export { CardSection };

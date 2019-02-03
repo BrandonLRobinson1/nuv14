@@ -1,11 +1,16 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import propTypes from 'prop-types';
 
-const FullCard = props => (
-  <View style={[styles.container, props.contentStyle]}>
-    {props.children}
-  </View>
-);
+const FullCard = props => {
+  const { contentStyle, children } = props; // eslint-disable-line
+  const { container } = styles;
+  return (
+    <View style={[container, contentStyle]}>
+      {children}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -15,5 +20,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   }
 });
+
+FullCard.propTypes = {
+  contentStyle: propTypes.object
+};
 
 export { FullCard };
