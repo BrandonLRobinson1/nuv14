@@ -24,10 +24,6 @@ class Preview extends Component {
     } = styles;
 
     const { item : personData  } = this.props.personData;
-    // const personData = item;\
-    console.log('🔥 -----', personData)
-
-
     const { NU_Header_Text, NU_Paragraph_Text } = commonStyles;
 
     return (

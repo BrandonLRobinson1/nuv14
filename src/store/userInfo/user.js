@@ -98,7 +98,6 @@ export default handleActions({
 }, defaultState);
 
 export const signUserUp = passWord => (dispatch, getState) => {
-  console.log('hit signuserup');
   const {
     userInfo: {
       user: {

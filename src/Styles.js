@@ -11,7 +11,7 @@ export const CARD_HEIGHT = height / 4;
 export const CARD_WIDTH = CARD_HEIGHT - 50;
 // phone dimensions *****
 
-console.log('Platform', Platform)
+console.log('Platform', Platform);
 
 export const colors = {
   NU_Red: 'red',

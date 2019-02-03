@@ -402,8 +402,6 @@ export default connect(
 
 const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
 
-console.log('phoneWidth - CARD_WIDTH', phoneWidth - CARD_WIDTH);
-
 const styles = StyleSheet.create({
   container: {
     flex: 1

@@ -40,7 +40,6 @@ class SearchAddress extends Component {
             longitude: details.geometry.location.lng,
             timeStamp: utcDate
           };
-          console.log('locationToSearch', locationToSearch, details.geometry.location)
           await setCurrentLocation(locationToSearch);
           // TODO: rerun and await new get markers function for fresh refresh
           await setSavedTechs([]);
