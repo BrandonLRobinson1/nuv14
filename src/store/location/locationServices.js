@@ -53,7 +53,7 @@ export const getinitialDelta = () => (dispatch, getState) => {
 
   let dataForDeltas = favorites.reduce((collection, item, index) => {
     collection.push(item.coordinate);
-    return collection
+    return collection;
   }, []);
 
   dataForDeltas = getRegionForCoordinates(dataForDeltas);

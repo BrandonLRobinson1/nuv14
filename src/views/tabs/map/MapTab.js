@@ -416,9 +416,6 @@ const styles = StyleSheet.create({
     borderColor: 'black'
   },
   endPadding: {
-    // paddingRight: phoneWidth - CARD_WIDTH,
-    // paddingRight: phoneWidth - CARD_WIDTH - 170,
-    // paddingRight: phoneWidth - CARD_WIDTH - ((phoneWidth - CARD_WIDTH) * .5),
     paddingRight: phoneWidth - CARD_WIDTH - ((phoneWidth - CARD_WIDTH) * .6),
     borderColor: 'black'
   },

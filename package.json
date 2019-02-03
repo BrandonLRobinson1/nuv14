@@ -10,8 +10,9 @@
     "best-cache-clean": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro* && rm -rf $TMPDIR/haste-*",
     "fresh-install": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build/ModuleCache/* && rm -rf node_modules/ && npm cache clean && npm install",
     "fresh-start": "npm run fresh-install && npm run rc-start",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src"
   },
+  "parser": "babel-eslint",
   "dependencies": {
     "axios": "^0.18.0",
     "firebase": "^5.7.0",
@@ -31,8 +32,11 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
     "babel-jest": "23.6.0",
-    "eslint": "^5.12.1",
+    "babel-preset-react-native": "^4.0.1",
+    "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.15.0",
     "eslint-plugin-jsx-a11y": "^6.2.0",

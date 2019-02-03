@@ -10,7 +10,7 @@ class DiscoverMain extends Component { // <------- name needs to be updated TODO
   }
 
   render() {
-    const { favorites } = this.props;
+    const { favorites } = this.props;;
 
     const addKeysList = (favorites || []).map((item, index) => {
       return {...item, key: `list-key-${index}`}
