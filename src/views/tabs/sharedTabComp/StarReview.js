@@ -1,12 +1,12 @@
 import React from 'react';
-import {  View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import propTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import { createRating } from '../../../helpers/helpersFunctions';
 
-const StarReview = (props) => {
+const StarReview = props => {
   const { score, size, color } = props;
-  if(!score || score === 0 || score > 5) return (<Text>No Reviews yet, be the first!</Text>) // with styling
+  if (!score || score === 0 || score > 5) return (<Text>No Reviews yet, be the first!</Text>); // with styling
   const ratingArray = createRating(score);
 
   const {
@@ -34,9 +34,7 @@ const StarReview = (props) => {
       </View>
     </View>
   );
-}
-
-export default StarReview;
+};
 
 const styles = StyleSheet.create({
   starRow: {
@@ -53,3 +51,11 @@ const styles = StyleSheet.create({
     padding: 2
   }
 });
+
+StarReview.propTypes = {
+  score: propTypes.number.isRequired,
+  size: propTypes.number.isRequired,
+  color: propTypes.string.isRequired
+};
+
+export default StarReview;

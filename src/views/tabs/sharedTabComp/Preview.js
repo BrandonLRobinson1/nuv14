@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { AlbumCard, CardSection, Card, SectionSmall, SectionMedium, Button } from '../../../common';
-// import { updateFirstName, updateLastName, updateZipCode } from '../../store/userInfo.user';
+import propTypes from 'prop-types';
+import { CardSection, Card, Button } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
+
+const { NU_White, NU_Grey, NU_Pink, NU_Border_Grey } = colors; // eslint-disable-line
 
 class Preview extends Component {
   constructor() {
@@ -23,7 +25,7 @@ class Preview extends Component {
       imageCardSectionContainer
     } = styles;
 
-    const { item : personData  } = this.props.personData;
+    const { item : personData } = this.props.personData; // eslint-disable-line
     const { NU_Header_Text, NU_Paragraph_Text } = commonStyles;
 
     return (
@@ -61,20 +63,9 @@ class Preview extends Component {
           />
         </CardSection>
       </Card>
-    )
+    );
   }
 }
-
-export default connect(
-  state => ({
-    // firstName: state.userInfo.user.firstName
-  }),
-  {
-    // updateFirstName,
-  }
-)(Preview);
-
-const { NU_White, NU_Grey, NU_Pink, NU_Border_Grey } = colors; // eslint-disable-line
 
 const styles = StyleSheet.create({
   circleContainer: {
@@ -108,7 +99,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignSelf: 'center',
-    backgroundColor: NU_White,
+    backgroundColor: NU_White
 
   },
   imageStyle: {
@@ -120,3 +111,16 @@ const styles = StyleSheet.create({
     resizeMode: 'cover'
   }
 });
+
+Preview.propTypes = {
+  personData: propTypes.object.isRequired
+};
+
+export default connect(
+  state => ({
+    // firstName: state.userInfo.user.firstName
+  }),
+  {
+    // updateFirstName,
+  }
+)(Preview);

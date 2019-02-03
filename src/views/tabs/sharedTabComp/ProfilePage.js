@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Image, View, Text, StyleSheet, Dimensions, ScrollView, ListView, TouchableOpacity, Animated } from 'react-native';
+import { Image, View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import propTypes from 'prop-types';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomMarker from '../map/CustomMarker';
 import StarReview from './StarReview';
-import { createRating } from '../../../helpers/helpersFunctions';
-import { CardSection, Spinner, Card } from '../../../common';
+import { CardSection, Card } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
-// maybe favorites and available
+const { NU_Red , NU_Blue, NU_White, NU_Grey, NU_Border_Grey, NU_Transparent } = colors; // eslint-disable-line
 
 // 🤯 will be grabbing the region obj from the nail tech info when its created
 // -> actually might be passed in as a prop not sure yet, or import { regionObj } from '../../../store/location/nailTECKSTORE';
-const regionObj = {latitude: 37.767, longitude: -122.421, latitudeDelta: 0.03148000000000195, longitudeDelta: 0.034317000000001485};
+const regionObj = { latitude: 37.767, longitude: -122.421, latitudeDelta: 0.03148000000000195, longitudeDelta: 0.034317000000001485 };
 
 // eslint-disable-next-line
 class ProfilePage extends Component {
-
   render() {
     const {
       NU_Header_Text,
@@ -40,7 +38,6 @@ class ProfilePage extends Component {
       reviewText
     } = styles; // eslint-disable-line
 
-    const { NU_White, NU_Red } = colors;
     const { title, description, address: { street }, ratings } = this.props.personData; // eslint-disable-line
     const starRating = 3.4; // TODO SHOULD COME FROM THIS.PROPS.PERSONDATA;
 
@@ -53,7 +50,7 @@ class ProfilePage extends Component {
               <CardSection style={[imageCardSectionContainer]}>
                 <View style={imageContainer}>
                   <Image
-                    source={{uri: "https://i.imgur.com/K3KJ3w4h.jpg"}}
+                    source={{ uri: "https://i.imgur.com/K3KJ3w4h.jpg" }}
                     style={imageStyle}
                   />
                 </View>
@@ -108,12 +105,12 @@ class ProfilePage extends Component {
                       moveOnMarkerPress={false}
                     >
 
-                    <MapView.Marker coordinate={regionObj}>
-                      <CustomMarker />
-                    </MapView.Marker>
+                      <MapView.Marker coordinate={regionObj}>
+                        <CustomMarker />
+                      </MapView.Marker>
 
                     </MapView>
-                </View>
+                  </View>
 
                 </View>
 
@@ -131,7 +128,7 @@ class ProfilePage extends Component {
                   </View>
                   <View>
                     <Text
-                      onPress={ () => Actions.Reviews(
+                      onPress={() => Actions.Reviews(
                         {
                           reviews: ratings,
                           ratingAvg: starRating,
@@ -197,20 +194,9 @@ class ProfilePage extends Component {
         </View>
 
       </View>
-    ); // TODO change if statements to if (!this.props.keyname)
+    );
   }
-};
-
-export default connect(
-  state => ({
-    // firstName: state.userInfo.user.firstName,
-  }),
-  {
-    // updateFirstName,
-  }
-)(ProfilePage);
-
-const { NU_Red , NU_Blue, NU_White, NU_Grey, NU_Border_Grey, NU_Transparent } = colors; // eslint-disable-line
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -285,3 +271,16 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline'
   }
 });
+
+ProfilePage.propTypes = {
+  personData: propTypes.object.isRequired
+};
+
+export default connect(
+  state => ({
+    // firstName: state.userInfo.user.firstName,
+  }),
+  {
+    // updateFirstName,
+  }
+)(ProfilePage);

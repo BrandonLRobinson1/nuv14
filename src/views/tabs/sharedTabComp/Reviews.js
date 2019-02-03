@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, Text, FlatList } from 'react-native';
+import propTypes from 'prop-types';
 import ReviewRow from './ReviewRow';
 import StarReview from './StarReview';
-import { Card , CardSection, FullCard, Spinner } from '../../../common';
 import { commonStyles, colors } from '../../../Styles';
 
-class Reviews extends Component {
-  constructor() {
-    super();
-    // this.getReview = this.getReview.bind(this) <--- put in componentwillmount instead
-  }
+const { NU_White, NU_Black, NU_Grey } = colors;
 
-  render () {
-    const { starGenerator, ratingAvg, title } = this.props;
+// eslint-disable-next-line
+class Reviews extends Component {
+  // constructor() {
+  //   super();
+  // }
+
+  // look into renderItem={({ reviewData }) => <ReviewRow key={Math.random()} reviewData={reviewData} />
+  render() {
+    const { ratingAvg, title } = this.props;
     const { reviewsBackground, summaryCard, sectionPadding } = styles;
     const { flexCenter, NU_Small_Header_Text } = commonStyles;
-    const { NU_Grey } = colors;
 
     // ***** shouldnt need a check should just since this info should be provided with profile
-    const addKeysToReviews = (reviewsSample || []).map((item, index) => {
-      return {...item, key: `list-key-${index}`}
-    });
+    const addKeysToReviews = (reviewsSample || []).map((item, index) => ({ ...item, key: `list-key-${index}`}));
 
     return (
       <View style={reviewsBackground}>
@@ -43,7 +43,7 @@ class Reviews extends Component {
 
           <FlatList
             data={addKeysToReviews}
-            renderItem={(reviewData) => <ReviewRow key={Math.random()} reviewData={reviewData} />}
+            renderItem={reviewData => <ReviewRow key={Math.random()} reviewData={reviewData} />}
           />
 
         </ScrollView>
@@ -51,11 +51,6 @@ class Reviews extends Component {
     );
   }
 }
-
-export default Reviews;
-
-const { NU_White, NU_Black } = colors;
-
 
 const styles = StyleSheet.create({
   reviewsBackground: {
@@ -78,6 +73,15 @@ const styles = StyleSheet.create({
   }
 });
 
+Reviews.propTypes = {
+  ratingAvg: propTypes.number.isRequired,
+  title: propTypes.string.isRequired
+  // list: propTypes.array.isRequired
+};
+
+export default Reviews;
+
+/* eslint-disable */
 const reviewsSample = [
   {
     name: "Sam",

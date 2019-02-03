@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet, Text, ListView } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import propTypes from 'prop-types';
 import StarReview from './StarReview';
 import { commonStyles, colors } from '../../../Styles';
 
-const ReviewRow = (props) => {
-  const { name, review, reviewScore, displayTime, title } = props.reviewData.item;
-  // const { reviewsBackground } = styles;
+const { NU_White, NU_Black, NU_Grey, NU_Red  } = colors;
 
+const ReviewRow = props => {
+  const { name, review, reviewScore, displayTime, title } = props.reviewData.item; // eslint-disable-line
   const { container } = styles;
   const { NU_Paragraph_Text, NU_Small_Header_Text } = commonStyles;
-  const { NU_Grey, NU_Red } = colors;
 
   return (
     <View style={container}>
@@ -33,12 +33,7 @@ const ReviewRow = (props) => {
       </View>
     </View>
   );
-}
-
-
-export default ReviewRow;
-
-const { NU_White, NU_Black } = colors;
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -48,5 +43,11 @@ const styles = StyleSheet.create({
     marginRight: 5,
     borderWidth: 1,
     borderRadius: 3
-  },
+  }
 });
+
+ReviewRow.propTypes = {
+  reviewData: propTypes.object.isRequired
+};
+
+export default ReviewRow;
