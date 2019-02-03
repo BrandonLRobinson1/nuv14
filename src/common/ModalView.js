@@ -1,8 +1,11 @@
 import React from 'react';
 import { Text, Modal, View, StyleSheet } from 'react-native';
+import propTypes from 'prop-types';
 import { CardSection } from './CardSection';
 import { Button } from './Button';
-import { colors } from '../Styles'
+import { colors } from '../Styles';
+
+const { NU_Red, NU_Black } = colors;
 
 const ModalView = ({ children, visible, onAccept, onDecline }) => {
   const { containerStyle, textStyle, cardSectionStyle, modalBottom } = styles;
@@ -26,10 +29,8 @@ const ModalView = ({ children, visible, onAccept, onDecline }) => {
         </CardSection>
       </View>
     </Modal>
-  )
-}
-
-const { NU_Red } = colors;
+  );
+};
 
 const styles = StyleSheet.create({
   cardSectionStyle: {
@@ -44,8 +45,7 @@ const styles = StyleSheet.create({
     lineHeight: 40
   },
   containerStyle: {
-    // backgroundColor: NU_Red
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    backgroundColor: NU_Black,
     position: 'relative',
     flex: 1,
     justifyContent: 'center',
@@ -57,58 +57,10 @@ const styles = StyleSheet.create({
   }
 });
 
+ModalView.propTypes = {
+  visible: propTypes.string.isRequired,
+  onAccept: propTypes.func.isRequired,
+  onDecline: propTypes.func.isRequired
+};
+
 export { ModalView };
-
-// import React from 'react';
-// import { Text, Modal, View, StyleSheet } from 'react-native';
-// import { CardSection } from './CardSection';
-// import { Button } from './Button';
-// import { colors } from '../Styles'
-
-// const ModalView = ({ children, visible, onAccept, onDecline }) => {
-//   const { containerStyle, textStyle, cardSectionStyle } = styles;
-//   return (
-//     <Modal
-//       visible={visible}
-//       transparent
-//       animationType="slide"
-//       onRequestClose={() => {}}
-//     >
-//       <View style={containerStyle}>
-//         <CardSection style={cardSectionStyle}>
-//           <Text style={textStyle}>
-//             {children}
-//           </Text>
-//         </CardSection>
-
-//         <CardSection>
-//           <Button onPress={onAccept} buttonText="Yes" />
-//           <Button onPress={onDecline} buttonText="No" />
-//         </CardSection>
-//       </View>
-//     </Modal>
-//   )
-// }
-
-// const { NU_Red } = colors;
-
-// const styles = StyleSheet.create({
-//   cardSectionStyle: {
-//     justifyContent: 'center'
-//   },
-//   textStyle: {
-//     flex: 1,
-//     fontSize: 18,
-//     textAlign: 'center',
-//     lineHeight: 40
-//   },
-//   containerStyle: {
-//     // backgroundColor: NU_Red
-//     backgroundColor: 'rgba(0, 0, 0, 0.75)',
-//     position: 'relative',
-//     flex: 1,
-//     justifyContent: 'center'
-//   }
-// });
-
-// export { ModalView };

@@ -36,14 +36,7 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
         </CardSection>
       </View>
     </Modal>
-  )
-}
-
-Confirm.propTypes = {
-  onAccept: propTypes.func.isRequired,
-  onDecline: propTypes.func.isRequired,
-  visible: propTypes.string.isRequired,
-  children: propTypes.string.isRequired
+  );
 };
 
 const styles = {
@@ -62,7 +55,13 @@ const styles = {
     flex: 1,
     justifyContent: 'center'
   }
+};
 
-}
+Confirm.propTypes = {
+  onAccept: propTypes.func.isRequired,
+  onDecline: propTypes.func.isRequired,
+  visible: propTypes.string.isRequired,
+  children: propTypes.string.isRequired
+};
 
-export default Confirm
+export default Confirm;

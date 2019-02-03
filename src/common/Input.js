@@ -28,12 +28,6 @@ const Input = ({ label, onChangeText, value, placeholder, secureTextEntry, edita
   </View>
 );
 
-Input.propTypes = {
-  label: propTypes.string.isRequired,
-  placeholder: propTypes.string.isRequired,
-  onChangeText: propTypes.func.isRequired
-};
-
 const styles = StyleSheet.create({
   inputStyle: {
     color: NU_Black,
@@ -55,5 +49,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+Input.propTypes = {
+  label: propTypes.string.isRequired,
+  placeholder: propTypes.string.isRequired,
+  onChangeText: propTypes.func.isRequired
+};
 
 export { Input };
