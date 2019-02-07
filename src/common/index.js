@@ -10,3 +10,4 @@ export * from './SectionMedium';
 export * from './SectionSmall';
 export * from './FlexContainer';
 export * from './ModalView';
+export * from './NavBackButton';

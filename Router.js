@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
+import { StyleSheet } from 'react-native';
 
 import SignUp from './src/views/getCredentials/SignUp';
 import PhoneNumber from './src/views/getCredentials/PhoneNumber';
@@ -9,6 +10,8 @@ import SignUpEmail from './src/views/getCredentials/SignUpEmail';
 import LogIn from './src/views/getCredentials/LogIn';
 import GetCredentials from './src/views/getCredentials/GetCredentials';
 import Validate from './src/views/getCredentials/Validate';
+
+import { NavBackButton } from './src/common';
 
 import ApptHome from './src/views/tabs/appointment/ApptHome';
 
@@ -32,13 +35,9 @@ import { colors } from './src/Styles';
 // eslint-disable-next-line
 const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Border_Grey, NU_Card_Border } = colors;
 
-const tabIcon = ({ focused, title }) => {
-  return (<Icon name="rocket" size={20} color={NU_Red} />);
-};
+const tabIcon = ({ focused, title }) => <Icon name="rocket" size={20} color={NU_Red} />
 
-const StarIcon = ({ focused, title }) => {
-  return (<Icon name="star" size={20} color={focused ? 'white' :'green'} />);
-};
+const StarIcon = ({ focused, title }) => <Icon name="star" size={20} color={focused ? 'white' :'green'} />
 
 
 class RouterComponent extends Component {
@@ -50,15 +49,20 @@ class RouterComponent extends Component {
 
     getAppData(); // ---> get markers for map TODO rename
 
-   // TURN BACK ON TURNED OFF FOR TESTING
+    // TURN BACK ON TURNED OFF FOR TESTING
 
-   // need to iniate here then run checks to see if data is there if not render accirdingly
+    // need to iniate here then run checks to see if data is there if not render accirdingly
   }
 
   render() {
+    const { topNavStyle, tabColor, titleColor } = styles;
     console.log('🚀 how many renders without listening to state');
+
     return (
-      <Router>
+      <Router
+        navigationBarStyle={topNavStyle}
+        icon={tabIcon}
+      >
         <Scene key="root">
 {/*
           <Scene
@@ -107,10 +111,12 @@ class RouterComponent extends Component {
             tabs
             inactiveTintColor={NU_Red}
             activeTintColor={NU_White}
-            tabBarStyle={{backgroundColor: "black"}}
+            tabBarStyle={tabColor}
             type="reset"
             hideNavBar
             pressOpacity={1}
+
+            titleStyle={titleColor}
           >
 
             <Scene key="featured" title="Discover" icon={StarIcon} initial>
@@ -125,6 +131,7 @@ class RouterComponent extends Component {
                 title=""
                 backTitle=""
                 hideTabBar
+                renderLeftButton={() => <NavBackButton />}
                 onLeft={() => Actions.pop()}
               />
               <Scene
@@ -243,7 +250,21 @@ class RouterComponent extends Component {
       </Router>
     );
   }
-};
+}
+
+
+const styles = StyleSheet.create({
+  topNavStyle: {
+    backgroundColor: NU_Grey, // changing navbar color
+    color: NU_White
+  },
+  tabColor: {
+    backgroundColor: NU_Grey
+  },
+  titleColor: {
+    color: NU_White
+  }
+});
 
 // export default connect(
 //   state => ({

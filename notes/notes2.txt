@@ -1,5 +1,45 @@
 react-native link react-native-vector-icons --> try in new branch for driod fix
 
+//// debugger wont run on driod
+
+n my case the issue was that the emulator was making a request to:
+
+http://10.0.2.2:8081/debugger-ui
+
+instead of:
+
+http://localhost:8081/debugger-ui and the request was failing.
+
+
+
+
+
+
+
+
+
+
+I want to automatically get the title of the previous scene on the current scene and display the return title in the upper left corner of the current scene.
+
+@lucasleelz Easy, just pass the title of the current scene to the next scene.
+For example in your current scene of which you want to show the title of on the nextScene:
+`Actions.nextScene({title: this.props.title})`
+
+And in your nextScene (or whatever name you have), just use:
+
+```
+componentDidMount(){
+Actions.refresh({backTitle: ()=> this.props.title})
+}
+```
+Should do the job, obviously you can play around and have the title in the redux store if you use it, and or fire Actions.refresh in a different place for example when you get a response from the api or something.
+
+Hope this helps, hit that thumbs up button 👍
+
+
+
+
+
 ** server functions for - firebase sessions, billing, twillio verifcation
 
 // eslint-disable-line
