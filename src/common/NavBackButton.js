@@ -1,7 +1,7 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
-import { Actions } from 'react-native-router-flux';
 import propTypes from 'prop-types';
+import { Actions } from 'react-native-router-flux';
 import { colors } from '../Styles';
 
 const { NU_White } = colors;

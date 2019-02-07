@@ -55,12 +55,12 @@ class RouterComponent extends Component {
   }
 
   render() {
-    const { topNavStyle, tabColor, titleColor } = styles;
+    const { topNavHeaderStyle, tabBackgroundColor, HeaderTitleColor } = styles;
     console.log('🚀 how many renders without listening to state');
 
     return (
       <Router
-        navigationBarStyle={topNavStyle}
+        navigationBarStyle={topNavHeaderStyle}
         icon={tabIcon}
       >
         <Scene key="root">
@@ -111,12 +111,12 @@ class RouterComponent extends Component {
             tabs
             inactiveTintColor={NU_Red}
             activeTintColor={NU_White}
-            tabBarStyle={tabColor}
+            tabBarStyle={tabBackgroundColor}
             type="reset"
             hideNavBar
             pressOpacity={1}
 
-            titleStyle={titleColor}
+            titleStyle={HeaderTitleColor}
           >
 
             <Scene key="featured" title="Discover" icon={StarIcon} initial>
@@ -254,14 +254,15 @@ class RouterComponent extends Component {
 
 
 const styles = StyleSheet.create({
-  topNavStyle: {
+  topNavHeaderStyle: {
     backgroundColor: NU_Grey, // changing navbar color
     color: NU_White
   },
-  tabColor: {
+  tabBackgroundColor: {
     backgroundColor: NU_Grey
   },
-  titleColor: {
+
+  HeaderTitleColor: {
     color: NU_White
   }
 });

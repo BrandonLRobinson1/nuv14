@@ -17,6 +17,7 @@ export const colors = {
   NU_Red: 'red',
   NU_Blue: 'blue',
   NU_White: 'white',
+  NU_Purple: 'purple',
   NU_Grey: 'lightgrey',
   NU_Black: 'black',
   NU_Pink: 'pink',
@@ -29,25 +30,28 @@ export const colors = {
   NU_Transparent: 'transparent'
 };
 
+// eslint-disable-next-line
+const { NU_Red, NU_Purple, NU_Pink, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Border_Grey, NU_Card_Border } = colors;
+
 export const commonStyles = StyleSheet.create({
   // NU_Font: {
   //   fontFamily: Platform.OS === 'ios' ? 'Avenir Next' : 'Roboto'
   // },
   NU_Header_Text: {
     fontSize: 26,
-    color: colors.NU_Black,
-    backgroundColor: colors.NU_Pink
+    color: NU_Black,
+    backgroundColor: NU_Purple
   },
   NU_Small_Header_Text: {
     fontSize: 16,
-    color: colors.NU_Black,
-    backgroundColor: colors.NU_Pink,
+    color: NU_Black,
+    backgroundColor: NU_Pink,
     fontWeight: '700'
   },
   NU_Paragraph_Text: {
     fontSize: 14,
-    color: colors.NU_Grey,
-    backgroundColor: colors.NU_Blue
+    color: NU_Grey,
+    backgroundColor: NU_Blue
   },
   horizontalFlex: {
     display: 'flex',
@@ -59,3 +63,8 @@ export const commonStyles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+export const colorMap = {
+  tabHeaderColor: NU_Grey,
+  tabHeaderTextColor: NU_White,
+}
