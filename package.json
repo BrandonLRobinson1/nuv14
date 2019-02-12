@@ -10,7 +10,8 @@
     "best-cache-clean": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro* && rm -rf $TMPDIR/haste-*",
     "fresh-install": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build/ModuleCache/* && rm -rf node_modules/ && npm cache clean && npm install",
     "fresh-start": "npm run fresh-install && npm run rc-start",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "redux-devtools": "redux-devtools --hostname=localhost --port=8000"
   },
   "parser": "babel-eslint",
   "dependencies": {
@@ -45,6 +46,7 @@
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.50.0",
     "react-test-renderer": "16.6.0-alpha.8af6728",
+    "redux-devtools-cli": "0.0.1-1",
     "remote-redux-devtools": "^0.5.14"
   },
   "jest": {

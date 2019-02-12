@@ -4,6 +4,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 
+import { NavBackButton } from './src/common';
+
+import { getActiveNailTechs, setMapLoading } from './src/store/location/locationServices';
+import { userInfoFetch, getAppData, setAppDataLoading, setUserInfoLoading } from './src/store/userInfo/user';
+
 import SignUp from './src/views/getCredentials/SignUp';
 import PhoneNumber from './src/views/getCredentials/PhoneNumber';
 import SignUpEmail from './src/views/getCredentials/SignUpEmail';
@@ -11,12 +16,7 @@ import LogIn from './src/views/getCredentials/LogIn';
 import GetCredentials from './src/views/getCredentials/GetCredentials';
 import Validate from './src/views/getCredentials/Validate';
 
-import { NavBackButton } from './src/common';
-
 import ApptHome from './src/views/tabs/appointment/ApptHome';
-
-// import { getinitialDelta, getActiveNailTechs } from './src/store/location/locationServices';
-import { userInfoFetch, getAppData } from './src/store/userInfo/user';
 
 import DiscoverMain from './src/views/tabs/discover/DiscoverMain';
 import ProfilePage from './src/views/tabs/sharedTabComp/ProfilePage';
@@ -42,16 +42,25 @@ const StarIcon = ({ focused, title }) => <Icon name="star" size={20} color={focu
 
 class RouterComponent extends Component {
 
-  componentWillMount() {
-    const { getinitialDelta, getActiveNailTechs, userInfoFetch, getAppData } = this.props;
+  async componentWillMount() {
+    const {
+      getActiveNailTechs,
+      userInfoFetch,
+      getAppData,
+      // setUserInfoLoading,
+      // setAppDataLoading,
+      // setMapLoading,
+    } = this.props;
     // ******************************************************* use lodash when searching through firebase database instead of writing your own functions
-    userInfoFetch(); // -> on app load preferabl
 
-    getAppData(); // ---> get markers for map TODO rename
+    // setAppDataLoading(true);
+    // setMapLoading(true);
+    // setUserInfoLoading(true);
 
-    // TURN BACK ON TURNED OFF FOR TESTING
-
-    // need to iniate here then run checks to see if data is there if not render accirdingly
+    userInfoFetch(); // --> gets user data and a collection of history an favs for profile
+    getAppData(); // --> gets info for discover page
+    getActiveNailTechs(); // map --> then run initialdelta in map
+    // **** on recalls set thier loading to true!!
   }
 
   render() {
@@ -105,7 +114,7 @@ class RouterComponent extends Component {
             title="Please Login"
             backTitle=" "
           />
-    */}
+*/}
           <Scene
             key="tabbar"
             tabs
@@ -297,7 +306,11 @@ export default connect(
   },
   {
     // getinitialDelta,
-    // getActiveNailTechs,
+    // setUserInfoLoading,
+    // setAppDataLoading,
+    // setMapLoading,
+
+    getActiveNailTechs,
     userInfoFetch,
     getAppData
   }

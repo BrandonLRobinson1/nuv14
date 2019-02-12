@@ -1,8 +1,9 @@
 import { handleActions, createAction } from 'redux-actions';
 import firebase from 'firebase';
 import { setCurrentLocation } from '../location/locationServices';
+
+// import dummydata from '../dummyMembers.json';
 // import { getRegionForCoordinates } from '../../helpers/helpersFunctions';
-// import { latDelta, longDelta } from '../../Styles';
 
 const defaultState = {
   firstName: '',
@@ -17,8 +18,11 @@ const defaultState = {
   gender: '',
   dob: '',
 
-  favorites: [],
-  other: null
+  favorites: null,
+  other: null,
+
+  userDataLoading: true,
+  appDataLoading: true
 };
 
 const prefix = 'NU_STORE/USER_INFO/';
@@ -36,6 +40,9 @@ export const setDob = createAction(`${prefix}SET_DOB`);
 
 export const setFavorites = createAction(`${prefix}SET_FAVORITES`);
 export const setOther = createAction(`${prefix}SET_OTHER`);
+
+export const setUserInfoLoading = createAction(`${prefix}SET_USER_INFO_LOADING`);
+export const setAppDataLoading = createAction(`${prefix}SET_APP_DATA_LOADING`);
 
 export const clearState = createAction(`${prefix}CLEAR_USER_STATE`);
 
@@ -90,6 +97,14 @@ export default handleActions({
     ...state,
     other: payload
   }),
+  [setUserInfoLoading]: (state, { payload }) => ({
+    ...state,
+    userDataLoading: payload
+  }),
+  [setAppDataLoading]: (state, { payload }) => ({
+    ...state,
+    appDataLoading: payload
+  }),
 
   [clearState]: (state, { payload }) => ({ // eslint-disable-line
     ...defaultState
@@ -139,66 +154,58 @@ export const addFormInfo = () => (dispatch, getState) => {
     });
 };
 
-
-export const clearAll = () => (dispatch, getState) => {
-  dispatch(updateFirstName(null));
-  dispatch(updateLastName(null));
-  dispatch(updatePhoneNumber(null));
-  dispatch(updatePassword(null));
-  dispatch(updateZipCode(null));
-  dispatch(updateEmail(null));
-};
-
 // I assume this would work, load the info redux and have the app read from state
-export const userInfoFetch = () => {
+export const userInfoFetch = () => dispatch => {
   const { currentUser } = firebase.auth();
+  // **** this is assuming that getting info with the current user uid gives you full access to the information bc doing it with it doesnt!
+  return firebase.database().ref('/users/testAccounts/vdSfqJpFXidXXy9RAgyWqDxEx6I3/-LKy4WpC_8mhAKMaMkvo')
+  // firebase.database().ref(`/users/testAccounts/${currentUser.uid}`) // dCpWn7CLu9bx3ZVEoBOx8bNdINT2
+    .on('value', snapshot => {
+      console.log('🤑 cha ching user info fetch payload', snapshot.val());
+      const {
+        email,
+        firstName,
+        lastName,
+        logIns,
+        moreUsefulData,
+        phoneNumber,
+        userData,
+        zipCode
+      } = snapshot.val();
 
-  return dispatch => {
-    // **** this is assuming that getting info with the current user uid gives you full access to the information bc doing it with it doesnt!
-    firebase.database().ref('/users/testAccounts/vdSfqJpFXidXXy9RAgyWqDxEx6I3/-LKy4WpC_8mhAKMaMkvo')
-    // firebase.database().ref(`/users/testAccounts/${currentUser.uid}`) // dCpWn7CLu9bx3ZVEoBOx8bNdINT2
-      .on('value', snapshot => {
-        console.log('🤑 cha ching user info fetch payload', snapshot.val());
-        const {
-          email,
-          firstName,
-          lastName,
-          logIns,
-          moreUsefulData,
-          phoneNumber,
-          userData,
-          zipCode
-        } = snapshot.val();
+      dispatch(updateFirstName(firstName));
+      dispatch(updateLastName(lastName));
+      dispatch(updatePhoneNumber(phoneNumber));
+      dispatch(updateZipCode(zipCode));
+      dispatch(updateEmail(email));
 
-        dispatch(updateFirstName(firstName));
-        dispatch(updateLastName(lastName));
-        dispatch(updatePhoneNumber(phoneNumber));
-        dispatch(updateZipCode(zipCode));
-        dispatch(updateEmail(email));
+      // ***!!! THE REASON THAT YOU SET A CURRENT LOCATION HERE ON THE USER INFO IS BECAUSE ITLL EITHER BE PRIVATE AND HAVE A confirmED one LIKE BELOW OR ITLL USE THE BUILT IN PHONE GET LOCATION
+      dispatch( setCurrentLocation({ latitude: 37.767, longitude: -122.421 })); // would be saved, using random steve data here
+      // dispatch(setCurrentLocation( "PRIVATE_LOCATION" ) );
 
-        // ***!!! THE REASON THAT YOU SET A CURRENT LOCATION HERE ON THE USER INFO IS BECAUSE ITLL EITHER BE PRIVATE AND HAVE A confirmED one LIKE BELOW OR ITLL USE THE BUILT IN PHONE GET LOCATION
-        dispatch( setCurrentLocation({ latitude: 37.767, longitude: -122.421 })); // would be saved, using random steve data here
-        // dispatch(setCurrentLocation( "PRIVATE_LOCATION" ) );
+      dispatch(setOther(email));
 
-        dispatch(setOther(email));
-      },
-      error => {
-        console.log('err', error);
-      });
-  };
+      dispatch(setUserInfoLoading(false));
+      return true;
+    },
+    error => {
+      console.log('err', error);
+
+      dispatch(setUserInfoLoading(false));
+      return false;
+    });
 };
 
-
-export const getAppData = () => {
+export const getAppData = () => dispatch => { // should be in its own store since its discover data TODO
   const { currentUser } = firebase.auth();
-  return dispatch => {
-    /// ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
-    firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
-      .on('value', snapshot => {
-        dispatch(setFavorites(snapshot.val()));
-      },
-      error => {
-        console.log('err', error);
-      });
-  };
+  /// ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
+  firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
+    .on('value', snapshot => {
+      dispatch(setFavorites(snapshot.val()));
+      dispatch(setAppDataLoading(false));
+    },
+    error => {
+      console.log('err', error);
+      dispatch(setAppDataLoading(false));
+    });
 };
