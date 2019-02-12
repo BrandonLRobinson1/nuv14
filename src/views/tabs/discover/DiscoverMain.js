@@ -6,7 +6,6 @@ import { getAppData, setAppDataLoading } from '../../../store/userInfo/user';
 import Preview from '../sharedTabComp/Preview';
 import { FullCard, Spinner } from '../../../common';
 
-// eslint-disable-next-line
 class DiscoverMain extends Component {
   constructor() {
     super();
@@ -27,7 +26,7 @@ class DiscoverMain extends Component {
   }
 
   render() {
-    ////////// 🚨🚨🚨🚨🚨 dont change this code, this is written to handle all cases with getAppData() ** will ALSO only RENDER once if call makes brings back correct array
+    // 🚨🚨🚨🚨🚨 dont change this code, this is written to handle all cases with getAppData() ** will ALSO only RENDER once if call makes brings back correct array
     const { favorites, appDataLoading, setAppDataLoading } = this.props;
     const { apiCallCounter } = this.state;
 
@@ -47,7 +46,7 @@ class DiscoverMain extends Component {
     );
 
     if (Array.isArray(favorites) && favorites.length > 1) {
-      const addKeysList = favorites.map((item, index) => ({ ...item, key: `list-key-${index}`}) );
+      const addKeysList = favorites.map((item, index) => ({ ...item, key: `list-key-${index}` }));
       return (
         <FlatList
           data={addKeysList}
