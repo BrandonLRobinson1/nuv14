@@ -18,10 +18,6 @@ class DiscoverMain extends Component {
     this.getDiscoverData = this.getDiscoverData.bind(this);
   }
 
-  // componentDidMount() {
-  //   return this.getDiscoverData();
-  // }
-
   getDiscoverData() {
     console.log('🚗🚗🚗calling getAppData again');
     const { getAppData, setAppDataLoading } = this.props;
@@ -31,40 +27,46 @@ class DiscoverMain extends Component {
   }
 
   render() {
+    ////////// 🚨🚨🚨🚨🚨 dont change this code, this is written to handle all cases with getAppData() ** will ALSO only RENDER once if call makes brings back correct array
     const { favorites, appDataLoading, setAppDataLoading } = this.props;
-    let { apiCallCounter } = this.state;
+    const { apiCallCounter } = this.state;
 
     if (!appDataLoading && favorites === 'empty' && apiCallCounter <= 2) {
       this.getDiscoverData();
     }
 
-    if (!Array.isArray(favorites)) return ( // eslint-disable-line
+    // if firebase sends back null or something and counter is low call again
+    if (!appDataLoading && !Array.isArray(favorites) && apiCallCounter <= 2) {
+      this.getDiscoverData();
+    }
+
+    if (favorites === 'empty') return ( // eslint-disable-line
       <FullCard>
         <Spinner />
       </FullCard>
     );
 
-    if (!appDataLoading && !favorites && apiCallCounter >= 3) return ( // eslint-disable-line
-    // if (!appDataLoading && !Array.isArray(favorites) && apiCallCounter >= 3) return ( // eslint-disable-line
-      <FullCard>
-        <Text> no service</Text>
-      </FullCard>
-    );
+    if (Array.isArray(favorites) && favorites.length > 1) {
+      const addKeysList = favorites.map((item, index) => ({ ...item, key: `list-key-${index}`}) );
+      return (
+        <FlatList
+          data={addKeysList}
+          renderItem={personData => <Preview personData={personData} />}
+        />
+      );
+    }
 
-    const addKeysList = ([]).map((item, index) => ({ ...item, key: `list-key-${index}`}) );
-    // const addKeysList = (favorites || []).map((item, index) => ({ ...item, key: `list-key-${index}`}) );
-
+    console.log('🔥🔥🔥🔥');
     return (
-      <FlatList
-        data={addKeysList}
-        renderItem={personData => <Preview personData={personData} />}
-      />
+      <FullCard>
+        <Text> oops something went wrong (send report)</Text>
+      </FullCard>
     );
   }
 }
 
 DiscoverMain.propTypes = {
-  // favorites: propTypes.array, // eslint-disable-line
+  favorites: propTypes.array, // eslint-disable-line
   appDataLoading: propTypes.bool.isRequired,
   getAppData: propTypes.func.isRequired,
   setAppDataLoading: propTypes.func.isRequired

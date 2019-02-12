@@ -200,10 +200,11 @@ export const userInfoFetch = () => dispatch => {
 
 export const getAppData = () => dispatch => { // should be in its own store since its discover data TODO
   const { currentUser } = firebase.auth();
-  /// ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
-  return firebase.database().ref('x')
+  // ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
+
+  // return firebase.database().ref('x')
   // return firebase.database().ref('/')
-  // firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
+  firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
     .on('value', snapshot => {
       console.log('---------->', snapshot.val());
       dispatch(setFavorites(snapshot.val()));
