@@ -28,7 +28,8 @@ class Maptab extends Component {
 
     this.state = {
       markers: null,
-      initialPosition: null
+      initialPosition: null,
+      callsToMap: 0
     };
 
     this.onCardClick = this.onCardClick.bind(this);

@@ -18,7 +18,8 @@ const defaultState = {
   gender: '',
   dob: '',
 
-  favorites: null,
+  // favorites: null,
+  favorites: 'empty', // becaue firebase will return null with bad query, null is falsy which im testing for
   other: null,
 
   userDataLoading: true,
@@ -158,6 +159,7 @@ export const addFormInfo = () => (dispatch, getState) => {
 export const userInfoFetch = () => dispatch => {
   const { currentUser } = firebase.auth();
   // **** this is assuming that getting info with the current user uid gives you full access to the information bc doing it with it doesnt!
+
   return firebase.database().ref('/users/testAccounts/vdSfqJpFXidXXy9RAgyWqDxEx6I3/-LKy4WpC_8mhAKMaMkvo')
   // firebase.database().ref(`/users/testAccounts/${currentUser.uid}`) // dCpWn7CLu9bx3ZVEoBOx8bNdINT2
     .on('value', snapshot => {
@@ -199,13 +201,17 @@ export const userInfoFetch = () => dispatch => {
 export const getAppData = () => dispatch => { // should be in its own store since its discover data TODO
   const { currentUser } = firebase.auth();
   /// ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
-  firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
+  return firebase.database().ref('x')
+  // return firebase.database().ref('/')
+  // firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
     .on('value', snapshot => {
+      console.log('---------->', snapshot.val());
       dispatch(setFavorites(snapshot.val()));
       dispatch(setAppDataLoading(false));
     },
     error => {
       console.log('err', error);
+      dispatch(setFavorites(null));
       dispatch(setAppDataLoading(false));
     });
 };
