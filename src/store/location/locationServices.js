@@ -6,9 +6,10 @@ import { latDelta, longDelta } from '../../Styles';
 // need to design this to grab info from every SESSION
 const defaultState = {
   regionObj: null,
-  activeNailTechs: null,
+  activeNailTechs: 'empty',
   deltas: null,
-  loadingMapData: true
+  // loadingMapData: true
+  loadingMapData: false // for testing onliny
 };
 
 const prefix = 'NU_STORE/LOCATION/';
@@ -39,20 +40,21 @@ export default handleActions({
 // should have one thunk package all the data i need for a users session and send it up, generator
 
 export const getinitialDelta = () => async (dispatch, getState) => {
+  console.log('called')
   const {
-    userInfo: {
-      user: {
-        favorites
+    location: {
+      locationServices: {
+        activeNailTechs
       }
     }
   } = getState();
 
-  if (!Array.isArray(favorites) || !favorites.length) {
+  if (!Array.isArray(activeNailTechs) || !activeNailTechs.length) {
     dispatch(setDeltas(null)); // <--- setting this to null probable isnt a good idea because the map will be in a loading state forever
   }
 
   // shouldnt be getting from favorites however it should be getting from active in atlanta
-  if (favorites.length < 2) { // 0 and 1 are usless for calculation
+  if (activeNailTechs.length < 2) { // 0 and 1 are usless for calculation
     const sendDeltas = {
       latitudeDelta: latDelta,
       longitudeDelta: longDelta
@@ -60,7 +62,7 @@ export const getinitialDelta = () => async (dispatch, getState) => {
     dispatch(setDeltas(sendDeltas));
   }
 
-  let dataForDeltas = favorites.reduce((collection, item) => {
+  let dataForDeltas = activeNailTechs.reduce((collection, item) => {
     collection.push(item.coordinate);
     return collection;
   }, []);
@@ -72,17 +74,35 @@ export const getinitialDelta = () => async (dispatch, getState) => {
 
 export const getActiveNailTechs = () => async dispatch => { // should be in its own store TODO
   const { currentUser } = firebase.auth();
-  return firebase.database().ref(`/city/atlanta/testAccounts/mapDataTestData/-AAAFFFCCC/-LYN_-LGnM5AawjAnro1`)
-    .on('value', snapshot => {
-      dispatch(setActiveNailTechs(snapshot.val()));
-      dispatch(setMapLoading(false));
-      console.log('done', snapshot.val())
-    },
-    error => {
-      console.log('err', error);
-      dispatch(setMapLoading(true));
-    });
+  return new Promise((resolve, reject) => {
+    return firebase.database().ref(`/city/atlanta/testAccounts/mapDataTestData/-AAAFFFCCC/-LYN_-LGnM5AawjAnro1`)
+      .on('value', snapshot => {
+        dispatch(setActiveNailTechs(snapshot.val()));
+        dispatch(setMapLoading(false));
+        resolve(true);
+        console.log('done', snapshot.val())
+      },
+      error => {
+        console.log('err', error);
+        dispatch(setMapLoading(true));
+        resolve(false);
+      });
+  });
 };
+
+// export const getActiveNailTechs = () => async dispatch => { // should be in its own store TODO
+//   const { currentUser } = firebase.auth();
+//   return firebase.database().ref(`/city/atlanta/testAccounts/mapDataTestData/-AAAFFFCCC/-LYN_-LGnM5AawjAnro1`)
+//     .on('value', snapshot => {
+//       dispatch(setActiveNailTechs(snapshot.val()));
+//       dispatch(setMapLoading(false));
+//       console.log('done', snapshot.val())
+//     },
+//     error => {
+//       console.log('err', error);
+//       dispatch(setMapLoading(true));
+//     });
+// };
 
 
 // How to pull real time data from firebase

@@ -13,13 +13,15 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import propTypes from 'prop-types';
 import CustomMarker from './CustomMarker';
 import { FullCard, Spinner } from '../../../common';
-import { setCurrentLocation, getActiveNailTechs, getinitialDelta } from '../../../store/location/locationServices';
+import { setCurrentLocation, getActiveNailTechs, getinitialDelta, setMapLoading } from '../../../store/location/locationServices';
 import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth } from '../../../Styles';
 
 // for line 330!!! took it out so it wont ping my account with fe
 // provider={PROVIDER_GOOGLE}
 
 const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
+
+// TODO remove Math.random
 
 // TODO need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
@@ -34,7 +36,7 @@ class Maptab extends Component {
 
     this.onCardClick = this.onCardClick.bind(this);
     this.getLocationInformation = this.getLocationInformation.bind(this);
-    this.timer = this.timer.bind(this);
+    this.getMapInfo = this.getMapInfo.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
   }
 
@@ -43,15 +45,16 @@ class Maptab extends Component {
     this.index = 0;
     this.animation = new Animated.Value(0);
     navigator.geolocation.clearWatch(this.watchID); // eslint-disable-line
-    this.timer();
+    this.getMapInfo();
   }
 
   componentDidMount() {
     console.log('component will mount in maptab run');
-    const { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, savedTechs } = this.props; // eslint-disable-line
+    const { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, activeNailTechs } = this.props; // eslint-disable-line
 
     // this for now will have to be recalled to be updated until we can run a watch on it
-    if (!Array.isArray(savedTechs)) getActiveNailTechs();
+    // if (!Array.isArray(activeNailTechs)) getActiveNailTechs();
+    // if (!Array.isArray(activeNailTechs)) return this.getMapInfo();
   }
 
   componentWillUnmount() {
@@ -62,6 +65,62 @@ class Maptab extends Component {
     this.timer = 0;
     console.log('UNMOUNT');
   }
+
+  // obvi refacor needed
+  async getMapInfo() { // eslint-disable-line
+
+    // this works onload doesnt call get active, this needs to work on its own to minamlize api calls, but also needs logic for if it IS call on load, currently will infitly loop,
+    //also know that loading in redux is initally set to false for this working
+
+
+    const { loadingMapData, setMapLoading, getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, deltas, activeNailTechs } = this.props;
+
+    if (this.state.callsToMap >= 3) return 0;
+
+    console.log('yer', loadingMapData, activeNailTechs, this.state.callsToMap)
+
+    if (!loadingMapData && activeNailTechs === 'empty' && this.state.callsToMap < 3) {
+      console.log('inside iffy')
+      setMapLoading(true);
+      // if
+      // const getMarkers =
+      await this.props.getActiveNailTechs()
+      .then((iffy) => {
+        console.log('iffffffffffyyy', iffy)
+        this.props.getinitialDelta()
+      })
+
+      // getinitialDelta()
+      // if
+
+      // if this.props.getinitialDelta()
+      // 🚨 could await getCurrentLocation() Which Would {lat long} or 'private' -- set loading before each await
+      console.log('-------->   getMarkers');
+      // console.log('-------->   getMarkers', getMarkers);
+    }
+
+    if (this.props.activeNailTechs && this.props.regionObj && this.props.deltas) {
+      console.log('function stopped 🛑');
+      return this.getLocationInformation()
+      // return setTimeout(this.getLocationInformation(), 200);
+    }
+
+    // if (!Array.isArray(this.props.activeNailTechs)) this.props.getActiveNailTechs();
+    // this.props.getinitialDelta();
+
+    // setstate maybe
+    this.setState({ callsToMap: this.state.callsToMap+1 });
+    if (
+      (activeNailTechs === 'empty'
+      || !Array.isArray(this.props.activeNailTechs)
+      || !this.props.deltas)
+      && !loadingMapData
+      ) {
+        // return setTimeout(() => this.getMapInfo(), 750);
+        return this.getMapInfo();
+      }
+    // if conditions arent true rerun on time and set stste
+}
 
   // eslint-disable-next-line
   onCardClick (person) {
@@ -91,9 +150,9 @@ class Maptab extends Component {
 
   // need to run the same logic a componentwillmount to fetch information
   getLocationInformation() {
-    let { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, deltas, savedTechs } = this.props;
+    let { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, deltas, activeNailTechs } = this.props;
 
-    const markers = savedTechs;
+    const markers = activeNailTechs;
     const init = deltas;
 
     const dt = new Date();
@@ -199,21 +258,21 @@ class Maptab extends Component {
   }
 
   timer() {
-    // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 async await calls
+  // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 async await calls
 // ******************************************************* if you turn on userFetch ioff in router then infinite loop - FIXXXXXXXXXXXXXXXXXX TODO
-    const myInterval = setInterval(() => {
-      console.log('started')
-      if (this.props.savedTechs && this.props.regionObj && this.props.deltas) {
-        console.log('timer stopped 🛑');
-        clearInterval(myInterval);
-        return this.getLocationInformation();
-      }
-      console.log('rerunning timer function ⛳');
-      if (!Array.isArray(this.props.savedTechs)) this.props.getActiveNailTechs();
-      this.props.getinitialDelta();
-    // }, 1500);
-    }, 500);
-  }
+  const myInterval = setInterval(() => {
+    console.log('started')
+    if (this.props.savedTechs && this.props.regionObj && this.props.deltas) {
+      console.log('timer stopped 🛑');
+      clearInterval(myInterval);
+      return this.getLocationInformation();
+    }
+    console.log('rerunning timer function ⛳');
+    if (!Array.isArray(this.props.savedTechs)) this.props.getActiveNailTechs();
+    this.props.getinitialDelta();
+  // }, 1500);
+  }, 500);
+}
 
   render() {
     const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardtitle, cardDescription, cardBack } = styles;
@@ -280,7 +339,7 @@ class Maptab extends Component {
 
             return (
               <MapView.Marker
-                key={`item-${marker.coordinate.latitude}`}
+                key={Math.random()}
                 coordinate={marker.coordinate}
                 onPress={() => Actions.ProfilePageMap({ personData: marker })}
               >
@@ -457,15 +516,17 @@ export default connect(
     // console.log('state', state)
     return {
       regionObj: state.location.locationServices.regionObj,
-      savedTechs: state.location.locationServices.savedTechs,
+      activeNailTechs: state.location.locationServices.activeNailTechs,
       deltas: state.location.locationServices.deltas,
-      favorites: state.userInfo.user.favorites // be sure to change this where ever the markers are in the code so that it listens for the prop that gets the map info to renender when waiting
+      favorites: state.userInfo.user.favorites, // be sure to change this where ever the markers are in the code so that it listens for the prop that gets the map info to renender when waiting
+      loadingMapData: state.location.locationServices.loadingMapData,
     };
   },
   {
     setCurrentLocation,
     getActiveNailTechs,
-    getinitialDelta
+    getinitialDelta,
+    setMapLoading
   }
 )(Maptab);
 
@@ -473,7 +534,7 @@ export default connect(
 // export default connect(
 //   state => ({
 //     regionObj: state.location.locationServices.regionObj,
-//     savedTechs: state.location.locationServices.savedTechs,
+//     activeNailTechs: state.location.locationServices.activeNailTechs,
 //     deltas: state.location.locationServices.deltas
 //     // favorites: state.userInfo.user.favorites // be sure to change this where ever the markers are in the code so that it listens for the prop that gets the map info to renender when waiting
 //   }),
@@ -664,7 +725,7 @@ export default connect(
 //     // currently get active nailtechs run depends on a successful call to getuserinfo in router, so on final timer reset may need to call
 //     // HUGE** get active nail techs is its OWN THING bc in the future itll have its own call to google to get active people,
 //     // this for now will have to be recalled to be updated until we can run a watch on it
-//     if (!Array.isArray(this.props.savedTechs)) this.props.getActiveNailTechs();
+//     if (!Array.isArray(this.props.activeNailTechs)) this.props.getActiveNailTechs();
 
 //     // ****** if you have required info cancel timer and call function that renders map
 //     return;
@@ -687,9 +748,9 @@ export default connect(
 
 //   // need to run the same logic a componentwillmount to fetch information
 //   getLocationInformation() {
-//     let { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, deltas, savedTechs } = this.props;
+//     let { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, deltas, activeNailTechs } = this.props;
 
-//     const markers = savedTechs;
+//     const markers = activeNailTechs;
 //     const init = deltas;
 
 //     // *** above should be called before this component loads
@@ -880,13 +941,13 @@ export default connect(
 // // ******************************************************* if you turn on userFetch ioff in router then infinite loop - FIXXXXXXXXXXXXXXXXXX TODO
 //     const myInterval = setInterval(() => {
 //       console.log('started')
-//       if (this.props.savedTechs && this.props.regionObj && this.props.deltas) {
+//       if (this.props.activeNailTechs && this.props.regionObj && this.props.deltas) {
 //         console.log('timer stopped 🛑');
 //         clearInterval(myInterval);
 //         return this.getLocationInformation();
 //       }
 //       console.log('rerunning timer function ⛳');
-//       if (!Array.isArray(this.props.savedTechs)) this.props.getActiveNailTechs();
+//       if (!Array.isArray(this.props.activeNailTechs)) this.props.getActiveNailTechs();
 //       this.props.getinitialDelta();
 //     // }, 1500);
 //     }, 500);
@@ -1043,7 +1104,7 @@ export default connect(
 // // export default connect(
 // //   state => ({
 // //     regionObj: state.location.locationServices.regionObj,
-// //     savedTechs: state.location.locationServices.savedTechs,
+// //     activeNailTechs: state.location.locationServices.activeNailTechs,
 // //     deltas: state.location.locationServices.deltas
 // //     // favorites: state.userInfo.user.favorites // be sure to change this where ever the markers are in the code so that it listens for the prop that gets the map info to renender when waiting
 // //   }),
@@ -1059,7 +1120,7 @@ export default connect(
 //     console.log('state', state)
 //     return {
 //     regionObj: state.location.locationServices.regionObj,
-//     savedTechs: state.location.locationServices.savedTechs,
+//     activeNailTechs: state.location.locationServices.activeNailTechs,
 //     deltas: state.location.locationServices.deltas,
 //     favorites: state.userInfo.user.favorites // be sure to change this where ever the markers are in the code so that it listens for the prop that gets the map info to renender when waiting
 //   }},

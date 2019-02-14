@@ -36,6 +36,7 @@ class DiscoverMain extends Component {
     const { favorites, appDataLoading, setAppDataLoading } = this.props;
     const { apiCallCounter } = this.state;
 
+// TODO see if you can wrapt this in a function that keeps calling itself until these conditions arent true called 'get discover info' that initiates on component will mount kind of like maptab
     if (!appDataLoading && favorites === 'empty' && apiCallCounter <= 2) {
       setTimeout(() => this.getDiscoverData(), 750);
     }
@@ -71,7 +72,10 @@ class DiscoverMain extends Component {
 }
 
 DiscoverMain.propTypes = {
-  favorites: propTypes.array, // eslint-disable-line
+  favorites: propTypes.oneOfType([ // eslint-disable-line
+    propTypes.string,
+    propTypes.array
+  ]),
   appDataLoading: propTypes.bool.isRequired,
   getAppData: propTypes.func.isRequired,
   setAppDataLoading: propTypes.func.isRequired
