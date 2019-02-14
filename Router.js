@@ -42,24 +42,17 @@ const StarIcon = ({ focused, title }) => <Icon name="star" size={20} color={focu
 
 class RouterComponent extends Component {
 
-  async componentWillMount() {
+  componentWillMount() {
     const {
       getActiveNailTechs,
       userInfoFetch,
-      getAppData,
-      // setUserInfoLoading,
-      // setAppDataLoading,
-      // setMapLoading,
+      getAppData
     } = this.props;
     // ******************************************************* use lodash when searching through firebase database instead of writing your own functions
 
-    // setAppDataLoading(true);
-    // setMapLoading(true);
-    // setUserInfoLoading(true);
-
-    userInfoFetch(); // --> gets user data and a collection of history an favs for profile
     getAppData(); // --> gets info for discover page
     getActiveNailTechs(); // map --> then run initialdelta in map
+    userInfoFetch(); // --> gets user data and a collection of history an favs for profile
     // **** on recalls set thier loading to true!!
   }
 
@@ -305,10 +298,6 @@ export default connect(
     };
   },
   {
-    // getinitialDelta,
-    // setUserInfoLoading,
-    // setAppDataLoading,
-    // setMapLoading,
 
     getActiveNailTechs,
     userInfoFetch,

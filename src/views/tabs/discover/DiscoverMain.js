@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, Text } from 'react-native';
@@ -17,12 +18,17 @@ class DiscoverMain extends Component {
     this.getDiscoverData = this.getDiscoverData.bind(this);
   }
 
-  getDiscoverData() {
+  // componentWillUnmount() {
+  //   console.log('unmounted');
+  //   this.setState({ apiCallCounter: 0 });
+  // }
+
+  async getDiscoverData() {
     console.log('🚗🚗🚗calling getAppData again');
     const { getAppData, setAppDataLoading } = this.props;
     setAppDataLoading(true);
     this.setState({ apiCallCounter: this.state.apiCallCounter+1 }); // eslint-disable-line
-    getAppData();
+    await getAppData();
   }
 
   render() {
@@ -31,12 +37,12 @@ class DiscoverMain extends Component {
     const { apiCallCounter } = this.state;
 
     if (!appDataLoading && favorites === 'empty' && apiCallCounter <= 2) {
-      this.getDiscoverData();
+      setTimeout(() => this.getDiscoverData(), 750);
     }
 
     // if firebase sends back null or something and counter is low call again
     if (!appDataLoading && !Array.isArray(favorites) && apiCallCounter <= 2) {
-      this.getDiscoverData();
+      setTimeout(() => this.getDiscoverData(), 750);
     }
 
     if (favorites === 'empty') return ( // eslint-disable-line

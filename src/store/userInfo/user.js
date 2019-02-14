@@ -198,21 +198,43 @@ export const userInfoFetch = () => dispatch => {
     });
 };
 
+// ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
 export const getAppData = () => dispatch => { // should be in its own store since its discover data TODO
   const { currentUser } = firebase.auth();
-  // ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
-
-  // return firebase.database().ref('x')
-  // return firebase.database().ref('/')
-  firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
-    .on('value', snapshot => {
-      console.log('---------->', snapshot.val());
-      dispatch(setFavorites(snapshot.val()));
-      dispatch(setAppDataLoading(false));
-    },
-    error => {
-      console.log('err', error);
-      dispatch(setFavorites(null));
-      dispatch(setAppDataLoading(false));
-    });
+  return new Promise((resolve, reject) => {
+    // firebase.database().ref('x')
+    // return firebase.database().ref('/')
+    return firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
+      .on('value', snapshot => {
+        console.log('---------->', snapshot.val());
+        dispatch(setFavorites(snapshot.val()));
+        dispatch(setAppDataLoading(false));
+        resolve(true);
+      },
+      error => {
+        console.log('err', error);
+        dispatch(setFavorites(null));
+        dispatch(setAppDataLoading(false));
+        resolve(false);
+      });
+  });
 };
+
+// export const getAppData = () => dispatch => { // should be in its own store since its discover data TODO
+//   const { currentUser } = firebase.auth();
+//   // ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
+
+//   return firebase.database().ref('x')
+//   // return firebase.database().ref('/')
+//   // firebase.database().ref(`/city/atlanta/testAccounts/${111222333}/-LVG0irfFjXpUsBbJKXl`)
+//     .on('value', snapshot => {
+//       console.log('---------->', snapshot.val());
+//       dispatch(setFavorites(snapshot.val()));
+//       dispatch(setAppDataLoading(false));
+//     },
+//     error => {
+//       console.log('err', error);
+//       dispatch(setFavorites(null));
+//       dispatch(setAppDataLoading(false));
+//     });
+// };
