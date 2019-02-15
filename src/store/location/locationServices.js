@@ -8,8 +8,7 @@ const defaultState = {
   regionObj: null,
   activeNailTechs: 'empty',
   deltas: null,
-  // loadingMapData: true
-  loadingMapData: false // for testing onliny
+  loadingMapData: true
 };
 
 const prefix = 'NU_STORE/LOCATION/';
@@ -40,7 +39,6 @@ export default handleActions({
 // should have one thunk package all the data i need for a users session and send it up, generator
 
 export const getinitialDelta = () => async (dispatch, getState) => {
-  console.log('called')
   const {
     location: {
       locationServices: {

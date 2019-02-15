@@ -13,8 +13,11 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import propTypes from 'prop-types';
 import CustomMarker from './CustomMarker';
 import { FullCard, Spinner } from '../../../common';
-import { setCurrentLocation, getActiveNailTechs, getinitialDelta, setMapLoading } from '../../../store/location/locationServices';
+import { setCurrentLocation, getActiveNailTechs, getinitialDelta, setMapLoading, setActiveNailTechs } from '../../../store/location/locationServices';
 import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth } from '../../../Styles';
+// import { lchown } from 'fs';
+
+// his.state.callsToMap > 3 render oops page TODO
 
 // for line 330!!! took it out so it wont ping my account with fe
 // provider={PROVIDER_GOOGLE}
@@ -38,6 +41,7 @@ class Maptab extends Component {
     this.getLocationInformation = this.getLocationInformation.bind(this);
     this.getMapInfo = this.getMapInfo.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.refetchButton = this.refetchButton.bind(this);
   }
 
   componentWillMount() {
@@ -45,7 +49,7 @@ class Maptab extends Component {
     this.index = 0;
     this.animation = new Animated.Value(0);
     navigator.geolocation.clearWatch(this.watchID); // eslint-disable-line
-    this.getMapInfo();
+    this.getMapInfo(); // might wanna have a check to see if a prop is true since you can enter from home or from change adress, in the case of changing address can enter different function, or just wait til you have that info and then switch pages
   }
 
   componentDidMount() {
@@ -68,58 +72,94 @@ class Maptab extends Component {
 
   // obvi refacor needed
   async getMapInfo() { // eslint-disable-line
-
-    // this works onload doesnt call get active, this needs to work on its own to minamlize api calls, but also needs logic for if it IS call on load, currently will infitly loop,
-    //also know that loading in redux is initally set to false for this working
-
-
     const { loadingMapData, setMapLoading, getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, deltas, activeNailTechs } = this.props;
 
-    if (this.state.callsToMap >= 3) return 0;
+    console.log('called map info', loadingMapData, activeNailTechs);
+    console.log('NNNNNNNN render', this.state.callsToMap)
+    // this works onload doesnt call get active, this needs to work on its own to minamlize api calls, but also needs logic for if it IS call on load, currently will infitly loop,
+    // also know that loading in redux is initally set to false for this working
 
-    console.log('yer', loadingMapData, activeNailTechs, this.state.callsToMap)
 
+
+    console.log('yer', this.state.callsToMap)
+    // console.log('activeNailTechs, this.props.activeNailTechs, this.props.deltas, loadingMapData', activeNailTechs, this.props.deltas, loadingMapData)
+
+    if (this.state.callsToMap >= 3) {
+
+      // return setTimeout(() => {
+      //   this.setState({ callsToMap: 0 }); // <=== i dont think t
+      //   this.getMapInfo();
+      // }, 25000);
+
+      // button to reset
+      return 0
+    } // avoids infinite loop
+
+    if (loadingMapData) {
+      console.log('loading reset')
+      await this.setState({ callsToMap: this.state.callsToMap+1 });
+      // return setTimeout(() => this.getMapInfo(), 1000);
+      return setTimeout(() => this.getMapInfo(), 100); // for testing
+    }
+
+    console.log('bullshit ---------->', loadingMapData , activeNailTechs === 'empty', this.state.callsToMap )
     if (!loadingMapData && activeNailTechs === 'empty' && this.state.callsToMap < 3) {
       console.log('inside iffy')
       setMapLoading(true);
-      // if
-      // const getMarkers =
       await this.props.getActiveNailTechs()
-      .then((iffy) => {
-        console.log('iffffffffffyyy', iffy)
-        this.props.getinitialDelta()
-      })
+        .then(iffy => {
+          console.log('iffffffffffyyy', iffy)
+          if (Array.isArray(activeNailTechs)) this.props.getinitialDelta();
+        })
 
-      // getinitialDelta()
-      // if
-
-      // if this.props.getinitialDelta()
-      // 🚨 could await getCurrentLocation() Which Would {lat long} or 'private' -- set loading before each await
-      console.log('-------->   getMarkers');
-      // console.log('-------->   getMarkers', getMarkers);
+      // console.log('-------->   getMarkers');
+      console.log('🔥-------->   getMarkers', getMarkers);
     }
 
-    if (this.props.activeNailTechs && this.props.regionObj && this.props.deltas) {
+    // if loading is false and info is there  and its an aray - and callstomap is low and initial delta is false --> should cover page switch from chane address
+    //   call initial delta
+
+    // normal case when load is initated from app start
+    if (!loadingMapData && Array.isArray(activeNailTechs) && !this.props.deltas) { // if you come here from another page or you have a home location
+      console.log('just grabbin deltas')
+      this.props.getinitialDelta();
+    }
+
+
+
+
+
+
+// ```if loading its true
+//     settimeout one .750 seconds and recall this function and setState
+
+
+
+    // fall cases
+    if (Array.isArray(activeNailTechs) && this.props.regionObj && this.props.deltas) { // need a to add a check here that the info that it populate in local state is false too TODO
       console.log('function stopped 🛑');
-      return this.getLocationInformation()
+      return this.getLocationInformation(); // activates map
       // return setTimeout(this.getLocationInformation(), 200);
     }
 
-    // if (!Array.isArray(this.props.activeNailTechs)) this.props.getActiveNailTechs();
-    // this.props.getinitialDelta();
+    console.log('⭐⭐⭐⭐⭐ final conditions', (activeNailTechs === 'empty' || !Array.isArray(this.props.activeNailTechs) || !this.props.deltas) )
+    console.log('⭐⭐⭐⭐⭐ final calcs', activeNailTechs,  this.props.deltas, loadingMapData)
 
-    // setstate maybe
-    this.setState({ callsToMap: this.state.callsToMap+1 });
     if (
       (activeNailTechs === 'empty'
       || !Array.isArray(this.props.activeNailTechs)
-      || !this.props.deltas)
+      || !this.props.deltas
+      || !this.props.regionObj) // added this if its buggy take it out
       && !loadingMapData
-      ) {
-        // return setTimeout(() => this.getMapInfo(), 750);
-        return this.getMapInfo();
-      }
+    ) {
+      // return setTimeout(() => this.getMapInfo(), 750);
+      console.log('fall')
+      await this.setState({ callsToMap: this.state.callsToMap+1 }); // <=== i dont think t
+      return this.getMapInfo();
+    }
     // if conditions arent true rerun on time and set stste
+    console.log('exit');
+    return 0;
 }
 
   // eslint-disable-next-line
@@ -257,28 +297,36 @@ class Maptab extends Component {
     });
   }
 
-  timer() {
-  // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 async await calls
-// ******************************************************* if you turn on userFetch ioff in router then infinite loop - FIXXXXXXXXXXXXXXXXXX TODO
-  const myInterval = setInterval(() => {
-    console.log('started')
-    if (this.props.savedTechs && this.props.regionObj && this.props.deltas) {
-      console.log('timer stopped 🛑');
-      clearInterval(myInterval);
-      return this.getLocationInformation();
-    }
-    console.log('rerunning timer function ⛳');
-    if (!Array.isArray(this.props.savedTechs)) this.props.getActiveNailTechs();
-    this.props.getinitialDelta();
-  // }, 1500);
-  }, 500);
-}
+//   timer() {
+//   // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 async await calls
+// // ******************************************************* if you turn on userFetch ioff in router then infinite loop - FIXXXXXXXXXXXXXXXXXX TODO
+//   const myInterval = setInterval(() => {
+//     console.log('started')
+//     if (this.props.savedTechs && this.props.regionObj && this.props.deltas) {
+//       console.log('timer stopped 🛑');
+//       clearInterval(myInterval);
+//       return this.getLocationInformation();
+//     }
+//     console.log('rerunning timer function ⛳');
+//     if (!Array.isArray(this.props.savedTechs)) this.props.getActiveNailTechs();
+//     this.props.getinitialDelta();
+//   // }, 1500);
+//   }, 500);
+// }
+
+  async refetchButton() {
+    if (!Array.isArray(this.props.activeNailTechs)) this.props.setActiveNailTechs('empty');
+    await this.setState({ callsToMap: 0 }); // <=== i dont think t
+    return this.getMapInfo();
+  }
 
   render() {
     const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardtitle, cardDescription, cardBack } = styles;
-    const { initialPosition, markers } = this.state;
+    const { initialPosition, markers, callsToMap } = this.state;
 
-    console.log('maptab rerender - render amount direct affected by timer');
+    console.log('🕔 maptab rerender - render amount direct affected by timer');
+    // console.log('NNNNNNNN render', this.state.callsToMap)
+
 
     let interpolations;
     if ( markers && markers.length ) {
@@ -308,6 +356,17 @@ class Maptab extends Component {
         return { scale, opacity, cardBorder };
       });
     }
+
+    if (callsToMap >= 3) {
+    console.log('🔥🔥🔥🔥');
+    return (
+      <FullCard>
+        <Text onPress={() => this.refetchButton()}>
+          oops something went wrong (send report), try again button, which resets states and tries again
+        </Text>
+      </FullCard>
+    );
+  }
 
     if (!initialPosition || !markers) return ( // TODO write code to have option if you only have a zip code bc location is turned on
       <FullCard>
@@ -523,12 +582,16 @@ export default connect(
     };
   },
   {
+    setActiveNailTechs,
     setCurrentLocation,
     getActiveNailTechs,
     getinitialDelta,
     setMapLoading
   }
 )(Maptab);
+
+
+// works dolo - meaning if the api isnt called on load this will do the job
 
 
 // export default connect(
