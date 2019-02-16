@@ -6,7 +6,7 @@ import { latDelta, longDelta } from '../../Styles';
 // need to design this to grab info from every SESSION
 const defaultState = {
   regionObj: null,
-  activeNailTechs: 'empty',
+  activeNailTechs: null,
   deltas: null,
   loadingMapData: true
 };

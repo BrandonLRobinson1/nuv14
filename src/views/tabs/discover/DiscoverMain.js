@@ -18,10 +18,9 @@ class DiscoverMain extends Component {
     this.getDiscoverData = this.getDiscoverData.bind(this);
   }
 
-  // componentWillUnmount() {
-  //   console.log('unmounted');
-  //   this.setState({ apiCallCounter: 0 });
-  // }
+  componentWillMount() {
+    console.log('x');
+  }
 
   async getDiscoverData() {
     console.log('🚗🚗🚗calling getAppData again');
