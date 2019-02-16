@@ -47,6 +47,12 @@ export const getinitialDelta = () => async (dispatch, getState) => {
     }
   } = getState();
 
+  const sendDeltas = {
+    latitudeDelta: latDelta,
+    longitudeDelta: longDelta
+  };
+  return dispatch(setDeltas(sendDeltas));
+
   if (!Array.isArray(activeNailTechs) || !activeNailTechs.length) {
     dispatch(setDeltas(null)); // <--- setting this to null probable isnt a good idea because the map will be in a loading state forever
   }

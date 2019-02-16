@@ -1,10 +1,11 @@
+// https://www.npmjs.com/package/react-native-google-places-autocomplete
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'; // https://www.npmjs.com/package/react-native-google-places-autocomplete
-import { setCurrentLocation, setSavedTechs } from '../../../store/location/locationServices';
 import propTypes from 'prop-types';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { setCurrentLocation, setActiveNailTechs, setDeltas } from '../../../store/location/locationServices';
 import { placesKey } from '../../../../private';
 import { colors } from '../../../Styles';
 
@@ -20,7 +21,7 @@ class SearchAddress extends Component {
 
   render() {
     // const { textInputContainer, textInput, predefinedPlacesDescription } = styles;
-    const { setCurrentLocation , setSavedTechs} = this.props; // eslint-disable-line
+    const { setCurrentLocation , setActiveNailTechs, setDeltas } = this.props; // eslint-disable-line
     return (
       <GooglePlacesAutocomplete
         placeholder="Enter Address"
@@ -42,8 +43,9 @@ class SearchAddress extends Component {
             timeStamp: utcDate
           };
           await setCurrentLocation(locationToSearch);
+          await setDeltas(null);
           // TODO: rerun and await new get markers function for fresh refresh
-          await setSavedTechs([]);
+          await setActiveNailTechs([]);
           return Actions.mapTab();
         }}
         query={{
@@ -77,7 +79,8 @@ const styles = StyleSheet.create({
 
 SearchAddress.propTypes = {
   setCurrentLocation: propTypes.func.isRequired,
-  setSavedTechs: propTypes.func.isRequired
+  setActiveNailTechs: propTypes.func.isRequired,
+  setDeltas: propTypes.func.isRequired
 };
 
 export default connect(
@@ -86,6 +89,7 @@ export default connect(
   }),
   {
     setCurrentLocation,
-    setSavedTechs
+    setActiveNailTechs,
+    setDeltas
   }
 )(SearchAddress);

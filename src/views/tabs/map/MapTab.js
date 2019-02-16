@@ -75,9 +75,15 @@ class Maptab extends Component {
 
     if (!isArr) await getActiveNailTechs();
 
-    if (isArr && !deltas) getinitialDelta();
+    if (isArr && !deltas) getinitialDelta(); // check delta values.. seeing 0's TODO
 
-    if (isArr && regionObj && deltas) return this.getLocationInformation(); // 🌎🌎🌎 starts map
+    // if (isArr && regionObj && deltas) return this.getLocationInformation(); // 🌎🌎🌎 starts map
+    if (isArr && regionObj && deltas) {
+      console.log('😎😎😎 activeNailTechs', activeNailTechs);
+      console.log('😎😎😎 regionObj', regionObj);
+      console.log('😎😎😎 deltas',  deltas);
+      return this.getLocationInformation();
+    };
 
     if (!isArr || !deltas || !regionObj) {
       await this.setState({ callsToMap: callsToMap + 1 });
@@ -124,7 +130,8 @@ class Maptab extends Component {
     if (regionObj !== 'PRIVATE_LOCATION') { // need to check for private region info not FALSY
       console.log('fired 4 - location isnt private', regionObj, init, markers);
 
-      const firstMarker = markers[0].coordinate;
+      // const firstMarker = markers[0].coordinate;
+      const firstMarker = ((markers[0] || {}).coordinate) || false;
 
       const initialRegion = {
         latitude: firstMarker.latitude || regionObj.latitude,
@@ -134,10 +141,25 @@ class Maptab extends Component {
         timeStamp: utcDate
       };
 
-      // this is STRICly to make the home postion the first map focus, to do this properly it needs to be done in redux and not here
-      initialRegion.latitude = 37.773;
-      initialRegion.longitude = -122.396;
-      // this is STRICly to make the home postion the first map focus, to do this properly it needs to be done in redux and not here
+      // const initialRegion = {
+      //   latitude: regionObj.latitude,
+      //   longitude: regionObj.longitude,
+      //   latitudeDelta: latDelta,
+      //   longitudeDelta: longDelta,
+      //   timeStamp: utcDate
+      // };
+
+      console.log("&&&&&&&&&&&& initialRegion", initialRegion)
+      // console.log("&&&&&&&&&&&& firstMarker", firstMarker)
+      console.log("&&&&&&&&&&&& init", init)
+      console.log("&&&&&&&&&&&& regionObj", regionObj)
+      console.log("&&&&&&&&&&&& latDelta", latDelta)
+      console.log("&&&&&&&&&&&& longDelta", longDelta)
+
+      // 🚨🚨🚨🚨 this is STRICTLY to make the home postion the first map focus, to do this properly it needs to be done in redux and not here
+      // initialRegion.latitude = 37.773;
+      // initialRegion.longitude = -122.396;
+      // this is STRICTLY to make the home postion the first map focus, to do this properly it needs to be done in redux and not here
 
       this.setState({
         initialPosition: initialRegion,
@@ -276,7 +298,7 @@ class Maptab extends Component {
 
 
     // eslint-disable-next-line
-    if (initialPosition && markers) return ( // TODO write code to have option if you only have a zip code bc location is turned on
+    if (initialPosition && Array.isArray(markers)) return ( // TODO write code to have option if you only have a zip code bc location is turned on
       <View style={container}>
 
         <MapView
@@ -476,7 +498,7 @@ Maptab.propTypes = {
   /* eslint-disable */
   regionObj: propTypes.object,
   deltas: propTypes.object,
-  activeNailTechs: propTypes.object
+  activeNailTechs: propTypes.array
   /* eslint-enable */
 };
 

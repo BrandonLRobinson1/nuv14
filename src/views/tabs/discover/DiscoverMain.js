@@ -34,7 +34,6 @@ class DiscoverMain extends Component {
       console.log('--loading');
       await this.setState({ apiCallCounter: apiCallCounter + 1 });
       return setTimeout(() => this.getDiscoverData(), 1500);
-      // return setTimeout(() => this.getDiscoverData(), 0);
     }
 
     if (!isArr) {
