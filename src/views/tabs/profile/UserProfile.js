@@ -103,7 +103,7 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
           <CardSection>
             <View style={imageContainer}>
               <Image
-                source={{uri: 'https://i.imgur.com/K3KJ3w4h.jpg'}}
+                source={{ uri: 'https://i.imgur.com/K3KJ3w4h.jpg' }}
                 style={imageStyle}
               />
             </View>

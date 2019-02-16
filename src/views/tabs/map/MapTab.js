@@ -83,7 +83,7 @@ class Maptab extends Component {
       console.log('😎😎😎 regionObj', regionObj);
       console.log('😎😎😎 deltas',  deltas);
       return this.getLocationInformation();
-    };
+    }
 
     if (!isArr || !deltas || !regionObj) {
       await this.setState({ callsToMap: callsToMap + 1 });
@@ -363,7 +363,7 @@ class Maptab extends Component {
         >
 
           { markers.map((marker, index) => {
-
+            // ⭐ fixx TODO source={marker.image}
             const opacityStyleBorder = { opacity: interpolations[index].cardBorder }
             return (
               <View key={index}>
@@ -371,7 +371,7 @@ class Maptab extends Component {
                 <Animated.View style={[cardBack, opacityStyleBorder, { display: 'flex' }]} />
                 <View style={card}>
                   <Image
-                    source={marker.image}
+                    source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj48iGzNhumqSY2EA3ZQ_Ns5uAvo4vxEapWSBbJ5tmPut-GqPw' }}
                     style={cardImage}
                     resizeMode="cover"
                   />

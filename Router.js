@@ -43,11 +43,7 @@ const StarIcon = ({ focused, title }) => <Icon name="star" size={20} color={focu
 class RouterComponent extends Component {
 
   componentWillMount() {
-    const {
-      getActiveNailTechs,
-      userInfoFetch,
-      getAppData
-    } = this.props;
+    const { getActiveNailTechs, userInfoFetch, getAppData, getinitialDelta, setMapLoading } = this.props; // eslint-disable-line
     // ******************************************************* use lodash when searching through firebase database instead of writing your own functions
 
     getAppData(); // --> gets info for discover page
@@ -257,11 +253,11 @@ class RouterComponent extends Component {
 
 const styles = StyleSheet.create({
   topNavHeaderStyle: {
-    backgroundColor: NU_Grey, // changing navbar color
+    backgroundColor: NU_Blue, // changing navbar color
     color: NU_White
   },
   tabBackgroundColor: {
-    backgroundColor: NU_Grey
+    backgroundColor: NU_Blue
   },
 
   HeaderTitleColor: {

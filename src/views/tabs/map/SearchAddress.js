@@ -31,7 +31,7 @@ class SearchAddress extends Component {
         fetchDetails
         currentLocation={false}
         currentLocationLabel="Current location"
-        debounce={200}
+        debounce={500}
         renderDescription={row => row.description}
         onPress={async (data, details = null) => {
           // 'details' is provided when fetchDetails = true
