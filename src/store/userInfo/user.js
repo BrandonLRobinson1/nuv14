@@ -18,8 +18,8 @@ const defaultState = {
   gender: '',
   dob: '',
 
-  // favorites: null,
-  favorites: 'empty', // becaue firebase will return null with bad query, null is falsy which im testing for
+  favorites: null,
+  // favorites: 'empty', // becaue firebase will return null with bad query, null is falsy which im testing for
   other: null,
 
   userDataLoading: true,

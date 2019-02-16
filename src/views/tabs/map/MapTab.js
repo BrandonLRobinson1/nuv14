@@ -44,21 +44,12 @@ class Maptab extends Component {
     this.refetchButton = this.refetchButton.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     console.log('keep in mind this fires when you try to change address');
     this.index = 0;
     this.animation = new Animated.Value(0);
     navigator.geolocation.clearWatch(this.watchID); // eslint-disable-line
     this.getMapInfo(); // might wanna have a check to see if a prop is true since you can enter from home or from change adress, in the case of changing address can enter different function, or just wait til you have that info and then switch pages
-  }
-
-  componentDidMount() {
-    console.log('component will mount in maptab run');
-    const { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, activeNailTechs } = this.props; // eslint-disable-line
-
-    // this for now will have to be recalled to be updated until we can run a watch on it
-    // if (!Array.isArray(activeNailTechs)) getActiveNailTechs();
-    // if (!Array.isArray(activeNailTechs)) return this.getMapInfo();
   }
 
   componentWillUnmount() {
@@ -229,7 +220,11 @@ class Maptab extends Component {
   }
 
   async refetchButton() {
-    if (!Array.isArray(this.props.activeNailTechs)) this.props.setActiveNailTechs('empty');
+    const { loadingMapData, getActiveNailTechs, getinitialDelta, regionObj, deltas, activeNailTechs } = this.props; // eslint-disable-line
+    const { callsToMap } = this.state;
+    const isArr = Array.isArray(activeNailTechs);
+
+    if (!Array.isArray(this.props.activeNailTechs)) this.props.setActiveNailTechs('');
     await this.setState({ callsToMap: 0 }); // <=== i dont think t
     return this.getMapInfo();
   }
@@ -237,7 +232,7 @@ class Maptab extends Component {
   render() {
     const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardtitle, cardDescription, cardBack } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
-
+    console.log('🔥🔥🔥🔥');
     console.log('🕔 maptab rerender - render amount direct affected by timer');
     // console.log('NNNNNNNN render', this.state.callsToMap)
 
@@ -271,24 +266,17 @@ class Maptab extends Component {
       });
     }
 
-    if (callsToMap >= 3) {
-    console.log('🔥🔥🔥🔥');
-    return (
-      <FullCard>
-        <Text onPress={() => this.refetchButton()}>
-          oops something went wrong (send report), try again button, which resets states and tries again
-        </Text>
-      </FullCard>
-    );
-  }
+        if (callsToMap >= 3) return (
+          <FullCard>
+            <Text onPress={() => this.refetchButton()}>
+              oops something went wrong (send report), try again button, which resets states and tries again
+            </Text>
+          </FullCard>
+        );
 
-    if (!initialPosition || !markers) return ( // TODO write code to have option if you only have a zip code bc location is turned on
-      <FullCard>
-        <Spinner />
-      </FullCard>
-    );
 
-    return (
+    // eslint-disable-next-line
+    if (initialPosition && markers) return ( // TODO write code to have option if you only have a zip code bc location is turned on
       <View style={container}>
 
         <MapView
@@ -392,6 +380,12 @@ class Maptab extends Component {
         </Animated.ScrollView>
 
       </View>
+    );
+
+    return ( // eslint-disable-line
+      <FullCard>
+        <Spinner />
+      </FullCard>
     );
   }
 }

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, Text } from 'react-native';
 import propTypes from 'prop-types';
-import { getAppData, setAppDataLoading } from '../../../store/userInfo/user';
+import { getAppData, setFavorites } from '../../../store/userInfo/user';
 import Preview from '../sharedTabComp/Preview';
 import { FullCard, Spinner } from '../../../common';
 
@@ -16,42 +16,62 @@ class DiscoverMain extends Component {
     };
 
     this.getDiscoverData = this.getDiscoverData.bind(this);
+    this.refetchButton = this.refetchButton.bind(this);
   }
 
-  componentWillMount() {
-    console.log('x');
+  componentDidMount() {
+    this.getDiscoverData();
   }
 
-  async getDiscoverData() {
-    console.log('🚗🚗🚗calling getAppData again');
-    const { getAppData, setAppDataLoading } = this.props;
-    setAppDataLoading(true);
-    this.setState({ apiCallCounter: this.state.apiCallCounter+1 }); // eslint-disable-line
-    await getAppData();
+  async getDiscoverData() { // eslint-disable-line
+    const { getAppData, favorites, appDataLoading } = this.props; // eslint-disable-line
+    const { apiCallCounter } = this.state;
+    const isArr = Array.isArray(favorites);
+
+    if (apiCallCounter >= 3 || isArr) return 0;
+
+    if (appDataLoading) {
+      console.log('--loading');
+      await this.setState({ apiCallCounter: apiCallCounter + 1 });
+      return setTimeout(() => this.getDiscoverData(), 1500);
+      // return setTimeout(() => this.getDiscoverData(), 0);
+    }
+
+    if (!isArr) {
+      console.log('--fetching');
+      await this.setState({ apiCallCounter: apiCallCounter + 1 });
+      await getAppData();
+      return setTimeout(() => this.getDiscoverData(), 750);
+    }
+  }
+
+  async refetchButton() {
+    console.log('--refetchButton');
+    const { favorites, setFavorites } = this.props;
+    const isArr = Array.isArray(favorites);
+
+    if (!isArr) setFavorites(''); // 🚨 <== will change from setFavorites to whereever appdata function pulls from
+    await this.setState({ apiCallCounter: 0 });
+    return this.getDiscoverData();
   }
 
   render() {
-    // 🚨🚨🚨🚨🚨 dont change this code, this is written to handle all cases with getAppData() ** will ALSO only RENDER once if call makes brings back correct array
-    const { favorites, appDataLoading, setAppDataLoading } = this.props;
+    console.log('🔥🔥🔥🔥');
+    const { favorites } = this.props;
     const { apiCallCounter } = this.state;
+    const isArr = Array.isArray(favorites);
 
-// TODO see if you can wrapt this in a function that keeps calling itself until these conditions arent true called 'get discover info' that initiates on component will mount kind of like maptab
-    if (!appDataLoading && favorites === 'empty' && apiCallCounter <= 2) {
-      setTimeout(() => this.getDiscoverData(), 750);
+    if (apiCallCounter >= 3) {
+      return (
+        <FullCard>
+          <Text onPress={() => this.refetchButton()}>
+            oops something went wrong (send report), try again button, which resets states and tries again
+          </Text>
+        </FullCard>
+      );
     }
 
-    // if firebase sends back null or something and counter is low call again
-    if (!appDataLoading && !Array.isArray(favorites) && apiCallCounter <= 2) {
-      setTimeout(() => this.getDiscoverData(), 750);
-    }
-
-    if (favorites === 'empty') return ( // eslint-disable-line
-      <FullCard>
-        <Spinner />
-      </FullCard>
-    );
-
-    if (Array.isArray(favorites) && favorites.length > 1) {
+    if (isArr && favorites.length > 1) {
       const addKeysList = favorites.map((item, index) => ({ ...item, key: `list-key-${index}` }));
       return (
         <FlatList
@@ -61,10 +81,9 @@ class DiscoverMain extends Component {
       );
     }
 
-    console.log('🔥🔥🔥🔥');
-    return (
+    return ( // eslint-disable-line
       <FullCard>
-        <Text> oops something went wrong (send report)</Text>
+        <Spinner />
       </FullCard>
     );
   }
@@ -77,7 +96,7 @@ DiscoverMain.propTypes = {
   ]),
   appDataLoading: propTypes.bool.isRequired,
   getAppData: propTypes.func.isRequired,
-  setAppDataLoading: propTypes.func.isRequired
+  setFavorites: propTypes.func.isRequired
 };
 
 export default connect(
@@ -87,6 +106,7 @@ export default connect(
   }),
   {
     getAppData,
-    setAppDataLoading
+    setFavorites
+    // setAppDataLoading
   }
 )(DiscoverMain);
