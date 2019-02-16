@@ -73,94 +73,36 @@ class Maptab extends Component {
   // obvi refacor needed
   async getMapInfo() { // eslint-disable-line
     const { loadingMapData, setMapLoading, getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, deltas, activeNailTechs } = this.props;
+    const { callsToMap } = this.state;
 
-    console.log('called map info', loadingMapData, activeNailTechs);
-    console.log('NNNNNNNN render', this.state.callsToMap)
-    // this works onload doesnt call get active, this needs to work on its own to minamlize api calls, but also needs logic for if it IS call on load, currently will infitly loop,
-    // also know that loading in redux is initally set to false for this working
-
-
-
-    console.log('yer', this.state.callsToMap)
-    // console.log('activeNailTechs, this.props.activeNailTechs, this.props.deltas, loadingMapData', activeNailTechs, this.props.deltas, loadingMapData)
-
-    if (this.state.callsToMap >= 3) {
-
-      // return setTimeout(() => {
-      //   this.setState({ callsToMap: 0 }); // <=== i dont think t
-      //   this.getMapInfo();
-      // }, 25000);
-
-      // button to reset
-      return 0
-    } // avoids infinite loop
+    if (callsToMap >= 3) return 0;
 
     if (loadingMapData) {
-      console.log('loading reset')
-      await this.setState({ callsToMap: this.state.callsToMap+1 });
-      // return setTimeout(() => this.getMapInfo(), 1000);
-      return setTimeout(() => this.getMapInfo(), 100); // for testing
+      await this.setState({ callsToMap: callsToMap + 1 });
+      return setTimeout(() => this.getMapInfo(), 750);
     }
 
-    console.log('bullshit ---------->', loadingMapData , activeNailTechs === 'empty', this.state.callsToMap )
-    if (!loadingMapData && activeNailTechs === 'empty' && this.state.callsToMap < 3) {
-      console.log('inside iffy')
+    if (!loadingMapData && activeNailTechs === 'empty') {
       setMapLoading(true);
-      await this.props.getActiveNailTechs()
-        .then(iffy => {
-          console.log('iffffffffffyyy', iffy)
-          if (Array.isArray(activeNailTechs)) this.props.getinitialDelta();
-        })
-
-      // console.log('-------->   getMarkers');
-      console.log('🔥-------->   getMarkers', getMarkers);
+      await getActiveNailTechs()
+        .then(() => (Array.isArray(activeNailTechs)) && getinitialDelta());
     }
 
-    // if loading is false and info is there  and its an aray - and callstomap is low and initial delta is false --> should cover page switch from chane address
-    //   call initial delta
+    const isArr = Array.isArray(activeNailTechs);
 
-    // normal case when load is initated from app start
-    if (!loadingMapData && Array.isArray(activeNailTechs) && !this.props.deltas) { // if you come here from another page or you have a home location
-      console.log('just grabbin deltas')
-      this.props.getinitialDelta();
-    }
+    // normal case when load is initated from app start also if you come here from another page or you have a home location
+    if (!loadingMapData && isArr && !deltas) getinitialDelta();
 
+    // 🛑 activates map
+    if (isArr && regionObj && deltas) return this.getLocationInformation();
 
-
-
-
-
-// ```if loading its true
-//     settimeout one .750 seconds and recall this function and setState
-
-
-
-    // fall cases
-    if (Array.isArray(activeNailTechs) && this.props.regionObj && this.props.deltas) { // need a to add a check here that the info that it populate in local state is false too TODO
-      console.log('function stopped 🛑');
-      return this.getLocationInformation(); // activates map
-      // return setTimeout(this.getLocationInformation(), 200);
-    }
-
-    console.log('⭐⭐⭐⭐⭐ final conditions', (activeNailTechs === 'empty' || !Array.isArray(this.props.activeNailTechs) || !this.props.deltas) )
-    console.log('⭐⭐⭐⭐⭐ final calcs', activeNailTechs,  this.props.deltas, loadingMapData)
-
-    if (
-      (activeNailTechs === 'empty'
-      || !Array.isArray(this.props.activeNailTechs)
-      || !this.props.deltas
-      || !this.props.regionObj) // added this if its buggy take it out
-      && !loadingMapData
-    ) {
-      // return setTimeout(() => this.getMapInfo(), 750);
-      console.log('fall')
-      await this.setState({ callsToMap: this.state.callsToMap+1 }); // <=== i dont think t
+    if ((activeNailTechs === 'empty' || !isArr || !deltas || !regionObj) && !loadingMapData) {
+      await this.setState({ callsToMap: callsToMap + 1 });
       return this.getMapInfo();
     }
-    // if conditions arent true rerun on time and set stste
-    console.log('exit');
+
     return 0;
-}
+  }
 
   // eslint-disable-next-line
   onCardClick (person) {
