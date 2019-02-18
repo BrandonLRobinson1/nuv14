@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import propTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
 import { colors, commonStyles } from '../../../../Styles';
 
 const SettingsList = ({ name, sceneLocation }) => {
@@ -17,8 +17,8 @@ const SettingsList = ({ name, sceneLocation }) => {
         </Text>
       </View>
       <View style={icon}>
-        <Text onPress={() => { Actions[sceneLocation]() }}>
-          <Icon name="chevron-right" size={20} color={NU_Blue} />
+        <Text onPress={() => { Actions[sceneLocation](); }}>
+          <Icon name="chevron-right" size={30} color={NU_Blue} />
         </Text>
       </View>
     </View>
