@@ -20,8 +20,7 @@ class Reviews extends Component {
     const { flexCenter, NU_Small_Header_Text } = commonStyles;
 
     // ***** shouldnt need a check should just since this info should be provided with profile
-    const addKeysToReviews = (reviewsSample || []).map((item, index) => ({ ...item, key: `list-key-${index}`}));
-
+    const addKeysToReviews = (reviewsSample || []).map((item, index) => ({ ...item, key: `list-key-${index}` }));
     return (
       <View style={reviewsBackground}>
         <ScrollView>
@@ -43,7 +42,7 @@ class Reviews extends Component {
 
           <FlatList
             data={addKeysToReviews}
-            renderItem={(reviewData, index) => <ReviewRow key={index} reviewData={reviewData} />}
+            renderItem={reviewData => <ReviewRow reviewData={reviewData} />}
           />
 
         </ScrollView>

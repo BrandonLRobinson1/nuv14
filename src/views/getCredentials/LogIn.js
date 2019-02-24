@@ -52,7 +52,6 @@ class LogIn extends Component {
           clearTextOnFocus: true,
           loading: false
         });
-        console.log('not logged in');
       });
   }
 

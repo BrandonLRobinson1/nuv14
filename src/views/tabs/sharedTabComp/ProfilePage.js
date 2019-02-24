@@ -90,7 +90,6 @@ class ProfilePage extends Component {
                   </View>
 
                   <View onPress={() => console.log('react-native-open-maps')}>
-                    {/* TODO write function to conditionally render mapview based on if regionOBJ is available -> also see if there is a better way to determine mapContainer hieght */}
                     <MapView
                       provider={PROVIDER_GOOGLE}
                       ref={map => this.map = map} // eslint-disable-line

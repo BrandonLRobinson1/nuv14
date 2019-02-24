@@ -19,7 +19,6 @@ const defaultState = {
   dob: '',
 
   favorites: null,
-  // favorites: 'empty', // becaue firebase will return null with bad query, null is falsy which im testing for
   other: null,
 
   userDataLoading: true,
@@ -154,10 +153,8 @@ export const addFormInfo = () => (dispatch, getState) => {
     });
 };
 
-// I assume this would work, load the info redux and have the app read from state
 export const userInfoFetch = () => dispatch => {
   const { currentUser } = firebase.auth();
-  // **** this is assuming that getting info with the current user uid gives you full access to the information bc doing it with it doesnt!
 
   return firebase.database().ref('/users/testAccounts/vdSfqJpFXidXXy9RAgyWqDxEx6I3/-LKy4WpC_8mhAKMaMkvo')
   // firebase.database().ref(`/users/testAccounts/${currentUser.uid}`) // dCpWn7CLu9bx3ZVEoBOx8bNdINT2
@@ -183,15 +180,12 @@ export const userInfoFetch = () => dispatch => {
       // ***!!! THE REASON THAT YOU SET A CURRENT LOCATION HERE ON THE USER INFO IS BECAUSE ITLL EITHER BE PRIVATE AND HAVE A confirmED one LIKE BELOW OR ITLL USE THE BUILT IN PHONE GET LOCATION
       dispatch( setCurrentLocation({ latitude: 37.767, longitude: -122.421 })); // would be saved, using random steve data here
       // dispatch(setCurrentLocation( "PRIVATE_LOCATION" ) );
-
       dispatch(setOther(email));
-
       dispatch(setUserInfoLoading(false));
       return true;
     },
     error => {
       console.log('err', error);
-
       dispatch(setUserInfoLoading(false));
       return false;
     });

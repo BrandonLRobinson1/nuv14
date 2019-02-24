@@ -11,7 +11,7 @@ const Spinner = ({ size }) => (
 
 const styles = StyleSheet.create({
   spinnerSyle: {
-    flex: 1, // to fill the whole screen
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   }

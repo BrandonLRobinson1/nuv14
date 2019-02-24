@@ -36,9 +36,6 @@ class PhoneNumber extends Component {
 
     await updatePhoneNumber(number);
 
-    // new plan is to save everything to redux, then when they verify their email we'll save them to the database.. or at least to save it all at the end
-    // so no addforminfo.. allow back nav
-
     this.setState({ loading: false });
 
     return Actions.Validate();

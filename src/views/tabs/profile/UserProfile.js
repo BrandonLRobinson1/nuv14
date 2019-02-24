@@ -38,7 +38,7 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
       return (
         <FlatList
           data={addKeysToFavorites}
-          renderItem={(personData, index) => <FeaturedItem key={index} personData={personData} />} // TODO: replace key value with personData.id
+          renderItem={personData => <FeaturedItem personData={personData} />} // TODO: replace key value with personData.id
         />
       );
     }

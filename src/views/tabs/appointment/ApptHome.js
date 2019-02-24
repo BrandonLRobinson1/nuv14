@@ -8,9 +8,9 @@ const { NU_Red , NU_Blue, NU_White, NU_Grey, NU_Border_Grey } = colors; // eslin
 
 // eslint-disable-next-line
 class ApptHome extends Component {
-  constructor() {
-    super();
-  }
+  // constructor() {
+  //   super();
+  // }
 
   render() {
     const {
