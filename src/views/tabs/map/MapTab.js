@@ -362,7 +362,7 @@ class Maptab extends Component {
 
           {markers.map((marker, index) => {
             // ⭐ fixx --> source={marker.image}
-            const opacityStyleBorder = { opacity: interpolations[index].cardBorder }
+            const opacityStyleBorder = { opacity: interpolations[index].cardBorder };
             return (
               <View key={index}>
               {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
@@ -422,9 +422,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     width: '100%',
     borderColor: 'black'
+
+
+    ,backgroundColor: 'pink',
   },
   endPadding: {
-    paddingRight: phoneWidth - CARD_WIDTH - ((phoneWidth - CARD_WIDTH) * .6),
+    paddingRight: phoneWidth - CARD_WIDTH - ((phoneWidth - CARD_WIDTH) * 0.6),
     borderColor: 'black'
   },
   card: {
