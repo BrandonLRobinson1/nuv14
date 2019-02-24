@@ -27,9 +27,9 @@ class Setting extends Component {
     return (
       <View>
         <SettingsTitle name={title} />
-        {settingsArr.map((setting, i) => {
+        {settingsArr.map((setting, index) => {
           const { name, sceneLocation } = setting;
-          return <SettingsList name={name} sceneLocation={sceneLocation} key={`${name}-${i}`} />
+          return <SettingsList name={name} sceneLocation={sceneLocation} key={index} />
         })}
       </View>
     );

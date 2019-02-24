@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import { handleActions, createAction } from 'redux-actions';
-import { getRegionForCoordinates } from '../../helpers/helpersFunctions'; // helper function is a way to get latitiud delta and longitude delta based on a number of points/markers
+import { getRegionForCoordinates } from '../../helpers/helpersFunctions';
 import { latDelta, longDelta } from '../../Styles';
 
 // need to design this to grab info from every SESSION
@@ -36,7 +36,7 @@ export default handleActions({
   })
 }, defaultState);
 
-// should have one thunk package all the data i need for a users session and send it up, generator
+// todo should have one thunk package all the data i need for a users session and send it up, generator
 
 export const getinitialDelta = () => async (dispatch, getState) => {
   const {
@@ -51,6 +51,7 @@ export const getinitialDelta = () => async (dispatch, getState) => {
     latitudeDelta: latDelta,
     longitudeDelta: longDelta
   };
+
   return dispatch(setDeltas(sendDeltas));
 
   if (!Array.isArray(activeNailTechs) || !activeNailTechs.length) {
@@ -76,15 +77,15 @@ export const getinitialDelta = () => async (dispatch, getState) => {
   dispatch(setDeltas(dataForDeltas));
 };
 
-export const getActiveNailTechs = () => async dispatch => { // should be in its own store TODO
+export const getActiveNailTechs = () => async dispatch => {
   const { currentUser } = firebase.auth();
   return new Promise((resolve, reject) => {
     return firebase.database().ref(`/city/atlanta/testAccounts/mapDataTestData/-AAAFFFCCC/-LYN_-LGnM5AawjAnro1`)
       .on('value', snapshot => {
+        console.log('done', snapshot.val());
         dispatch(setActiveNailTechs(snapshot.val()));
         dispatch(setMapLoading(false));
         resolve(true);
-        console.log('done', snapshot.val())
       },
       error => {
         console.log('err', error);
@@ -93,30 +94,3 @@ export const getActiveNailTechs = () => async dispatch => { // should be in its 
       });
   });
 };
-
-// export const getActiveNailTechs = () => async dispatch => { // should be in its own store TODO
-//   const { currentUser } = firebase.auth();
-//   return firebase.database().ref(`/city/atlanta/testAccounts/mapDataTestData/-AAAFFFCCC/-LYN_-LGnM5AawjAnro1`)
-//     .on('value', snapshot => {
-//       dispatch(setActiveNailTechs(snapshot.val()));
-//       dispatch(setMapLoading(false));
-//       console.log('done', snapshot.val())
-//     },
-//     error => {
-//       console.log('err', error);
-//       dispatch(setMapLoading(true));
-//     });
-// };
-
-
-// How to pull real time data from firebase
-// export const employeesFetch = () => {
-//   const { currentUser } = firebase.auth();
-//   return (dispatch) => {
-//     firebase.database().ref(`/users/${currentUser.uid}/employees`)
-//       .on('value', snapshot => {
-//         console.log('cha ching ... payload', snapshot)
-//         dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() })
-//       })
-//   }
-// }

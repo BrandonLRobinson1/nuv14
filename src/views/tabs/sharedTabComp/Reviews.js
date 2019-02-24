@@ -13,7 +13,7 @@ class Reviews extends Component {
   //   super();
   // }
 
-  // look into renderItem={({ reviewData }) => <ReviewRow key={Math.random()} reviewData={reviewData} />
+  // look into renderItem={({ reviewData }) => <ReviewRow key={index} reviewData={reviewData} />
   render() {
     const { ratingAvg, title } = this.props;
     const { reviewsBackground, summaryCard, sectionPadding } = styles;
@@ -43,7 +43,7 @@ class Reviews extends Component {
 
           <FlatList
             data={addKeysToReviews}
-            renderItem={reviewData => <ReviewRow key={Math.random()} reviewData={reviewData} />}
+            renderItem={(reviewData, index) => <ReviewRow key={index} reviewData={reviewData} />}
           />
 
         </ScrollView>

@@ -41,7 +41,6 @@ class SignUpEmail extends Component {
     //   useSecondPassword: true
     // });
 
-    // TODO: encrtypt password save it and clear it from state
     // const salt = bcrypt.genSaltSync(saltRounds);
     // const hash = bcrypt.hashSync(myPlaintextPassword, salt);
     // updatePassword(hash);

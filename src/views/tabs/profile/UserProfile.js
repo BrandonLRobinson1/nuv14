@@ -28,7 +28,7 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
 
   // eslint-disable-next-line
   renderFavsAndHistory (list) {
-    const { favorites } = this.props; // <--- should be list TODO
+    const { favorites } = this.props;
     const { tabSelected } = this.state;
 
     // TODO change favorites to list
@@ -38,7 +38,7 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
       return (
         <FlatList
           data={addKeysToFavorites}
-          renderItem={personData => <FeaturedItem key={personData.title} personData={personData} />} // TODO: replace key value with personData.id
+          renderItem={(personData, index) => <FeaturedItem key={index} personData={personData} />} // TODO: replace key value with personData.id
         />
       );
     }

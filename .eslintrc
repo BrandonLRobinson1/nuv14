@@ -16,6 +16,7 @@
         "react/forbid-prop-types": [1],
         "import/export": [1],
         "camelcase": [0],
+        "react/no-array-index-key": [0],
         "object-curly-newline": [0],
         "max-len": ["error", { "code": 150 }]
     }

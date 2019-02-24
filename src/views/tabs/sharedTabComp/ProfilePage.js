@@ -50,7 +50,7 @@ class ProfilePage extends Component {
               <CardSection style={[imageCardSectionContainer]}>
                 <View style={imageContainer}>
                   <Image
-                    source={{ uri: "https://i.imgur.com/K3KJ3w4h.jpg" }}
+                    source={{ uri: 'https://i.imgur.com/K3KJ3w4h.jpg' }}
                     style={imageStyle}
                   />
                 </View>

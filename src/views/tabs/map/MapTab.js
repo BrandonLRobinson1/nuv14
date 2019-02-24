@@ -24,8 +24,6 @@ import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth } from
 
 const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
 
-// TODO remove Math.random
-
 // TODO need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
   constructor() {
@@ -75,13 +73,13 @@ class Maptab extends Component {
 
     if (!isArr) await getActiveNailTechs();
 
-    if (isArr && !deltas) getinitialDelta(); // check delta values.. seeing 0's TODO
+    if (isArr && !deltas) getinitialDelta();
 
     // if (isArr && regionObj && deltas) return this.getLocationInformation(); // 🌎🌎🌎 starts map
     if (isArr && regionObj && deltas) {
       console.log('😎😎😎 activeNailTechs', activeNailTechs);
       console.log('😎😎😎 regionObj', regionObj);
-      console.log('😎😎😎 deltas',  deltas);
+      console.log('😎😎😎 deltas', deltas);
       return this.getLocationInformation();
     }
 
@@ -298,7 +296,7 @@ class Maptab extends Component {
 
 
     // eslint-disable-next-line
-    if (initialPosition && Array.isArray(markers)) return ( // TODO write code to have option if you only have a zip code bc location is turned on
+    if (initialPosition && Array.isArray(markers)) return (
       <View style={container}>
 
         <MapView
@@ -308,7 +306,7 @@ class Maptab extends Component {
           style={container}
         >
 
-          { markers.map((marker, index) => {
+          {markers.map((marker, index) => {
             const scaleStyle = {
               transform: [
                 {
@@ -322,7 +320,7 @@ class Maptab extends Component {
 
             return (
               <MapView.Marker
-                key={Math.random()}
+                key={index}
                 coordinate={marker.coordinate}
                 onPress={() => Actions.ProfilePageMap({ personData: marker })}
               >
@@ -362,8 +360,8 @@ class Maptab extends Component {
           contentContainerStyle={endPadding}
         >
 
-          { markers.map((marker, index) => {
-            // ⭐ fixx TODO source={marker.image}
+          {markers.map((marker, index) => {
+            // ⭐ fixx --> source={marker.image}
             const opacityStyleBorder = { opacity: interpolations[index].cardBorder }
             return (
               <View key={index}>
@@ -971,7 +969,7 @@ export default connect(
 //   }
 
 //   timer() {
-// // ******************************************************* if you turn on userFetch ioff in router then infinite loop - FIXXXXXXXXXXXXXXXXXX TODO
+// // ******************************************************* if you turn on userFetch ioff in router then infinite loop - FIXXXXXXXXXXXXXXXXXX
 //     const myInterval = setInterval(() => {
 //       console.log('started')
 //       if (this.props.activeNailTechs && this.props.regionObj && this.props.deltas) {
@@ -1022,7 +1020,7 @@ export default connect(
 //       });
 //     }
 
-//     if (!initialPosition || !markers) return ( // TODO write code to have option if you only have a zip code bc location is turned on
+//     if (!initialPosition || !markers) return (
 //       <FullCard>
 //         <Spinner />
 //       </FullCard>

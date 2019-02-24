@@ -140,9 +140,8 @@ export const addFormInfo = () => (dispatch, getState) => {
     }
   } = getState();
 
-  // TODO: SWITCH IT OFF TEST DATA FOLDER IN FIREBASE
   // return firebase.database().ref(`/users/${currentUser.uid}/testAccounts`)
-  return firebase.database().ref(`/users/testAccounts/${currentUser.uid}`) // TODO ***** WILL HAVE SUBFOLDER LIKE USER INFO, LIKES ETC
+  return firebase.database().ref(`/users/testAccounts/${currentUser.uid}`)
     .push({
       firstName,
       lastName,
@@ -199,7 +198,7 @@ export const userInfoFetch = () => dispatch => {
 };
 
 // ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
-export const getAppData = () => dispatch => { // should be in its own store since its discover data TODO
+export const getAppData = () => dispatch => { // should be in its own store since its discover data
   const { currentUser } = firebase.auth();
   return new Promise((resolve, reject) => {
     // firebase.database().ref('x')
@@ -220,7 +219,7 @@ export const getAppData = () => dispatch => { // should be in its own store sinc
   });
 };
 
-// export const getAppData = () => dispatch => { // should be in its own store since its discover data TODO
+// export const getAppData = () => dispatch => { // should be in its own store since its discover data
 //   const { currentUser } = firebase.auth();
 //   // ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
 
