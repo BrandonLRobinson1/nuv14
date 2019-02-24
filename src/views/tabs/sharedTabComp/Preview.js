@@ -22,7 +22,8 @@ class Preview extends Component {
       imageStyle,
       horizontalFlex,
       imageContainer,
-      imageCardSectionContainer
+      imageCardSectionContainer,
+      cardBottom
     } = styles;
 
     const { item : personData } = this.props.personData; // eslint-disable-line
@@ -54,7 +55,7 @@ class Preview extends Component {
           </View>
         </CardSection>
 
-        <CardSection>
+        <CardSection style={cardBottom}>
           <Button
             buttonText="View"
             onPress={() => {
@@ -68,30 +69,16 @@ class Preview extends Component {
 }
 
 const styles = StyleSheet.create({
-  circleContainer: {
-    height: '13%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: NU_Grey
-  },
-
   horizontalFlex: {
     display: 'flex',
     flexDirection: 'column',
     width: '100%'
   },
-
   imageCardSectionContainer: {
     padding: 0,
     borderTopLeftRadius: 3,
     borderTopRightRadius: 3,
-    overflow: 'hidden',
-    shadowColor: NU_Border_Grey,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5
+    overflow: 'hidden'
   },
   imageContainer: {
     minHeight: 120,
@@ -100,7 +87,6 @@ const styles = StyleSheet.create({
     height: '100%',
     alignSelf: 'center',
     backgroundColor: NU_White
-
   },
   imageStyle: {
     flex: 1,
@@ -109,6 +95,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: NU_White,
     resizeMode: 'cover'
+  },
+  cardBottom: {
+    borderBottomLeftRadius: 3,
+    borderBottomRightRadius: 3
   }
 });
 

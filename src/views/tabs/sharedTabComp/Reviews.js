@@ -56,15 +56,17 @@ const styles = StyleSheet.create({
     backgroundColor: NU_Black,
     display: 'flex',
     paddingTop: 10,
-    paddingBottom: 10,
-    height: '100%'
+    height: '100%',
+    paddingLeft: 3,
+    paddingRight: 3
   },
   summaryCard: {
     backgroundColor: NU_White,
     marginLeft: 5,
     marginRight: 5,
     borderWidth: 1,
-    borderRadius: 3
+    borderRadius: 3,
+    marginBottom: 5
   },
   sectionPadding: {
     paddingTop: 5,

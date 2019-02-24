@@ -33,7 +33,7 @@ import ChangeEmail from './src/views/tabs/profile/settingsItems/account/ChangeEm
 import { colors } from './src/Styles';
 
 // eslint-disable-next-line
-const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Border_Grey, NU_Card_Border } = colors;
+const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Border_Grey, NU_Card_Border, NU_Green } = colors;
 
 const tabIcon = ({ focused, title }) => <Icon name="rocket" size={20} color={NU_Red} />
 
@@ -253,11 +253,11 @@ class RouterComponent extends Component {
 
 const styles = StyleSheet.create({
   topNavHeaderStyle: {
-    backgroundColor: NU_Blue, // changing navbar color
+    backgroundColor: NU_Green, // changing navbar color
     color: NU_White
   },
   tabBackgroundColor: {
-    backgroundColor: NU_Blue
+    backgroundColor: NU_Green
   },
 
   HeaderTitleColor: {

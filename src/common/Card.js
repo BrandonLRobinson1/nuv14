@@ -21,13 +21,14 @@ const styles = StyleSheet.create({
     borderColor: NU_Border_Grey,
     borderBottomWidth: 0,
     shadowColor: NU_Card_Border,
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.28,
     shadowRadius: 2,
     elevation: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 10
+    marginTop: 5,
+    marginBottom: 5
   }
 });
 

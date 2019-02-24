@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Image, View, Text, StyleSheet, FlatList } from 'react-native';
 import propTypes from 'prop-types';
-import FeaturedItem from '../sharedTabComp/Preview';
+import Preview from '../sharedTabComp/Preview';
 import { CardSection, Card, ModalView, FullCard, Spinner } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
@@ -38,7 +38,7 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
       return (
         <FlatList
           data={addKeysToFavorites}
-          renderItem={personData => <FeaturedItem personData={personData} />} // TODO: replace key value with personData.id
+          renderItem={personData => <Preview personData={personData} />} // TODO: replace key value with personData.id
         />
       );
     }

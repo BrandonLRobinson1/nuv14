@@ -18,6 +18,7 @@ export const colors = {
   NU_Blue: 'blue',
   NU_White: 'white',
   NU_Purple: 'purple',
+  NU_Green: 'green',
   NU_Grey: 'lightgrey',
   NU_Black: 'black',
   NU_Pink: 'pink',

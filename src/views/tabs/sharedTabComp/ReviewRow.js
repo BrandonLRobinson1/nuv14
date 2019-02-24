@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     marginLeft: 5,
     marginRight: 5,
+    // marginTop: 3,
+    marginBottom: 6,
     borderWidth: 1,
     borderRadius: 3
   }
