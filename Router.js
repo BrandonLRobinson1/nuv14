@@ -19,6 +19,7 @@ import Validate from './src/views/getCredentials/Validate';
 import ApptHome from './src/views/tabs/appointment/ApptHome';
 
 import DiscoverMain from './src/views/tabs/discover/DiscoverMain';
+
 import ProfilePage from './src/views/tabs/sharedTabComp/ProfilePage';
 import Reviews from './src/views/tabs/sharedTabComp/Reviews';
 

@@ -5,6 +5,7 @@ import { FlatList, Text } from 'react-native';
 import propTypes from 'prop-types';
 import { getAppData, setFavorites } from '../../../store/userInfo/user';
 import Preview from '../sharedTabComp/Preview';
+import Oops from '../sharedTabComp/Oops';
 import { FullCard, Spinner } from '../../../common';
 
 class DiscoverMain extends Component {
@@ -33,7 +34,8 @@ class DiscoverMain extends Component {
     if (appDataLoading) {
       console.log('--loading');
       await this.setState({ apiCallCounter: apiCallCounter + 1 });
-      return setTimeout(() => this.getDiscoverData(), 1500);
+      return setTimeout(() => this.getDiscoverData(), 0);
+      // return setTimeout(() => this.getDiscoverData(), 1500);
     }
 
     if (!isArr) {
@@ -62,11 +64,10 @@ class DiscoverMain extends Component {
 
     if (apiCallCounter >= 3) {
       return (
-        <FullCard>
-          <Text onPress={() => this.refetchButton()}>
-            oops something went wrong (send report), try again button, which resets states and tries again
-          </Text>
-        </FullCard>
+        <Oops
+          compName="Discover Page"
+          retry={() => this.refetchButton()}
+        />
       );
     }
 

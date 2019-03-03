@@ -67,5 +67,5 @@ export const commonStyles = StyleSheet.create({
 
 export const colorMap = {
   tabHeaderColor: NU_Grey,
-  tabHeaderTextColor: NU_White,
-}
+  tabHeaderTextColor: NU_White
+};
