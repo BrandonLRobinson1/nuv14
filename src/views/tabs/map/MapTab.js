@@ -430,7 +430,8 @@ const styles = StyleSheet.create({
   },
   card: {
     padding: 10,
-    elevation: 2,
+    margin: 1.5,
+    elevation: 3,
     backgroundColor: NU_Background,
     marginHorizontal: 10,
     shadowColor: NU_Card_Border,
@@ -440,7 +441,7 @@ const styles = StyleSheet.create({
     height: CARD_HEIGHT,
     width: CARD_WIDTH,
     overflow: 'hidden',
-    borderRadius: 5,
+    borderRadius: 3,
   },
   cardBack: {
     // padding: 10,
@@ -451,7 +452,7 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.3,
     // shadowOffset: { x: 2, y: -2 },
 
-    height: CARD_HEIGHT + 4,
+    height: CARD_HEIGHT + 5,
     width: CARD_WIDTH + 4,
     backgroundColor: NU_Red,
     borderRadius: 6,
