@@ -11,11 +11,11 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import propTypes from 'prop-types';
+import Oops from '../sharedTabComp/Oops';
 import CustomMarker from './CustomMarker';
 import { FullCard, Spinner } from '../../../common';
 import { setCurrentLocation, getActiveNailTechs, getinitialDelta, setMapLoading, setActiveNailTechs } from '../../../store/location/locationServices';
 import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth } from '../../../Styles';
-// import { lchown } from 'fs';
 
 // his.state.callsToMap > 3 render oops page TODO
 
@@ -286,14 +286,12 @@ class Maptab extends Component {
       });
     }
 
-        if (callsToMap >= 3) return (
-          <FullCard>
-            <Text onPress={() => this.refetchButton()}>
-              oops something went wrong (send report), try again button, which resets states and tries again
-            </Text>
-          </FullCard>
-        );
-
+    if (callsToMap >= 3) return ( // eslint-disable-line
+      <Oops
+        compName="Map Page"
+        retry={() => this.refetchButton()}
+      />
+    );
 
     // eslint-disable-next-line
     if (initialPosition && Array.isArray(markers)) return (

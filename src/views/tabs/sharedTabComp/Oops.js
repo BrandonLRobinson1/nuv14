@@ -26,10 +26,10 @@ const Oops = ({ compName, retry }) => {
           </Text>
         </View>
         <View style={buttonContainer}>
-        <Button
-          buttonText="Next"
-          onPress={() => retry()}
-        />
+          <Button
+            buttonText="Try Again"
+            onPress={() => retry()}
+          />
         </View>
       </View>
     </View>
@@ -40,7 +40,6 @@ const Oops = ({ compName, retry }) => {
 const styles = StyleSheet.create({
   background: {
     padding: 5,
-    borderColor: 'red',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -48,12 +47,12 @@ const styles = StyleSheet.create({
   },
   oopsContainer: {
     width: '100%',
-    borderColor: NU_Card_Border,
-    borderWidth: 1,
     padding: 10,
     height: 215,
     display: 'flex',
-    borderRadius: 5
+    borderRadius: 5,
+    // borderColor: NU_Card_Border,
+    // borderWidth: 1
   },
   textContainer: {
     width: '100%',
@@ -90,8 +89,8 @@ const styles = StyleSheet.create({
 });
 
 Oops.propTypes = {
-  retry: propTypes.func.isRequired, // eslint-disable-line
-  compName: propTypes.string.isRequired  // eslint-disable-line
+  retry: propTypes.func.isRequired,
+  compName: propTypes.string.isRequired
 };
 
 export default Oops;

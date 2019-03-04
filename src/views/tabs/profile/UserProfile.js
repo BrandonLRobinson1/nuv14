@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Image, View, Text, StyleSheet, FlatList } from 'react-native';
 import propTypes from 'prop-types';
+import { userInfoFetch, getAppData } from '../../../store/userInfo/user'
+import Oops from '../sharedTabComp/Oops';
 import Preview from '../sharedTabComp/Preview';
 import { CardSection, Card, ModalView, FullCard, Spinner } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
@@ -14,9 +16,53 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
     super();
     this.state = {
       tabSelected: 'favorites',
-      modalTesterWillDelete: false
+      modalTesterWillDelete: false,
+      apiCallCounter: 0
     };
+
     this.renderFavsAndHistory = this.renderFavsAndHistory.bind(this);
+    this.getProfileData = this.getProfileData.bind(this);
+    this.refetchButton = this.refetchButton.bind(this);
+  }
+
+  componentDidMount() {
+    this.getProfileData();
+  }
+
+  async getProfileData() { // eslint-disable-line
+    const { getAppData, userDataLoading, appDataLoading, userInfoFetch, favorites, firstName } = this.props; // eslint-disable-line
+    const { apiCallCounter } = this.state;
+    const infoArrived = firstName.length > 0;
+    const isArr = Array.isArray(favorites); // will be one for fav and one for history
+
+    if (apiCallCounter >= 3 || (infoArrived && isArr)) return 0;
+
+    console.log('hit')
+
+    // if (userDataLoading || appDataLoading) {
+    //   console.log('--loading');
+    //   await this.setState({ apiCallCounter: apiCallCounter + 1 });
+    //   return setTimeout(() => this.getProfileData(), 1000);
+    // }
+
+    if (!infoArrived) {
+      console.log('--fetching');
+      await this.setState({ apiCallCounter: apiCallCounter + 1 });
+      await getAppData();
+      return setTimeout(() => this.getProfileData(), 750);
+    }
+
+    if (!isArr) {
+      console.log('--fetching');
+      await this.setState({ apiCallCounter: apiCallCounter + 1 });
+      await userInfoFetch();
+      return setTimeout(() => this.getProfileData(), 750);
+    }
+  }
+
+  async refetchButton() {
+    await this.setState({ apiCallCounter: 0 });
+    return this.getProfileData();
   }
 
   // componentWillMount(deletethisuneededshit) {
@@ -87,11 +133,22 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
       cardMargin
     } = styles; // eslint-disable-line
 
-    const { tabSelected } = this.state;
+    const { tabSelected, apiCallCounter } = this.state;
     const favSelectHistory = tabSelected === 'history' ? tabOn : tabOff;
     const favSelectFavorites = tabSelected === 'favorites' ? tabOn : tabOff;
+    const infoArrived = firstName.length > 0;
 
-    if (!favorites) return ( //would be checking for favorites and history
+    if (apiCallCounter >= 3) {
+      return (
+        <Oops
+          compName="Profile Page"
+          retry={() => this.refetchButton()}
+        />
+      );
+    }
+
+    // eslint-disable-next-line
+    if (!favorites || !infoArrived) return ( // would be checking for favorites and history
       <FullCard>
         <Spinner />
       </FullCard>
@@ -175,7 +232,6 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
 
         </View>
 
-
         <ModalView
           visible={modalTesterWillDelete}
           onAccept={() => console.log('accept')}
@@ -249,6 +305,8 @@ UserProfile.propTypes = {
 
 export default connect(
   state => ({
+    appDataLoading: state.userInfo.user.appDataLoading,
+    userDataLoading: state.userInfo.user.userDataLoading,
     firstName: state.userInfo.user.firstName,
     lastName: state.userInfo.user.lastName,
     profilePic: state.userInfo.user.profilePic,
@@ -256,5 +314,7 @@ export default connect(
     favorites: state.userInfo.user.favorites
   }),
   {
+    userInfoFetch,
+    getAppData
   }
 )(UserProfile);
