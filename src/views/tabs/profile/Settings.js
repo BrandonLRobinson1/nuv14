@@ -74,8 +74,10 @@ class Setting extends Component {
             {this.buildSettings('Privacy', privacySettings)}
             {this.buildSettings('Payment Info', paymentSettings)}
             {this.buildSettings('Support', support)}
-            <Text style={logOut}>Log Out</Text>
+            <Text style={logOut}>Log Out - big red button</Text>
             <Text>Version</Text>
+            <Text>This app was created by sososo group</Text>
+            <Text>www.sososo.com</Text>
           </ScrollView>
         </View>
 
