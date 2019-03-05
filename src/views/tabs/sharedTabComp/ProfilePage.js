@@ -4,6 +4,7 @@ import { Image, View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'rea
 import { Actions } from 'react-native-router-flux';
 import propTypes from 'prop-types';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import openMap from 'react-native-open-maps';
 import CustomMarker from '../map/CustomMarker';
 import StarReview from './StarReview';
 import { CardSection, Card } from '../../../common';
@@ -89,7 +90,7 @@ class ProfilePage extends Component {
                     </Text>
                   </View>
 
-                  <View onPress={() => console.log('react-native-open-maps')}>
+                  <View>
                     <MapView
                       provider={PROVIDER_GOOGLE}
                       ref={map => this.map = map} // eslint-disable-line
@@ -102,6 +103,7 @@ class ProfilePage extends Component {
                       scrollEnabled={false}
                       pitchEnabled={false}
                       moveOnMarkerPress={false}
+                      onPress={() => openMap(regionObj)}
                     >
 
                       <MapView.Marker coordinate={regionObj}>

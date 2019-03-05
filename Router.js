@@ -117,7 +117,7 @@ class RouterComponent extends Component {
 
             titleStyle={HeaderTitleColor}
           >
-{/*
+
             <Scene key="featured" title="Discover" icon={StarIcon} initial>
               <Scene
                 key="DiscoverMainTab"
@@ -141,7 +141,7 @@ class RouterComponent extends Component {
                 onLeft={() => Actions.pop()}
               />
             </Scene>
-*/}
+
             <Scene key="map" title="Find a salon" icon={tabIcon}>
               <Scene
                 key="mapTab"
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     color: NU_White
   },
   tabBackgroundColor: {
-    backgroundColor: NU_Green
+    backgroundColor: NU_Grey
   },
 
   HeaderTitleColor: {
