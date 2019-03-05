@@ -22,6 +22,8 @@ import DiscoverMain from './src/views/tabs/discover/DiscoverMain';
 
 import ProfilePage from './src/views/tabs/sharedTabComp/ProfilePage';
 import Reviews from './src/views/tabs/sharedTabComp/Reviews';
+// import TabBarButton from './src/views/tabs/sharedTabComp/TabBarButton';
+import Options from './src/views/tabs/sharedTabComp/Options';
 
 import MapTab from './src/views/tabs/map/MapTab';
 import SearchAddress from './src/views/tabs/map/SearchAddress';
@@ -140,6 +142,13 @@ class RouterComponent extends Component {
                 backTitle=""
                 onLeft={() => Actions.pop()}
               />
+              <Scene
+                key="Options"
+                component={Options}
+                title="Options"
+                backTitle=""
+                onLeft={() => Actions.pop()}
+              />
             </Scene>
 
             <Scene key="map" title="Find a salon" icon={tabIcon}>
@@ -162,10 +171,11 @@ class RouterComponent extends Component {
               />
               <Scene
                 key="ProfilePageMap"
+                hideTabBar
+                // tabBarComponent={() => <TabBarButton />}
                 component={ProfilePage}
                 title=""
                 backTitle=""
-                hideTabBar
                 onLeft={() => Actions.pop()}
               />
               <Scene
