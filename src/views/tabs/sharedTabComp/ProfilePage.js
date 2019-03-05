@@ -189,7 +189,7 @@ class ProfilePage extends Component {
         <View style={stickyBottom}>
           <TouchableOpacity style={customAppointmentButton} onPress={() => Actions.Options({ times: ['TODO **********times Arr', 'time'], title })}>
             <Text style={customAppointmentButtonText}>
-              nooo lisa.. whyyyy
+              View Schedule
             </Text>
           </TouchableOpacity>
         </View>

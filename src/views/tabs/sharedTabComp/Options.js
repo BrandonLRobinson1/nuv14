@@ -45,7 +45,7 @@ class Options extends Component {
               <Icon name="clock" size={18} color={NU_Green} />
             </View>
             <View style={textFlex}>
-              <Text style={NU_Small_Header_Text}>{time}</Text>
+              <Text style={NU_Small_Header_Text}>{time}, ??? price</Text>
             </View>
           </View>
         </CardSection>
@@ -61,7 +61,7 @@ class Options extends Component {
         </CardSection>
         <CardSection>
           <Button
-            buttonText="View"
+            buttonText="Book Appointment"
             onPress={() => {
               Actions.something({ time, user });
             }}
