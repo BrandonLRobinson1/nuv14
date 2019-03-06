@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textFlex: {
-    flex: 8
+    flex: 9
   }
 });
 

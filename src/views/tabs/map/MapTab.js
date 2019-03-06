@@ -13,15 +13,16 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import propTypes from 'prop-types';
 import Oops from '../sharedTabComp/Oops';
 import CustomMarker from './CustomMarker';
-import { FullCard, Spinner } from '../../../common';
+import { FullCard, Spinner, Button } from '../../../common';
 import { setCurrentLocation, getActiveNailTechs, getinitialDelta, setMapLoading, setActiveNailTechs } from '../../../store/location/locationServices';
-import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth } from '../../../Styles';
+import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth, commonStyles } from '../../../Styles';
 
 // his.state.callsToMap > 3 render oops page TODO
 
 // for line 330!!! took it out so it wont ping my account with fe
 // provider={PROVIDER_GOOGLE}
 
+const { NU_Small_Header_Text } = commonStyles;
 const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
 
 // TODO need to add a button over map to take you to current or zip code saved location
@@ -240,7 +241,7 @@ class Maptab extends Component {
   }
 
   async refetchButton() {
-    const { loadingMapData, getActiveNailTechs, getinitialDelta, regionObj, deltas, activeNailTechs } = this.props; // eslint-disable-line
+    const { loadingMapData, getActiveNailTechs, getinitialDelta, regionObj, deltas, activeNailTechs,  } = this.props; // eslint-disable-line
     const { callsToMap } = this.state;
     const isArr = Array.isArray(activeNailTechs);
 
@@ -250,7 +251,7 @@ class Maptab extends Component {
   }
 
   render() {
-    const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardtitle, cardDescription, cardBack } = styles;
+    const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
     console.log('🔥🔥🔥🔥');
     console.log('🕔 maptab rerender - render amount direct affected by timer');
@@ -372,21 +373,28 @@ class Maptab extends Component {
                     resizeMode="cover"
                   />
                   <View style={textContent}>
-                    <Text numberOfLines={1} style={cardtitle}>
+                    <Text numberOfLines={1} style={NU_Small_Header_Text}>
                       {marker.title}
                     </Text>
+                  </View>
+                  {/*
                     <Text numberOfLines={1} style={cardDescription}>
                       {marker.description}
                     </Text>
-                  </View>
+                    <Button
+                      buttonText="Try Again"
+                      onPress={() =>  { Actions.ProfilePageMap({ personData: marker })}}
+                    />
+                   */}
                   <TouchableOpacity
-                    onPress={() =>  {
+                    style={[{ flex: 0.6 }, mapCardButton]}
+                    onPress={() => {
                       // Actions.pop();
                       Actions.ProfilePageMap({ personData: marker });
                     }}
                   >
                     <Text>
-                      button
+                      View
                     </Text>
                   </TouchableOpacity>
                 </View>
@@ -461,12 +469,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   textContent: {
-    flex: 1
-  },
-  cardtitle: {
-    fontSize: 12,
-    marginTop: 5,
-    fontWeight: 'bold'
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   cardDescription: {
     fontSize: 12,
@@ -479,6 +484,12 @@ const styles = StyleSheet.create({
   markerWrap: {
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  mapCardButton: {
+    backgroundColor: NU_Red,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5
   }
 });
 

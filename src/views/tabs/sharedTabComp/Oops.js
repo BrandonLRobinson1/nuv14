@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   oopsContainer: {
     width: '100%',
     padding: 10,
-    height: 215,
+    height: 200,
     display: 'flex',
     borderRadius: 5,
     // borderColor: NU_Card_Border,
