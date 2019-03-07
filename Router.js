@@ -24,6 +24,7 @@ import ProfilePage from './src/views/tabs/sharedTabComp/ProfilePage';
 import Reviews from './src/views/tabs/sharedTabComp/Reviews';
 // import TabBarButton from './src/views/tabs/sharedTabComp/TabBarButton';
 import Options from './src/views/tabs/sharedTabComp/Options';
+import MakeAppointment from './src/views/tabs/sharedTabComp/MakeAppointment';
 
 import MapTab from './src/views/tabs/map/MapTab';
 import SearchAddress from './src/views/tabs/map/SearchAddress';
@@ -40,11 +41,10 @@ const { NU_Red, NU_Blue, NU_White, NU_Grey, NU_Black, NU_Border_Grey, NU_Card_Bo
 
 const tabIcon = ({ focused, title }) => <Icon name="rocket" size={20} color={NU_Red} />
 
-const StarIcon = ({ focused, title }) => <Icon name="star" size={20} color={focused ? 'white' :'green'} />
+const StarIcon = ({ focused, title }) => <Icon name="star" size={20} color={focused ? 'white' : 'green'} />
 
 
 class RouterComponent extends Component {
-
   componentWillMount() {
     const { getActiveNailTechs, userInfoFetch, getAppData, getinitialDelta, setMapLoading } = this.props; // eslint-disable-line
     // ******************************************************* use lodash when searching through firebase database instead of writing your own functions
@@ -120,6 +120,7 @@ class RouterComponent extends Component {
             titleStyle={HeaderTitleColor}
           >
 
+
             <Scene key="featured" title="Discover" icon={StarIcon} initial>
               <Scene
                 key="DiscoverMainTab"
@@ -146,6 +147,14 @@ class RouterComponent extends Component {
                 key="Options"
                 component={Options}
                 title="Options"
+                backTitle=""
+                onLeft={() => Actions.pop()}
+              />
+              <Scene
+    initial
+                key="MakeAppointment"
+                component={MakeAppointment}
+                title="Make Appointment"
                 backTitle=""
                 onLeft={() => Actions.pop()}
               />

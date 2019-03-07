@@ -393,7 +393,7 @@ class Maptab extends Component {
                       Actions.ProfilePageMap({ personData: marker });
                     }}
                   >
-                    <Text>
+                    <Text style={{ fontWeight: '500' }}>
                       View
                     </Text>
                   </TouchableOpacity>

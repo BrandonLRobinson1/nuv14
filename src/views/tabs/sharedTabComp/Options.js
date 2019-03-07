@@ -63,7 +63,9 @@ class Options extends Component {
           <Button
             buttonText="Book Appointment"
             onPress={() => {
-              // TODO ⭐ modal asks, are you sure you want to book st pierra nails at 7:30pm? if yes ---->>> Actions.something({ time, user });
+              // TODO ⭐ modal asks, are you sure you want to book st pierra nails at 7:30pm? if yes ---->>>
+              // packages comes from nailtech object, may use redux to pluck
+              Actions.something({ timeOfChoice: time, packages: undefined });
             }}
           />
         </CardSection>
