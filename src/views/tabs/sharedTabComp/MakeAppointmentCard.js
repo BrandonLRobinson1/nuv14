@@ -3,7 +3,9 @@ import propTypes from 'prop-types';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 // import { Actions } from 'react-native-router-flux';
-import { CardSection, Card, Button, ModalView } from '../../../common';
+
+// import { CardSection, Card, Button, ModalView } from '../../../common';
+import { CardSection, Card, Button, ModalView, ButtonThin } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
 const { NU_Green, NU_Grey, NU_Pink, NU_Border_Grey } = colors; // eslint-disable-line
@@ -58,8 +60,8 @@ class MakeAppointmentCard extends Component {
         </CardSection>
 
         <CardSection>
-          <Button
-            buttonText="View More, might change to buy button"
+          <ButtonThin
+            buttonText={packageName.length < 20 ? `Book ${packageName}` : `Book ${packageName.substring(0, 20)}...`}
             onPress={() => this.setState({ bookAppointment: true })}
           />
         </CardSection>

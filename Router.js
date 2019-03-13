@@ -151,6 +151,7 @@ class RouterComponent extends Component {
                 onLeft={() => Actions.pop()}
               />
               <Scene
+initial
                 key="MakeAppointment"
                 component={MakeAppointment}
                 title="Make Appointment"

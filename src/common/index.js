@@ -1,4 +1,6 @@
 export * from './Button';
+export * from './ButtonFull';
+export * from './ButtonThin';
 export * from './Card';
 export * from './CardSection';
 export * from './Header';
