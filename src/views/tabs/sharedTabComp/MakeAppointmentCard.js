@@ -70,7 +70,7 @@ class MakeAppointmentCard extends Component {
           onDecline={() => this.setState({ bookAppointment: false })}
         >
           Are you sure you would like to book
-          {` ${packageName}`}
+          {` ${packageName}?`}
         </ModalView>
       </Card>
     );
