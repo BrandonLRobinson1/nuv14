@@ -45,7 +45,7 @@ class Options extends Component {
               <Icon name="clock" size={18} color={NU_Green} />
             </View>
             <View style={textFlex}>
-              <Text style={NU_Small_Header_Text}>{time}, ??? price</Text>
+              <Text style={NU_Small_Header_Text}>{time}</Text>
             </View>
           </View>
         </CardSection>
@@ -65,7 +65,7 @@ class Options extends Component {
             onPress={() => {
               // TODO ⭐ modal asks, are you sure you want to book st pierra nails at 7:30pm? if yes ---->>>
               // packages comes from nailtech object, may use redux to pluck
-              Actions.something({ timeOfChoice: time, packages: undefined });
+              Actions.MakeAppointment({ timeOfChoice: time, packages: undefined });
             }}
           />
         </CardSection>

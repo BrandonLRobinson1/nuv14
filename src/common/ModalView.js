@@ -6,7 +6,7 @@ import { Button } from './Button';
 import { colors } from '../Styles';
 
 // eslint-disable-next-line
-const { NU_Red, NU_Black } = colors;
+const { NU_Red, NU_Black, NU_Grey } = colors;
 
 // eslint-disable-next-line
 const ModalView = ({ children, visible, onAccept, onDecline }) => {
@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     lineHeight: 40
   },
   containerStyle: {
-    backgroundColor: NU_Black,
+    // backgroundColor: NU_Black,
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
     position: 'relative',
     flex: 1,
     justifyContent: 'center',

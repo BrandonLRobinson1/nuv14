@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 // import { Actions } from 'react-native-router-flux';
-import { CardSection, Card, Button } from '../../../common';
+import { CardSection, Card, Button, ModalView } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
 const { NU_Green, NU_Grey, NU_Pink, NU_Border_Grey } = colors; // eslint-disable-line
@@ -15,8 +15,12 @@ class MakeAppointmentCard extends Component {
   constructor() {
     super();
     this.state = {
-      showMore: 2
+      bookAppointment: false
     };
+  }
+
+  componentWillUnmount() {
+    this.setState({ bookAppointment: false });
   }
 
   render() {
@@ -46,7 +50,7 @@ class MakeAppointmentCard extends Component {
         <CardSection>
           <View style={containter}>
             <View style={textFlex}>
-              <Text style={NU_Paragraph_Text} numberOfLines={showMore}>
+              <Text style={NU_Paragraph_Text}>
                 {description}
               </Text>
             </View>
@@ -56,11 +60,18 @@ class MakeAppointmentCard extends Component {
         <CardSection>
           <Button
             buttonText="View More, might change to buy button"
-            onPress={() => {
-              return showMore === 2 ? this.setState({ showMore: null }) : this.setState({ showMore: 2 });
-            }}
+            onPress={() => this.setState({ bookAppointment: true })}
           />
         </CardSection>
+
+        <ModalView
+          visible={this.state.bookAppointment}
+          onAccept={() => console.log('accept')}
+          onDecline={() => this.setState({ bookAppointment: false })}
+        >
+          Are you sure you would like to book
+          {` ${packageName}`}
+        </ModalView>
       </Card>
     );
   }

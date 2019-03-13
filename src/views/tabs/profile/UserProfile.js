@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 import { userInfoFetch, getAppData } from '../../../store/userInfo/user'
 import Oops from '../sharedTabComp/Oops';
 import Preview from '../sharedTabComp/Preview';
-import { CardSection, Card, ModalView, FullCard, Spinner } from '../../../common';
+import { CardSection, Card, FullCard, Spinner } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
 const { NU_Blue, NU_White, NU_Grey, NU_Card_Border, NU_Border_Grey } = colors; // eslint-disable-line
@@ -231,15 +231,6 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
           </View>
 
         </View>
-
-        <ModalView
-          visible={modalTesterWillDelete}
-          onAccept={() => console.log('accept')}
-          onDecline={() => console.log('decline')}
-        >
-          refer Modal
-        </ModalView>
-
       </Card>
     );
   }
