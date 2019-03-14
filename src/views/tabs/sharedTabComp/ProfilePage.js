@@ -11,6 +11,7 @@ import { CardSection, Card } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
 const { NU_Red , NU_Blue, NU_White, NU_Grey, NU_Border_Grey, NU_Transparent } = colors; // eslint-disable-line
+const { NU_Header_Text, horizontalFlex, NU_Paragraph_Text, NU_Small_Header_Text, leftAndRightPadding } = commonStyles;
 
 // 🤯 will be grabbing the region obj from the nail tech info when its created
 // -> actually might be passed in as a prop not sure yet, or import { regionObj } from '../../../store/location/nailTECKSTORE';
@@ -19,12 +20,6 @@ const regionObj = { latitude: 37.767, longitude: -122.421, latitudeDelta: 0.0314
 // eslint-disable-next-line
 class ProfilePage extends Component {
   render() {
-    const {
-      NU_Header_Text,
-      horizontalFlex,
-      NU_Paragraph_Text,
-      NU_Small_Header_Text
-    } = commonStyles;
     const {
       imageStyle,
       imageContainer,
@@ -43,7 +38,7 @@ class ProfilePage extends Component {
     const starRating = 3.4; // TODO SHOULD COME FROM THIS.PROPS.PERSONDATA;
 
     return (
-      <View style={container}>
+      <View style={[container, leftAndRightPadding]}>
 
         <View style={scrollableBody}>
           <ScrollView>

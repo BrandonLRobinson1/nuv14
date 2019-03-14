@@ -62,6 +62,10 @@ export const commonStyles = StyleSheet.create({
   flexCenter: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  leftAndRightPadding: {
+    paddingLeft: 5,
+    paddingRight: 5
   }
 });
 

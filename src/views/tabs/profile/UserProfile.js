@@ -9,6 +9,7 @@ import { CardSection, Card, FullCard, Spinner } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
 const { NU_Blue, NU_White, NU_Grey, NU_Card_Border, NU_Border_Grey } = colors; // eslint-disable-line
+const { horizontalFlex, NU_Paragraph_Text, NU_Small_Header_Text, flexCenter, leftAndRightPadding } = commonStyles;
 
 // eslint-disable-next-line
 class UserProfile extends Component {   // should pull a fresh copy of data everytime you land on this page so on willmount might handle
@@ -85,6 +86,7 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
         <FlatList
           data={addKeysToFavorites}
           renderItem={personData => <Preview personData={personData} />} // TODO: replace key value with personData.id
+          style={leftAndRightPadding}
         />
       );
     }
@@ -103,15 +105,6 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
 
   // overide sectional styles for some of these so like there isnt a line between the name and the picture
   render() {
-    const { modalTesterWillDelete } = this.state;
-
-    const {
-      horizontalFlex,
-      NU_Paragraph_Text,
-      NU_Small_Header_Text,
-      flexCenter
-    } = commonStyles;
-
     const {
       firstName,
       lastName,
@@ -155,83 +148,85 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
     );
 
     return (
-      <Card>
-        <View style={cardSectionFlex}>
-          <CardSection>
-            <View style={imageContainer}>
-              <Image
-                source={{ uri: 'https://i.imgur.com/K3KJ3w4h.jpg' }}
-                style={imageStyle}
-              />
-            </View>
-          </CardSection>
+      <View style={leftAndRightPadding}>
+        <Card>
+          <View style={cardSectionFlex}>
+            <CardSection>
+              <View style={imageContainer}>
+                <Image
+                  source={{ uri: 'https://i.imgur.com/K3KJ3w4h.jpg' }}
+                  style={imageStyle}
+                />
+              </View>
+            </CardSection>
 
-          <CardSection>
-            <View style={horizontalFlex}>
-              <View style={flexCenter}>
-                <Text style={NU_Paragraph_Text}>
-                  {`${firstName} ${lastName}`}
+            <CardSection>
+              <View style={horizontalFlex}>
+                <View style={flexCenter}>
+                  <Text style={NU_Paragraph_Text}>
+                    {`${firstName} ${lastName}`}
+                  </Text>
+                  <Text style={NU_Paragraph_Text}>
+                    Charlotte, NC (from zip)
+                  </Text>
+                </View>
+              </View>
+            </CardSection>
+
+            <CardSection>
+              <View style={[horizontalFlex, flexCenter]}>
+                <View>
+                  <Text style={NU_Small_Header_Text}>
+                    About Me:
+                  </Text>
+                </View>
+                <View>
+                  <Text style={NU_Paragraph_Text}>
+                    bio
+                  </Text>
+                </View>
+              </View>
+            </CardSection>
+
+            <CardSection>
+              <View style={[horizontalFlex, flexCenter]}>
+                <View>
+                  <Text style={NU_Small_Header_Text}>
+                    Contact Info
+                  </Text>
+                </View>
+                <View>
+                  <Text style={NU_Paragraph_Text}>
+                    stuff
+                  </Text>
+                </View>
+              </View>
+            </CardSection>
+
+            <CardSection>
+              <View style={[horizontalFlex, dividerStyle]}>
+                <Text
+                  style={[NU_Small_Header_Text, sectionalButtonStyle, favSelectFavorites]}
+                  onPress={() => this.tabSelect('favorites')}
+                >
+                  Favorites
                 </Text>
-                <Text style={NU_Paragraph_Text}>
-                  Charlotte, NC (from zip)
+                <Text
+                  style={[NU_Small_Header_Text, sectionalButtonStyle, favSelectHistory ]}
+                  onPress={() => this.tabSelect('history')}
+                >
+                  History
                 </Text>
               </View>
-            </View>
-          </CardSection>
+            </CardSection>
 
-          <CardSection>
-            <View style={[horizontalFlex, flexCenter]}>
-              <View>
-                <Text style={NU_Small_Header_Text}>
-                  About Me:
-                </Text>
-              </View>
-              <View>
-                <Text style={NU_Paragraph_Text}>
-                  bio
-                </Text>
-              </View>
+            <View style={scrollSection}>
+              {this.renderFavsAndHistory(tabSelected === 'favorites' ? ['fav list'] : ['history list'])}
             </View>
-          </CardSection>
 
-          <CardSection>
-            <View style={[horizontalFlex, flexCenter]}>
-              <View>
-                <Text style={NU_Small_Header_Text}>
-                  Contact Info
-                </Text>
-              </View>
-              <View>
-                <Text style={NU_Paragraph_Text}>
-                  stuff
-                </Text>
-              </View>
-            </View>
-          </CardSection>
-
-          <CardSection>
-            <View style={[horizontalFlex, dividerStyle]}>
-              <Text
-                style={[NU_Small_Header_Text, sectionalButtonStyle, favSelectFavorites]}
-                onPress={() => this.tabSelect('favorites')}
-              >
-                Favorites
-              </Text>
-              <Text
-                style={[NU_Small_Header_Text, sectionalButtonStyle, favSelectHistory ]}
-                onPress={() => this.tabSelect('history')}
-              >
-                History
-              </Text>
-            </View>
-          </CardSection>
-
-          <View style={scrollSection}>
-            {this.renderFavsAndHistory(tabSelected === 'favorites' ? ['fav list'] : ['history list'])}
           </View>
-
-        </View>
-      </Card>
+        </Card>
+      </View>
     );
   }
 }

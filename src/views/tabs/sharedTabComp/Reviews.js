@@ -6,6 +6,7 @@ import StarReview from './StarReview';
 import { commonStyles, colors } from '../../../Styles';
 
 const { NU_White, NU_Black, NU_Grey } = colors;
+const { flexCenter, NU_Small_Header_Text, leftAndRightPadding } = commonStyles;
 
 // eslint-disable-next-line
 class Reviews extends Component {
@@ -17,7 +18,6 @@ class Reviews extends Component {
   render() {
     const { ratingAvg, title } = this.props;
     const { reviewsBackground, summaryCard, sectionPadding } = styles;
-    const { flexCenter, NU_Small_Header_Text } = commonStyles;
 
     // ***** shouldnt need a check should just since this info should be provided with profile
     const addKeysToReviews = (reviewsSample || []).map((item, index) => ({ ...item, key: `list-key-${index}` }));
@@ -43,6 +43,7 @@ class Reviews extends Component {
           <FlatList
             data={addKeysToReviews}
             renderItem={reviewData => <ReviewRow reviewData={reviewData} />}
+            style={leftAndRightPadding}
           />
 
         </ScrollView>

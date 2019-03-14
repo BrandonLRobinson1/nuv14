@@ -1,12 +1,15 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
 import propTypes from 'prop-types';
 import { getAppData, setFavorites } from '../../../store/userInfo/user';
 import Preview from '../sharedTabComp/Preview';
 import Oops from '../sharedTabComp/Oops';
 import { FullCard, Spinner } from '../../../common';
+import { commonStyles } from '../../../Styles';
+
+const { leftAndRightPadding } = commonStyles;
 
 class DiscoverMain extends Component {
   constructor() {
@@ -46,7 +49,6 @@ class DiscoverMain extends Component {
   }
 
   async refetchButton() {
-    console.log('--refetchButton');
     const { favorites, setFavorites } = this.props;
     const isArr = Array.isArray(favorites);
 
@@ -76,6 +78,7 @@ class DiscoverMain extends Component {
         <FlatList
           data={addKeysList}
           renderItem={personData => <Preview personData={personData} />}
+          style={leftAndRightPadding}
         />
       );
     }

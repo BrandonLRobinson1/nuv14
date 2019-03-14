@@ -5,6 +5,7 @@ import { CardSection, Spinner, Card } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
 const { NU_Red , NU_Blue, NU_White, NU_Grey, NU_Border_Grey } = colors; // eslint-disable-line
+const { horizontalFlex, NU_Paragraph_Text, NU_Small_Header_Text, leftAndRightPadding } = commonStyles;
 
 // eslint-disable-next-line
 class ApptHome extends Component {
@@ -14,74 +15,71 @@ class ApptHome extends Component {
 
   render() {
     const {
-      horizontalFlex,
-      NU_Paragraph_Text,
-      NU_Small_Header_Text
-    } = commonStyles;
-    const {
       imageStyle,
       imageContainer,
       flexCenter
     } = styles; // eslint-disable-line
 
     return (
-      <Card>
-        <CardSection>
-          <View style={imageContainer}>
-            <Image
-              source={{ uri: 'https://media.wmagazine.com/photos/5ab3b3cd8f35206e675d7d28/4:3/w_1536/beyonce-pledges-to-build-more-wells-in-burundi.jpg' }}
-              style={imageStyle}
-            />
-          </View>
-        </CardSection>
+      <View style={leftAndRightPadding}>
+        <Card>
+          <CardSection>
+            <View style={imageContainer}>
+              <Image
+                source={{ uri: 'https://media.wmagazine.com/photos/5ab3b3cd8f35206e675d7d28/4:3/w_1536/beyonce-pledges-to-build-more-wells-in-burundi.jpg' }}
+                style={imageStyle}
+              />
+            </View>
+          </CardSection>
 
-        <CardSection>
-          <View style={horizontalFlex}>
-            <View style={flexCenter}>
-              <Text style={NU_Paragraph_Text}>
-                Brandon Robinson
-              </Text>
-              <Text style={NU_Paragraph_Text}>
-                Charlotte, NC
-              </Text>
+          <CardSection>
+            <View style={horizontalFlex}>
+              <View style={flexCenter}>
+                <Text style={NU_Paragraph_Text}>
+                  Brandon Robinson
+                </Text>
+                <Text style={NU_Paragraph_Text}>
+                  Charlotte, NC
+                </Text>
+              </View>
             </View>
-          </View>
-        </CardSection>
+          </CardSection>
 
-        <CardSection>
-          <View style={[horizontalFlex, flexCenter]}>
-            <View>
-              <Text style={NU_Small_Header_Text}>
-                About Me:
-              </Text>
+          <CardSection>
+            <View style={[horizontalFlex, flexCenter]}>
+              <View>
+                <Text style={NU_Small_Header_Text}>
+                  About Me:
+                </Text>
+              </View>
+              <View>
+                <Text style={NU_Paragraph_Text}>
+                  stuff
+                </Text>
+              </View>
             </View>
-            <View>
-              <Text style={NU_Paragraph_Text}>
-                stuff
-              </Text>
-            </View>
-          </View>
-        </CardSection>
+          </CardSection>
 
-        <CardSection>
-          <View style={[horizontalFlex, flexCenter]}>
-            <View>
-              <Text style={NU_Small_Header_Text}>
-                Contact Info
-              </Text>
+          <CardSection>
+            <View style={[horizontalFlex, flexCenter]}>
+              <View>
+                <Text style={NU_Small_Header_Text}>
+                  Contact Info
+                </Text>
+              </View>
+              <View>
+                <Text style={NU_Paragraph_Text}>
+                  appointment info
+                </Text>
+              </View>
             </View>
-            <View>
-              <Text style={NU_Paragraph_Text}>
-                appointment info
-              </Text>
-            </View>
-          </View>
-        </CardSection>
+          </CardSection>
 
-        <CardSection>
-          <Text onPress={() => this.requestCameraPermission('camera')}>Path to QR code</Text>
-        </CardSection>
-      </Card>
+          <CardSection>
+            <Text onPress={() => this.requestCameraPermission('camera')}>Path to QR code</Text>
+          </CardSection>
+        </Card>
+      </View>
     );
   }
 }

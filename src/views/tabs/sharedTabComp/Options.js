@@ -7,7 +7,7 @@ import { CardSection, Card, Button } from '../../../common';
 import { colors, commonStyles } from '../../../Styles';
 
 const { NU_Green, NU_Grey, NU_Pink, NU_Border_Grey } = colors; // eslint-disable-line
-const { NU_Paragraph_Text, NU_Small_Header_Text } = commonStyles; // eslint-disable-line
+const { NU_Paragraph_Text, NU_Small_Header_Text, leftAndRightPadding } = commonStyles; // eslint-disable-line
 
 const timesArr = [
   {
@@ -83,6 +83,7 @@ class Options extends Component {
       <FlatList
         data={timesWithKeys}
         renderItem={aptData => this.optionsCard(aptData)}
+        style={leftAndRightPadding}
       />
     );
   }
