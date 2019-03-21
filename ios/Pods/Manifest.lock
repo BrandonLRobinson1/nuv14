@@ -85,7 +85,7 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - RNVectorIcons (6.1.0):
+  - RNVectorIcons (6.4.2):
     - React
   - yoga (0.57.4.React)
 
@@ -156,6 +156,6 @@ SPEC CHECKSUMS:
   RNVectorIcons: 8c52e1e8da1153613fdef44748e865c25556cb9c
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: d7896095d09cf70348520e7411f2a26db201f900
+PODFILE CHECKSUM: 8d5f2ecee3540470ee0cbdc5d57b54c280e18aaa
 
 COCOAPODS: 1.5.3

@@ -59,7 +59,7 @@ end
 source 'https://github.com/CocoaPods/Specs.git'
 
 #need to turn off for the pod install/update but turn this shit back on!!!! (frameworks)
-use_frameworks!
+#use_frameworks!
 
 # post_install do |installer|
 #   installer.pods_project.targets.each do |target|
