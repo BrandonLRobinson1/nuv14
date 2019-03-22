@@ -62,6 +62,8 @@ import com.airbnb.android.react.maps.MapsPackage;
 
 import com.oblador.vectoricons.VectorIconsPackage;
 
+import com.imagepicker.ImagePickerPackage;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -87,6 +89,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new ImagePickerPackage(),
+          // OR if you want to customize dialog style (replace line above) new ImagePickerPackage(R.style.my_dialog_style)
           new MapsPackage(),
           new RNGooglePlacesPackage(),
           new VectorIconsPackage()

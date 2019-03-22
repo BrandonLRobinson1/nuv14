@@ -49,9 +49,9 @@ class RouterComponent extends Component {
     const { getActiveNailTechs, userInfoFetch, getAppData, getinitialDelta, setMapLoading } = this.props; // eslint-disable-line
     // ******************************************************* use lodash when searching through firebase database instead of writing your own functions
 
-    getAppData(); // --> gets info for discover page
-    getActiveNailTechs(); // map --> then run initialdelta in map
-    userInfoFetch(); // --> gets user data and a collection of history an favs for profile
+    // getAppData(); // --> gets info for discover page
+    // getActiveNailTechs(); // map --> then run initialdelta in map
+    // userInfoFetch(); // --> gets user data and a collection of history an favs for profile
     // **** on recalls set thier loading to true!!
   }
 

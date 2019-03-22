@@ -15,7 +15,6 @@ export default class DiscoverMain extends React.Component {
     const options = {
       noData: true,
     };
-    console.log('ImagePicker', ImagePicker.showImagePicker);
 
     ImagePicker.showImagePicker(options, response => {
       if (response.uri) {
@@ -26,7 +25,10 @@ export default class DiscoverMain extends React.Component {
 
   render() {
     const { photo } = this.state;
+
     console.log('photo', photo);
+    console.log('ImagePicker', ImagePicker.showImagePicker);
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         {photo && (
