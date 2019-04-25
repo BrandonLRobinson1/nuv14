@@ -30,6 +30,7 @@ import MapTab from './src/views/tabs/map/MapTab';
 import SearchAddress from './src/views/tabs/map/SearchAddress';
 
 import UserProfile from './src/views/tabs/profile/UserProfile';
+import PictureUpload from './src/views/tabs/profile/PictureUpload';
 import Settings from './src/views/tabs/profile/Settings';
 import EditAccount from './src/views/tabs/profile/settingsItems/account/EditAccount';
 import ChangeEmail from './src/views/tabs/profile/settingsItems/account/ChangeEmail';
@@ -48,10 +49,9 @@ class RouterComponent extends Component {
   componentWillMount() {
     const { getActiveNailTechs, userInfoFetch, getAppData, getinitialDelta, setMapLoading } = this.props; // eslint-disable-line
     // ******************************************************* use lodash when searching through firebase database instead of writing your own functions
-
-    // getAppData(); // --> gets info for discover page
-    // getActiveNailTechs(); // map --> then run initialdelta in map
-    // userInfoFetch(); // --> gets user data and a collection of history an favs for profile
+    getAppData(); // --> gets info for discover page
+    getActiveNailTechs(); // map --> then run initialdelta in map
+    userInfoFetch(); // --> gets user data and a collection of history an favs for profile
     // **** on recalls set thier loading to true!!
   }
 
@@ -247,6 +247,14 @@ class RouterComponent extends Component {
                 title=""
                 backTitle=""
                 hideTabBar
+                onLeft={() => Actions.pop()}
+              />
+
+              <Scene
+                key="pictureUpload"
+                component={PictureUpload}
+                title="pic upload"
+                backTitle="yer"
                 onLeft={() => Actions.pop()}
               />
 

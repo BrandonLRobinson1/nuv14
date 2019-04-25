@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Image, View, Text, StyleSheet, FlatList } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import propTypes from 'prop-types';
-import { userInfoFetch, getAppData } from '../../../store/userInfo/user'
+import { userInfoFetch, getAppData } from '../../../store/userInfo/user';
 import Oops from '../sharedTabComp/Oops';
 import Preview from '../sharedTabComp/Preview';
 import { CardSection, Card, FullCard, Spinner } from '../../../common';
@@ -157,6 +158,11 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
                   source={{ uri: 'https://i.imgur.com/K3KJ3w4h.jpg' }}
                   style={imageStyle}
                 />
+
+                <Text onPress={() => Actions.pictureUpload()}>
+                  most likely removing or putting in settings - 'change photo'
+                </Text>
+
               </View>
             </CardSection>
 
@@ -167,7 +173,7 @@ class UserProfile extends Component {   // should pull a fresh copy of data ever
                     {`${firstName} ${lastName}`}
                   </Text>
                   <Text style={NU_Paragraph_Text}>
-                    Charlotte, NC (from zip)
+                    ******* Charlotte, NC (from zip)
                   </Text>
                 </View>
               </View>
