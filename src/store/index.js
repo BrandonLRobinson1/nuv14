@@ -10,6 +10,7 @@ import location from './location';
 
 // https://github.com/infinitered/reactotron/blob/master/examples/demo-react-native/App/Redux/index.js
 // for adding sagas or whatever refer to link
+// https://www.youtube.com/watch?v=UiPo9A9k7xc
 
 const rootReducer = combineReducers({
   logIn,
