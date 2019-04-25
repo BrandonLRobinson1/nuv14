@@ -15,6 +15,11 @@ http://localhost:8081/debugger-ui and the request was failing.
 
 
 
+Now run 🔥react-devtools from the terminal to launch the standalone DevTools app:
+
+
+
+
 
 
 
