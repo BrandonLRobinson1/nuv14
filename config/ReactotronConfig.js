@@ -6,7 +6,9 @@ const reactotron = Reactotron
     name: 'NUV14'
   })
   .useReactNative() // add all built-in react native plugins
-  .use(reactotronRedux())
+  .use(reactotronRedux({
+    isActionImportant: action => action.type === 'some action type'
+  }))
   .connect();
 
 export default reactotron;
