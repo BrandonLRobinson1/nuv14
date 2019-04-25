@@ -33,7 +33,9 @@
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.4",
-    "redux-thunk": "^2.3.0"
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "remote-redux-devtools": "^0.5.16"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -47,10 +49,10 @@
     "eslint-plugin-react": "^7.12.4",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.50.0",
-    "react-test-renderer": "16.6.0-alpha.8af6728",
+    "react-test-renderer": "^16.6.0-alpha.8af6728",
     "reactotron-react-native": "^3.2.2",
-    "redux-devtools-cli": "0.0.1-1",
-    "remote-redux-devtools": "^0.5.14"
+    "reactotron-redux": "^3.1.0",
+    "redux-devtools-cli": "0.0.1-1"
   },
   "jest": {
     "preset": "react-native"

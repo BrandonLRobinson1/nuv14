@@ -4,7 +4,10 @@ import firebase from 'firebase';
 import { config } from './private';
 import Router from './Router';
 import { store } from './src/store';
-import './config/ReactotronConfig';
+
+if(__DEV__) {
+  import('./config/ReactotronConfig').then(() => console.log('Reactotron Configured'))
+}
 import Reactotron from 'reactotron-react-native';
 
 export default class App extends Component {
@@ -14,7 +17,14 @@ export default class App extends Component {
   }
 
   render() {
-    Reactotron.log('hello from AppContainer')
+    Reactotron.log('hello from AppContainerrrrr');
+    Reactotron.warn('*glares*');
+    Reactotron.error('Now you\'ve done it.');
+    Reactotron.display({
+      name: 'KNOCK KNOCK',
+      preview: 'Who\'s there?',
+      value: 'Orange.'
+    });
     return (
       <Provider store={store}>
         <Router />

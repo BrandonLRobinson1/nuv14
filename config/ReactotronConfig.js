@@ -1,7 +1,12 @@
-import Reactotron from 'reactotron-react-native'
+import Reactotron from 'reactotron-react-native';
+import { reactotronRedux } from 'reactotron-redux';
 
-Reactotron
+const reactotron = Reactotron
   .configure({
-      name: 'NUV14'
-    })
-  .connect()
+    name: 'NUV14'
+  })
+  .useReactNative() // add all built-in react native plugins
+  .use(reactotronRedux())
+  .connect();
+
+export default reactotron;
