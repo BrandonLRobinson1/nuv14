@@ -4,7 +4,8 @@ import firebase from 'firebase';
 import { config } from './private';
 import Router from './Router';
 import { store } from './src/store';
-
+import './config/ReactotronConfig';
+import Reactotron from 'reactotron-react-native';
 
 export default class App extends Component {
   componentWillMount() {
@@ -13,6 +14,7 @@ export default class App extends Component {
   }
 
   render() {
+    Reactotron.log('hello from AppContainer')
     return (
       <Provider store={store}>
         <Router />
