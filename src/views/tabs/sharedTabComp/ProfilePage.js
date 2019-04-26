@@ -26,7 +26,10 @@ class ProfilePage extends Component {
       imageStyle,
       imageContainer,
       slideContainer,
-      defaultSlide
+      defaultSlide,
+      invisible,
+      activeDot,
+      nonActiveDot
     } = styles; // eslint-disable-line
 
     const itachi = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLgejngJJnK5fqFKvTtZOp21aGI9GBkYtXKIq3Y9wIF25kbGYZJQ';
@@ -40,7 +43,12 @@ class ProfilePage extends Component {
     );
 
     return (
-      <Swiper>
+      <Swiper
+        nextButtonStyle={invisible}
+        prevButtonStyle={invisible}
+        activeDotStyle={activeDot}
+        dotStyle={nonActiveDot}
+      >
         {uriArray.map((uri, key) => (
           <View style={imageContainer} key={key}>
             <Image
@@ -305,11 +313,20 @@ const styles = StyleSheet.create({
   },
   defaultSlide: {
     backgroundColor: 'rgba(20,20,200,0.3)'
+  },
+  invisible: {
+    display: 'none'
+  },
+  activeDot: {
+    backgroundColor: NU_Red
+  },
+  nonActiveDot: {
+    backgroundColor: NU_Grey
   }
 });
 
 ProfilePage.propTypes = {
-  personData: propTypes.object.isRequired
+  personData: propTypes.object.isRequired // eslint-disable-line
 };
 
 export default connect(
