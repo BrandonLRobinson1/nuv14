@@ -4,11 +4,10 @@ import firebase from 'firebase';
 import { config } from './private';
 import Router from './Router';
 import { store } from './src/store';
-
-if(__DEV__) {
+if(__DEV__) { // eslint-disable-line
   import('./config/ReactotronConfig').then(() => console.log('Reactotron Configured'))
 }
-import Reactotron from 'reactotron-react-native';
+import Reactotron from 'reactotron-react-native'; // eslint-disable-line
 
 export default class App extends Component {
   componentWillMount() {
