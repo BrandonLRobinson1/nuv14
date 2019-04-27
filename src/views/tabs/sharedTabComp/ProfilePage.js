@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Image, View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, View, Text, StyleSheet, ScrollView, TouchableOpacity, Clipboard } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import propTypes from 'prop-types';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
@@ -74,6 +74,9 @@ class ProfilePage extends Component {
       reviewText
     } = styles; // eslint-disable-line
 
+    // paste from clipboard
+    // const clipboardContent = Clipboard.getString();
+
     const { title, description, address: { street }, ratings } = this.props.personData; // eslint-disable-line
     const starRating = 3.4; // TODO SHOULD COME FROM THIS.PROPS.PERSONDATA;
 
@@ -108,12 +111,18 @@ class ProfilePage extends Component {
 
                   <View>
                     <Text style={NU_Small_Header_Text}>
-                      address
+                      address (touch to copy)
                     </Text>
                   </View>
 
                   <View>
-                    <Text style={NU_Paragraph_Text}>
+                    <Text
+                      style={NU_Paragraph_Text}
+                      onPress={async () => {
+                        const clip = await Clipboard.setString(street);
+                        return clip;
+                      }}
+                    >
                       {street}
                     </Text>
                   </View>
