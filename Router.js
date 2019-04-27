@@ -294,15 +294,14 @@ class RouterComponent extends Component {
 
 const styles = StyleSheet.create({
   topNavHeaderStyle: {
-    // backgroundColor: NU_Green, // changing navbar color
+    backgroundColor: 'orange', // changing navbar color
     color: NU_White
   },
   tabBackgroundColor: {
-    backgroundColor: NU_Pink
+    backgroundColor: 'yellow'
   },
-
   HeaderTitleColor: {
-    color: NU_Green
+    color: 'white'
   }
 });
 
