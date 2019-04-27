@@ -4,9 +4,7 @@ import Reactotron from '../../config/ReactotronConfig';
 import logIn from './logIn';
 import userInfo from './userInfo';
 import location from './location';
-// import { composeWithDevTools } from 'remote-redux-devtools'; // eslint-disable-line
 // import { createLogger } from 'redux-logger'
-// import { reactotronRedux } from 'reactotron-redux'
 
 // https://github.com/infinitered/reactotron/blob/master/examples/demo-react-native/App/Redux/index.js
 // for adding sagas or whatever refer to link

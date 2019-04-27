@@ -43,7 +43,7 @@ const styles = {
   cardSectiontyle: {
     jusifyContent: 'center'
   },
-  textStyle:{
+  textStyle: {
     flex: 1,
     fontSize: 18,
     textAlign: 'center',
@@ -64,4 +64,4 @@ Confirm.propTypes = {
   children: propTypes.string.isRequired
 };
 
-export default Confirm;
+export { Confirm };
