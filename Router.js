@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
-import { StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import { NavBackButton } from './src/common';
 
@@ -22,7 +22,7 @@ import DiscoverMain from './src/views/tabs/discover/DiscoverMain';
 
 import ProfilePage from './src/views/tabs/sharedTabComp/ProfilePage';
 import Reviews from './src/views/tabs/sharedTabComp/Reviews';
-// import TabBarButton from './src/views/tabs/sharedTabComp/TabBarButton';
+import TabBarButton from './src/views/tabs/sharedTabComp/TabBarButton';
 import Options from './src/views/tabs/sharedTabComp/Options';
 import MakeAppointment from './src/views/tabs/sharedTabComp/MakeAppointment';
 
@@ -180,6 +180,7 @@ class RouterComponent extends Component {
               <Scene
                 key="ProfilePageMap"
                 hideTabBar
+                // tabBarComponent={() => <View><Text>???</Text></View>}
                 // tabBarComponent={() => <TabBarButton />}
                 component={ProfilePage}
                 title=""
