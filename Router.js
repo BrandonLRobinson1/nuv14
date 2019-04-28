@@ -51,6 +51,8 @@ class RouterComponent extends Component {
     // ******************************************************* use lodash when searching through firebase database instead of writing your own functions
     getAppData(); // --> gets info for discover page
     getActiveNailTechs(); // map --> then run initialdelta in map
+
+    // TODO: user info needs to conditionally run bc on the first log in there will be nothing to fetch or if you create a new account itll auto fill
     userInfoFetch(); // --> gets user data and a collection of history an favs for profile
     // **** on recalls set thier loading to true!!
   }
@@ -119,8 +121,7 @@ class RouterComponent extends Component {
 
             titleStyle={HeaderTitleColor}
           >
-
-
+{/*
             <Scene key="featured" title="Discover" icon={StarIcon} initial>
               <Scene
                 key="DiscoverMainTab"
@@ -202,9 +203,9 @@ class RouterComponent extends Component {
                 onLeft={() => Actions.pop()}
               />
             </Scene>
-
-
+*/}
             <Scene key="profile" title="Profile" icon={tabIcon}>
+{/*
               <Scene
                 key="userProfile"
                 component={UserProfile}
@@ -217,29 +218,6 @@ class RouterComponent extends Component {
                 }}
                 leftTitle="Refer"
                 onLeft={() => console.log('modal')}
-              />
-
-              <Scene
-                key="EditAccount"
-                component={EditAccount}
-                title="Edit Account"
-                backTitle=""
-                rightTitle="Edit"
-              />
-
-              <Scene
-                key="ChangeEmail"
-                component={ChangeEmail}
-                title="Edit Email"
-                backTitle=""
-                rightTitle=""
-              />
-
-              <Scene
-                key="Settings"
-                component={Settings}
-                title="Settings"
-                backTitle=""
               />
 
               <Scene
@@ -266,6 +244,14 @@ class RouterComponent extends Component {
                 backTitle=" "
                 onLeft={() => Actions.pop()}
               />
+*/}
+              <Scene
+                key="Settings"
+                component={Settings}
+                title="Settings"
+                backTitle=""
+              />
+
               <Scene
                 key="Options"
                 component={Options}
@@ -273,6 +259,23 @@ class RouterComponent extends Component {
                 backTitle=""
                 onLeft={() => Actions.pop()}
               />
+
+              <Scene
+                key="EditAccount"
+                component={EditAccount}
+                title="Edit Account"
+                backTitle=""
+                rightTitle="Edit"
+              />
+
+              <Scene
+                key="ChangeEmail"
+                component={ChangeEmail}
+                title="Edit Email"
+                backTitle=""
+                rightTitle=""
+              />
+
             </Scene>
 
             <Scene key="Appointment" title="Appointment" icon={tabIcon}>

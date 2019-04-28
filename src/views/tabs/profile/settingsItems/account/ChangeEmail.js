@@ -8,7 +8,7 @@ import {
   Input,
   Spinner
 } from '../../../../../common';
-import { updateEmail } from '../../../../../store/userInfo/user';
+import { updateEmailAddress } from '../../../../../store/userInfo/user';
 import { emailRegEx } from '../../../../../helpers/helpersFunctions';
 import { colors } from '../../../../../Styles';
 
@@ -22,16 +22,20 @@ class EditAccouunt extends Component {
       loading: null,
       oldEmail: '',
       newEmail1: '',
-      newEmail2: ''
+      newEmail2: '',
+      password: ''
     };
     this.onButtonPress = this.onButtonPress.bind(this);
     this.renderButton = this.renderButton.bind(this);
   }
 
+  // Ght@g.co
+  // Ght@g.com
   // eslint-disable-next-line
   async onButtonPress() {
-    const { oldEmail, newEmail1, newEmail2 } = this.state;
-    const { email } = this.props; // eslint-disable-line
+    // TODO: make sure all inputs are trimmed otherwise users will get frustrated for result that dont match ❌
+    const { oldEmail, newEmail1, newEmail2, password } = this.state;
+    const { email, updateEmailAddress } = this.props; // eslint-disable-line
 
     if (oldEmail !== email) return this.setState({ errorMessage: 'Old email is incorrect' });
     if (!emailRegEx(newEmail1)) return this.setState({ errorMessage: 'The new email address is badly formatted.' });
@@ -42,7 +46,17 @@ class EditAccouunt extends Component {
     });
 
     // do something in redux and firebase
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
+
+    const newInfo = {
+      email: newEmail1,
+      password
+    };
+
+    updateEmailAddress(newInfo);
+
+    // this.setState({ password: '' });
+    // TODO: maybe auto sign out after three atempts
   };
 
   renderButton() {
@@ -63,7 +77,8 @@ class EditAccouunt extends Component {
       errorMessage,
       oldEmail,
       newEmail1,
-      newEmail2
+      newEmail2,
+      password
     } = this.state;
 
     return (
@@ -76,6 +91,20 @@ class EditAccouunt extends Component {
             onChangeText={text => {
               this.setState({
                 oldEmail: text,
+                errorMessage: ''
+              });
+            }}
+          />
+        </CardSection>
+
+        <CardSection>
+          <Input
+            label="passowrd"
+            placeholder="password"
+            value={password}
+            onChangeText={text => {
+              this.setState({
+                password: text,
                 errorMessage: ''
               });
             }}
@@ -138,6 +167,6 @@ export default connect(
     email: state.userInfo.user.email
   }),
   {
-    updateEmail
+    updateEmailAddress
   },
 )(EditAccouunt);

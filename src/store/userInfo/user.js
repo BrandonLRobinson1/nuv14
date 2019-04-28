@@ -139,8 +139,11 @@ export const addFormInfo = () => (dispatch, getState) => {
     }
   } = getState();
 
+
   // return firebase.database().ref(`/users/${currentUser.uid}/testAccounts`)
-  return firebase.database().ref(`/users/testAccounts/${currentUser.uid}`)
+  return firebase.database().ref(`/users/testAccounts/FINDME/${currentUser.uid}`)
+
+  // return firebase.database().ref(`/users/testAccounts/${currentUser.uid}`)
     .push({
       firstName,
       lastName,
@@ -154,9 +157,9 @@ export const addFormInfo = () => (dispatch, getState) => {
 };
 
 export const userInfoFetch = () => dispatch => {
-  const { currentUser } = firebase.auth();
-
-  return firebase.database().ref('/users/testAccounts/vdSfqJpFXidXXy9RAgyWqDxEx6I3/-LKy4WpC_8mhAKMaMkvo')
+  // const { currentUser } = firebase.auth();
+  return firebase.database().ref(`/users/testAccounts/FINDME/mKOZBzubWhdMuqfzBV3qHzZo0Bd2/-Ld_5YH_3VBqWAOMJion`)
+  // return firebase.database().ref('/users/testAccounts/vdSfqJpFXidXXy9RAgyWqDxEx6I3/-LKy4WpC_8mhAKMaMkvo')
   // firebase.database().ref(`/users/testAccounts/${currentUser.uid}`) // dCpWn7CLu9bx3ZVEoBOx8bNdINT2
     .on('value', snapshot => {
       console.log('🤑 cha ching user info fetch payload', snapshot.val());
@@ -177,8 +180,8 @@ export const userInfoFetch = () => dispatch => {
       dispatch(updateZipCode(zipCode));
       dispatch(updateEmail(email));
 
-      // ***!!! THE REASON THAT YOU SET A CURRENT LOCATION HERE ON THE USER INFO IS BECAUSE ITLL EITHER BE PRIVATE AND HAVE A confirmED one LIKE BELOW OR ITLL USE THE BUILT IN PHONE GET LOCATION
-      dispatch( setCurrentLocation({ latitude: 37.767, longitude: -122.421 })); // would be saved, using random steve data here
+      // ***!!! TODO: fix -> THE REASON THAT YOU SET A CURRENT LOCATION HERE ON THE USER INFO IS BECAUSE ITLL EITHER BE PRIVATE AND HAVE A confirmED one LIKE BELOW OR ITLL USE THE BUILT IN PHONE GET LOCATION
+      dispatch(setCurrentLocation({ latitude: 37.767, longitude: -122.421 })); // would be saved, using random steve data here
       // dispatch(setCurrentLocation( "PRIVATE_LOCATION" ) );
       dispatch(setOther(email));
       dispatch(setUserInfoLoading(false));
@@ -189,6 +192,30 @@ export const userInfoFetch = () => dispatch => {
       dispatch(setUserInfoLoading(false));
       return false;
     });
+};
+
+// can set alerts to for this
+const reauthenticate = currentPassword => {
+  const user = firebase.auth().currentUser;
+  const credentials = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
+  console.log('returns bool?', user.reauthenticateWithCredential(credentials));
+  return user.reauthenticateWithCredential(credentials);
+};
+
+export const updateEmailAddress = userInfo => dispatch => {
+
+  console.log('userInfo', userInfo);
+  return reauthenticate(userInfo.password);
+
+
+
+  // firebase.User.reauthenticateWithCredential
+  // firebase.auth()
+  //   .signInWithEmailAndPassword('you@domain.com', 'correcthorsebatterystaple')
+  //   .then(function(userCredential) {
+  //       userCredential.user.updateEmail('newyou@domain.com')
+  //   })
+
 };
 
 // ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)

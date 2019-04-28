@@ -19,12 +19,15 @@ class Validate extends Component {
 
   verifyInfo() {
     const { verifcationCode, errorMessage } = this.state;
+    const { addFormInfo } = this.props;
     console.log('verifcationCode', verifcationCode);
 
     // if verification fails boot them
 
-    // if it passes
-    // addFormInfo();
+    // TODO: seems if you double click on verify by email itll stack two of them in the nav stack
+
+    // TODO: if it passes
+    addFormInfo();
     Actions.tabbar();
   }
 
