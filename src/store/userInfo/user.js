@@ -206,38 +206,29 @@ export const updateEmailAddress = userInfo => async dispatch => {
   const user = firebase.auth().currentUser;
   const { email, password } = userInfo;
 
+  // 🚒 i think this may be error prone, test .. especially aftersecond then im worried itll update in the firebase storage of the email and not my stored email field (currently works but test scenarios);
   return reauthenticate(user, password)
-    .then(() => user.updateEmail(email)
-      .then(() => {
-        dispatch(updateEmail(email));
-        return 'Email Updated';
-      })
-      .catch(err => {
-        console.log('email, password', email, password);
-        throw new Error(err.message);
-      })
-    )
+    .then(() => {
+      user.updateEmail(email)
+        // will only run this 'then' if the email update is succesful so it may not be that error prone
+        .then(() => {
+          // TODO: user.uid and bucket '/-Ld_F4LO8QBgEBzppYbT' are not connected as i thought
+          const userRef = firebase.database().ref(`/users/testAccounts/FINDME/${user.uid}`);
+          userRef.child('/-Ld_F4LO8QBgEBzppYbT').update({ email })
+            .then(() => 'Email Updated')
+            .catch(err => {
+              throw new Error(err);
+            });
+        })
+        .catch(err => {
+          console.log('email, password', email, password);
+          throw new Error(err.message);
+        });
+    })
     .catch(err => {
       console.log('err*', err);
       throw (err.message);
     });
-
-  // let result = null;
-  // await reauthenticate(user, password)
-  //   .then(() => { result = 'authenticated'; })
-  //   .catch(err => {
-  //     result = err.message
-  //     return result
-  //    });
-
-  // return result === 'authenticated'
-  //   ? user.updateEmail(email)
-  //     .then(() => {
-  //       dispatch(updateEmail(email));
-  //       result = 'Email Updated';
-  //     })
-  //     .catch(err => { result = err.message; })
-  //   : result;
 };
 
 export const updateUserPassword = userInfo => async dispatch => {
@@ -246,9 +237,7 @@ export const updateUserPassword = userInfo => async dispatch => {
 
   return reauthenticate(user, password)
     .then(() => user.updatePassword(newPassword)
-      .then(() => {
-        return 'Password Updated';
-      })
+      .then(() => 'Password Updated')
       .catch(err => {
         console.log('email, password', email, password);
         throw new Error(err.message);

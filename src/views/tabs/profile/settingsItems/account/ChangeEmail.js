@@ -33,45 +33,63 @@ class EditAccouunt extends Component {
   // Ght@g.com
   // eslint-disable-next-line
   async onButtonPress() {
-    const { email, updateEmailAddress } = this.props; // eslint-disable-line
-    const newInfo = {
-      email: 'Go2@go2.com',
-      // email: 'jjjjpppp@gmail.com', //
-      // email: 'jjjjpppp@gmail.com', //
-      password: 'findout how to encrypt in front end Password'
-      // password: 'findout how to encrypt in front en'
-    };
-    return updateEmailAddress(newInfo)
-      .then(() => Alert.alert('Success', 'Email Updated 😄'))
-      .catch(failedMessage => Alert.alert('Uh Oh!', failedMessage));
-
-
-
-    // TODO: make sure all inputs are trimmed otherwise users will get frustrated for result that dont match ❌
-    // const { oldEmail, newEmail1, newEmail2, password } = this.state;
     // const { email, updateEmailAddress } = this.props; // eslint-disable-line
-
-    // if (oldEmail !== email) return this.setState({ errorMessage: 'Old email is incorrect' });
-    // if (!emailRegEx(newEmail1)) return this.setState({ errorMessage: 'The new email address is badly formatted.' });
-    // if (newEmail1 !== newEmail2) return this.setState({ // eslint-disable-line
-    //   errorMessage: `Email Addresses don't match`, // eslint-disable-line
-    //   newEmail1: '',
-    //   newEmail2: ''
-    // });
-
-    // // do something in redux and firebase
-    // // this.setState({ loading: true });
-
     // const newInfo = {
-    //   email: newEmail1,
-    //   password
+    //   email: 'didit5@go1.com', // email to update to (can watch in firebase)
+    //   // email: 'jjjjpppp@gmail.com', //
+    //   // email: 'jjjjpppp@gmail.com', //
+    //   password: 'findout how to encrypt in front end Password' // <-- real password!!
+    //   // password: 'findout how to encrypt in front en'
     // };
+    // return updateEmailAddress(newInfo)
+    //   .then(() => Alert.alert('Success', 'Email Updated 😄'))
+    //   .catch(failedMessage => Alert.alert('Uh Oh!', failedMessage));
+    // above is for quick and dirty testing 🌩️
 
-    // updateEmailAddress(newInfo);
+    // TODO:  🔥make sure all inputs are trimmed otherwise users will get frustrated for result that dont match ❌
+    const { oldEmail, newEmail1, newEmail2, password } = this.state;
+    const { email, updateEmailAddress } = this.props; // eslint-disable-line
 
-    // // this.setState({ password: '' });
-    // // TODO: maybe auto sign out after three atempts and TRIM()!!!!
-  };
+    if (oldEmail !== email) return this.setState({ errorMessage: 'Old email is incorrect' });
+    if (!emailRegEx(newEmail1)) return this.setState({ errorMessage: 'The new email address is badly formatted.' });
+    if (newEmail1 !== newEmail2) return this.setState({ // eslint-disable-line
+      errorMessage: `Email Addresses don't match`, // eslint-disable-line
+      newEmail1: '',
+      newEmail2: ''
+    });
+
+    // do something in redux and firebase
+    // this.setState({ loading: true });
+
+    const newInfo = {
+      email: newEmail1,
+      password
+    };
+
+    updateEmailAddress(newInfo)
+      .then(() => {
+        Alert.alert('Success', 'Email Updated 😄');
+        this.setState({
+          loading: null,
+          oldEmail: '',
+          newEmail1: '',
+          newEmail2: '',
+          password: ''
+        });
+      })
+      .catch(failedMessage => {
+        // Alert.alert('Uh Oh!', failedMessage);
+        this.setState({
+          errorMessage: failedMessage,
+          loading: null,
+          oldEmail: '',
+          newEmail1: '',
+          newEmail2: '',
+          password: ''
+        });
+      });
+    // // TODO: maybe auto sign out after five atempts and TRIM()!!!!
+  }
 
   renderButton() {
     if (this.state.loading) { // eslint-disable-line
