@@ -121,6 +121,8 @@ export const signUserUp = passWord => (dispatch, getState) => {
       }
     }
   } = getState();
+  console.log('passWord, password', passWord, password);
+  // TODO: fix how this is recieving the password, at least make it consistent all fro m redux all from component
   return firebase.auth().createUserWithEmailAndPassword(email.toLowerCase(), password); // use return otherwise it will try to regulate password length
 };
 
@@ -158,7 +160,7 @@ export const addFormInfo = () => (dispatch, getState) => {
 
 export const userInfoFetch = () => dispatch => {
   // const { currentUser } = firebase.auth();
-  return firebase.database().ref(`/users/testAccounts/FINDME/mKOZBzubWhdMuqfzBV3qHzZo0Bd2/-Ld_5YH_3VBqWAOMJion`)
+  return firebase.database().ref(`/users/testAccounts/FINDME/lL9zn1tBv4b5YnxqysAuXfC8JQg1/-Ld_F4LO8QBgEBzppYbT`)
   // return firebase.database().ref('/users/testAccounts/vdSfqJpFXidXXy9RAgyWqDxEx6I3/-LKy4WpC_8mhAKMaMkvo')
   // firebase.database().ref(`/users/testAccounts/${currentUser.uid}`) // dCpWn7CLu9bx3ZVEoBOx8bNdINT2
     .on('value', snapshot => {
@@ -194,28 +196,67 @@ export const userInfoFetch = () => dispatch => {
     });
 };
 
-// can set alerts to for this
-const reauthenticate = currentPassword => {
-  const user = firebase.auth().currentUser;
-  const credentials = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
-  console.log('returns bool?', user.reauthenticateWithCredential(credentials));
-  return user.reauthenticateWithCredential(credentials);
+
+const reauthenticate = (firebaseUserObj, currentPassword) => {
+  const credentials = firebase.auth.EmailAuthProvider.credential(firebaseUserObj.email, currentPassword);
+  return firebaseUserObj.reauthenticateAndRetrieveDataWithCredential(credentials);
 };
 
-export const updateEmailAddress = userInfo => dispatch => {
+export const updateEmailAddress = userInfo => async dispatch => {
+  const user = firebase.auth().currentUser;
+  const { email, password } = userInfo;
 
-  console.log('userInfo', userInfo);
-  return reauthenticate(userInfo.password);
+  return reauthenticate(user, password)
+    .then(() => user.updateEmail(email)
+      .then(() => {
+        dispatch(updateEmail(email));
+        return 'Email Updated';
+      })
+      .catch(err => {
+        console.log('email, password', email, password);
+        throw new Error(err.message);
+      })
+    )
+    .catch(err => {
+      console.log('err*', err);
+      throw (err.message);
+    });
 
+  // let result = null;
+  // await reauthenticate(user, password)
+  //   .then(() => { result = 'authenticated'; })
+  //   .catch(err => {
+  //     result = err.message
+  //     return result
+  //    });
 
+  // return result === 'authenticated'
+  //   ? user.updateEmail(email)
+  //     .then(() => {
+  //       dispatch(updateEmail(email));
+  //       result = 'Email Updated';
+  //     })
+  //     .catch(err => { result = err.message; })
+  //   : result;
+};
 
-  // firebase.User.reauthenticateWithCredential
-  // firebase.auth()
-  //   .signInWithEmailAndPassword('you@domain.com', 'correcthorsebatterystaple')
-  //   .then(function(userCredential) {
-  //       userCredential.user.updateEmail('newyou@domain.com')
-  //   })
+export const updateUserPassword = userInfo => async dispatch => {
+  const user = firebase.auth().currentUser;
+  const { email, password, newPassword } = userInfo;
 
+  return reauthenticate(user, password)
+    .then(() => user.updatePassword(newPassword)
+      .then(() => {
+        return 'Password Updated';
+      })
+      .catch(err => {
+        console.log('email, password', email, password);
+        throw new Error(err.message);
+      }))
+    .catch(err => {
+      console.log('err*', err);
+      throw (err.message);
+    });
 };
 
 // ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)

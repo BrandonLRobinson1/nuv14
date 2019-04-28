@@ -44,6 +44,7 @@ const tabIcon = ({ focused, title }) => <Icon name="rocket" size={20} color={NU_
 
 const StarIcon = ({ focused, title }) => <Icon name="star" size={20} color={focused ? 'white' : 'green'} />
 
+// TODO: 🔥 trim and to lowercase all user inputs - before saving!!!!!!
 
 class RouterComponent extends Component {
   componentWillMount() {
