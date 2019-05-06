@@ -6,7 +6,7 @@ import { colors, commonStyles } from '../../../Styles';
 
 const { NU_Red , NU_Blue, NU_White, NU_Grey, NU_Border_Grey } = colors; // eslint-disable-line
 const { horizontalFlex, NU_Paragraph_Text, NU_Small_Header_Text, leftAndRightPadding } = commonStyles;
-
+                  //************************ might end section with a appt details(place time date nail package - might make appointment store), picture, and map location again
 // eslint-disable-next-line
 class ApptHome extends Component {
   // constructor() {

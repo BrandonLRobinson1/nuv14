@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import {
   Button,
@@ -12,8 +12,10 @@ import {
   updateFirstName,
   updateLastName,
   updateZipCode,
-  setBio
+  updateUserInfo
+  // setBio
 } from '../../../../../store/userInfo/user';
+import { allLettersRegEx, allNumbersRegEx } from '../../../../../helpers/helpersFunctions';
 import { colors } from '../../../../../Styles';
 
 class EditAccouunt extends Component {
@@ -24,8 +26,7 @@ class EditAccouunt extends Component {
       errorMessage: '',
       firstName: '',
       lastName: '',
-      zip: '',
-      bio: ''
+      zipCode: ''
     };
     this.onButtonPress = this.onButtonPress.bind(this);
     this.renderButton = this.renderButton.bind(this);
@@ -37,14 +38,31 @@ class EditAccouunt extends Component {
 
   // eslint-disable-next-line
   async onButtonPress() {
-    // const {
-    //   firstName,
-    //   lastName,
-    //   zip,
-    //   bio
-    // } = this.state;
-
-    console.log('firstName, lastName, zip, bio', firstName, lastName, zip, bio);
+    const { firstName, lastName, zipCode } = this.state;
+    const { updateUserInfo } = this.props;
+    // if (!allLettersRegEx(firstName) || firstName.length < 2) return this.setState({ errorMessage: 'Please Enter Valid First Name' });
+    // if (!allLettersRegEx(lastName) || lastName.length < 2) return this.setState({ errorMessage: 'Please Enter Valid Last Name' });
+    // if (!allNumbersRegEx(zipCode) || zipCode.length !== 5) return this.setState({ errorMessage: 'Please Enter Valid zipCode Code' });
+    const userInfo = { firstName, lastName, zipCode };
+    updateUserInfo(userInfo)
+      .then(() => {
+        Alert.alert('Success', 'Info Updated 😄');
+        this.setState({
+          errorMessage: '',
+          firstName: '',
+          lastName: '',
+          zipCode: ''
+        })
+      })
+      .catch(failedMessage => {
+        console.log('hmm')
+        this.setState({
+          errorMessage: failedMessage,
+          firstName: '',
+          lastName: '',
+          zipCode: ''
+        });
+     });
     // validate and pass to thunk to update redux and send to firebase
   }
 
@@ -66,8 +84,7 @@ class EditAccouunt extends Component {
       errorMessage,
       firstName,
       lastName,
-      zip,
-      bio
+      zipCode
     } = this.state;
 
     return (
@@ -102,26 +119,12 @@ class EditAccouunt extends Component {
 
         <CardSection>
           <Input
-            label="zip"
-            placeholder="zip"
-            value={zip}
+            label="zipCode"
+            placeholder="zipCode"
+            value={zipCode}
             onChangeText={text => {
               this.setState({
-                zip: text,
-                errorMessage: ''
-              });
-            }}
-          />
-        </CardSection>
-
-        <CardSection>
-          <Input
-            label="Bio"
-            placeholder="Bio"
-            value={bio}
-            onChangeText={text => {
-              this.setState({
-                bio: text,
+                zipCode: text,
                 errorMessage: ''
               });
             }}
@@ -147,14 +150,15 @@ export default connect(
     firstName: state.userInfo.user.firstName,
     lastName: state.userInfo.user.lastName,
     zipCode: state.userInfo.user.zipCode,
-    profilePic: state.userInfo.user.profilePic,
-    bio: state.userInfo.user.bio
+    profilePic: state.userInfo.user.profilePic
+    // bio: state.userInfo.user.bio
   }),
   {
     updateFirstName,
     updateLastName,
     updateZipCode,
-    setBio
+    updateUserInfo
+    // setBio
   },
 )(EditAccouunt);
 

@@ -257,6 +257,22 @@ export const updateUserPassword = userInfo => async dispatch => {
     });
 };
 
+export const updateUserInfo = userInfo => async dispatch => {
+  const user = firebase.auth().currentUser;
+  const { firstName, lastName, zipCode } = userInfo;
+
+  const userRef = firebase.database().ref(`/users/testAccounts/FINDME/${user.uid}`);
+  userRef.child('/-Le8i7VGCjxhpOl4KJwK').update({ // this is where you can filter whats updated
+    firstName,
+    lastName,
+    zipCode
+  })
+    .then(() => 'Email Updated') // TODO: cant seem to find to test a failing case
+    .catch(err => {
+      throw new Error(err);
+    });
+};
+
 // ===>> favorites and history would live on the user profile, featured wouldnt but theyll all be the same TYPE of arrays (same objs)
 export const getAppData = () => dispatch => { // should be in its own store since its discover data
   const { currentUser } = firebase.auth();

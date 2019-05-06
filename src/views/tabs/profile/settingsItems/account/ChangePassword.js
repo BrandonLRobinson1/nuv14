@@ -20,12 +20,9 @@ class ChangePassword extends Component {
     this.state = {
       errorMessage: '',
       loading: null,
-      // newPassword1: '',
-      // newPassword2: '',
-      // password: ''
-      newPassword1: '111111$',
-      newPassword2: '111111$',
-      password: '111111@'
+      newPassword1: '',
+      newPassword2: '',
+      password: ''
     };
     this.onButtonPress = this.onButtonPress.bind(this);
     this.renderButton = this.renderButton.bind(this);

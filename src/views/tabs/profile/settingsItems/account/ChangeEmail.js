@@ -20,21 +20,15 @@ class ChangeEmail extends Component {
     this.state = {
       errorMessage: '',
       loading: null,
-      // oldEmail: '',
-      // newEmail1: '',
-      // newEmail2: '',
-      // password: ''
-      oldEmail: 'bb@go.com',
-      newEmail1: 'bbb@go.com',
-      newEmail2: 'bbb@go.com',
-      password: '111111!'
+      oldEmail: '',
+      newEmail1: '',
+      newEmail2: '',
+      password: ''
     };
     this.onButtonPress = this.onButtonPress.bind(this);
     this.renderButton = this.renderButton.bind(this);
   }
 
-  // Ght@g.co
-  // Ght@g.com
   // eslint-disable-next-line
   async onButtonPress() {
     // const { email, updateEmailAddress } = this.props; // eslint-disable-line

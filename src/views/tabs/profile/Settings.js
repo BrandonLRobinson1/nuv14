@@ -50,19 +50,18 @@ class Setting extends Component {
     ];
 
     const privacySettings = [
-      { name: 'Privacy', sceneLocation: 'name' }
+      { name: 'Privacy Policy', sceneLocation: 'LegalDoc' }
     ];
 
-    const paymentSettings = [
-      { name: 'CardInfo', sceneLocation: 'name' },
-      { name: 'Plan', sceneLocation: 'name' }
-    ];
+    // const paymentSettings = [
+    //   { name: 'CardInfo', sceneLocation: 'name' },
+    //   { name: 'Plan', sceneLocation: 'name' }
+    // ];
 
     const support = [
-      { name: 'Help Center', sceneLocation: 'name' },
-      { name: 'Terms and Conditions', sceneLocation: 'thingA' },
-      { name: 'Privacy Policy', sceneLocation: 'thingB' },
-      { name: 'Email Us', sceneLocation: 'thingB' }
+      { name: 'FAQ/Help Center', sceneLocation: 'FAQ' },
+      { name: 'Terms and Conditions', sceneLocation: 'LegalDoc' },
+      { name: 'Contact Us', sceneLocation: 'ContactUs' }
     ];
 
     return (
@@ -72,10 +71,11 @@ class Setting extends Component {
           <ScrollView>
             {this.buildSettings('Account', nameSettings)}
             {this.buildSettings('Privacy', privacySettings)}
-            {this.buildSettings('Payment Info', paymentSettings)}
+            {/* {this.buildSettings('Payment Info', paymentSettings)} */}
             {this.buildSettings('Support', support)}
             <Text style={logOut}>Log Out - big red button</Text>
             <Text>Version</Text>
+            <Text>need something to click to take you to billing</Text>
             <Text>This app was created by sososo group</Text>
             <Text>www.sososo.com</Text>
           </ScrollView>

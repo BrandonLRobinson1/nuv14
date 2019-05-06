@@ -35,6 +35,9 @@ import Settings from './src/views/tabs/profile/Settings';
 import EditAccount from './src/views/tabs/profile/settingsItems/account/EditAccount';
 import ChangeEmail from './src/views/tabs/profile/settingsItems/account/ChangeEmail';
 import ChangePassword from './src/views/tabs/profile/settingsItems/account/ChangePassword';
+import LegalDoc from './src/views/tabs/profile/settingsItems/account/LegalDoc';
+import FAQ from './src/views/tabs/profile/settingsItems/account/FAQ';
+import ContactUs from './src/views/tabs/profile/settingsItems/account/ContactUs';
 
 import { colors } from './src/Styles';
 
@@ -280,6 +283,27 @@ class RouterComponent extends Component {
                 key="ChangePassword"
                 component={ChangePassword}
                 title="Edit Password"
+                backTitle=""
+                rightTitle=""
+              />
+              <Scene
+                key="LegalDoc"
+                component={LegalDoc}
+                title=""
+                backTitle=""
+                rightTitle=""
+              />
+              <Scene
+                key="FAQ"
+                component={FAQ}
+                title="FAQ"
+                backTitle=""
+                rightTitle=""
+              />
+              <Scene
+                key="ContactUs"
+                component={ContactUs}
+                title="Contact Us"
                 backTitle=""
                 rightTitle=""
               />

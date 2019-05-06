@@ -20,9 +20,9 @@ class SignUp extends Component {
 
   onButtonPress() {
     const { firstName, lastName, zipCode } = this.props; // eslint-disable-line
-    if (!allLettersRegEx(firstName)) return this.setState({ errorMessage: 'Please Enter Valid First Name' });
-    if (!allLettersRegEx(lastName)) return this.setState({ errorMessage: 'Please Enter Valid Last Name' });
-    if (!allNumbersRegEx(zipCode)) return this.setState({ errorMessage: 'Please Enter Valid Zip Code' });
+    if (!allLettersRegEx(firstName) || firstName.length < 2) return this.setState({ errorMessage: 'Please Enter Valid First Name' });
+    if (!allLettersRegEx(lastName) || lastName.length < 2) return this.setState({ errorMessage: 'Please Enter Valid Last Name' });
+    if (!allNumbersRegEx(zipCode) || zipCode.length !== 5) return this.setState({ errorMessage: 'Please Enter Valid Zip Code' });
     return Actions['Phone Number']();
   }
 
