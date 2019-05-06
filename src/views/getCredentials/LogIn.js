@@ -31,7 +31,7 @@ class LogIn extends Component {
     const { email, updateLogInPassword, logUserIn } = this.props; // eslint-disable-line
     if (!emailRegEx(email)) return this.setState({ errorMessage: 'The email address is badly formatted.' });
 
-    updateLogInPassword(`findout how to encrypt in front end ${password}`);
+    updateLogInPassword(password);
 
     this.setState({ loading: true });
 

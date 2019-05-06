@@ -45,7 +45,7 @@ class Setting extends Component {
     const nameSettings = [
       { name: 'Account Info', sceneLocation: 'EditAccount' },
       { name: 'Change Email', sceneLocation: 'ChangeEmail' },
-      { name: 'Reset Password', sceneLocation: 'EditAccount' },
+      { name: 'Reset Password', sceneLocation: 'ChangePassword' },
       { name: 'Change Photo', sceneLocation: 'EditAccount' }
     ];
 

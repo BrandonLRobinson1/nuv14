@@ -8,75 +8,76 @@ import {
   Input,
   Spinner
 } from '../../../../../common';
-import { updateEmailAddress } from '../../../../../store/userInfo/user';
-import { emailRegEx } from '../../../../../helpers/helpersFunctions';
+import { updateUserPassword } from '../../../../../store/userInfo/user';
 import { colors } from '../../../../../Styles';
+import { specialCharacterValidation } from '../../../../../helpers/helpersFunctions';
 
 const { NU_Red } = colors; // eslint-disable-line
 
-class ChangeEmail extends Component {
+class ChangePassword extends Component {
   constructor() {
     super();
     this.state = {
       errorMessage: '',
       loading: null,
-      // oldEmail: '',
-      // newEmail1: '',
-      // newEmail2: '',
+      // newPassword1: '',
+      // newPassword2: '',
       // password: ''
-      oldEmail: 'bb@go.com',
-      newEmail1: 'bbb@go.com',
-      newEmail2: 'bbb@go.com',
-      password: '111111!'
+      newPassword1: '111111$',
+      newPassword2: '111111$',
+      password: '111111@'
     };
     this.onButtonPress = this.onButtonPress.bind(this);
     this.renderButton = this.renderButton.bind(this);
   }
 
-  // Ght@g.co
-  // Ght@g.com
   // eslint-disable-next-line
   async onButtonPress() {
-    // const { email, updateEmailAddress } = this.props; // eslint-disable-line
+    // const { email, updateUserPassword } = this.props; // eslint-disable-line
     // const newInfo = {
-    //   email: 'Bb@go.co', // email to update to (can watch in firebase)
-    //   // email: 'bb@go.com', //
-    //   // email: 'bb@go.com', //
+    //   email: 'didit5@go1.com', // email to update to (can watch in firebase)
+    //   // email: 'jjjjpppp@gmail.com', //
+    //   // email: 'jjjjpppp@gmail.com', //
     //   password: 'findout how to encrypt in front end Password' // <-- real password!!
     //   // password: 'findout how to encrypt in front en'
     // };
-    // return updateEmailAddress(newInfo)
+    // return updateUserPassword(newInfo)
     //   .then(() => Alert.alert('Success', 'Email Updated 😄'))
     //   .catch(failedMessage => Alert.alert('Uh Oh!', failedMessage));
     // above is for quick and dirty testing 🌩️
 
     // TODO:  🔥make sure all inputs are trimmed otherwise users will get frustrated for result that dont match ❌
-    const { oldEmail, newEmail1, newEmail2, password } = this.state;
-    const { email, updateEmailAddress } = this.props; // eslint-disable-line
-    if (oldEmail !== email) return this.setState({ errorMessage: 'Old email is incorrect' });
-    if (!emailRegEx(newEmail1)) return this.setState({ errorMessage: 'The new email address is badly formatted.' });
-    if (newEmail1 !== newEmail2) return this.setState({ // eslint-disable-line
-      errorMessage: `Email Addresses don't match`, // eslint-disable-line
-      newEmail1: '',
-      newEmail2: ''
+    const { newPassword1, newPassword2, password } = this.state;
+    const { updateUserPassword } = this.props; // eslint-disable-line
+
+    if (newPassword1.length < 7) return this.setState({ errorMessage: 'New password must be at least 7 characters' });
+    if (!specialCharacterValidation(newPassword1) || !specialCharacterValidation(newPassword2)) return this.setState({ errorMessage: 'Password must contain at least one special character' });
+    if (newPassword1 !== newPassword2) return this.setState({
+      errorMessage: 'New passwords do not match',
+      newPassword1: '',
+      newPassword2: ''
     });
+
+    // const salt = bcrypt.genSaltSync(saltRounds);
+    // const hash = bcrypt.hashSync(myPlaintextPassword, salt);
+    // updatePassword(hash);
 
     // do something in redux and firebase
     // this.setState({ loading: true });
 
     const newInfo = {
-      email: newEmail1,
+      newPassword: newPassword1,
       password
     };
 
-    updateEmailAddress(newInfo)
+    console.log('newInfo', newInfo);
+    updateUserPassword(newInfo)
       .then(() => {
-        Alert.alert('Success', 'Email Updated 😄');
+        Alert.alert('Success', 'Password Updated 😄');
         this.setState({
           loading: null,
-          oldEmail: '',
-          newEmail1: '',
-          newEmail2: '',
+          newPassword1: '',
+          newPassword2: '',
           password: ''
         });
       })
@@ -85,9 +86,8 @@ class ChangeEmail extends Component {
         this.setState({
           errorMessage: failedMessage,
           loading: null,
-          oldEmail: '',
-          newEmail1: '',
-          newEmail2: '',
+          newPassword1: '',
+          newPassword2: '',
           password: ''
         });
       });
@@ -110,33 +110,19 @@ class ChangeEmail extends Component {
     const { errorText } = styles; // eslint-disable-line
     const {
       errorMessage,
-      oldEmail,
-      newEmail1,
-      newEmail2,
+      newPassword1,
+      newPassword2,
       password
     } = this.state;
 
     return (
       <Card>
-        <CardSection>
-          <Input
-            label="Previos Email"
-            placeholder="Previos Address"
-            value={oldEmail}
-            onChangeText={text => {
-              this.setState({
-                oldEmail: text,
-                errorMessage: ''
-              });
-            }}
-          />
-        </CardSection>
 
         <CardSection>
           <Input
             secureTextEntry
-            label="Password"
-            placeholder="Password"
+            label="password"
+            placeholder="previous password"
             value={password}
             onChangeText={text => {
               this.setState({
@@ -149,12 +135,13 @@ class ChangeEmail extends Component {
 
         <CardSection>
           <Input
-            label="New Email"
-            placeholder="New Email Address"
-            value={newEmail1}
+            secureTextEntry
+            label="New Password"
+            placeholder="New Password (Again)"
+            value={newPassword1}
             onChangeText={text => {
               this.setState({
-                newEmail1: text,
+                newPassword1: text,
                 errorMessage: ''
               });
             }}
@@ -163,12 +150,13 @@ class ChangeEmail extends Component {
 
         <CardSection>
           <Input
+            secureTextEntry
             label="New Email (Again)"
             placeholder="New Email Address (Again)"
-            value={newEmail2}
+            value={newPassword2}
             onChangeText={text => {
               this.setState({
-                newEmail2: text,
+                newPassword2: text,
                 errorMessage: ''
               });
             }}
@@ -200,9 +188,8 @@ const styles = StyleSheet.create({
 
 export default connect(
   state => ({
-    email: state.userInfo.user.email
   }),
   {
-    updateEmailAddress
+    updateUserPassword
   },
-)(ChangeEmail);
+)(ChangePassword);

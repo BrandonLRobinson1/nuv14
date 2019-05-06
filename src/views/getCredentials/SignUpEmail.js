@@ -44,7 +44,7 @@ class SignUpEmail extends Component {
     // const salt = bcrypt.genSaltSync(saltRounds);
     // const hash = bcrypt.hashSync(myPlaintextPassword, salt);
     // updatePassword(hash);
-    updatePassword(`findout how to encrypt in front end ${pw1}`);
+    updatePassword(pw1);
 
     this.setState({ loading: true });
     await signUserUp()

@@ -34,6 +34,7 @@ import PictureUpload from './src/views/tabs/profile/PictureUpload';
 import Settings from './src/views/tabs/profile/Settings';
 import EditAccount from './src/views/tabs/profile/settingsItems/account/EditAccount';
 import ChangeEmail from './src/views/tabs/profile/settingsItems/account/ChangeEmail';
+import ChangePassword from './src/views/tabs/profile/settingsItems/account/ChangePassword';
 
 import { colors } from './src/Styles';
 
@@ -268,11 +269,17 @@ class RouterComponent extends Component {
                 backTitle=""
                 rightTitle="Edit"
               />
-
               <Scene
                 key="ChangeEmail"
                 component={ChangeEmail}
                 title="Edit Email"
+                backTitle=""
+                rightTitle=""
+              />
+              <Scene
+                key="ChangePassword"
+                component={ChangePassword}
+                title="Edit Password"
                 backTitle=""
                 rightTitle=""
               />

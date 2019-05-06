@@ -160,7 +160,7 @@ export const addFormInfo = () => (dispatch, getState) => {
 
 export const userInfoFetch = () => dispatch => {
   // const { currentUser } = firebase.auth();
-  return firebase.database().ref(`/users/testAccounts/FINDME/lL9zn1tBv4b5YnxqysAuXfC8JQg1/-Ld_F4LO8QBgEBzppYbT`)
+  return firebase.database().ref(`/users/testAccounts/FINDME/u3cpy3UdMoWHThsme7XGyDLnl8G3/-Le8i7VGCjxhpOl4KJwK`)
   // return firebase.database().ref('/users/testAccounts/vdSfqJpFXidXXy9RAgyWqDxEx6I3/-LKy4WpC_8mhAKMaMkvo')
   // firebase.database().ref(`/users/testAccounts/${currentUser.uid}`) // dCpWn7CLu9bx3ZVEoBOx8bNdINT2
     .on('value', snapshot => {
@@ -212,9 +212,9 @@ export const updateEmailAddress = userInfo => async dispatch => {
       user.updateEmail(email)
         // will only run this 'then' if the email update is succesful so it may not be that error prone
         .then(() => {
-          // TODO: user.uid and bucket '/-Ld_F4LO8QBgEBzppYbT' are not connected as i thought
+          // TODO: user.uid and bucket '/-Le8i7VGCjxhpOl4KJwK' are not connected as i thought
           const userRef = firebase.database().ref(`/users/testAccounts/FINDME/${user.uid}`);
-          userRef.child('/-Ld_F4LO8QBgEBzppYbT').update({ email })
+          userRef.child('/-Le8i7VGCjxhpOl4KJwK').update({ email })
             .then(() => 'Email Updated')
             .catch(err => {
               throw new Error(err);
@@ -231,15 +231,24 @@ export const updateEmailAddress = userInfo => async dispatch => {
     });
 };
 
+// https://firebase.google.com/docs/auth/web/manage-users
+// var auth = firebase.auth();
+// var emailAddress = "user@example.com";
+
+// auth.sendPasswordResetEmail(emailAddress).then(function() {
+//   // Email sent.
+// }).catch(function(error) {
+//   // An error happened.
+// });
 export const updateUserPassword = userInfo => async dispatch => {
   const user = firebase.auth().currentUser;
-  const { email, password, newPassword } = userInfo;
+  const { password, newPassword } = userInfo;
 
   return reauthenticate(user, password)
     .then(() => user.updatePassword(newPassword)
       .then(() => 'Password Updated')
       .catch(err => {
-        console.log('email, password', email, password);
+        console.log('!password', password);
         throw new Error(err.message);
       }))
     .catch(err => {
