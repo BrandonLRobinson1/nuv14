@@ -13,6 +13,8 @@ export const CARD_WIDTH = CARD_HEIGHT - 50;
 
 console.log('Platform', Platform);
 
+// TODO: MAYBE style app with https://www.npmjs.com/package/react-native-elements --> https://react-native-training.github.io/react-native-elements/docs/badge.html
+
 export const colors = {
   NU_Red: 'red',
   NU_Blue: 'blue',
