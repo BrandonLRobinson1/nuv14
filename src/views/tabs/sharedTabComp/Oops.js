@@ -33,7 +33,6 @@ const Oops = ({ compName, retry }) => {
         </View>
       </View>
     </View>
-
   );
 };
 

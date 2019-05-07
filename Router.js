@@ -126,7 +126,7 @@ class RouterComponent extends Component {
 
             titleStyle={HeaderTitleColor}
           >
-{/*
+
             <Scene key="featured" title="Discover" icon={StarIcon} initial>
               <Scene
                 key="DiscoverMainTab"
@@ -208,9 +208,9 @@ class RouterComponent extends Component {
                 onLeft={() => Actions.pop()}
               />
             </Scene>
-*/}
+
             <Scene key="profile" title="Profile" icon={tabIcon}>
-{/*
+
               <Scene
                 key="userProfile"
                 component={UserProfile}
@@ -249,7 +249,7 @@ class RouterComponent extends Component {
                 backTitle=" "
                 onLeft={() => Actions.pop()}
               />
-*/}
+
               <Scene
                 key="Settings"
                 component={Settings}
@@ -330,11 +330,11 @@ class RouterComponent extends Component {
 
 const styles = StyleSheet.create({
   topNavHeaderStyle: {
-    backgroundColor: 'orange', // changing navbar color
+    backgroundColor: 'red', // changing navbar color
     color: NU_White
   },
   tabBackgroundColor: {
-    backgroundColor: 'yellow'
+    backgroundColor: 'black'
   },
   HeaderTitleColor: {
     color: 'white'
@@ -370,7 +370,6 @@ export default connect(
     };
   },
   {
-
     getActiveNailTechs,
     userInfoFetch,
     getAppData
