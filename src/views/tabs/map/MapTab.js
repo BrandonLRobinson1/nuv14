@@ -427,47 +427,81 @@ const styles = StyleSheet.create({
     right: 0,
     paddingVertical: 10,
     width: '100%',
-    borderColor: 'black'
+    borderColor: 'black',
 
-
-    ,backgroundColor: 'pink',
+    backgroundColor: 'blue'
+    
   },
   endPadding: {
     paddingRight: phoneWidth - CARD_WIDTH - ((phoneWidth - CARD_WIDTH) * 0.6),
     borderColor: 'black'
   },
+  // card: {
+  //   padding: 10,
+  //   margin: 1.5,
+  //   elevation: 3,
+  //   backgroundColor: NU_Background,
+  //   marginHorizontal: 10,
+  //   shadowColor: NU_Card_Border,
+  //   shadowRadius: 5,
+  //   shadowOpacity: 0.3,
+  //   shadowOffset: { x: 2, y: -2 },
+  //   height: CARD_HEIGHT,
+  //   width: CARD_WIDTH,
+  //   overflow: 'hidden',
+  //   borderRadius: 3,
+  // },
+  // cardBack: {
+  //   height: CARD_HEIGHT + 5,
+  //   width: CARD_WIDTH + 4,
+  //   backgroundColor: NU_Red,
+  //   borderRadius: 6,
+  //   position: 'absolute',
+  //   bottom: -1.4,
+  //   // left: 0,
+  //   right: 8,
+  //   // paddingVertical: 10,
+  // },
+  // cardImage: {
+  //   flex: 3,
+  //   width: '100%',
+  //   height: '100%',
+  //   alignSelf: 'center'
+  // },
+
   card: {
     padding: 10,
-    margin: 1.5,
+    margin: 5,
     elevation: 3,
     backgroundColor: NU_Background,
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     shadowColor: NU_Card_Border,
     shadowRadius: 5,
     shadowOpacity: 0.3,
     shadowOffset: { x: 2, y: -2 },
-    height: CARD_HEIGHT,
-    width: CARD_WIDTH,
-    overflow: 'hidden',
-    borderRadius: 3,
+    height: (CARD_HEIGHT - (CARD_HEIGHT / 4)),
+    width: (phoneWidth - (phoneWidth / 8)),
+    // overflow: 'hidden',
+    borderRadius: 3
   },
   cardBack: {
-    height: CARD_HEIGHT + 5,
-    width: CARD_WIDTH + 4,
-    backgroundColor: NU_Red,
-    borderRadius: 6,
-    position: 'absolute',
-    bottom: -1.4,
-    // left: 0,
-    right: 8,
+    // height: CARD_HEIGHT + 5,
+    // width: CARD_WIDTH + 4,
+    // backgroundColor: NU_Red,
+    // borderRadius: 6,
+    // position: 'absolute',
+    // bottom: -1.4,
+    // // left: 0,
+    // right: 8,
     // paddingVertical: 10,
   },
   cardImage: {
-    flex: 3,
-    width: '100%',
-    height: '100%',
-    alignSelf: 'center'
+    // flex: 3,
+    // width: '100%',
+    // height: '100%',
+    // alignSelf: 'center'
   },
+
   textContent: {
     flex: 1,
     justifyContent: 'center',
@@ -530,6 +564,539 @@ export default connect(
     setMapLoading
   }
 )(Maptab);
+
+// import React, { Component } from 'react';
+// import {
+//   StyleSheet,
+//   Text,
+//   View,
+//   Animated,
+//   Image,
+//   TouchableOpacity
+// } from 'react-native';
+// import { connect } from 'react-redux';
+// import { Actions } from 'react-native-router-flux';
+// import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+// import propTypes from 'prop-types';
+// import Oops from '../sharedTabComp/Oops';
+// import CustomMarker from './CustomMarker';
+// import { FullCard, Spinner, Button } from '../../../common';
+// import { setCurrentLocation, getActiveNailTechs, getinitialDelta, setMapLoading, setActiveNailTechs } from '../../../store/location/locationServices';
+// import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth, commonStyles } from '../../../Styles';
+
+// // his.state.callsToMap > 3 render oops page TODO
+
+// // for line 330!!! took it out so it wont ping my account with fe
+// // provider={PROVIDER_GOOGLE}
+
+// const { NU_Small_Header_Text } = commonStyles;
+// const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
+
+// // TODO need to add a button over map to take you to current or zip code saved location
+// class Maptab extends Component {
+//   constructor() {
+//     super();
+
+//     this.state = {
+//       markers: null,
+//       initialPosition: null,
+//       callsToMap: 0
+//     };
+
+//     this.onCardClick = this.onCardClick.bind(this);
+//     this.getLocationInformation = this.getLocationInformation.bind(this);
+//     this.getMapInfo = this.getMapInfo.bind(this);
+//     this.onMarkerClick = this.onMarkerClick.bind(this);
+//     this.refetchButton = this.refetchButton.bind(this);
+//   }
+
+//   componentDidMount() {
+//     console.log('keep in mind this fires when you try to change address');
+//     this.index = 0;
+//     this.animation = new Animated.Value(0);
+//     navigator.geolocation.clearWatch(this.watchID); // eslint-disable-line
+//     this.getMapInfo(); // might wanna have a check to see if a prop is true since you can enter from home or from change adress, in the case of changing address can enter different function, or just wait til you have that info and then switch pages
+//   }
+
+//   componentWillUnmount() {
+//     this.index = 0;
+//     this.animation = new Animated.Value(0);
+//     navigator.geolocation.clearWatch(this.watchID); // eslint-disable-line
+//     this.regionTimeout = 0;
+//     this.timer = 0;
+//     console.log('UNMOUNT');
+//   }
+
+//   async getMapInfo() { // eslint-disable-line
+//     const { loadingMapData, getActiveNailTechs, getinitialDelta, regionObj, deltas, activeNailTechs } = this.props; // eslint-disable-line
+//     const { callsToMap } = this.state;
+//     const isArr = Array.isArray(activeNailTechs);
+
+//     if (callsToMap >= 3) return 0;
+
+//     if (loadingMapData) {
+//       await this.setState({ callsToMap: callsToMap + 1 });
+//       return setTimeout(() => this.getMapInfo(), 750);
+//     }
+
+//     if (!isArr) await getActiveNailTechs();
+
+//     if (isArr && !deltas) getinitialDelta();
+
+//     // if (isArr && regionObj && deltas) return this.getLocationInformation(); // 🌎🌎🌎 starts map
+//     if (isArr && regionObj && deltas) {
+//       console.log('😎😎😎 activeNailTechs', activeNailTechs);
+//       console.log('😎😎😎 regionObj', regionObj);
+//       console.log('😎😎😎 deltas', deltas);
+//       return this.getLocationInformation();
+//     }
+
+//     if (!isArr || !deltas || !regionObj) {
+//       await this.setState({ callsToMap: callsToMap + 1 });
+//       return setTimeout(() => this.getMapInfo(), 750);
+//     }
+//   }
+
+//   // eslint-disable-next-line
+//   onCardClick (person) {
+//   // capture info for confirmed visit and details in the redux on they book apt, build big info obj
+//     console.log('marker', person);
+//   }
+
+//   onMarkerClick() {
+//     this.setState({
+//       ...this.state
+//     });
+
+//     Animated.event(
+//       [
+//         {
+//           nativeEvent: {
+//             contentOffset: {
+//               x: this.animation
+//             }
+//           }
+//         }
+//       ],
+//       { useNativeDriver: true }
+//     );
+//   }
+
+//   // need to run the same logic a componentwillmount to fetch information
+//   getLocationInformation() {
+//     let { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, deltas, activeNailTechs } = this.props;
+
+//     const markers = activeNailTechs;
+//     const init = deltas;
+
+//     const dt = new Date();
+//     const utcDate = dt.toUTCString(); // unique timestamp with date
+
+//     // private will pull generic location, otherwise either use built in get location from phone or cached location
+//     if (regionObj !== 'PRIVATE_LOCATION') { // need to check for private region info not FALSY
+//       console.log('fired 4 - location isnt private', regionObj, init, markers);
+
+//       // const firstMarker = markers[0].coordinate;
+//       const firstMarker = ((markers[0] || {}).coordinate) || false;
+
+//       const initialRegion = {
+//         latitude: firstMarker.latitude || regionObj.latitude,
+//         longitude: firstMarker.longitude || regionObj.longitude,
+//         latitudeDelta: init.latitudeDelta || latDelta,
+//         longitudeDelta: init.longitudeDelta || longDelta,
+//         timeStamp: utcDate
+//       };
+
+//       // const initialRegion = {
+//       //   latitude: regionObj.latitude,
+//       //   longitude: regionObj.longitude,
+//       //   latitudeDelta: latDelta,
+//       //   longitudeDelta: longDelta,
+//       //   timeStamp: utcDate
+//       // };
+
+//       console.log("&&&&&&&&&&&& initialRegion", initialRegion)
+//       // console.log("&&&&&&&&&&&& firstMarker", firstMarker)
+//       console.log("&&&&&&&&&&&& init", init)
+//       console.log("&&&&&&&&&&&& regionObj", regionObj)
+//       console.log("&&&&&&&&&&&& latDelta", latDelta)
+//       console.log("&&&&&&&&&&&& longDelta", longDelta)
+
+//       // 🚨🚨🚨🚨 this is STRICTLY to make the home postion the first map focus, to do this properly it needs to be done in redux and not here
+//       // initialRegion.latitude = 37.773;
+//       // initialRegion.longitude = -122.396;
+//       // this is STRICTLY to make the home postion the first map focus, to do this properly it needs to be done in redux and not here
+
+//       this.setState({
+//         initialPosition: initialRegion,
+//         markers
+//       });
+
+//     } else {
+//       console.log('fired 3 now with init', regionObj, init, markers);
+//       navigator.geolocation.clearWatch(this.watchID);
+
+//       navigator.geolocation.getCurrentPosition(position => {
+//         const latitude = parseFloat(position.coords.latitude);
+//         const longitude = parseFloat(position.coords.longitude);
+
+//         const initialRegion = {
+//           latitude,
+//           longitude,
+//           latitudeDelta: init.latitudeDelta || latDelta,
+//           longitudeDelta: init.longitudeDelta || longDelta,
+//           timeStamp: utcDate // may want to assiociate timestamp with sessions
+//         };
+
+//         this.setState({
+//           initialPosition: initialRegion,
+//           markers
+//         });
+
+//         setCurrentLocation(initialRegion);
+//       },
+//       error => console.error(JSON.stringify(error)),
+//       { enableHighAccuracy: true, timeout: 40000, maximumAge: 2000 }
+//       )
+
+//       this.watchID = navigator.geolocation.watchPosition(position => {
+//         const latitude = parseFloat(position.coords.latitude);
+//         const longitude = parseFloat(position.coords.longitude);
+
+//         const lastRegion = {
+//           latitude,
+//           longitude,
+//           latitudeDelta: init.latitudeDelta || latDelta,
+//           longitudeDelta: init.longitudeDelta || longDelta,
+//           timeStamp: utcDate
+//         }
+
+//         this.setState({
+//           initialPosition: lastRegion
+//         });
+
+//       });
+//     }
+
+//     // // We should detect when scrolling has stopped then animate
+//     // // We should just debounce the event listener here
+//     this.animation.addListener(({ value }) => {
+//       let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+//       if (index >= this.state.markers.length) {
+//         index = this.state.markers.length - 1;
+//       }
+//       if (index <= 0) {
+//         index = 0;
+//       }
+
+//       this.regionTimeout = setTimeout(() => {
+//         if (this.index !== index) {
+//           this.index = index;
+//           const { coordinate } = this.state.markers[index];
+//           // changes the region you animate too and keeps your deltas *****
+//           this.map.animateToRegion(
+//             {
+//               ...coordinate,
+//               latitudeDelta: this.state.initialPosition.latitudeDelta,
+//               longitudeDelta: this.state.initialPosition.longitudeDelta
+//             },
+//             350
+//           );
+//         }
+//       }, 10);
+//     });
+//   }
+
+//   async refetchButton() {
+//     const { loadingMapData, getActiveNailTechs, getinitialDelta, regionObj, deltas, activeNailTechs,  } = this.props; // eslint-disable-line
+//     const { callsToMap } = this.state;
+//     const isArr = Array.isArray(activeNailTechs);
+
+//     if (!Array.isArray(this.props.activeNailTechs)) this.props.setActiveNailTechs('');
+//     await this.setState({ callsToMap: 0 }); // <=== i dont think t
+//     return this.getMapInfo();
+//   }
+
+//   render() {
+//     const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton } = styles;
+//     const { initialPosition, markers, callsToMap } = this.state;
+//     console.log('🔥🔥🔥🔥');
+//     console.log('🕔 maptab rerender - render amount direct affected by timer');
+//     // console.log('NNNNNNNN render', this.state.callsToMap)
+
+
+//     let interpolations;
+//     if (markers && markers.length) {
+//       interpolations = markers.map((marker, index) => {
+//         const inputRange = [
+//           (index - 1) * CARD_WIDTH,
+//           index * CARD_WIDTH,
+//           (index + 1) * CARD_WIDTH
+//         ];
+
+//         const scale = this.animation.interpolate({
+//           inputRange,
+//           outputRange: [1, 1.35, 1],
+//           extrapolate: 'clamp'
+//         });
+//         const opacity = this.animation.interpolate({
+//           inputRange,
+//           outputRange: [0.35, 1, 0.35],
+//           extrapolate: 'clamp'
+//         });
+
+//         const cardBorder = this.animation.interpolate({
+//           inputRange,
+//           outputRange: [0, 1, 0],
+//           extrapolate: 'clamp'
+//         });
+//         return { scale, opacity, cardBorder };
+//       });
+//     }
+
+//     if (callsToMap >= 3) return ( // eslint-disable-line
+//       <Oops
+//         compName="Map Page"
+//         retry={() => this.refetchButton()}
+//       />
+//     );
+
+//     // eslint-disable-next-line
+//     if (initialPosition && Array.isArray(markers)) return (
+//       <View style={container}>
+
+//         <MapView
+
+//           ref={map => this.map = map} // eslint-disable-line
+//           initialRegion={initialPosition}
+//           style={container}
+//         >
+
+//           {markers.map((marker, index) => {
+//             const scaleStyle = {
+//               transform: [
+//                 {
+//                   scale: interpolations[index].scale
+//                 }
+//               ]
+//             };
+//             const opacityStyle = {
+//               opacity: interpolations[index].opacity
+//             };
+
+//             return (
+//               <MapView.Marker
+//                 key={index}
+//                 coordinate={marker.coordinate}
+//                 onPress={() => Actions.ProfilePageMap({ personData: marker })}
+//               >
+//                 <Animated.View style={[markerWrap, opacityStyle, scaleStyle, markerSize]}>
+//                   <CustomMarker />
+//                 </Animated.View>
+//               </MapView.Marker>
+//             );
+//           }) }
+
+//           {/* below is an optional your location marker */}
+//           <MapView.Marker
+//             coordinate={{ latitude: 37.773, longitude: -122.396 }}
+//             pinColor={NU_White}
+//           />
+
+//         </MapView>
+
+//         <Animated.ScrollView
+//           horizontal
+//           scrollEventThrottle={1}
+//           showsHorizontalScrollIndicator
+//           snapToInterval={CARD_WIDTH}
+//           onScroll={Animated.event(
+//             [
+//               {
+//                 nativeEvent: {
+//                   contentOffset: {
+//                     x: this.animation
+//                   }
+//                 }
+//               }
+//             ],
+//             { useNativeDriver: true }
+//           )}
+//           style={scrollView}
+//           contentContainerStyle={endPadding}
+//         >
+
+//           {markers.map((marker, index) => {
+//             // ⭐ fixx --> source={marker.image}
+//             const opacityStyleBorder = { opacity: interpolations[index].cardBorder };
+//             return (
+//               <View key={index}>
+//               {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
+//                 <Animated.View style={[cardBack, opacityStyleBorder, { display: 'flex' }]} />
+//                 <View style={card}>
+//                   <Image
+//                     source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj48iGzNhumqSY2EA3ZQ_Ns5uAvo4vxEapWSBbJ5tmPut-GqPw' }}
+//                     style={cardImage}
+//                     resizeMode="cover"
+//                   />
+//                   <View style={textContent}>
+//                     <Text numberOfLines={1} style={NU_Small_Header_Text}>
+//                       {marker.title}
+//                     </Text>
+//                   </View>
+//                   {/*
+//                     <Text numberOfLines={1} style={cardDescription}>
+//                       {marker.description}
+//                     </Text>
+//                     <Button
+//                       buttonText="Try Again"
+//                       onPress={() =>  { Actions.ProfilePageMap({ personData: marker })}}
+//                     />
+//                    */}
+//                   <TouchableOpacity
+//                     style={[{ flex: 0.6 }, mapCardButton]}
+//                     onPress={() => {
+//                       // Actions.pop();
+//                       Actions.ProfilePageMap({ personData: marker });
+//                     }}
+//                   >
+//                     <Text style={{ fontWeight: '500' }}>
+//                       View
+//                     </Text>
+//                   </TouchableOpacity>
+//                 </View>
+//               </View>
+
+//             );
+//           }) }
+
+//         </Animated.ScrollView>
+
+//       </View>
+//     );
+
+//     return ( // eslint-disable-line
+//       <FullCard>
+//         <Spinner />
+//       </FullCard>
+//     );
+//   }
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1
+//   },
+//   scrollView: {
+//     position: 'absolute',
+//     bottom: 30,
+//     left: 0,
+//     right: 0,
+//     paddingVertical: 10,
+//     width: '100%',
+//     borderColor: 'black'
+
+
+//     ,backgroundColor: 'pink',
+//   },
+//   endPadding: {
+//     paddingRight: phoneWidth - CARD_WIDTH - ((phoneWidth - CARD_WIDTH) * 0.6),
+//     borderColor: 'black'
+//   },
+//   card: {
+//     padding: 10,
+//     margin: 1.5,
+//     elevation: 3,
+//     backgroundColor: NU_Background,
+//     marginHorizontal: 10,
+//     shadowColor: NU_Card_Border,
+//     shadowRadius: 5,
+//     shadowOpacity: 0.3,
+//     shadowOffset: { x: 2, y: -2 },
+//     height: CARD_HEIGHT,
+//     width: CARD_WIDTH,
+//     overflow: 'hidden',
+//     borderRadius: 3,
+//   },
+//   cardBack: {
+//     height: CARD_HEIGHT + 5,
+//     width: CARD_WIDTH + 4,
+//     backgroundColor: NU_Red,
+//     borderRadius: 6,
+//     position: 'absolute',
+//     bottom: -1.4,
+//     // left: 0,
+//     right: 8,
+//     // paddingVertical: 10,
+//   },
+//   cardImage: {
+//     flex: 3,
+//     width: '100%',
+//     height: '100%',
+//     alignSelf: 'center'
+//   },
+//   textContent: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center'
+//   },
+//   cardDescription: {
+//     fontSize: 12,
+//     color: NU_Text_Desc
+//   },
+//   markerSize: {
+//     width: 100,
+//     height: 40
+//   },
+//   markerWrap: {
+//     alignItems: 'center',
+//     justifyContent: 'center'
+//   },
+//   mapCardButton: {
+//     backgroundColor: NU_Red,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     borderRadius: 5
+//   }
+// });
+
+// Maptab.propTypes = {
+//   setCurrentLocation: propTypes.func.isRequired,
+//   getActiveNailTechs: propTypes.func.isRequired,
+//   getinitialDelta: propTypes.func.isRequired,
+//   loadingMapData: propTypes.bool.isRequired,
+//   /* eslint-disable */
+//   regionObj: propTypes.object,
+//   deltas: propTypes.object,
+//   activeNailTechs: propTypes.array
+//   /* eslint-enable */
+// };
+
+// Maptab.defaultProps = {
+//   regionObj: null,
+//   deltas: null,
+//   activeNailTechs: null
+// };
+
+// export default connect(
+//   state => {
+//     // console.log('state', state)
+//     return {
+//       regionObj: state.location.locationServices.regionObj,
+//       activeNailTechs: state.location.locationServices.activeNailTechs,
+//       deltas: state.location.locationServices.deltas,
+//       favorites: state.userInfo.user.favorites, // be sure to change this where ever the markers are in the code so that it listens for the prop that gets the map info to renender when waiting
+//       loadingMapData: state.location.locationServices.loadingMapData
+//     };
+//   },
+//   {
+//     setActiveNailTechs,
+//     setCurrentLocation,
+//     getActiveNailTechs,
+//     getinitialDelta,
+//     setMapLoading
+//   }
+// )(Maptab);
 
 
 // works dolo - meaning if the api isnt called on load this will do the job

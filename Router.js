@@ -126,7 +126,7 @@ class RouterComponent extends Component {
 
             titleStyle={HeaderTitleColor}
           >
-
+{/*
             <Scene key="featured" title="Discover" icon={StarIcon} initial>
               <Scene
                 key="DiscoverMainTab"
@@ -164,7 +164,7 @@ class RouterComponent extends Component {
                 onLeft={() => Actions.pop()}
               />
             </Scene>
-
+*/}
             <Scene key="map" title="Find a salon" icon={tabIcon}>
               <Scene
                 key="mapTab"
