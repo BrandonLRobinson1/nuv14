@@ -24,6 +24,10 @@ import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth, commo
 
 const { NU_Small_Header_Text } = commonStyles;
 const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
+// const heightMeasurments = (CARD_HEIGHT - (CARD_HEIGHT / 4));
+// const widthMeasurments = (phoneWidth - (phoneWidth / 8));
+const heightMeasurments = (CARD_HEIGHT - (CARD_HEIGHT / 3));
+const widthMeasurments = (phoneWidth - (phoneWidth / 8));
 
 // TODO need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
@@ -214,7 +218,8 @@ class Maptab extends Component {
     // // We should detect when scrolling has stopped then animate
     // // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
-      let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+      // let index = Math.floor(value / widthMeasurments + 0.3); // animate 30% away from landing on the next item
+      let index = Math.floor(value / widthMeasurments + 0.3); // animate 30% away from landing on the next item
       if (index >= this.state.markers.length) {
         index = this.state.markers.length - 1;
       }
@@ -253,8 +258,10 @@ class Maptab extends Component {
   render() {
     const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
+
     console.log('🔥🔥🔥🔥');
     console.log('🕔 maptab rerender - render amount direct affected by timer');
+    console.log('widthMeasurments', widthMeasurments);
     // console.log('NNNNNNNN render', this.state.callsToMap)
 
 
@@ -262,9 +269,9 @@ class Maptab extends Component {
     if (markers && markers.length) {
       interpolations = markers.map((marker, index) => {
         const inputRange = [
-          (index - 1) * CARD_WIDTH,
-          index * CARD_WIDTH,
-          (index + 1) * CARD_WIDTH
+          (index - 1) * widthMeasurments,
+          index * widthMeasurments,
+          (index + 1) * widthMeasurments
         ];
 
         const scale = this.animation.interpolate({
@@ -342,7 +349,7 @@ class Maptab extends Component {
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator
-          snapToInterval={CARD_WIDTH}
+          snapToInterval={widthMeasurments + 6.5}
           onScroll={Animated.event(
             [
               {
@@ -429,11 +436,15 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: 'black',
 
-    backgroundColor: 'blue'
-    
+    paddingLeft: 20,
+    // paddingLeft: 5px,
+    backgroundColor: 'blue',
+    // display: 'flex',
+    // justifyContent: 'center',
+    // alignItems: 'center'
   },
   endPadding: {
-    paddingRight: phoneWidth - CARD_WIDTH - ((phoneWidth - CARD_WIDTH) * 0.6),
+    paddingRight: phoneWidth - widthMeasurments - ((phoneWidth - widthMeasurments) * 0.6),
     borderColor: 'black'
   },
   // card: {
@@ -471,7 +482,11 @@ const styles = StyleSheet.create({
 
   card: {
     padding: 10,
-    margin: 5,
+    // margin: 8,
+    marginTop: 12,
+    marginRight: 4,
+    marginBottom: 12,
+    marginLeft: 4,
     elevation: 3,
     backgroundColor: NU_Background,
     // marginHorizontal: 10,
@@ -479,10 +494,14 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 0.3,
     shadowOffset: { x: 2, y: -2 },
-    height: (CARD_HEIGHT - (CARD_HEIGHT / 4)),
-    width: (phoneWidth - (phoneWidth / 8)),
+    height: heightMeasurments,
+    width: widthMeasurments,
     // overflow: 'hidden',
-    borderRadius: 3
+    borderRadius: 3,
+    // display: 'flex',
+    // justifyContent: 'center',
+    // alignContent: 'center',
+    // alignItems: 'center'
   },
   cardBack: {
     // height: CARD_HEIGHT + 5,
