@@ -28,7 +28,7 @@ const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text
 // const widthMeasurments = (phoneWidth - (phoneWidth / 8));
 const heightMeasurments = (CARD_HEIGHT - (CARD_HEIGHT / 3));
 // const widthMeasurments = (phoneWidth - (phoneWidth / 8)); // **
-const widthMeasurments = (phoneWidth - (phoneWidth / 12));
+const widthMeasurments = (phoneWidth - (phoneWidth / 9));
 
 // TODO need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
@@ -350,7 +350,7 @@ class Maptab extends Component {
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator
-          snapToInterval={widthMeasurments + 11}
+          snapToInterval={widthMeasurments + 10.95}
           onScroll={Animated.event(
             [
               {
@@ -437,10 +437,10 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: 'black',
 
-    paddingLeft: 15,
+    paddingLeft: 18
     // paddingRight: 20,
     // paddingLeft: 5px,
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
               // snapToInterval={widthMeasurments + 9.274}
     // display: 'flex',
     // justifyContent: 'center',
@@ -489,9 +489,9 @@ const styles = StyleSheet.create({
     padding: 10,
     // margin: 8,
     marginTop: 12,
-    marginRight: 5.1,
+    marginRight: 5,
     marginBottom: 12,
-    marginLeft: 5.1,
+    marginLeft: 5,
     elevation: 3,
     backgroundColor: NU_Background,
     // marginHorizontal: 10,
