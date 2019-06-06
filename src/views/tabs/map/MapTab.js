@@ -27,7 +27,8 @@ const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text
 // const heightMeasurments = (CARD_HEIGHT - (CARD_HEIGHT / 4));
 // const widthMeasurments = (phoneWidth - (phoneWidth / 8));
 const heightMeasurments = (CARD_HEIGHT - (CARD_HEIGHT / 3));
-const widthMeasurments = (phoneWidth - (phoneWidth / 8));
+// const widthMeasurments = (phoneWidth - (phoneWidth / 8)); // **
+const widthMeasurments = (phoneWidth - (phoneWidth / 9));
 
 // TODO need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
@@ -219,7 +220,7 @@ class Maptab extends Component {
     // // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
       // let index = Math.floor(value / widthMeasurments + 0.3); // animate 30% away from landing on the next item
-      let index = Math.floor(value / widthMeasurments + 0.3); // animate 30% away from landing on the next item
+      let index = Math.floor(value / widthMeasurments + 0.1); // animate 30% away from landing on the next item
       if (index >= this.state.markers.length) {
         index = this.state.markers.length - 1;
       }
@@ -261,7 +262,7 @@ class Maptab extends Component {
 
     console.log('🔥🔥🔥🔥');
     console.log('🕔 maptab rerender - render amount direct affected by timer');
-    console.log('widthMeasurments', widthMeasurments);
+    console.log('snapToInterval={widthMeasurments + 6.5} responsible for map snap', widthMeasurments);
     // console.log('NNNNNNNN render', this.state.callsToMap)
 
 
@@ -349,7 +350,7 @@ class Maptab extends Component {
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator
-          snapToInterval={widthMeasurments + 6.5}
+          snapToInterval={widthMeasurments + 9}
           onScroll={Animated.event(
             [
               {
@@ -437,15 +438,20 @@ const styles = StyleSheet.create({
     borderColor: 'black',
 
     paddingLeft: 20,
+    paddingRight: 20,
     // paddingLeft: 5px,
     backgroundColor: 'blue',
+              // snapToInterval={widthMeasurments + 9.274}
     // display: 'flex',
     // justifyContent: 'center',
     // alignItems: 'center'
   },
   endPadding: {
-    paddingRight: phoneWidth - widthMeasurments - ((phoneWidth - widthMeasurments) * 0.6),
-    borderColor: 'black'
+    // paddingRight: 40
+    paddingRight: 45
+    // paddingRight: phoneWidth - widthMeasurments - ((phoneWidth - widthMeasurments)),
+    // paddingRight: phoneWidth - widthMeasurments - ((phoneWidth - widthMeasurments) * 0.6),
+    // borderColor: 'black'
   },
   // card: {
   //   padding: 10,
