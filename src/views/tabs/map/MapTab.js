@@ -259,10 +259,14 @@ class Maptab extends Component {
   render() {
     const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
+    // const snapMath = (widthMeasurments + (widthMeasurments * 0.0295));
+    // const snapMath = (widthMeasurments + (widthMeasurments * 0.03285)); // ** good for iphone 8 and x
+    const snapMath = (widthMeasurments + (widthMeasurments * 0.03285)); // ** good for iphone 8 and x
 
     console.log('🔥🔥🔥🔥');
     console.log('🕔 maptab rerender - render amount direct affected by timer');
     console.log('snapToInterval={widthMeasurments + 6.5} responsible for map snap', widthMeasurments);
+    console.log('(widthMeasurments * .9)', (widthMeasurments * 0.03285)); // 10.95
     // console.log('NNNNNNNN render', this.state.callsToMap)
 
 
@@ -350,7 +354,7 @@ class Maptab extends Component {
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator
-          snapToInterval={widthMeasurments + 10.95}
+          snapToInterval={snapMath}
           onScroll={Animated.event(
             [
               {

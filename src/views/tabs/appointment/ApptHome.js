@@ -47,7 +47,10 @@ class ApptHome extends Component {
             <View style={buttonContainer}>
               <Button
                 buttonText="Browse Techs"
-                onPress={() => Actions.DiscoverMainTab()}
+                onPress={() => {
+                  Actions.DiscoverMainTab();
+                  Actions.pop();
+                }}
               />
             </View>
           </View>
@@ -274,14 +277,14 @@ const packages = {
   ]
 };
 
-// const appObj = null;
-const appObj = {
-  name: 'extra salon',
-  time: '12:54', // may take utc format
-  date: '12/12/19', // may take utc format
-  street: '123 davie jones drive',
-  regionObj: { latitude: 37.767, longitude: -122.421, latitudeDelta: 0.03148000000000195, longitudeDelta: 0.034317000000001485 },
-  packageChoice: 'seaside wave',
-  phoneNumber: '704-449-6636',
-  uri: 'https://media.wmagazine.com/photos/5ab3b3cd8f35206e675d7d28/4:3/w_1536/beyonce-pledges-to-build-more-wells-in-burundi.jpg'
-};
+const appObj = null;
+// const appObj = {
+//   name: 'extra salon',
+//   time: '12:54', // may take utc format
+//   date: '12/12/19', // may take utc format
+//   street: '123 davie jones drive',
+//   regionObj: { latitude: 37.767, longitude: -122.421, latitudeDelta: 0.03148000000000195, longitudeDelta: 0.034317000000001485 },
+//   packageChoice: 'seaside wave',
+//   phoneNumber: '704-449-6636',
+//   uri: 'https://media.wmagazine.com/photos/5ab3b3cd8f35206e675d7d28/4:3/w_1536/beyonce-pledges-to-build-more-wells-in-burundi.jpg'
+// };
