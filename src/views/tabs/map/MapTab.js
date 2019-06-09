@@ -28,7 +28,8 @@ const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text
 // const widthMeasurments = (phoneWidth - (phoneWidth / 8));
 const heightMeasurments = (CARD_HEIGHT - (CARD_HEIGHT / 3));
 // const widthMeasurments = (phoneWidth - (phoneWidth / 8)); // **
-const widthMeasurments = (phoneWidth - (phoneWidth / 9));
+// const widthMeasurments = (phoneWidth - (phoneWidth / 9));
+const widthMeasurments = phoneWidth;
 
 // TODO need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
@@ -220,7 +221,8 @@ class Maptab extends Component {
     // // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
       // let index = Math.floor(value / widthMeasurments + 0.3); // animate 30% away from landing on the next item
-      let index = Math.floor(value / widthMeasurments + 0.1); // animate 30% away from landing on the next item
+      let index = Math.floor(value / widthMeasurments + 0.3); // animate 30% away from landing on the next item
+      console.log('🙅‍♂️ animation value', value, '💯index', index)
       if (index >= this.state.markers.length) {
         index = this.state.markers.length - 1;
       }
@@ -260,10 +262,10 @@ class Maptab extends Component {
     const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
     // const snapMath = (widthMeasurments + (widthMeasurments * 0.0295));
-    // const snapMath = (widthMeasurments + (widthMeasurments * 0.03285)); // ** good for iphone 8 and x
     const snapMath = (widthMeasurments + (widthMeasurments * 0.03285)); // ** good for iphone 8 and x
+    // const snapMath = (widthMeasurments + 20.5); // ** good for iphone 8 and x
 
-    console.log('🔥🔥🔥🔥');
+    console.log('🔥🔥🔥🔥widthMeasurments', widthMeasurments);
     console.log('🕔 maptab rerender - render amount direct affected by timer');
     console.log('snapToInterval={widthMeasurments + 6.5} responsible for map snap', widthMeasurments);
     console.log('(widthMeasurments * .9)', (widthMeasurments * 0.03285)); // 10.95
@@ -271,13 +273,15 @@ class Maptab extends Component {
 
 
     let interpolations;
-    if (markers && markers.length) {
+    if (Array.isArray(markers) && markers.length) {
       interpolations = markers.map((marker, index) => {
         const inputRange = [
           (index - 1) * widthMeasurments,
           index * widthMeasurments,
           (index + 1) * widthMeasurments
         ];
+
+        console.log('🐴 inputRange', inputRange)
 
         const scale = this.animation.interpolate({
           inputRange,
@@ -354,7 +358,8 @@ class Maptab extends Component {
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator
-          snapToInterval={snapMath}
+          snapToInterval={widthMeasurments}
+          snapToAlignment="center"
           onScroll={Animated.event(
             [
               {
@@ -377,7 +382,7 @@ class Maptab extends Component {
             return (
               <View key={index}>
               {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
-                <Animated.View style={[cardBack, opacityStyleBorder, { display: 'flex' }]} />
+                <Animated.View style={[cardBack, opacityStyleBorder ]} />
                 <View style={card}>
                   <Image
                     source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj48iGzNhumqSY2EA3ZQ_Ns5uAvo4vxEapWSBbJ5tmPut-GqPw' }}
@@ -441,9 +446,11 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: 'black',
 
-    paddingLeft: 18
+    // paddingLeft: 10,
+    // marginLeft: 15,
+    // marginRight: 8,
     // paddingRight: 20,
-    // paddingLeft: 5px,
+    // paddingLeft: 15,
     // backgroundColor: 'blue',
               // snapToInterval={widthMeasurments + 9.274}
     // display: 'flex',
@@ -451,7 +458,9 @@ const styles = StyleSheet.create({
     // alignItems: 'center'
   },
   endPadding: {
-    paddingRight: 40
+    // paddingRight: 30
+    // marginRight: 30
+
     // paddingRight: phoneWidth - widthMeasurments - ((phoneWidth - widthMeasurments)),
     // paddingRight: phoneWidth - widthMeasurments - ((phoneWidth - widthMeasurments) * 0.6),
     // borderColor: 'black'
@@ -492,10 +501,10 @@ const styles = StyleSheet.create({
   card: {
     padding: 10,
     // margin: 8,
-    marginTop: 12,
-    marginRight: 5,
-    marginBottom: 12,
-    marginLeft: 5,
+    // marginTop: 12,
+    // marginRight: 5,
+    // marginBottom: 12,
+    // marginLeft: 5,
     elevation: 3,
     backgroundColor: NU_Background,
     // marginHorizontal: 10,
