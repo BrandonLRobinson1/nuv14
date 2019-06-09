@@ -259,7 +259,7 @@ class Maptab extends Component {
   }
 
   render() {
-    const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton } = styles;
+    const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton, cardLast, cardFirst } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
     // const snapMath = (widthMeasurments + (widthMeasurments * 0.0295));
     const snapMath = (widthMeasurments + (widthMeasurments * 0.03285)); // ** good for iphone 8 and x
@@ -270,7 +270,6 @@ class Maptab extends Component {
     console.log('snapToInterval={widthMeasurments + 6.5} responsible for map snap', widthMeasurments);
     console.log('(widthMeasurments * .9)', (widthMeasurments * 0.03285)); // 10.95
     // console.log('NNNNNNNN render', this.state.callsToMap)
-
 
     let interpolations;
     if (Array.isArray(markers) && markers.length) {
@@ -358,7 +357,7 @@ class Maptab extends Component {
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator
-          snapToInterval={widthMeasurments}
+          snapToInterval={widthMeasurments - 50}
           snapToAlignment="center"
           onScroll={Animated.event(
             [
@@ -379,11 +378,13 @@ class Maptab extends Component {
           {markers.map((marker, index) => {
             // ⭐ fixx --> source={marker.image}
             const opacityStyleBorder = { opacity: interpolations[index].cardBorder };
+            const cardStyles = index === 0 ? cardFirst : markers.length === index + 1 ? cardLast : card; // eslint-disable-line
+            console.log('card styles', cardStyles)
             return (
               <View key={index}>
               {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
-                <Animated.View style={[cardBack, opacityStyleBorder ]} />
-                <View style={card}>
+                <Animated.View style={[cardBack, opacityStyleBorder]} />
+                <View style={cardStyles}>
                   <Image
                     source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj48iGzNhumqSY2EA3ZQ_Ns5uAvo4vxEapWSBbJ5tmPut-GqPw' }}
                     style={cardImage}
@@ -502,8 +503,56 @@ const styles = StyleSheet.create({
     padding: 10,
     // margin: 8,
     // marginTop: 12,
-    // marginRight: 5,
     // marginBottom: 12,
+    // marginRight: 15,
+    // marginLeft: 15,
+    elevation: 3,
+    backgroundColor: NU_Background,
+    // marginHorizontal: 10,
+    shadowColor: NU_Card_Border,
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: { x: 2, y: -2 },
+    height: heightMeasurments,
+    // width: widthMeasurments, // 🔥
+    width: widthMeasurments - 50, // 🔥
+    // overflow: 'hidden',
+    borderRadius: 3,
+    // display: 'flex',
+    // justifyContent: 'center',
+    // alignContent: 'center',
+    // alignItems: 'center'
+  },
+  cardFirst: {
+    padding: 10,
+    // margin: 8,
+    // marginTop: 12,
+    // marginBottom: 12,
+    // marginRight: 10,
+    // marginLeft: 15,
+    elevation: 3,
+    backgroundColor: NU_Background,
+    // marginHorizontal: 10,
+    shadowColor: NU_Card_Border,
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: { x: 2, y: -2 },
+    height: heightMeasurments,
+    // width: widthMeasurments, // 🔥
+    width: widthMeasurments - 50, // 🔥
+    // overflow: 'hidden',
+    borderRadius: 3,
+    // display: 'flex',
+    // justifyContent: 'center',
+    // alignContent: 'center',
+    // alignItems: 'center'
+  },
+  cardLast: {
+    padding: 10,
+    // margin: 8,
+    // marginTop: 12,
+    // marginBottom: 12,
+    // marginRight: 15,
     // marginLeft: 5,
     elevation: 3,
     backgroundColor: NU_Background,
@@ -513,7 +562,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { x: 2, y: -2 },
     height: heightMeasurments,
-    width: widthMeasurments,
+    // width: widthMeasurments, // 🔥
+    width: widthMeasurments- 50, // 🔥
     // overflow: 'hidden',
     borderRadius: 3,
     // display: 'flex',
