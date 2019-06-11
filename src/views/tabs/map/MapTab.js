@@ -27,9 +27,9 @@ const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text
 // const heightMeasurments = (CARD_HEIGHT - (CARD_HEIGHT / 4));
 // const widthMeasurments = (phoneWidth - (phoneWidth / 8));
 const heightMeasurments = (CARD_HEIGHT - (CARD_HEIGHT / 3));
+const widthMeasurments = phoneWidth;
 // const widthMeasurments = (phoneWidth - (phoneWidth / 8)); // **
 // const widthMeasurments = (phoneWidth - (phoneWidth / 9));
-const widthMeasurments = phoneWidth;
 
 // TODO need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
@@ -208,7 +208,7 @@ class Maptab extends Component {
           latitudeDelta: init.latitudeDelta || latDelta,
           longitudeDelta: init.longitudeDelta || longDelta,
           timeStamp: utcDate
-        }
+        };
 
         this.setState({
           initialPosition: lastRegion
@@ -278,6 +278,9 @@ class Maptab extends Component {
           (index - 1) * widthMeasurments,
           index * widthMeasurments,
           (index + 1) * widthMeasurments
+          // (index - 1) * widthMeasurments,
+          // index * widthMeasurments,
+          // (index + 1) * widthMeasurments
         ];
 
         console.log('🐴 inputRange', inputRange)
@@ -314,7 +317,6 @@ class Maptab extends Component {
       <View style={container}>
 
         <MapView
-
           ref={map => this.map = map} // eslint-disable-line
           initialRegion={initialPosition}
           style={container}
@@ -357,7 +359,7 @@ class Maptab extends Component {
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator
-          snapToInterval={widthMeasurments - 50}
+          snapToInterval={(widthMeasurments * 0.8 + 20)}
           snapToAlignment="center"
           onScroll={Animated.event(
             [
@@ -379,22 +381,23 @@ class Maptab extends Component {
             // ⭐ fixx --> source={marker.image}
             const opacityStyleBorder = { opacity: interpolations[index].cardBorder };
             const cardStyles = index === 0 ? cardFirst : markers.length === index + 1 ? cardLast : card; // eslint-disable-line
+            // const cardStyles = card; // eslint-disable-line
             console.log('card styles', cardStyles)
             return (
               <View key={index}>
               {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
                 <Animated.View style={[cardBack, opacityStyleBorder]} />
-                <View style={cardStyles}>
-                  <Image
-                    source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj48iGzNhumqSY2EA3ZQ_Ns5uAvo4vxEapWSBbJ5tmPut-GqPw' }}
-                    style={cardImage}
-                    resizeMode="cover"
-                  />
-                  <View style={textContent}>
-                    <Text numberOfLines={1} style={NU_Small_Header_Text}>
-                      {marker.title}
-                    </Text>
-                  </View>
+                  <View style={cardStyles}>
+                    <Image
+                      source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj48iGzNhumqSY2EA3ZQ_Ns5uAvo4vxEapWSBbJ5tmPut-GqPw' }}
+                      style={cardImage}
+                      resizeMode="cover"
+                    />
+                    <View style={textContent}>
+                      <Text numberOfLines={1} style={NU_Small_Header_Text}>
+                        {marker.title}
+                      </Text>
+                    </View>
                   {/*
                     <Text numberOfLines={1} style={cardDescription}>
                       {marker.description}
@@ -445,17 +448,17 @@ const styles = StyleSheet.create({
     right: 0,
     paddingVertical: 10,
     width: '100%',
-    borderColor: 'black',
+    // borderColor: 'black',
 
-    // paddingLeft: 10,
-    // marginLeft: 15,
-    // marginRight: 8,
-    // paddingRight: 20,
-    // paddingLeft: 15,
-    // backgroundColor: 'blue',
-              // snapToInterval={widthMeasurments + 9.274}
-    // display: 'flex',
-    // justifyContent: 'center',
+    // paddingLeft: 30,
+    // marginLeft: ((phoneWidth / 8) - 10),
+    // marginRight: ((phoneWidth / 8) - 10),
+    paddingRight: ((phoneWidth / 8) - 10),
+    paddingLeft: ((phoneWidth / 8) - 10),
+    
+    backgroundColor: 'blue',
+    display: 'flex',
+    // justifyContent: 'space-evenly',
     // alignItems: 'center'
   },
   endPadding: {
@@ -499,78 +502,122 @@ const styles = StyleSheet.create({
   //   alignSelf: 'center'
   // },
 
+
   card: {
     padding: 10,
-    // margin: 8,
-    // marginTop: 12,
-    // marginBottom: 12,
-    // marginRight: 15,
-    // marginLeft: 15,
-    elevation: 3,
-    backgroundColor: NU_Background,
-    // marginHorizontal: 10,
-    shadowColor: NU_Card_Border,
-    shadowRadius: 5,
-    shadowOpacity: 0.3,
-    shadowOffset: { x: 2, y: -2 },
-    height: heightMeasurments,
-    // width: widthMeasurments, // 🔥
-    width: widthMeasurments - 50, // 🔥
-    // overflow: 'hidden',
-    borderRadius: 3,
-    // display: 'flex',
     // justifyContent: 'center',
-    // alignContent: 'center',
-    // alignItems: 'center'
+    // alignItems: 'center',
+    marginRight: 10,
+    marginLeft: 10,
+    // justifyContent: 'space-evenly',
+    width: widthMeasurments * 0.8,
+    height: heightMeasurments,
+    backgroundColor: NU_Background,
+    borderRadius: 3,
+    // marginRight: 5,
+    // marginLeft: 5
   },
   cardFirst: {
     padding: 10,
-    // margin: 8,
-    // marginTop: 12,
-    // marginBottom: 12,
-    // marginRight: 10,
-    // marginLeft: 15,
-    elevation: 3,
-    backgroundColor: NU_Background,
-    // marginHorizontal: 10,
-    shadowColor: NU_Card_Border,
-    shadowRadius: 5,
-    shadowOpacity: 0.3,
-    shadowOffset: { x: 2, y: -2 },
-    height: heightMeasurments,
-    // width: widthMeasurments, // 🔥
-    width: widthMeasurments - 50, // 🔥
-    // overflow: 'hidden',
-    borderRadius: 3,
-    // display: 'flex',
     // justifyContent: 'center',
-    // alignContent: 'center',
-    // alignItems: 'center'
+    // alignItems: 'center',
+    marginRight: 10,
+    marginLeft: 0,
+    // justifyContent: 'space-evenly',
+    width: widthMeasurments * 0.8,
+    height: heightMeasurments,
+    backgroundColor: NU_Background,
+    borderRadius: 3,
+    // marginRight: 5,
+    // marginLeft: 5
   },
   cardLast: {
     padding: 10,
-    // margin: 8,
-    // marginTop: 12,
-    // marginBottom: 12,
-    // marginRight: 15,
-    // marginLeft: 5,
-    elevation: 3,
-    backgroundColor: NU_Background,
-    // marginHorizontal: 10,
-    shadowColor: NU_Card_Border,
-    shadowRadius: 5,
-    shadowOpacity: 0.3,
-    shadowOffset: { x: 2, y: -2 },
-    height: heightMeasurments,
-    // width: widthMeasurments, // 🔥
-    width: widthMeasurments- 50, // 🔥
-    // overflow: 'hidden',
-    borderRadius: 3,
-    // display: 'flex',
     // justifyContent: 'center',
-    // alignContent: 'center',
-    // alignItems: 'center'
+    // alignItems: 'center',
+    marginRight: 0,
+    marginLeft: 10,
+    // justifyContent: 'space-evenly',
+    width: widthMeasurments * 0.8,
+    height: heightMeasurments,
+    backgroundColor: NU_Background,
+    borderRadius: 3,
+    // marginRight: 5,
+    // marginLeft: 5
   },
+
+    // card: {
+    //   
+    //   // margin: 8,
+    //   // marginTop: 12,
+    //   // marginBottom: 12,
+    //   marginRight: 5,
+    //   marginLeft: 5,
+    //   elevation: 3,
+    //   backgroundColor: NU_Background,
+    //   // marginHorizontal: 10,
+    //   shadowColor: NU_Card_Border,
+    //   shadowRadius: 5,
+    //   shadowOpacity: 0.3,
+    //   shadowOffset: { x: 2, y: -2 },
+    //   height: heightMeasurments,
+    //   // width: widthMeasurments, // 🔥
+    //   width: widthMeasurments, // 🔥
+    //   // overflow: 'hidden',
+    //   borderRadius: 3,
+    //   // display: 'flex',
+    //   // justifyContent: 'center',
+    //   // alignContent: 'center',
+    //   // alignItems: 'center'
+    // },
+    // cardFirst: {
+    //   padding: 10,
+    //   // margin: 8,
+    //   // marginTop: 12,
+    //   // marginBottom: 12,
+    //   // marginRight: 5,
+    //   // marginLeft: 25,
+    //   elevation: 3,
+    //   backgroundColor: NU_Background,
+    //   // marginHorizontal: 10,
+    //   shadowColor: NU_Card_Border,
+    //   shadowRadius: 5,
+    //   shadowOpacity: 0.3,
+    //   shadowOffset: { x: 2, y: -2 },
+    //   height: heightMeasurments,
+    //   // width: widthMeasurments, // 🔥
+    //   width: widthMeasurments, // 🔥
+    //   // overflow: 'hidden',
+    //   borderRadius: 3,
+    //   // display: 'flex',
+    //   // justifyContent: 'center',
+    //   // alignContent: 'center',
+    //   // alignItems: 'center'
+    // },
+    // cardLast: {
+    //   padding: 10,
+    //   // margin: 8,
+    //   // marginTop: 12,
+    //   // marginBottom: 12,
+    //   marginRight: 25,
+    //   marginLeft: 5,
+    //   elevation: 3,
+    //   backgroundColor: NU_Background,
+    //   // marginHorizontal: 10,
+    //   shadowColor: NU_Card_Border,
+    //   shadowRadius: 5,
+    //   shadowOpacity: 0.3,
+    //   shadowOffset: { x: 2, y: -2 },
+    //   height: heightMeasurments,
+    //   // width: widthMeasurments, // 🔥
+    //   width: widthMeasurments - 50, // 🔥
+    //   // overflow: 'hidden',
+    //   borderRadius: 3,
+    //   // display: 'flex',
+    //   // justifyContent: 'center',
+    //   // alignContent: 'center',
+    //   // alignItems: 'center'
+    // },
   cardBack: {
     // height: CARD_HEIGHT + 5,
     // width: CARD_WIDTH + 4,
