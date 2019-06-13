@@ -357,7 +357,7 @@ class Maptab extends Component {
 
         <Animated.ScrollView
           
-          contentOffset={{ x: phoneWidth * 0.7573, y: 0 }} // 🔥
+          contentOffset={{ x: phoneWidth * 0.75725, y: 0 }} // 🔥
           contentInset={{ top: 0, left: 0, bottom: 0, right: 0 }}
           pagingEnabled
 
@@ -389,7 +389,7 @@ class Maptab extends Component {
             const cardStyles = card; // eslint-disable-line
             console.log('card styles', cardStyles)
             console.log('rando number', (phoneWidth * 0.8) )
-            console.log('figure out rando number - * 289.5 - 313.5', phoneWidth * 0.7573) // 🛎️ bingo 0.7 with no margin - 0.7573
+            console.log('figure out rando number - * 289.5 - 313.5', phoneWidth * 0.75725) // 🛎️ bingo 0.7 with no margin - 0.7573
             return (
               <View key={index}>
               {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
