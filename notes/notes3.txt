@@ -101,17 +101,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 
 
-map tab notes
+👍 map tab notes
 
 1. contentOffset={{ x: phoneWidth * 0.75725, y: 0 }} // 🔥
  will load you dead center on the first index (not the 0 index) of the list, if you can find a way to dispay none and add dummy in for the 0 index and last index you can make the map start and end from center positions
  generated 0.75725 with trial and error, trying to get it exactly the same value as "this.animation.addListener(({ value })" ⭐ the 'value' is the location across the x axis
- so with content offset there .. it starts there
+ so with content offset there .. the x axis value starts there
 
 2.  snapToInterval={phoneWidth * 0.8 + 16} // ⭐ card width plus 16 added for margin on cards (8 on each side)
+snapToInterval -> how far the card moves between swipes
 
-3. phoneWidth * 0.8 -> 80% of the screen
+3. card width = phoneWidth * 0.8 -> 80% of the screen
 
-4. inputRange = value where there the animations are going to take over and scroll for the use
+4. inputRange = value where there the animations are going to take over and scroll for the user to set value
 
 5. (should be #1) value is basically the 🅰️animation location across the x axis of the scroll
