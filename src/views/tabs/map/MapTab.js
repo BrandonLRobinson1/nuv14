@@ -357,14 +357,14 @@ class Maptab extends Component {
 
         <Animated.ScrollView
           
-          contentOffset={{ x: phoneWidth * 0.7, y: 0 }} // 🔥
+          contentOffset={{ x: phoneWidth * 0.7573, y: 0 }} // 🔥
           contentInset={{ top: 0, left: 0, bottom: 0, right: 0 }}
           pagingEnabled
 
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator
-          snapToInterval={phoneWidth * 0.8}
+          snapToInterval={phoneWidth * 0.8 + 16} // 16 added for padding
           snapToAlignment="center"
           onScroll={Animated.event(
             [
@@ -389,7 +389,7 @@ class Maptab extends Component {
             const cardStyles = card; // eslint-disable-line
             console.log('card styles', cardStyles)
             console.log('rando number', (phoneWidth * 0.8) )
-            console.log('figure out rando number - * 289.5', phoneWidth * 0.7) // 🛎️ bingo
+            console.log('figure out rando number - * 289.5 - 313.5', phoneWidth * 0.7573) // 🛎️ bingo 0.7 with no margin - 0.7573
             return (
               <View key={index}>
               {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
@@ -514,8 +514,8 @@ const styles = StyleSheet.create({
     padding: 10,
     // justifyContent: 'center',
     // alignItems: 'center',
-    // marginRight: 10,
-    // marginLeft: 10,
+    marginRight: 8,
+    marginLeft: 8,
     // justifyContent: 'space-evenly',
     width: widthMeasurments * 0.8,
     height: heightMeasurments,
