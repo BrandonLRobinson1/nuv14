@@ -221,12 +221,12 @@ class Maptab extends Component {
     // // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
       // let index = Math.floor(value / widthMeasurments + 0.3); // animate 30% away from landing on the next item
-      let index = Math.floor(value / widthMeasurments + 0.8); // animate 30% away from landing on the next item
+      let index = Math.floor(value / widthMeasurments + 0.5); // animate 30% away from landing on the next item
       console.log('🙅‍♂️ animation value', value, '💯index', index)
       if (index >= this.state.markers.length) {
         index = this.state.markers.length - 1;
       }
-      if (index <= 0) {
+      if (index <= 0) { // TODO: find out what this does
         index = 0;
       }
 
@@ -269,6 +269,7 @@ class Maptab extends Component {
     console.log('🕔 maptab rerender - render amount direct affected by timer');
     console.log('snapToInterval={widthMeasurments + 6.5} responsible for map snap', widthMeasurments);
     console.log('(widthMeasurments * .9)', (widthMeasurments * 0.03285)); // 10.95
+
     // console.log('NNNNNNNN render', this.state.callsToMap)
 // 352, 702, 1054 iphone x
     let interpolations;
@@ -356,15 +357,16 @@ class Maptab extends Component {
         </MapView>
 
         <Animated.ScrollView
-          
+
           contentOffset={{ x: phoneWidth * 0.75725, y: 0 }} // 🔥
           contentInset={{ top: 0, left: 0, bottom: 0, right: 0 }}
           pagingEnabled
+          scrollEnabled
 
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator
-          snapToInterval={phoneWidth * 0.8 + 16} // 16 added for padding
+          snapToInterval={phoneWidth * 0.8 + 16} // 16 added for margin
           snapToAlignment="center"
           onScroll={Animated.event(
             [
@@ -390,6 +392,8 @@ class Maptab extends Component {
             console.log('card styles', cardStyles)
             console.log('rando number', (phoneWidth * 0.8) )
             console.log('figure out rando number - * 289.5 - 313.5', phoneWidth * 0.75725) // 🛎️ bingo 0.7 with no margin - 0.7573
+            console.log('?????????????????', this.animation._value)
+
             return (
               <View key={index}>
               {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
@@ -462,8 +466,8 @@ const styles = StyleSheet.create({
     // marginRight: ((phoneWidth / 8) - 10),
     // paddingRight: ((phoneWidth / 8) - 10),
     // paddingLeft: ((phoneWidth / 8) - 10),
-    
-    backgroundColor: 'blue',
+
+    // backgroundColor: 'blue',
     display: 'flex',
     // justifyContent: 'space-evenly',
     // alignItems: 'center'
@@ -554,7 +558,7 @@ const styles = StyleSheet.create({
   // },
 
     // card: {
-    //   
+    //
     //   // margin: 8,
     //   // marginTop: 12,
     //   // marginBottom: 12,
