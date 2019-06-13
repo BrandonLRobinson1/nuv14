@@ -221,7 +221,7 @@ class Maptab extends Component {
     // // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
       // let index = Math.floor(value / widthMeasurments + 0.3); // animate 30% away from landing on the next item
-      let index = Math.floor(value / widthMeasurments + 0.3); // animate 30% away from landing on the next item
+      let index = Math.floor(value / widthMeasurments + 0.8); // animate 30% away from landing on the next item
       console.log('🙅‍♂️ animation value', value, '💯index', index)
       if (index >= this.state.markers.length) {
         index = this.state.markers.length - 1;
@@ -270,7 +270,7 @@ class Maptab extends Component {
     console.log('snapToInterval={widthMeasurments + 6.5} responsible for map snap', widthMeasurments);
     console.log('(widthMeasurments * .9)', (widthMeasurments * 0.03285)); // 10.95
     // console.log('NNNNNNNN render', this.state.callsToMap)
-
+// 352, 702, 1054 iphone x
     let interpolations;
     if (Array.isArray(markers) && markers.length) {
       interpolations = markers.map((marker, index) => {
@@ -356,10 +356,15 @@ class Maptab extends Component {
         </MapView>
 
         <Animated.ScrollView
+          
+          contentOffset={{ x: phoneWidth * 0.7, y: 0 }} // 🔥
+          contentInset={{ top: 0, left: 0, bottom: 0, right: 0 }}
+          pagingEnabled
+
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator
-          snapToInterval={(widthMeasurments * 0.8 + 20)}
+          snapToInterval={phoneWidth * 0.8}
           snapToAlignment="center"
           onScroll={Animated.event(
             [
@@ -380,9 +385,11 @@ class Maptab extends Component {
           {markers.map((marker, index) => {
             // ⭐ fixx --> source={marker.image}
             const opacityStyleBorder = { opacity: interpolations[index].cardBorder };
-            const cardStyles = index === 0 ? cardFirst : markers.length === index + 1 ? cardLast : card; // eslint-disable-line
-            // const cardStyles = card; // eslint-disable-line
+            // const cardStyles = index === 0 ? cardFirst : markers.length === index + 1 ? cardLast : card; // eslint-disable-line
+            const cardStyles = card; // eslint-disable-line
             console.log('card styles', cardStyles)
+            console.log('rando number', (phoneWidth * 0.8) )
+            console.log('figure out rando number - * 289.5', phoneWidth * 0.7) // 🛎️ bingo
             return (
               <View key={index}>
               {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
@@ -453,8 +460,8 @@ const styles = StyleSheet.create({
     // paddingLeft: 30,
     // marginLeft: ((phoneWidth / 8) - 10),
     // marginRight: ((phoneWidth / 8) - 10),
-    paddingRight: ((phoneWidth / 8) - 10),
-    paddingLeft: ((phoneWidth / 8) - 10),
+    // paddingRight: ((phoneWidth / 8) - 10),
+    // paddingLeft: ((phoneWidth / 8) - 10),
     
     backgroundColor: 'blue',
     display: 'flex',
@@ -507,8 +514,8 @@ const styles = StyleSheet.create({
     padding: 10,
     // justifyContent: 'center',
     // alignItems: 'center',
-    marginRight: 10,
-    marginLeft: 10,
+    // marginRight: 10,
+    // marginLeft: 10,
     // justifyContent: 'space-evenly',
     width: widthMeasurments * 0.8,
     height: heightMeasurments,
@@ -517,34 +524,34 @@ const styles = StyleSheet.create({
     // marginRight: 5,
     // marginLeft: 5
   },
-  cardFirst: {
-    padding: 10,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    marginRight: 10,
-    marginLeft: 0,
-    // justifyContent: 'space-evenly',
-    width: widthMeasurments * 0.8,
-    height: heightMeasurments,
-    backgroundColor: NU_Background,
-    borderRadius: 3,
-    // marginRight: 5,
-    // marginLeft: 5
-  },
-  cardLast: {
-    padding: 10,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    marginRight: 0,
-    marginLeft: 10,
-    // justifyContent: 'space-evenly',
-    width: widthMeasurments * 0.8,
-    height: heightMeasurments,
-    backgroundColor: NU_Background,
-    borderRadius: 3,
-    // marginRight: 5,
-    // marginLeft: 5
-  },
+  // cardFirst: {
+  //   padding: 10,
+  //   // justifyContent: 'center',
+  //   // alignItems: 'center',
+  //   marginRight: 10,
+  //   marginLeft: 0,
+  //   // justifyContent: 'space-evenly',
+  //   width: widthMeasurments * 0.8,
+  //   height: heightMeasurments,
+  //   backgroundColor: NU_Background,
+  //   borderRadius: 3,
+  //   // marginRight: 5,
+  //   // marginLeft: 5
+  // },
+  // cardLast: {
+  //   padding: 10,
+  //   // justifyContent: 'center',
+  //   // alignItems: 'center',
+  //   marginRight: 0,
+  //   marginLeft: 10,
+  //   // justifyContent: 'space-evenly',
+  //   width: widthMeasurments * 0.8,
+  //   height: heightMeasurments,
+  //   backgroundColor: NU_Background,
+  //   borderRadius: 3,
+  //   // marginRight: 5,
+  //   // marginLeft: 5
+  // },
 
     // card: {
     //   
