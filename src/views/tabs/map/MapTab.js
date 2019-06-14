@@ -254,10 +254,12 @@ class Maptab extends Component {
   render() {
     const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton, cardLast, cardFirst } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
+
     // const startOnIndexOneMath = phoneWidth * 0.75725;
     // const randomFirstCoord = { latitude: 37.773, longitude: -122.396 }; // TODO: pull from database
     // const snapToIntervalMath = cardwidth + 16; // 16 added for margin
-    const startOnIndexOneMath = phoneWidth * 0.75725;
+
+    const startOnIndexOneMath = 0;
     const randomFirstCoord = { latitude: 37.773, longitude: -122.396 }; // TODO: pull from database
     const snapToIntervalMath = cardwidth + 16; // 16 added for margin
 
@@ -438,8 +440,12 @@ const styles = StyleSheet.create({
 
   },
   endPadding: {
-    // paddingRight: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.7),
-    // paddingLeft: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.7),
+    // paddingRight: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.75725),
+    // paddingLeft: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.75725),
+    paddingRight: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.85),
+    // paddingLeft: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.100),
+    paddingLeft: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.6500),
+    
     // borderColor: 'black'
   },
   // endPadding: {
