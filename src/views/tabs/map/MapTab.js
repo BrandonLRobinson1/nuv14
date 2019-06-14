@@ -15,23 +15,17 @@ import Oops from '../sharedTabComp/Oops';
 import CustomMarker from './CustomMarker';
 import { FullCard, Spinner, Button } from '../../../common';
 import { setCurrentLocation, getActiveNailTechs, getinitialDelta, setMapLoading, setActiveNailTechs } from '../../../store/location/locationServices';
-import { colors, latDelta, longDelta, CARD_HEIGHT, CARD_WIDTH, phoneWidth, commonStyles } from '../../../Styles';
+import { colors, latDelta, longDelta, CARD_HEIGHT, phoneWidth, commonStyles } from '../../../Styles';
 
-// his.state.callsToMap > 3 render oops page TODO
-
-// for line 330!!! took it out so it wont ping my account with fe
-// provider={PROVIDER_GOOGLE}
+// for line around 330!!! took it out so it wont ping my account with fe
+// provider={PROVIDER_GOOGLE} TODO: throw back on map for production
 
 const { NU_Small_Header_Text } = commonStyles;
 const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
-// const heightMeasurments = (CARD_HEIGHT - (CARD_HEIGHT / 4));
-// const widthMeasurments = (phoneWidth - (phoneWidth / 8));
-const heightMeasurments = (CARD_HEIGHT - (CARD_HEIGHT / 3));
-const widthMeasurments = phoneWidth;
-// const widthMeasurments = (phoneWidth - (phoneWidth / 8)); // **
-// const widthMeasurments = (phoneWidth - (phoneWidth / 9));
+const cardHeight = (CARD_HEIGHT - (CARD_HEIGHT / 3));
+const cardwidth = phoneWidth * 0.8;
 
-// TODO need to add a button over map to take you to current or zip code saved location
+// TODO: need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
   constructor() {
     super();
@@ -63,7 +57,7 @@ class Maptab extends Component {
     navigator.geolocation.clearWatch(this.watchID); // eslint-disable-line
     this.regionTimeout = 0;
     this.timer = 0;
-    console.log('UNMOUNT');
+    console.log('UNMOUNTED');
   }
 
   async getMapInfo() { // eslint-disable-line
@@ -123,7 +117,7 @@ class Maptab extends Component {
 
   // need to run the same logic a componentwillmount to fetch information
   getLocationInformation() {
-    let { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, deltas, activeNailTechs } = this.props;
+    const { getActiveNailTechs, getinitialDelta, setCurrentLocation, regionObj, deltas, activeNailTechs } = this.props;
 
     const markers = activeNailTechs;
     const init = deltas;
@@ -217,12 +211,12 @@ class Maptab extends Component {
       });
     }
 
-    // // We should detect when scrolling has stopped then animate
-    // // We should just debounce the event listener here
+    // We should detect when scrolling has stopped then animate
+    // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
-      // let index = Math.floor(value / widthMeasurments + 0.3); // animate 30% away from landing on the next item
-      let index = Math.floor(value / widthMeasurments + 0.5); // animate 30% away from landing on the next item
-      console.log('🙅‍♂️ animation value', value, '💯index', index)
+      // let index = Math.floor(value / phoneWidth + 0.5); // animate 50% away from landing on the next item
+      let index = Math.floor(value / cardwidth + 0.5); // animate 50% away from landing on the next item
+
       if (index >= this.state.markers.length) {
         index = this.state.markers.length - 1;
       }
@@ -249,11 +243,10 @@ class Maptab extends Component {
   }
 
   async refetchButton() {
-    const { loadingMapData, getActiveNailTechs, getinitialDelta, regionObj, deltas, activeNailTechs,  } = this.props; // eslint-disable-line
-    const { callsToMap } = this.state;
+    const { activeNailTechs } = this.props; // eslint-disable-line
     const isArr = Array.isArray(activeNailTechs);
 
-    if (!Array.isArray(this.props.activeNailTechs)) this.props.setActiveNailTechs('');
+    if (!isArr) this.props.setActiveNailTechs('');
     await this.setState({ callsToMap: 0 }); // <=== i dont think t
     return this.getMapInfo();
   }
@@ -261,30 +254,24 @@ class Maptab extends Component {
   render() {
     const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton, cardLast, cardFirst } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
-    // const snapMath = (widthMeasurments + (widthMeasurments * 0.0295));
-    const snapMath = (widthMeasurments + (widthMeasurments * 0.03285)); // ** good for iphone 8 and x
-    // const snapMath = (widthMeasurments + 20.5); // ** good for iphone 8 and x
+    // const startOnIndexOneMath = phoneWidth * 0.75725;
+    // const randomFirstCoord = { latitude: 37.773, longitude: -122.396 }; // TODO: pull from database
+    // const snapToIntervalMath = cardwidth + 16; // 16 added for margin
+    const startOnIndexOneMath = phoneWidth * 0.75725;
+    const randomFirstCoord = { latitude: 37.773, longitude: -122.396 }; // TODO: pull from database
+    const snapToIntervalMath = cardwidth + 16; // 16 added for margin
 
-    console.log('🔥🔥🔥🔥widthMeasurments', widthMeasurments);
-    console.log('🕔 maptab rerender - render amount direct affected by timer');
-    console.log('snapToInterval={widthMeasurments + 6.5} responsible for map snap', widthMeasurments);
-    console.log('(widthMeasurments * .9)', (widthMeasurments * 0.03285)); // 10.95
-
-    // console.log('NNNNNNNN render', this.state.callsToMap)
-// 352, 702, 1054 iphone x
     let interpolations;
     if (Array.isArray(markers) && markers.length) {
       interpolations = markers.map((marker, index) => {
         const inputRange = [
-          (index - 1) * widthMeasurments,
-          index * widthMeasurments,
-          (index + 1) * widthMeasurments
-          // (index - 1) * widthMeasurments,
-          // index * widthMeasurments,
-          // (index + 1) * widthMeasurments
+          // (index - 1) * phoneWidth,
+          // index * phoneWidth,
+          // (index + 1) * phoneWidth
+          (index - 1) * cardwidth,
+          index * cardwidth,
+          (index + 1) * cardwidth
         ];
-
-        console.log('🐴 inputRange', inputRange)
 
         const scale = this.animation.interpolate({
           inputRange,
@@ -324,6 +311,7 @@ class Maptab extends Component {
         >
 
           {markers.map((marker, index) => {
+
             const scaleStyle = {
               transform: [
                 {
@@ -350,23 +338,21 @@ class Maptab extends Component {
 
           {/* below is an optional your location marker */}
           <MapView.Marker
-            coordinate={{ latitude: 37.773, longitude: -122.396 }}
+            coordinate={randomFirstCoord} // TODO: can land on this if need be or make a button to bring you here, make the 0 index invisible and you gotta scroll... maybe
             pinColor={NU_White}
           />
 
         </MapView>
 
         <Animated.ScrollView
-
-          contentOffset={{ x: phoneWidth * 0.75725, y: 0 }} // 🔥
-          contentInset={{ top: 0, left: 0, bottom: 0, right: 0 }}
+          contentOffset={{ x: startOnIndexOneMath, y: 0 }} // 🔥
           pagingEnabled
           scrollEnabled
 
           horizontal
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator
-          snapToInterval={phoneWidth * 0.8 + 16} // 16 added for margin
+          snapToInterval={snapToIntervalMath} // 16 added for margin
           snapToAlignment="center"
           onScroll={Animated.event(
             [
@@ -389,35 +375,23 @@ class Maptab extends Component {
             const opacityStyleBorder = { opacity: interpolations[index].cardBorder };
             // const cardStyles = index === 0 ? cardFirst : markers.length === index + 1 ? cardLast : card; // eslint-disable-line
             const cardStyles = card; // eslint-disable-line
-            console.log('card styles', cardStyles)
-            console.log('rando number', (phoneWidth * 0.8) )
-            console.log('figure out rando number - * 289.5 - 313.5', phoneWidth * 0.75725) // 🛎️ bingo 0.7 with no margin - 0.7573
-            console.log('?????????????????', this.animation._value)
 
             return (
               <View key={index}>
-              {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
+                {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
                 <Animated.View style={[cardBack, opacityStyleBorder]} />
-                  <View style={cardStyles}>
-                    <Image
-                      source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj48iGzNhumqSY2EA3ZQ_Ns5uAvo4vxEapWSBbJ5tmPut-GqPw' }}
-                      style={cardImage}
-                      resizeMode="cover"
-                    />
-                    <View style={textContent}>
-                      <Text numberOfLines={1} style={NU_Small_Header_Text}>
-                        {marker.title}
-                      </Text>
-                    </View>
-                  {/*
-                    <Text numberOfLines={1} style={cardDescription}>
-                      {marker.description}
+                <View style={cardStyles}>
+                  <Image
+                    source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj48iGzNhumqSY2EA3ZQ_Ns5uAvo4vxEapWSBbJ5tmPut-GqPw' }}
+                    style={cardImage}
+                    resizeMode="cover"
+                  />
+                  <View style={textContent}>
+                    <Text numberOfLines={1} style={NU_Small_Header_Text}>
+                      {marker.title}
                     </Text>
-                    <Button
-                      buttonText="Try Again"
-                      onPress={() =>  { Actions.ProfilePageMap({ personData: marker })}}
-                    />
-                   */}
+                  </View>
+
                   <TouchableOpacity
                     style={[{ flex: 0.6 }, mapCardButton]}
                     onPress={() => {
@@ -429,6 +403,7 @@ class Maptab extends Component {
                       View
                     </Text>
                   </TouchableOpacity>
+
                 </View>
               </View>
 
@@ -459,27 +434,22 @@ const styles = StyleSheet.create({
     right: 0,
     paddingVertical: 10,
     width: '100%',
-    // borderColor: 'black',
+    marginRight: 30
 
-    // paddingLeft: 30,
-    // marginLeft: ((phoneWidth / 8) - 10),
-    // marginRight: ((phoneWidth / 8) - 10),
-    // paddingRight: ((phoneWidth / 8) - 10),
-    // paddingLeft: ((phoneWidth / 8) - 10),
-
-    // backgroundColor: 'blue',
-    display: 'flex',
-    // justifyContent: 'space-evenly',
-    // alignItems: 'center'
   },
   endPadding: {
+    // paddingRight: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.7),
+    // paddingLeft: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.7),
+    // borderColor: 'black'
+  },
+  // endPadding: {
     // paddingRight: 30
     // marginRight: 30
 
-    // paddingRight: phoneWidth - widthMeasurments - ((phoneWidth - widthMeasurments)),
-    // paddingRight: phoneWidth - widthMeasurments - ((phoneWidth - widthMeasurments) * 0.6),
+    // paddingRight: phoneWidth - phoneWidth - ((phoneWidth - phoneWidth)),
+    // paddingRight: phoneWidth - phoneWidth - ((phoneWidth - phoneWidth) * 0.6),
     // borderColor: 'black'
-  },
+  // },
   // card: {
   //   padding: 10,
   //   margin: 1.5,
@@ -521,8 +491,8 @@ const styles = StyleSheet.create({
     marginRight: 8,
     marginLeft: 8,
     // justifyContent: 'space-evenly',
-    width: widthMeasurments * 0.8,
-    height: heightMeasurments,
+    width: cardwidth,
+    height: cardHeight,
     backgroundColor: NU_Background,
     borderRadius: 3,
     // marginRight: 5,
@@ -535,7 +505,7 @@ const styles = StyleSheet.create({
   //   marginRight: 10,
   //   marginLeft: 0,
   //   // justifyContent: 'space-evenly',
-  //   width: widthMeasurments * 0.8,
+  //   width: phoneWidth * 0.8,
   //   height: heightMeasurments,
   //   backgroundColor: NU_Background,
   //   borderRadius: 3,
@@ -549,7 +519,7 @@ const styles = StyleSheet.create({
   //   marginRight: 0,
   //   marginLeft: 10,
   //   // justifyContent: 'space-evenly',
-  //   width: widthMeasurments * 0.8,
+  //   width: phoneWidth * 0.8,
   //   height: heightMeasurments,
   //   backgroundColor: NU_Background,
   //   borderRadius: 3,
@@ -572,8 +542,8 @@ const styles = StyleSheet.create({
     //   shadowOpacity: 0.3,
     //   shadowOffset: { x: 2, y: -2 },
     //   height: heightMeasurments,
-    //   // width: widthMeasurments, // 🔥
-    //   width: widthMeasurments, // 🔥
+    //   // width: phoneWidth, // 🔥
+    //   width: phoneWidth, // 🔥
     //   // overflow: 'hidden',
     //   borderRadius: 3,
     //   // display: 'flex',
@@ -596,8 +566,8 @@ const styles = StyleSheet.create({
     //   shadowOpacity: 0.3,
     //   shadowOffset: { x: 2, y: -2 },
     //   height: heightMeasurments,
-    //   // width: widthMeasurments, // 🔥
-    //   width: widthMeasurments, // 🔥
+    //   // width: phoneWidth, // 🔥
+    //   width: phoneWidth, // 🔥
     //   // overflow: 'hidden',
     //   borderRadius: 3,
     //   // display: 'flex',
@@ -620,8 +590,8 @@ const styles = StyleSheet.create({
     //   shadowOpacity: 0.3,
     //   shadowOffset: { x: 2, y: -2 },
     //   height: heightMeasurments,
-    //   // width: widthMeasurments, // 🔥
-    //   width: widthMeasurments - 50, // 🔥
+    //   // width: phoneWidth, // 🔥
+    //   width: phoneWidth - 50, // 🔥
     //   // overflow: 'hidden',
     //   borderRadius: 3,
     //   // display: 'flex',
