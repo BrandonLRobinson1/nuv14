@@ -23,7 +23,7 @@ import { colors, latDelta, longDelta, CARD_HEIGHT, phoneWidth, commonStyles } fr
 // provider={PROVIDER_GOOGLE} TODO: throw back on map for production
 const { NU_Small_Header_Text, NU_Paragraph_Text } = commonStyles;
 const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
-const cardHeight = (CARD_HEIGHT - (CARD_HEIGHT / 3));
+const cardHeight = (CARD_HEIGHT - (CARD_HEIGHT / 5));
 const cardwidth = phoneWidth * 0.8;
 // ❗❗ below is the math eqatuion to use on contentContainerStyle={endPadding} to make list not start leaning left, and start in the center like ive been trying to do for like 8 days => snapToIntervalMath will need to be changed but to whattttt
 // const paddingMagic = phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.6200);
@@ -254,7 +254,7 @@ class Maptab extends Component {
   }
 
   render() {
-    const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton, cardLast, cardFirst, mapCardTop, mapCardPictureSection, mapCardTextSection, mapCardBottom } = styles;
+    const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton, cardLast, cardFirst, mapCardTop, mapCardPictureSection, mapCardTextSection, mapCardBottom, textContentRatingUnder } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
 
     // const startOnIndexOneMath = phoneWidth * 0.75725; contentOffset={{ x: startOnIndexOneMath, y: 0 }}
@@ -401,40 +401,25 @@ class Maptab extends Component {
                         </Text>
                       </View>
 
-                      <View style={textContent}>
+                      <View style={textContentRatingUnder}>
                         <Text numberOfLines={2} style={NU_Paragraph_Text}>
                           {description}
                         </Text>
                       </View>
 
-                      <View style={textContent}>
-                        <StarReview color={NU_Red} size={20} score={ratingsAvg} />
+                      <View>
+                        <StarReview color={NU_Red} size={16} score={ratingsAvg} />
                       </View>
 
                     </View>
 
                   </View>
-{/*
-                  <Button
-                    onPress={() => {
-                      // Actions.pop();
-                      Actions.ProfilePageMap({ personData: marker });
-                    }}
-                    buttonText="View"
-                  />
 
-                  <TouchableOpacity
-                    style={[{ flex: 0.6 }, mapCardButton]}
-                    onPress={() => {
-                      // Actions.pop();
-                      Actions.ProfilePageMap({ personData: marker });
-                    }}
-                  >
-                    <Text style={{ fontWeight: '500' }}>
-                      View
-                    </Text>
-                  </TouchableOpacity>
- */}
+                  <View style={{ flex: 1, borderTopWidth: 1, borderColor: 'black', flexDirection: 'row', marginLeft: -10, marginRight: -10 }} >
+                    <View style={{ flex: 1}}><Text>er</Text></View>
+                  </View>
+
+
                 </View>
               </View>
 
@@ -500,6 +485,12 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingBottom: 5
   },
+  textContentRatingUnder: {
+    // flex: 1,
+    // justifyContent: 'flex-start',
+    // alignItems: 'flex-start',
+    paddingLeft: 5
+  },
   cardDescription: {
     fontSize: 12,
     color: NU_Text_Desc
@@ -513,11 +504,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   mapCardTop: {
-    flex: 2,
+    flex: 3,
     flexDirection: 'row'
   },
   mapCardPictureSection: {
-    flex: 2
+    flex: 2,
+    paddingBottom: 5
   },
   mapCardTextSection: {
     flex: 3
