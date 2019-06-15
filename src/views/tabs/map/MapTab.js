@@ -13,13 +13,15 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import propTypes from 'prop-types';
 import Oops from '../sharedTabComp/Oops';
 import CustomMarker from './CustomMarker';
+import StarReview from '../sharedTabComp/StarReview';
+import { calculateRatingsAvg } from '../../../helpers/helpersFunctions';
 import { FullCard, Spinner, Button } from '../../../common';
 import { setCurrentLocation, getActiveNailTechs, getinitialDelta, setMapLoading, setActiveNailTechs } from '../../../store/location/locationServices';
 import { colors, latDelta, longDelta, CARD_HEIGHT, phoneWidth, commonStyles } from '../../../Styles';
 
 // for line around 330!!! took it out so it wont ping my account with fe
 // provider={PROVIDER_GOOGLE} TODO: throw back on map for production
-const { NU_Small_Header_Text } = commonStyles;
+const { NU_Small_Header_Text, NU_Paragraph_Text } = commonStyles;
 const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
 const cardHeight = (CARD_HEIGHT - (CARD_HEIGHT / 3));
 const cardwidth = phoneWidth * 0.8;
@@ -70,7 +72,7 @@ class Maptab extends Component {
 
     if (loadingMapData) {
       await this.setState({ callsToMap: callsToMap + 1 });
-      return setTimeout(() => this.getMapInfo(), 5000);
+      return setTimeout(() => this.getMapInfo(), 2500);
     }
 
     if (!isArr) await getActiveNailTechs();
@@ -87,7 +89,7 @@ class Maptab extends Component {
 
     if (!isArr || !deltas || !regionObj) {
       await this.setState({ callsToMap: callsToMap + 1 });
-      return setTimeout(() => this.getMapInfo(), 5000);
+      return setTimeout(() => this.getMapInfo(), 2500);
     }
   }
 
@@ -252,7 +254,7 @@ class Maptab extends Component {
   }
 
   render() {
-    const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton, cardLast, cardFirst } = styles;
+    const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton, cardLast, cardFirst, mapCardTop, mapCardPictureSection, mapCardTextSection, mapCardBottom } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
 
     // const startOnIndexOneMath = phoneWidth * 0.75725; contentOffset={{ x: startOnIndexOneMath, y: 0 }}
@@ -372,25 +374,54 @@ class Maptab extends Component {
 
           {markers.map((marker, index) => {
             // ⭐ TODO: fixx --> source={marker.image}
+            const { image, title, ratings, description } = marker;
             const opacityStyleBorder = { opacity: interpolations[index].cardBorder };
             // const cardStyles = index === 0 ? cardFirst : markers.length === index + 1 ? cardLast : card; // eslint-disable-line
             const cardStyles = card; // eslint-disable-line
-
+            const ratingsAvg = calculateRatingsAvg(ratings);
             return (
               <View key={index}>
                 {/* it works, however, it SEEMS TO USE THE BORDER AND SELECTION AS the motion on the swipe instead of the selected card */}
-                <Animated.View style={[cardBack, opacityStyleBorder]} />
                 <View style={cardStyles}>
-                  <Image
-                    source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj48iGzNhumqSY2EA3ZQ_Ns5uAvo4vxEapWSBbJ5tmPut-GqPw' }}
-                    style={cardImage}
-                    resizeMode="cover"
-                  />
-                  <View style={textContent}>
-                    <Text numberOfLines={1} style={NU_Small_Header_Text}>
-                      {marker.title}
-                    </Text>
+                  <View style={mapCardTop}>
+
+                    <View style={mapCardPictureSection}>
+                      <Image
+                        source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj48iGzNhumqSY2EA3ZQ_Ns5uAvo4vxEapWSBbJ5tmPut-GqPw' }}
+                        style={cardImage}
+                        resizeMode="cover"
+                      />
+                    </View>
+
+                    <View style={mapCardTextSection}>
+
+                      <View style={textContent}>
+                        <Text numberOfLines={1} style={NU_Small_Header_Text}>
+                          {title}
+                        </Text>
+                      </View>
+
+                      <View style={textContent}>
+                        <Text numberOfLines={2} style={NU_Paragraph_Text}>
+                          {description}
+                        </Text>
+                      </View>
+
+                      <View style={textContent}>
+                        <StarReview color={NU_Red} size={20} score={ratingsAvg} />
+                      </View>
+
+                    </View>
+
                   </View>
+{/*
+                  <Button
+                    onPress={() => {
+                      // Actions.pop();
+                      Actions.ProfilePageMap({ personData: marker });
+                    }}
+                    buttonText="View"
+                  />
 
                   <TouchableOpacity
                     style={[{ flex: 0.6 }, mapCardButton]}
@@ -403,7 +434,7 @@ class Maptab extends Component {
                       View
                     </Text>
                   </TouchableOpacity>
-
+ */}
                 </View>
               </View>
 
@@ -449,22 +480,25 @@ const styles = StyleSheet.create({
     backgroundColor: NU_Background,
     borderRadius: 3,
     borderColor: NU_Red,
-    borderWidth: 1
+    borderWidth: 0.5,
+    display: 'flex'
   },
   // cardFirst: {
   // },
   // cardLast: {
   // },
   cardImage: {
-    // flex: 3,
-    // width: '100%',
-    // height: '100%',
-    // alignSelf: 'center'
+    flex: 3,
+    width: '100%',
+    height: '100%',
+    alignSelf: 'center'
   },
   textContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    // flex: 1,
+    // justifyContent: 'flex-start',
+    // alignItems: 'flex-start',
+    paddingLeft: 5,
+    paddingBottom: 5
   },
   cardDescription: {
     fontSize: 12,
@@ -478,12 +512,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  mapCardTop: {
+    flex: 2,
+    flexDirection: 'row'
+  },
+  mapCardPictureSection: {
+    flex: 2
+  },
+  mapCardTextSection: {
+    flex: 3
+  },
   mapCardButton: {
-    backgroundColor: NU_Red,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5
-  }
+    // backgroundColor: NU_Red,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // borderRadius: 5
+  },
+  // mapCardBottom, mapCardButton
 });
 
 Maptab.propTypes = {

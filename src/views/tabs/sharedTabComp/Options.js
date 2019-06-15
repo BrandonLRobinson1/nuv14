@@ -36,11 +36,11 @@ const timesArr = [
 class Options extends Component {
   optionsCard = stuff => {
     const { item: { time, date } } = stuff;
-    const { containter, iconFlex, textFlex } = styles;
+    const { container, iconFlex, textFlex } = styles;
     return (
       <Card>
         <CardSection>
-          <View style={containter}>
+          <View style={container}>
             <View style={iconFlex}>
               <Icon name="clock" size={18} color={NU_Green} />
             </View>
@@ -50,7 +50,7 @@ class Options extends Component {
           </View>
         </CardSection>
         <CardSection>
-          <View style={containter}>
+          <View style={container}>
             <View style={iconFlex}>
               <Icon name="calendar" size={18} color={NU_Green} />
             </View>
@@ -91,7 +91,7 @@ class Options extends Component {
 
 
 const styles = StyleSheet.create({
-  containter: {
+  container: {
     display: 'flex',
     flexDirection: 'row',
     height: '100%',

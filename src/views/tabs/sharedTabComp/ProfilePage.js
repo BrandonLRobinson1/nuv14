@@ -78,7 +78,7 @@ class ProfilePage extends Component {
     // const clipboardContent = Clipboard.getString();
 
     const { title, description, address: { street }, ratings } = this.props.personData; // eslint-disable-line
-    const starRating = 3.4; // TODO SHOULD COME FROM THIS.PROPS.PERSONDATA;
+    const starRating = 3.4; // TODO: calculateRatingsAvg in helper functions -> also SHOULD COME FROM THIS.PROPS.PERSONDATA;
 
     return (
       <View style={[container, leftAndRightPadding]}>
