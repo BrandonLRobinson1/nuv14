@@ -19,11 +19,12 @@ import { colors, latDelta, longDelta, CARD_HEIGHT, phoneWidth, commonStyles } fr
 
 // for line around 330!!! took it out so it wont ping my account with fe
 // provider={PROVIDER_GOOGLE} TODO: throw back on map for production
-
 const { NU_Small_Header_Text } = commonStyles;
 const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
 const cardHeight = (CARD_HEIGHT - (CARD_HEIGHT / 3));
 const cardwidth = phoneWidth * 0.8;
+// ❗❗ below is the math eqatuion to use on contentContainerStyle={endPadding} to make list not start leaning left, and start in the center like ive been trying to do for like 8 days => snapToIntervalMath will need to be changed but to whattttt
+// const paddingMagic = phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.6200);
 
 // TODO: need to add a button over map to take you to current or zip code saved location
 class Maptab extends Component {
@@ -39,7 +40,7 @@ class Maptab extends Component {
     this.onCardClick = this.onCardClick.bind(this);
     this.getLocationInformation = this.getLocationInformation.bind(this);
     this.getMapInfo = this.getMapInfo.bind(this);
-    this.onMarkerClick = this.onMarkerClick.bind(this);
+    // this.onMarkerClick = this.onMarkerClick.bind(this);
     this.refetchButton = this.refetchButton.bind(this);
   }
 
@@ -69,7 +70,7 @@ class Maptab extends Component {
 
     if (loadingMapData) {
       await this.setState({ callsToMap: callsToMap + 1 });
-      return setTimeout(() => this.getMapInfo(), 750);
+      return setTimeout(() => this.getMapInfo(), 5000);
     }
 
     if (!isArr) await getActiveNailTechs();
@@ -86,7 +87,7 @@ class Maptab extends Component {
 
     if (!isArr || !deltas || !regionObj) {
       await this.setState({ callsToMap: callsToMap + 1 });
-      return setTimeout(() => this.getMapInfo(), 750);
+      return setTimeout(() => this.getMapInfo(), 5000);
     }
   }
 
@@ -96,24 +97,24 @@ class Maptab extends Component {
     console.log('marker', person);
   }
 
-  onMarkerClick() {
-    this.setState({
-      ...this.state
-    });
+  // onMarkerClick() {
+  //   this.setState({
+  //     ...this.state
+  //   });
 
-    Animated.event(
-      [
-        {
-          nativeEvent: {
-            contentOffset: {
-              x: this.animation
-            }
-          }
-        }
-      ],
-      { useNativeDriver: true }
-    );
-  }
+  //   Animated.event(
+  //     [
+  //       {
+  //         nativeEvent: {
+  //           contentOffset: {
+  //             x: this.animation
+  //           }
+  //         }
+  //       }
+  //     ],
+  //     { useNativeDriver: true }
+  //   );
+  // }
 
   // need to run the same logic a componentwillmount to fetch information
   getLocationInformation() {
@@ -189,8 +190,7 @@ class Maptab extends Component {
         setCurrentLocation(initialRegion);
       },
       error => console.error(JSON.stringify(error)),
-      { enableHighAccuracy: true, timeout: 40000, maximumAge: 2000 }
-      )
+      { enableHighAccuracy: true, timeout: 40000, maximumAge: 2000 });
 
       this.watchID = navigator.geolocation.watchPosition(position => {
         const latitude = parseFloat(position.coords.latitude);
@@ -214,8 +214,8 @@ class Maptab extends Component {
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
-      // let index = Math.floor(value / phoneWidth + 0.5); // animate 50% away from landing on the next item
-      let index = Math.floor(value / cardwidth + 0.5); // animate 50% away from landing on the next item
+      let index = Math.floor(value / cardwidth + 0.65); // animate 50% away from landing on the next item
+      console.log('🦆🦆V🦆🦆', value);
 
       if (index >= this.state.markers.length) {
         index = this.state.markers.length - 1;
@@ -246,7 +246,7 @@ class Maptab extends Component {
     const { activeNailTechs } = this.props; // eslint-disable-line
     const isArr = Array.isArray(activeNailTechs);
 
-    if (!isArr) this.props.setActiveNailTechs('');
+    if (!isArr) setActiveNailTechs('');
     await this.setState({ callsToMap: 0 }); // <=== i dont think t
     return this.getMapInfo();
   }
@@ -255,24 +255,23 @@ class Maptab extends Component {
     const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton, cardLast, cardFirst } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
 
-    // const startOnIndexOneMath = phoneWidth * 0.75725;
-    // const randomFirstCoord = { latitude: 37.773, longitude: -122.396 }; // TODO: pull from database
-    // const snapToIntervalMath = cardwidth + 16; // 16 added for margin
-
-    const startOnIndexOneMath = 0;
+    // const startOnIndexOneMath = phoneWidth * 0.75725; contentOffset={{ x: startOnIndexOneMath, y: 0 }}
     const randomFirstCoord = { latitude: 37.773, longitude: -122.396 }; // TODO: pull from database
     const snapToIntervalMath = cardwidth + 16; // 16 added for margin
+    const isArr = Array.isArray(markers);
+
+    console.log(`%c${snapToIntervalMath} %cI am green`, "color: red", "color: green")
 
     let interpolations;
-    if (Array.isArray(markers) && markers.length) {
+    if (isArr && markers.length) {
       interpolations = markers.map((marker, index) => {
         const inputRange = [
-          // (index - 1) * phoneWidth,
-          // index * phoneWidth,
-          // (index + 1) * phoneWidth
-          (index - 1) * cardwidth,
-          index * cardwidth,
-          (index + 1) * cardwidth
+          (index - 1) * phoneWidth,
+          index * phoneWidth,
+          (index + 1) * phoneWidth
+          // (index - 1) * cardwidth,
+          // index * cardwidth,
+          // (index + 1) * cardwidth
         ];
 
         const scale = this.animation.interpolate({
@@ -303,7 +302,7 @@ class Maptab extends Component {
     );
 
     // eslint-disable-next-line
-    if (initialPosition && Array.isArray(markers)) return (
+    if (initialPosition && isArr) return (
       <View style={container}>
 
         <MapView
@@ -313,7 +312,6 @@ class Maptab extends Component {
         >
 
           {markers.map((marker, index) => {
-
             const scaleStyle = {
               transform: [
                 {
@@ -347,7 +345,7 @@ class Maptab extends Component {
         </MapView>
 
         <Animated.ScrollView
-          contentOffset={{ x: startOnIndexOneMath, y: 0 }} // 🔥
+          contentOffset={{ x: 0, y: 0 }} // 🔥
           pagingEnabled
           scrollEnabled
 
@@ -373,7 +371,7 @@ class Maptab extends Component {
         >
 
           {markers.map((marker, index) => {
-            // ⭐ fixx --> source={marker.image}
+            // ⭐ TODO: fixx --> source={marker.image}
             const opacityStyleBorder = { opacity: interpolations[index].cardBorder };
             // const cardStyles = index === 0 ? cardFirst : markers.length === index + 1 ? cardLast : card; // eslint-disable-line
             const cardStyles = card; // eslint-disable-line
@@ -437,192 +435,32 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     width: '100%',
     marginRight: 30
-
   },
   endPadding: {
-    // paddingRight: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.75725),
-    // paddingLeft: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.75725),
-    paddingRight: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.85),
-    // paddingLeft: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.100),
-    paddingLeft: phoneWidth - cardwidth - ((phoneWidth - cardwidth) * 0.6500),
-    
-    // borderColor: 'black'
+    // marginRight: paddingMagic,
+    // marginLeft: paddingMagic,
   },
-  // endPadding: {
-    // paddingRight: 30
-    // marginRight: 30
-
-    // paddingRight: phoneWidth - phoneWidth - ((phoneWidth - phoneWidth)),
-    // paddingRight: phoneWidth - phoneWidth - ((phoneWidth - phoneWidth) * 0.6),
-    // borderColor: 'black'
-  // },
-  // card: {
-  //   padding: 10,
-  //   margin: 1.5,
-  //   elevation: 3,
-  //   backgroundColor: NU_Background,
-  //   marginHorizontal: 10,
-  //   shadowColor: NU_Card_Border,
-  //   shadowRadius: 5,
-  //   shadowOpacity: 0.3,
-  //   shadowOffset: { x: 2, y: -2 },
-  //   height: CARD_HEIGHT,
-  //   width: CARD_WIDTH,
-  //   overflow: 'hidden',
-  //   borderRadius: 3,
-  // },
-  // cardBack: {
-  //   height: CARD_HEIGHT + 5,
-  //   width: CARD_WIDTH + 4,
-  //   backgroundColor: NU_Red,
-  //   borderRadius: 6,
-  //   position: 'absolute',
-  //   bottom: -1.4,
-  //   // left: 0,
-  //   right: 8,
-  //   // paddingVertical: 10,
-  // },
-  // cardImage: {
-  //   flex: 3,
-  //   width: '100%',
-  //   height: '100%',
-  //   alignSelf: 'center'
-  // },
-
-
   card: {
     padding: 10,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     marginRight: 8,
     marginLeft: 8,
-    // justifyContent: 'space-evenly',
     width: cardwidth,
     height: cardHeight,
     backgroundColor: NU_Background,
     borderRadius: 3,
-    // marginRight: 5,
-    // marginLeft: 5
+    borderColor: NU_Red,
+    borderWidth: 1
   },
   // cardFirst: {
-  //   padding: 10,
-  //   // justifyContent: 'center',
-  //   // alignItems: 'center',
-  //   marginRight: 10,
-  //   marginLeft: 0,
-  //   // justifyContent: 'space-evenly',
-  //   width: phoneWidth * 0.8,
-  //   height: heightMeasurments,
-  //   backgroundColor: NU_Background,
-  //   borderRadius: 3,
-  //   // marginRight: 5,
-  //   // marginLeft: 5
   // },
   // cardLast: {
-  //   padding: 10,
-  //   // justifyContent: 'center',
-  //   // alignItems: 'center',
-  //   marginRight: 0,
-  //   marginLeft: 10,
-  //   // justifyContent: 'space-evenly',
-  //   width: phoneWidth * 0.8,
-  //   height: heightMeasurments,
-  //   backgroundColor: NU_Background,
-  //   borderRadius: 3,
-  //   // marginRight: 5,
-  //   // marginLeft: 5
   // },
-
-    // card: {
-    //
-    //   // margin: 8,
-    //   // marginTop: 12,
-    //   // marginBottom: 12,
-    //   marginRight: 5,
-    //   marginLeft: 5,
-    //   elevation: 3,
-    //   backgroundColor: NU_Background,
-    //   // marginHorizontal: 10,
-    //   shadowColor: NU_Card_Border,
-    //   shadowRadius: 5,
-    //   shadowOpacity: 0.3,
-    //   shadowOffset: { x: 2, y: -2 },
-    //   height: heightMeasurments,
-    //   // width: phoneWidth, // 🔥
-    //   width: phoneWidth, // 🔥
-    //   // overflow: 'hidden',
-    //   borderRadius: 3,
-    //   // display: 'flex',
-    //   // justifyContent: 'center',
-    //   // alignContent: 'center',
-    //   // alignItems: 'center'
-    // },
-    // cardFirst: {
-    //   padding: 10,
-    //   // margin: 8,
-    //   // marginTop: 12,
-    //   // marginBottom: 12,
-    //   // marginRight: 5,
-    //   // marginLeft: 25,
-    //   elevation: 3,
-    //   backgroundColor: NU_Background,
-    //   // marginHorizontal: 10,
-    //   shadowColor: NU_Card_Border,
-    //   shadowRadius: 5,
-    //   shadowOpacity: 0.3,
-    //   shadowOffset: { x: 2, y: -2 },
-    //   height: heightMeasurments,
-    //   // width: phoneWidth, // 🔥
-    //   width: phoneWidth, // 🔥
-    //   // overflow: 'hidden',
-    //   borderRadius: 3,
-    //   // display: 'flex',
-    //   // justifyContent: 'center',
-    //   // alignContent: 'center',
-    //   // alignItems: 'center'
-    // },
-    // cardLast: {
-    //   padding: 10,
-    //   // margin: 8,
-    //   // marginTop: 12,
-    //   // marginBottom: 12,
-    //   marginRight: 25,
-    //   marginLeft: 5,
-    //   elevation: 3,
-    //   backgroundColor: NU_Background,
-    //   // marginHorizontal: 10,
-    //   shadowColor: NU_Card_Border,
-    //   shadowRadius: 5,
-    //   shadowOpacity: 0.3,
-    //   shadowOffset: { x: 2, y: -2 },
-    //   height: heightMeasurments,
-    //   // width: phoneWidth, // 🔥
-    //   width: phoneWidth - 50, // 🔥
-    //   // overflow: 'hidden',
-    //   borderRadius: 3,
-    //   // display: 'flex',
-    //   // justifyContent: 'center',
-    //   // alignContent: 'center',
-    //   // alignItems: 'center'
-    // },
-  cardBack: {
-    // height: CARD_HEIGHT + 5,
-    // width: CARD_WIDTH + 4,
-    // backgroundColor: NU_Red,
-    // borderRadius: 6,
-    // position: 'absolute',
-    // bottom: -1.4,
-    // // left: 0,
-    // right: 8,
-    // paddingVertical: 10,
-  },
   cardImage: {
     // flex: 3,
     // width: '100%',
     // height: '100%',
     // alignSelf: 'center'
   },
-
   textContent: {
     flex: 1,
     justifyContent: 'center',
