@@ -23,7 +23,7 @@ import { colors, latDelta, longDelta, CARD_HEIGHT, phoneWidth, commonStyles } fr
 // for line around 330!!! took it out so it wont ping my account with fe
 // provider={PROVIDER_GOOGLE} TODO: throw back on map for production
 const { NU_Small_Header_Text, NU_Paragraph_Text } = commonStyles;
-const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc, NU_Blue } = colors; // eslint-disable-line
+const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc, NU_Blue, NU_Grey } = colors; // eslint-disable-line
 const cardHeight = (CARD_HEIGHT - (CARD_HEIGHT / 5));
 const cardwidth = phoneWidth * 0.8;
 // ❗❗ below is the math eqatuion to use on contentContainerStyle={endPadding} to make list not start leaning left, and start in the center like ive been trying to do for like 8 days => snapToIntervalMath will need to be changed but to whattttt
@@ -427,7 +427,7 @@ class Maptab extends Component {
                       <Text>View</Text>
                     </View>
                     <View style={mapcardIcon}>
-                      <Icon name="chevron-right" size={30} color={NU_Blue}/>
+                      <Icon name="chevron-right" size={25} color={NU_Blue}/>
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -467,14 +467,16 @@ const styles = StyleSheet.create({
     // marginLeft: paddingMagic,
   },
   card: {
-    padding: 10,
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
     marginRight: 8,
     marginLeft: 8,
     width: cardwidth,
     height: cardHeight,
     backgroundColor: NU_Background,
     borderRadius: 3,
-    borderColor: NU_Red,
+    borderColor: NU_Grey,
     borderWidth: 0.5,
     display: 'flex',
     minHeight: 133
@@ -529,7 +531,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     borderTopWidth: 1,
-    borderColor: 'black',
+    borderColor: NU_Grey,
     flexDirection: 'row',
     marginLeft: -10,
     marginRight: -10
@@ -543,16 +545,8 @@ const styles = StyleSheet.create({
   mapcardIcon: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-end',
-    paddingRight: 10
+    alignItems: 'flex-end'
   }
-  // mapCardButton: {
-  //   // backgroundColor: NU_Red,
-  //   // justifyContent: 'center',
-  //   // alignItems: 'center',
-  //   // borderRadius: 5
-  // },
-  // mapCardBottom, mapCardButton
 });
 
 Maptab.propTypes = {
