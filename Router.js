@@ -126,7 +126,7 @@ class RouterComponent extends Component {
 
             titleStyle={HeaderTitleColor}
           >
-{/*
+
             <Scene key="featured" title="Discover" icon={StarIcon} initial>
               <Scene
                 key="DiscoverMainTab"
@@ -164,7 +164,7 @@ class RouterComponent extends Component {
                 onLeft={() => Actions.pop()}
               />
             </Scene>
-*/}
+
             <Scene key="map" title="Find a salon" icon={tabIcon}>
               <Scene
                 key="mapTab"
@@ -204,6 +204,13 @@ class RouterComponent extends Component {
                 key="Options"
                 component={Options}
                 title="Options"
+                backTitle=""
+                onLeft={() => Actions.pop()}
+              />
+              <Scene
+                key="MakeAppointment"
+                component={MakeAppointment}
+                title="Make Appointment"
                 backTitle=""
                 onLeft={() => Actions.pop()}
               />
@@ -261,6 +268,14 @@ class RouterComponent extends Component {
                 key="Options"
                 component={Options}
                 title="Options"
+                backTitle=""
+                onLeft={() => Actions.pop()}
+              />
+
+              <Scene
+                key="MakeAppointment"
+                component={MakeAppointment}
+                title="Make Appointment"
                 backTitle=""
                 onLeft={() => Actions.pop()}
               />

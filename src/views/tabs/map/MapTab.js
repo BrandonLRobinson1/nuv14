@@ -217,7 +217,7 @@ class Maptab extends Component {
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
-      let index = Math.floor(value / cardwidth + 0.65); // animate 50% away from landing on the next item
+      let index = Math.floor(value / cardwidth + 0.5); // animate 50% away from landing on the next item
       console.log('🦆🦆V🦆🦆', value);
 
       if (index >= this.state.markers.length) {
@@ -475,9 +475,9 @@ const styles = StyleSheet.create({
     width: cardwidth,
     height: cardHeight,
     backgroundColor: NU_Background,
-    borderRadius: 3,
+    borderRadius: 5,
     borderColor: NU_Grey,
-    borderWidth: 0.5,
+    borderWidth: 1,
     display: 'flex',
     minHeight: 133
   },
@@ -489,7 +489,8 @@ const styles = StyleSheet.create({
     flex: 3,
     width: '100%',
     height: '100%',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    borderRadius: 3
   },
   textContent: {
     // flex: 1,
