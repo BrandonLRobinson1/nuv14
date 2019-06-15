@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import propTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/Feather';
 import Oops from '../sharedTabComp/Oops';
 import CustomMarker from './CustomMarker';
 import StarReview from '../sharedTabComp/StarReview';
@@ -22,7 +23,7 @@ import { colors, latDelta, longDelta, CARD_HEIGHT, phoneWidth, commonStyles } fr
 // for line around 330!!! took it out so it wont ping my account with fe
 // provider={PROVIDER_GOOGLE} TODO: throw back on map for production
 const { NU_Small_Header_Text, NU_Paragraph_Text } = commonStyles;
-const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc } = colors; // eslint-disable-line
+const { NU_Red, NU_White, NU_Transparent, NU_Background, NU_Card_Border, NU_Text_Desc, NU_Blue } = colors; // eslint-disable-line
 const cardHeight = (CARD_HEIGHT - (CARD_HEIGHT / 5));
 const cardwidth = phoneWidth * 0.8;
 // ❗❗ below is the math eqatuion to use on contentContainerStyle={endPadding} to make list not start leaning left, and start in the center like ive been trying to do for like 8 days => snapToIntervalMath will need to be changed but to whattttt
@@ -254,7 +255,7 @@ class Maptab extends Component {
   }
 
   render() {
-    const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton, cardLast, cardFirst, mapCardTop, mapCardPictureSection, mapCardTextSection, mapCardBottom, textContentRatingUnder } = styles;
+    const { container, scrollView, endPadding, markerWrap, markerSize, card, cardImage, textContent, cardDescription, cardBack, mapCardButton, cardLast, cardFirst, mapCardTop, mapCardPictureSection, mapCardTextSection, mapCardBottom, textContentRatingUnder, mapCardButtonSection, mapcardButtonText, mapcardIcon } = styles;
     const { initialPosition, markers, callsToMap } = this.state;
 
     // const startOnIndexOneMath = phoneWidth * 0.75725; contentOffset={{ x: startOnIndexOneMath, y: 0 }}
@@ -414,17 +415,26 @@ class Maptab extends Component {
                     </View>
 
                   </View>
-
-                  <View style={{ flex: 1, borderTopWidth: 1, borderColor: 'black', flexDirection: 'row', marginLeft: -10, marginRight: -10 }} >
-                    <View style={{ flex: 1}}><Text>er</Text></View>
-                  </View>
-
-
+                    
+                  <TouchableOpacity 
+                    onPress={() => {
+                      // Actions.pop();
+                      Actions.ProfilePageMap({ personData: marker });
+                    }}
+                    style={mapCardButtonSection}
+                    >
+                    <View style={mapcardButtonText}>
+                      <Text>View</Text>
+                    </View>
+                    <View style={mapcardIcon}>
+                      <Icon name="chevron-right" size={30} color={NU_Blue}/>
+                    </View>
+                  </TouchableOpacity>
                 </View>
               </View>
 
             );
-          }) }
+          })}
 
         </Animated.ScrollView>
 
@@ -466,7 +476,8 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     borderColor: NU_Red,
     borderWidth: 0.5,
-    display: 'flex'
+    display: 'flex',
+    minHeight: 133
   },
   // cardFirst: {
   // },
@@ -514,12 +525,33 @@ const styles = StyleSheet.create({
   mapCardTextSection: {
     flex: 3
   },
-  mapCardButton: {
-    // backgroundColor: NU_Red,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // borderRadius: 5
+  mapCardButtonSection: {
+    flex: 1,
+    display: 'flex',
+    borderTopWidth: 1,
+    borderColor: 'black',
+    flexDirection: 'row',
+    marginLeft: -10,
+    marginRight: -10
   },
+  mapcardButtonText: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingLeft: 10 
+  },
+  mapcardIcon: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: 10
+  }
+  // mapCardButton: {
+  //   // backgroundColor: NU_Red,
+  //   // justifyContent: 'center',
+  //   // alignItems: 'center',
+  //   // borderRadius: 5
+  // },
   // mapCardBottom, mapCardButton
 });
 
